@@ -1,0 +1,36 @@
+<md-content>
+  <div ui-view="header"></div>
+
+  <div ui-view="topic-grid" ng-show="dashboardCtrl.topic_grid"></div>
+  <div class="page-wrapper md-padding" layout="row">
+    <div flex-auto>
+      <md-sidenav
+        layout="row"
+        class="md-sidenav-left md-theme-blue"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-sm')">
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">  {{ profileCtrl.profile.displayName }}</span>
+              <span class="md-subhead"><a ui-sref="">edit</a> </span>
+            </md-card-title-text>
+            <md-card-title-media>
+              <img ng-src="{{profileCtrl.profile.photo}}">
+            </md-card-title-media>
+          </md-card-title>
+          <md-card-actions layout="row">
+            <md-button>Post <br> 1</md-button>
+            <md-button>Post <br> 1</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-sidenav>
+    </div>
+
+    <div flex-auto="" layout-fill layout-align="top center">
+      Dashboard where the feeds are
+    </div>
+  </div>
+
+</md-content>
+

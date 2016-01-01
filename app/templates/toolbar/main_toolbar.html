@@ -1,0 +1,41 @@
+<md-toolbar>
+  <div class="md-toolbar-tools page-wrapper">
+    <h2>
+      <a ui-sref="home">
+        <span>bluemooon</span>
+      </a>
+    </h2>
+    <span flex></span>
+    <md-button class="md-primary">
+      <h2>
+      <i class="ion-grid"></i>
+      </h2>
+    </md-button>
+    <div ng-if="profileCtrl.profile.displayName">
+      {{ authCtrl.profile.displayName }}
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle"
+                type="button"
+                id="profile_dd"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <img ng-src="{{profileCtrl.profile.photo}}">
+          {{profileCtrl.profile.displayName}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="profile_dd">
+          <li><a href="#">View Profile</a></li>
+          <li><a href="#">Setting</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" ng-click="authCtrl.logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <md-button
+      ng-if="!profileCtrl.profile"
+      class="md-raised" aria-label="More" ui-sref="register">
+      Register
+    </md-button>
+  </div>
+</md-toolbar>
+{{ authCtrl.profile }}

@@ -1,17 +1,43 @@
 body {
+  @import url(https://fonts.googleapis.com/css?family=Lato);
+  @import url(https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin);
+  font-family: 'Lato','Kanit', sans-serif;
   padding: 0;
+  background-color: #F5F8FA;
+}
+
+.bg-image {
+  position: relative;
+}
+.bg-image img {
+  display: block;
+  width: 100%;
+  max-width: 1200px; /* corresponds to max height of 450px */
+  margin: 0 auto;
+}
+.bg-image h1 {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+}
+
+.inner-container{
+  max-width:600px;
 }
 
 .page-wrapper {
-  max-width:550px;
+  max-width:890px;
   margin-right: auto;
   margin-left: auto;
   padding:15px;
 }
-
+/*
 .page-wrapper .logo-img {
   margin-top:-10px;
-}
+}*/
 
 
 .main {
