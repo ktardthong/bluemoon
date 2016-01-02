@@ -6,7 +6,7 @@
       </a>
     </h2>
     <span flex></span>
-    <md-button class="md-primary">
+    <md-button class="md-primary" ng-click="topicGridShow = true">
       <h2>
       <i class="ion-grid"></i>
       </h2>
@@ -38,4 +38,5 @@
     </md-button>
   </div>
 </md-toolbar>
-{{ authCtrl.profile }}
+
+<topic-grid ng-show="topicGridShow" ng-init="topicGridShow = false"></topic-grid>

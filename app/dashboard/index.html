@@ -1,12 +1,10 @@
 <md-content>
   <div ui-view="header"></div>
-
-  <div ui-view="topic-grid" ng-show="dashboardCtrl.topic_grid"></div>
   <div class="page-wrapper md-padding" layout="row">
-    <div flex-auto>
+    <div flex-gt-md-auto="">
       <md-sidenav
-        layout="row"
-        class="md-sidenav-left md-theme-blue"
+        layout="column"
+        class="md-sidenav-left"
         md-component-id="left"
         md-is-locked-open="$mdMedia('gt-sm')">
         <md-card>
@@ -24,10 +22,24 @@
             <md-button>Post <br> 1</md-button>
           </md-card-actions>
         </md-card>
+
+        <md-card>
+          <md-list>
+            <md-subheader class="md-no-sticky">3 line item</md-subheader>
+            <md-list-item class="md-3-line">test</md-list-item>
+            <md-divider ></md-divider>
+            <md-list-item class="md-3-line">test</md-list-item>
+            <md-list-item class="md-3-line">test</md-list-item>
+          </md-list>
+        </md-card>
       </md-sidenav>
+
+
     </div>
 
-    <div flex-auto="" layout-fill layout-align="top center">
+
+
+    <div flex-auto="80" layout-fill layout-align="top center">
       Dashboard where the feeds are
     </div>
   </div>

@@ -33,17 +33,6 @@ angular
             controller: 'HomeCtrl as  homeCtrl',
             templateUrl: 'home/home.html',
             resolve:{
-              /* profile: function(Users, Auth){
-               return Auth.$requireAuth().then(function(auth){
-               return Users.getProfile(auth.uid).$loaded();
-               });
-               },
-               auth: function($state, Users, Auth){
-               return Auth.$requireAuth().catch(function(){
-               $state.go('home');
-               });
-
-               },*/
                requireNoAuth: function($state, Auth){
                return Auth.$requireAuth().then(function(auth){
                $state.go('dashboard');
@@ -66,6 +55,33 @@ angular
         },
       })
 
+
+      .state('topics',{
+        url: '/topic/{topicSlug}',
+        controller:  'AuthCtrl as authCtrl',
+        views:{
+          '':{
+            controller:   'TopicCtrl as topicCtrl',
+            templateUrl:  'topic/index.html',
+            resolve:{
+              topicName: function($stateParams, Topics) {
+                console.log($stateParams.topicSlug);
+                return Topics.getName($stateParams.topicSlug);
+              }
+              /*topicName: function($stateParams, TopicService) {
+                return TopicService.name($stateParams.topicSlug).$loaded();
+              }*/
+
+              /*posts: function($stateParams, TopicService){
+                return TopicService.forChannel($stateParams.topicSlug).$loaded();
+              }*/
+            }
+          },
+          'header@topics': {
+            templateUrl: 'templates/toolbar/main_toolbar.html',
+          }
+        }
+      })
 
       .state('dashboard', {
         url: '/dashboard',
