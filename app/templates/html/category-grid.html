@@ -6,15 +6,17 @@
 
 
   <md-button
+    ui-sref="topics({topicSlug: topic.slug})"
     aria-label="{{topic.name}}"
     ng-repeat="topic in dashboardCtrl.topics | orderBy: '-slug' "
     class="md-fab">
     <i class="ion-ios-football"></i>
+    {{topic.name}}
   </md-button>
   <br>
-  {{topic.name}}
 
-  <md-grid-list
+
+  <!--<md-grid-list
     md-cols-sm="5"
     md-cols-md="5"
     md-cols-gt-md="6"
@@ -25,6 +27,6 @@
       {{topic.name}}
       </a>
     </md-grid-tile>
-  </md-grid-list>
+  </md-grid-list>-->
 
 </div>
