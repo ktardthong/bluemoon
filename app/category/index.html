@@ -1,67 +1,70 @@
 <md-content>
   <div ui-view="header"></div>
 
-
-  {{ topicCtrl.topicName }}
-  {{ topicCtrl.topicName('name') }}
-  {{ topicCtrl.topicName.name }}
-  >>>
-  {{ topicCtrl.topicName.$value}}
-
   <section class="text-center">
     <h1>
-      TOPIC NAME
+      {{cateCtrl.cateName.name}}
     </h1>
 
     <div layout="column" class="inner-container container">
-      <md-card>
-        <md-card-title>
-          <md-card-title-media>
-              <img src="https://lh3.googleusercontent.com/-ONIXPD1ozmQ/AAAAAAAAAAI/AAAAAAAAD8Q/HB38gqJDdyU/s36-p-k-rw-no/photo.jpg"
-                   class="img-circle">
-          </md-card-title-media>
-          <md-card-title-text>
-            <md-input-container class="md-block">
-              <label>Your story</label>
-              <textarea ng-model="user.biography" columns="1" md-maxlength="150" rows="5"></textarea>
-            </md-input-container>
-          </md-card-title-text>
 
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-primary">submit</md-button>
-        </md-card-actions>
-      </md-card>
+      <div ng-controller="TopicCtrl as topicCtrl">
+        <md-card ng-if="topicCtrl.uid">
+          <form ng-submit="topicCtrl.createTopic(cateCtrl.cateName.$id)">
+            <md-card-title>
+              <md-card-title-media>
+                <img src="https://lh3.googleusercontent.com/-ONIXPD1ozmQ/AAAAAAAAAAI/AAAAAAAAD8Q/HB38gqJDdyU/s36-p-k-rw-no/photo.jpg"
+                     class="img-circle">
+              </md-card-title-media>
+              <md-card-title-text>
+                <md-input-container>
+                  <label>Topic</label>
+                  <input ng-model="topicCtrl.newTopic.topic">
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Your story</label>
+                  <textarea ng-model="topicCtrl.newTopic.body" columns="1" md-maxlength="150" rows="5"></textarea>
+                </md-input-container>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-primary" type="submit">submit</md-button>
+            </md-card-actions>
+          </form>
+        </md-card>
+      </div>
 
 
+      <!-- List topics here-->
+      <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderBy:'created'">
+        <md-card class="md-whiteframe-2dp">
+          <img ng-if="topic.photo" ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+          <md-card-title>
+            <md-card-title-text>
+              <small>{{topic.created}}</small>
+              <span class="md-headline">
+                <a ui-sref="topic({Slug: topic.slug, Key: topicKey })">{{topic.topic}}</a>
+              </span>
+            </md-card-title-text>
+          </md-card-title>
 
-      <md-card>
-        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">In-card mixed actions</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="start center">
-          <md-card-icon-actions>
-            <md-button class="md-icon-button" aria-label="Favorite">
-              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-            </md-button>
-          </md-card-icon-actions>
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
-        <md-card-content>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-        </md-card-content>
-      </md-card>
+          <md-card-content>
+            <p>
+              {{topic.body}}
+            </p>
+          </md-card-content>
 
+          <md-card-actions layout="row" layout-align="start center">
+            <md-card-icon-actions>
+              <md-button class="md-primary ion-chevron-up"  aria-label="Upvote"> Upvote</md-button>
+              <md-button class="ion-chevron-down"           aria-label="Downvote"> Downvote</md-button>
+              <md-button class="ion-chatbubble-working"     aria-label="Comments"> Comments 2 </md-button>
+              <md-button class="ion-share"     aria-label="Share"> Share </md-button>
+            </md-card-icon-actions>
+          </md-card-actions>
+
+        </md-card>
+      </div>
     </div>
   </section>
 

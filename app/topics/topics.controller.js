@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope, $rootScope, Topics, Auth, Users){
+  .controller('TopicCtrl', function($state,$scope, $rootScope,Slug, Topics, Auth, Users){
 
     var topicCtrl = this;
 
@@ -9,27 +9,33 @@ angular.module('App')
     Auth.$requireAuth().then(function(auth){
     Users.getProfile(auth.uid).$loaded().then(function (profile){
       console.log(profile);
+      console.log(profile.$id);
       topicCtrl.uid = profile.$id;
       })
     });
+
+
     //Parser here
     topicCtrl.topics  = Topics;
 
-    //Preset values for new topic
-    topicCtrl.newTopic = {
-      body: '',
-      created: moment().format("MM-DD-YYYY")
+
+    //
+    topicCtrl.topic_landing = function(){
+
     }
 
 
-
     //Create new topic
-    topicCtrl.createTopic = function(){
+    topicCtrl.createTopic = function(category){
 
-      console.log("topic create press");
-      console.log(topicCtrl.newTopic);
-
-      topicCtrl.topics.arr.$add(topicCtrl.newTopic).then(function(){
+      topicCtrl.topics.arr.$add({
+          topic:    topicCtrl.newTopic.topic,
+          body:     topicCtrl.newTopic.body,
+          category: category,
+          uid:      topicCtrl.uid,
+          slug:     Slug.slugify(topicCtrl.newTopic.topic),
+          created:  moment().format("MM-DD-YYYY")
+        }).then(function(){
         topicCtrl.newTopic = {
           body: ''
         };

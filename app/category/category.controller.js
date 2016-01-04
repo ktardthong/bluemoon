@@ -1,9 +1,10 @@
 angular.module('App')
-  .controller('CateCtrl', function($state,Category,topicName){
+  .controller('CateCtrl', function($state, Category,cateName,cateTopics){
     var cateCtrl = this;
 
     //Parsers
-    cateCtrl.topicName = topicName;
-    cateCtrl.topics = Topics;
+    cateCtrl.cateName   = cateName;
+    cateCtrl.category   = Category;
+    cateCtrl.cateTopics = cateTopics;
 
   });

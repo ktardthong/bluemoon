@@ -1,20 +1,22 @@
 angular.module('App')
 
-  //Topic list
-  .factory('Topics', function($firebaseObject, $firebaseArray, FirebaseUrl){
-    var ref    = new Firebase(FirebaseUrl+'topics');
-    var topics = $firebaseObject(ref);
+  //Category list
+  .factory('Category', function($firebaseObject, $firebaseArray, FirebaseUrl){
+    var ref    = new Firebase(FirebaseUrl+'categories');
+    var categories = $firebaseObject(ref);
     var topicArr = $firebaseArray(ref);
 
-    var Topics = {
+    var Category = {
       getName: function(slug){
         console.log(slug);
-        console.log(topicArr.$getRecord(slug).name);
-        return topics.$getRecord(slug).name;
+        console.log($firebaseObject(ref.child(slug)));
+        var data = ref.child(slug);
+        return $firebaseObject(data);
       },
-      all: topics
+
+      all: categories
     }
-    return Topics;
+    return Category;
   })
 
   .factory('Languages', function($firebaseObject, FirebaseUrl){

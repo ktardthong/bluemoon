@@ -1,9 +1,9 @@
 angular.module('App')
-  .controller('DashboardCtrl', function(Auth, $state,Topics) {
+  .controller('DashboardCtrl', function(Auth, $state,Category) {
     var dashboardCtrl = this;
 
 
-    dashboardCtrl.topics = Topics.all;
-    dashboardCtrl.topic_grid = false;
+    dashboardCtrl.categories      = Category.all;
+    dashboardCtrl.topic_grid  = false;
 
   });

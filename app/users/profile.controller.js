@@ -1,8 +1,11 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($state, md5, auth, profile){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, auth, profile){
     var profileCtrl = this;
 
+    //Parser
     profileCtrl.profile = profile;
+    $rootScope.profile = profile;
+
 
     //Preset Parameters
     profileCtrl.imageStrings = [];

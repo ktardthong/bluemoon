@@ -13,13 +13,14 @@ angular
     'firebase',
     'angular-md5',
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'slugifier'
   ])
 
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue-grey')
-      .accentPalette('deep-orange');
+      .primaryPalette('blue')
+      .accentPalette('pink');
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -47,7 +48,7 @@ angular
             templateUrl: 'templates/html/login-form.html'
           },
           'topic-grid@home':{
-            templateUrl: 'templates/html/topic-grid.html'
+            templateUrl: 'templates/html/category-grid.html'
           },
           'header@home': {
             templateUrl: 'templates/toolbar/main_toolbar.html',
@@ -56,28 +57,45 @@ angular
       })
 
 
-      .state('topics',{
-        url: '/topic/{topicSlug}',
-        controller:  'AuthCtrl as authCtrl',
+      .state('category',{
+        url: '/category/{Slug}',
         views:{
           '':{
-            controller:   'TopicCtrl as topicCtrl',
-            templateUrl:  'topic/index.html',
+            controller:   'CateCtrl as cateCtrl',
+            templateUrl:  'category/index.html',
             resolve:{
-              topicName: function($stateParams, Topics) {
-                console.log($stateParams.topicSlug);
-                return Topics.getName($stateParams.topicSlug);
+              //Getting Category details
+              cateName: function($stateParams, Category) {
+                return Category.getName($stateParams.Slug).$loaded();
+              },
+              //Getting list of category topics here
+              cateTopics:function($stateParams,Topics){
+                //console.log(Topics.list($stateParams.Slug));
+                return Topics.list($stateParams.Slug);
               }
-              /*topicName: function($stateParams, TopicService) {
-                return TopicService.name($stateParams.topicSlug).$loaded();
-              }*/
-
-              /*posts: function($stateParams, TopicService){
-                return TopicService.forChannel($stateParams.topicSlug).$loaded();
-              }*/
             }
           },
-          'header@topics': {
+          'header@category': {
+            templateUrl: 'templates/toolbar/main_toolbar.html',
+          }
+        }
+      })
+
+
+      //Topic laning page
+      .state('topic',{
+        url:'/{Slug}/',
+        views:{
+          '':{
+            controller: 'TopicLandingCtrl as topicLandingCtrl',
+            templateUrl:  'topics/index.html',
+            resolve:{
+              topicLanding: function($stateParams,Topics){
+                return Topics.fortopic($stateParams.Slug);
+              }
+            }
+          },
+          'header@topic': {
             templateUrl: 'templates/toolbar/main_toolbar.html',
           }
         }
@@ -91,10 +109,12 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'dashboard/index.html',
             resolve:{
-              profile: function ($state, Auth, Users){
+              profile: function ($state,$rootScope, Auth, Users){
                 return Auth.$requireAuth().then(function(auth){
                   return Users.getProfile(auth.uid).$loaded().then(function (profile){
                     if(profile.displayName){
+                      $rootScope.profile = profile;
+                      console.log($rootScope.profile);
                       return profile;
                     } else {
                       $state.go('get_started');
@@ -114,7 +134,7 @@ angular
           },
           'topic-grid@dashboard':{
             controller: 'HomeCtrl as  homeCtrl',
-            templateUrl: 'templates/html/topic-grid.html'
+            templateUrl: 'templates/html/category-grid.html'
           },
           'header@dashboard': {
             controller:  'AuthCtrl as authCtrl',
@@ -150,6 +170,7 @@ angular
           }
         }
       })
+
 
       .state('login', {
         url: '/login',

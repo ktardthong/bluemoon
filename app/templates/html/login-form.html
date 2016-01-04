@@ -1,17 +1,23 @@
-<md-card>
+<md-card class="md-margin">
 
-  <div ng-show="authCtrl.error">
+  <div ng-show="authCtrl.error" class="md-padding">
     <span>{{ authCtrl.error.message }}</span>
   </div>
 
-  <form ng-submit="authCtrl.login()">
-    <div class="input-group">
-      <input type="email" class="form-control" placeholder="Email" ng-model="authCtrl.user.email">
-    </div>
-    <div class="input-group">
-      <input type="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password">
-    </div>
-    <input type="submit" class="btn btn-default" value="Log In">
+  <form ng-submit="authCtrl.login()" class="md-padding">
+
+    <md-input-container class="md-block md-accent" flex-gt-sm>
+      <label>email</label>
+      <input type="email" ng-model="authCtrl.user.email">
+    </md-input-container>
+
+    <md-input-container class="md-block md-accent" flex-gt-sm>
+      <label>password</label>
+      <input type="password" placeholder="Password" ng-model="authCtrl.user.password">
+    </md-input-container>
+
+    <md-button class="md-accent md-raised" type="submit">Login</md-button>
+
   </form>
 
 </md-card>

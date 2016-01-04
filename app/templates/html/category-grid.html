@@ -1,17 +1,16 @@
 <!-- -->
 
-<div ng-controller="DashboardCtrl as dashboardCtrl">
+<div>
 
   <h5 class="md-display-1 text-center">Explore</h5>
 
-
   <md-button
-    ui-sref="topics({topicSlug: topic.slug})"
-    aria-label="{{topic.name}}"
-    ng-repeat="topic in dashboardCtrl.topics | orderBy: '-slug' "
+    ui-sref="category({Slug: cate.slug})"
+    aria-label="{{cate.name}}"
+    ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
     class="md-fab">
     <i class="ion-ios-football"></i>
-    {{topic.name}}
+    {{cate.name}}
   </md-button>
   <br>
 
@@ -22,9 +21,9 @@
     md-cols-gt-md="6"
     md-row-height-gt-md="1:1" md-row-height="2:2"
     md-gutter="12px" md-gutter-gt-sm="8px">
-    <md-grid-tile ng-repeat="topic in dashboardCtrl.topics | orderBy: '-slug' ">
-      <a ui-sref="topics({topicSlug: topic.slug})">
-      {{topic.name}}
+    <md-grid-tile ng-repeat="category in dashboardCtrl.topics | orderBy: '-slug' ">
+      <a ui-sref="topics({topicSlug: category.slug})">
+      {{category.name}}
       </a>
     </md-grid-tile>
   </md-grid-list>-->
