@@ -8,8 +8,6 @@ angular.module('App')
 
     Auth.$requireAuth().then(function(auth){
     Users.getProfile(auth.uid).$loaded().then(function (profile){
-      console.log(profile);
-      console.log(profile.$id);
       topicCtrl.uid = profile.$id;
       })
     });
@@ -19,11 +17,29 @@ angular.module('App')
     topicCtrl.topics  = Topics;
 
 
+
+    topicCtrl.userName = function(userId){
+      if(userId!= null){
+        return Users.getDisplayName(userId);
+      }
+    }
+
     //
     topicCtrl.topic_landing = function(){
 
     }
 
+
+    //Reply to topic
+    topicCtrl.reply = function(topicId){
+      console.log(topicId);
+      topicCtrl.topics.replyArr(topicId).$add({
+        topicId:  topicId,
+        body:     topicCtrl.newReply.body,
+        uid:      topicCtrl.uid,
+        created:  moment().format("MM-DD-YYYY h:m:s")
+      })
+    }
 
     //Create new topic
     topicCtrl.createTopic = function(category){
@@ -34,7 +50,7 @@ angular.module('App')
           category: category,
           uid:      topicCtrl.uid,
           slug:     Slug.slugify(topicCtrl.newTopic.topic),
-          created:  moment().format("MM-DD-YYYY")
+          created:  moment().format("MM-DD-YYYY h:m:s")
         }).then(function(){
         topicCtrl.newTopic = {
           body: ''
