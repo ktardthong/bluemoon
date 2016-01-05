@@ -27,6 +27,18 @@
                 </md-input-container>
               </md-card-title-text>
             </md-card-title>
+
+            <div flow-init
+                 flow-name="uploader.flow"
+                 flow-files-added="topicCtrl.uploadFile($files)">
+              <button flow-btn type="file">Upload Images</button>
+              <div ng-repeat="image in uploader.flow.files track by $index">
+                <!--<span class="text">Blob image displayed with "flow-img"</span>-->
+                <img class="preview" flow-img="image"/><br>
+                <!--<span class="text">Base64 image displayed with "ng-src"</span> <img class="preview" ng-src="{{imageStrings[$index]}}"/>-->
+              </div>
+            </div>
+
             <md-card-actions layout="row" layout-align="end center">
               <md-button class="md-primary" type="submit">submit</md-button>
             </md-card-actions>
@@ -38,7 +50,6 @@
       <!-- List topics here-->
       <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderBy:'created'">
         <md-card class="md-whiteframe-2dp">
-          <img ng-if="topic.photo" ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
           <md-card-title>
             <md-card-title-text>
               <small>
@@ -56,6 +67,11 @@
               {{topic.body}}
             </p>
           </md-card-content>
+
+          <div ng-if="topic.photos" ng-repeat="photo in topic.photos">
+            <img ng-src="{{photo}}" class="md-card-image" alt="Washed Out">
+          </div>
+
 
           <md-card-actions layout="row" layout-align="start center">
             <md-card-icon-actions>

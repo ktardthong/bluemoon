@@ -29,6 +29,21 @@ angular.module('App')
 
     }
 
+    //Preset Parameters
+    topicCtrl.imageStrings = [];
+
+
+    //Upload Profile image
+    topicCtrl.uploadFile = function(files) {
+      angular.forEach(files, function (flowFile, i) {
+        var fileReader = new FileReader();
+        fileReader.onload = function (event) {
+          var uri = event.target.result;
+          topicCtrl.imageStrings[i] = uri;
+        };
+        fileReader.readAsDataURL(flowFile.file);
+      })
+    };
 
     //Reply to topic
     topicCtrl.reply = function(topicId){
@@ -37,7 +52,7 @@ angular.module('App')
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
         uid:      topicCtrl.uid,
-        created:  moment().format("MM-DD-YYYY h:m:s")
+        created:  moment().format("MM-DD-YYYY hh:mm:ss")
       })
     }
 
@@ -50,6 +65,7 @@ angular.module('App')
           category: category,
           uid:      topicCtrl.uid,
           slug:     Slug.slugify(topicCtrl.newTopic.topic),
+          photos:   topicCtrl.imageStrings,
           created:  moment().format("MM-DD-YYYY h:m:s")
         }).then(function(){
         topicCtrl.newTopic = {

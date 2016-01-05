@@ -15,7 +15,8 @@ angular
     'ui.router',
     'ngMaterial',
     'slugifier',
-    'angularMoment'
+    'angularMoment',
+    'flow'
   ])
 
   .config(function($mdThemingProvider) {
@@ -71,7 +72,6 @@ angular
               },
               //Getting list of category topics here
               cateTopics:function($stateParams,Topics){
-                //console.log(Topics.list($stateParams.Slug));
                 return Topics.list($stateParams.Slug);
               }
             }
@@ -85,7 +85,7 @@ angular
 
       //Topic landing page
       .state('topic',{
-        url:'/{Slug}/{Key}',
+        url:'/{Slug}',
         views:{
           '':{
             controller: 'TopicLandingCtrl as topicLandingCtrl',
@@ -95,7 +95,11 @@ angular
                 return Topics.fortopic($stateParams.Slug);
               },
               replyList:function($stateParams,Topics){
-                return Topics.replyList($stateParams.Key)
+                var topicKey = '';
+                return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
+                  topicKey = data[0].$id;
+                  return Topics.replyList(topicKey);
+                })
               }
             }
           },
@@ -104,6 +108,7 @@ angular
           }
         }
       })
+
 
       .state('dashboard', {
         url: '/dashboard',
@@ -118,7 +123,6 @@ angular
                   return Users.getProfile(auth.uid).$loaded().then(function (profile){
                     if(profile.displayName){
                       $rootScope.profile = profile;
-                      console.log($rootScope.profile);
                       return profile;
                     } else {
                       $state.go('get_started');

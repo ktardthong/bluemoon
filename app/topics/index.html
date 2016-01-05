@@ -7,14 +7,14 @@
   <div class="page-wrapper md-padding" layout="row">
 
 
-      <md-sidenav
-        flex
-        layout="column"
-        class="md-sidenav-left"
-        md-component-id="left"
-        md-is-locked-open="$mdMedia('gt-sm')">
-          {{topicLandingCtrl.topicLanding[0].slug}}
-        </md-sidenav>
+    <md-sidenav
+      flex
+      layout="column"
+      class="md-sidenav-left"
+      md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-sm')">
+        {{topicLandingCtrl.topicLanding[0].slug}}
+      </md-sidenav>
 
 
     <div flex flex-sm-grow="">
@@ -53,8 +53,10 @@
             </md-card-title-media>
             <md-input-container class="md-block" flex>
               <label>Your Comment</label>
-              <textarea ng-model="topicCtrl.newReply.body" columns="1" rows="3"></textarea>
+              <textarea ng-model="topicCtrl.newReply.body" col
+                        umns="1" rows="3"></textarea>
             </md-input-container>
+
             <!--<md-input-container class="md-block" >-->
             <md-button class="md-primary md-block md-mini" type="submit">submit</md-button>
           </div>

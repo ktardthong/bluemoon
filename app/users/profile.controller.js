@@ -21,8 +21,9 @@ angular.module('App')
         };
         fileReader.readAsDataURL(flowFile.file);
       })
-
     };
+
+
     profileCtrl.updateProfile = function(){
       profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
       profileCtrl.profile.$save().then(function(){
