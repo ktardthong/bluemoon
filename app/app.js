@@ -14,7 +14,8 @@ angular
     'angular-md5',
     'ui.router',
     'ngMaterial',
-    'slugifier'
+    'slugifier',
+    'angularMoment'
   ])
 
   .config(function($mdThemingProvider) {
@@ -82,9 +83,9 @@ angular
       })
 
 
-      //Topic laning page
+      //Topic landing page
       .state('topic',{
-        url:'/{Slug}/',
+        url:'/{Slug}/{Key}',
         views:{
           '':{
             controller: 'TopicLandingCtrl as topicLandingCtrl',
@@ -92,6 +93,9 @@ angular
             resolve:{
               topicLanding: function($stateParams,Topics){
                 return Topics.fortopic($stateParams.Slug);
+              },
+              replyList:function($stateParams,Topics){
+                return Topics.replyList($stateParams.Key)
               }
             }
           },

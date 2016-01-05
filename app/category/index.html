@@ -1,7 +1,7 @@
 <md-content>
   <div ui-view="header"></div>
 
-  <section class="text-center">
+  <section>
     <h1>
       {{cateCtrl.cateName.name}}
     </h1>
@@ -41,8 +41,11 @@
           <img ng-if="topic.photo" ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
           <md-card-title>
             <md-card-title-text>
-              <small>{{topic.created}}</small>
-              <span class="md-headline">
+              <small>
+                <i class="ion-ios-clock-outline"></i>
+                <span am-time-ago="topic.created"></span>
+              </small>
+              <span class="md-headline text-center">
                 <a ui-sref="topic({Slug: topic.slug, Key: topicKey })">{{topic.topic}}</a>
               </span>
             </md-card-title-text>

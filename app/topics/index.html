@@ -1,3 +1,75 @@
 <md-content>
+
   <div ui-view="header"></div>
+
+
+
+  <div class="page-wrapper md-padding" layout="row">
+
+
+      <md-sidenav
+        flex
+        layout="column"
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-sm')">
+          {{topicLandingCtrl.topicLanding[0].slug}}
+        </md-sidenav>
+
+
+    <div flex flex-sm-grow="">
+      <div layout="column" ng-controller="TopicCtrl as topicCtrl">
+        <md-card class="md-whiteframe-3dp md-padding">
+          <small>
+            <i class="ion-ios-clock-outline"></i>
+            <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
+          </small>
+          <section class="text-center">
+            <span class="md-headline">
+              {{topicLandingCtrl.topicLanding[0].topic}}
+            </span>
+            <p class="md-padding">
+              {{topicLandingCtrl.topicLanding[0].body}}
+            </p>
+          </section>
+
+          <div layout="row">
+            {{ topicCtrl.userName(topicLandingCtrl.topicLanding[0].uid) }}
+            views:
+            <a ui-sref="category({Slug: topicLandingCtrl.topicLanding[0].category})">
+              {{topicLandingCtrl.topicLanding[0].category}}
+            </a>
+          </div>
+
+        </md-card>
+      </div>
+
+      <md-card class="md-whiteframe-2dp md-padding" ng-controller="TopicCtrl as topicCtrl">
+        <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
+          <div layout-gt-sm="row">
+            <md-card-title-media>
+              <img src="https://lh3.googleusercontent.com/-ONIXPD1ozmQ/AAAAAAAAAAI/AAAAAAAAD8Q/HB38gqJDdyU/s36-p-k-rw-no/photo.jpg"
+                   class="img-circle">
+            </md-card-title-media>
+            <md-input-container class="md-block" flex>
+              <label>Your Comment</label>
+              <textarea ng-model="topicCtrl.newReply.body" columns="1" rows="3"></textarea>
+            </md-input-container>
+            <!--<md-input-container class="md-block" >-->
+            <md-button class="md-primary md-block md-mini" type="submit">submit</md-button>
+          </div>
+        </form>
+      </md-card>
+
+      <div ng-repeat="reply in topicLandingCtrl.replyList">
+        <md-card class="md-padding">
+          <span am-time-ago="reply.created"></span>
+          {{reply.body}}
+        </md-card>
+
+      </div>
+    </div>
+  </div>
+
+
 </md-content>
