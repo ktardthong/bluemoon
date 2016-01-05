@@ -36,7 +36,7 @@
 
 
       <!-- List topics here-->
-      <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderBy:'created'">
+      <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderObjectBy:'created':true">
         <md-card class="md-whiteframe-2dp">
           <img ng-if="topic.photo" ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
           <md-card-title>
