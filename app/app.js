@@ -20,15 +20,34 @@ angular
   ])
 
   .config(function($mdThemingProvider) {
+    $mdThemingProvider.definePalette('slack', {
+      '50': 'ffebee',
+      '100': 'ffcdd2',
+      '200': 'ef9a9a',
+      '300': 'e57373',
+      '400': 'ef5350',
+      '500': '4D394B',
+      '600': 'e53935',
+      '700': 'd32f2f',
+      '800': 'c62828',
+      '900': 'b71c1c',
+      'A100': 'ff8a80',
+      'A200': 'ff5252',
+      'A400': 'ff1744',
+      'A700': 'd50000',
+      'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
+                                          // on this palette should be dark or light
+      'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+        '200', '300', '400', 'A100'],
+      'contrastLightColors': undefined    // could also specify this if default was 'dark'
+    });
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue')
-      .accentPalette('pink');
+      .primaryPalette('slack')
   })
+
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-
-
       .state('home', {
         url: '/',
         views:{
@@ -37,7 +56,7 @@ angular
             templateUrl: 'home/home.html',
             resolve:{
                requireNoAuth: function($state, Auth){
-               return Auth.$requireAuth().then(function(auth){
+               return Auth.auth.$requireAuth().then(function(auth){
                $state.go('dashboard');
                }, function(error){
                return;
@@ -49,10 +68,8 @@ angular
             controller:  'AuthCtrl as authCtrl',
             templateUrl: 'templates/html/login-form.html'
           },
-          'topic-grid@home':{
-            templateUrl: 'templates/html/category-grid.html'
-          },
           'header@home': {
+            controller:  'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html',
           },
         },
@@ -77,6 +94,7 @@ angular
             }
           },
           'header@category': {
+            controller:  'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html',
           }
         }
@@ -96,10 +114,11 @@ angular
               },
               replyList:function($stateParams,Topics){
                 var topicKey = '';
-                return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
+                /*return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
+                  console.log(data[0]);
                   topicKey = data[0].$id;
                   return Topics.replyList(topicKey);
-                })
+                })*/
               }
             }
           },
@@ -119,9 +138,10 @@ angular
             templateUrl: 'dashboard/index.html',
             resolve:{
               profile: function ($state,$rootScope, Auth, Users){
-                return Auth.$requireAuth().then(function(auth){
+                return Auth.auth.$requireAuth().then(function(auth){
                   return Users.getProfile(auth.uid).$loaded().then(function (profile){
                     if(profile.displayName){
+                      console.log($rootScope);
                       $rootScope.profile = profile;
                       return profile;
                     } else {
@@ -133,7 +153,7 @@ angular
                 });
               },
               auth: function($state, Users, Auth){
-                return Auth.$requireAuth().catch(function(){
+                return Auth.auth.$requireAuth().catch(function(){
                   $state.go('home');
                 });
 
@@ -160,12 +180,12 @@ angular
             templateUrl: 'auth/get_started.html',
             resolve:{
               profile: function(Users, Auth){
-                return Auth.$requireAuth().then(function(auth){
+                return Auth.auth.$requireAuth().then(function(auth){
                   return Users.getProfile(auth.uid).$loaded();
                 });
               },
               auth: function($state, Users, Auth){
-                return Auth.$requireAuth().catch(function(){
+                return Auth.auth.$requireAuth().catch(function(){
                   $state.go('home');
                 });
 
@@ -181,7 +201,7 @@ angular
 
 
       .state('login', {
-        url: '/login',
+        url: '/auth/login',
         views:{
           '':{
             //controller: 'HomeCtrl as  homeCtrl',
@@ -194,21 +214,12 @@ angular
           'header@login': {
             templateUrl: 'templates/toolbar/main_toolbar.html'
           }
-        },
-        resolve: {
-          requireNoAuth: function($state, Auth){
-            return Auth.$requireAuth().then(function(auth){
-              $state.go('home');
-            }, function(error){
-              return;
-            });
-          }
         }
       })
 
 
       .state('register', {
-        url: '/register',
+        url: '/auth/register',
         views:{
           '':{
             controller:  'AuthCtrl as authCtrl',
@@ -220,7 +231,7 @@ angular
         },
         resolve: {
           requireNoAuth: function($state, Auth){
-            return Auth.$requireAuth().then(function(auth){
+            return Auth.auth.$requireAuth().then(function(auth){
               $state.go('home');
             }, function(error){
               return;

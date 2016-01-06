@@ -4,8 +4,7 @@
 
 
 
-  <div class="page-wrapper md-padding" layout="row">
-
+  <div class="page-wrapper md-padding margin-top" layout="row">
 
     <md-sidenav
       flex
@@ -31,6 +30,9 @@
             <p class="md-padding">
               {{topicLandingCtrl.topicLanding[0].body}}
             </p>
+            <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
+              <img ng-src="{{photo}}">
+            </div>
           </section>
 
           <div layout="row">

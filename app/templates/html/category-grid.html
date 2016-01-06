@@ -5,6 +5,7 @@
   <h5 class="md-display-1 text-center">Explore</h5>
 
   <md-button
+    layout="column"
     ui-sref="category({Slug: cate.slug})"
     aria-label="{{cate.name}}"
     ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "

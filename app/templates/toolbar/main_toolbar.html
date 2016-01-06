@@ -1,4 +1,4 @@
-<md-toolbar>
+<md-toolbar class="fix-toolbar">
   <div class="md-toolbar-tools page-wrapper">
     <h2>
       <a ui-sref="home">
@@ -6,20 +6,21 @@
       </a>
     </h2>
     <span flex></span>
-    <md-button aria-label="categories" class="md-primary" ng-click="topicGridShow = true">
-      <h2>
+    <md-button ng-click="authCtrl.toggleRight()"
+               ng-hide="isOpenRight()"
+               class="md-primary md-fab md-mini">
       <i class="ion-grid"></i>
-      </h2>
     </md-button>
-    <div ng-if="profileCtrl.profile.displayName">
-      {{ authCtrl.profile.displayName }}
+
+    <!-- Profile Drop down -->
+    <div ng-if="authCtrl.profile.$id">
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle"
                 type="button"
                 id="profile_dd"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <img ng-src="{{profileCtrl.profile.photo}}">
-          {{profileCtrl.profile.displayName}}
+          <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}">
+          {{authCtrl.profile.displayName}}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="profile_dd">
@@ -31,12 +32,30 @@
       </div>
     </div>
 
-    <md-button
-      ng-if="!profileCtrl.profile"
-      class="md-raised" aria-label="More" ui-sref="register">
+    <md-button ng-if="!authCtrl.profile.$id" class="" aria-label="Register" ui-sref="register">
       Register
     </md-button>
+
   </div>
 </md-toolbar>
 
-<topic-grid ng-show="topicGridShow" ng-init="topicGridShow = false"></topic-grid>
+
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Sidenav Right</h1>
+  </md-toolbar>
+  <md-content ng-controller="AuthCtrl" layout-padding>
+    <form>
+      <md-input-container>
+        <label for="testInput">Test input</label>
+        <input type="text" id="testInput"
+               ng-model="data" md-autofocus>
+      </md-input-container>
+    </form>
+    <md-button ng-click="close()" class="md-primary">
+
+    </md-button>
+    <topic-grid ></topic-grid>
+  </md-content>
+</md-sidenav>

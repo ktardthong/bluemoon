@@ -1,6 +1,17 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope){
+  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$log){
     var authCtrl = this;
+
+
+    //Parser
+    authCtrl.auth     = Auth;
+    authCtrl.users    = Users;
+    if(Auth.ref.getAuth() != null ){
+      authCtrl.profile  = authCtrl.users.getProfile(Auth.ref.getAuth().uid);
+    }
+    else{
+      authCtrl.profile =''
+    }
 
     authCtrl.user = {
       email: '',
@@ -30,4 +41,15 @@ angular.module('App')
       });
     };
 
+
+    authCtrl.toggleRight = buildToggler('right');
+    function buildToggler(navID) {
+      return function() {
+        $mdSidenav(navID)
+          .toggle()
+          .then(function () {
+            $log.debug("toggle " + navID + " is done");
+          });
+      }
+    }
   });

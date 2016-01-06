@@ -4,17 +4,11 @@ angular.module('App')
     var topicCtrl = this;
 
     topicCtrl.uid = '';
-    console.log($rootScope.profile);
-
-    Auth.$requireAuth().then(function(auth){
-    Users.getProfile(auth.uid).$loaded().then(function (profile){
-      topicCtrl.uid = profile.$id;
-      })
-    });
-
+    
 
     //Parser here
     topicCtrl.topics  = Topics;
+    topicCtrl.auth    = Auth;
 
 
 

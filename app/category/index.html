@@ -1,51 +1,72 @@
 <md-content>
   <div ui-view="header"></div>
 
-  <section>
-    <h1>
-      {{cateCtrl.cateName.name}}
-    </h1>
+  <section class="gray-background">
 
-    <div layout="column" class="inner-container container">
+    <div layout="column" class="inner-container container margin-top">
 
+      <!-- Creation form -->
       <div ng-controller="TopicCtrl as topicCtrl">
-        <md-card ng-if="topicCtrl.uid">
+        <md-content ng-if="topicCtrl.auth.ref.getAuth().uid" class="md-padding md-whiteframe-1dp">
           <form ng-submit="topicCtrl.createTopic(cateCtrl.cateName.$id)">
-            <md-card-title>
-              <md-card-title-media>
+            <md-list>
+              <md-list-item class="md-3-line">
                 <img src="https://lh3.googleusercontent.com/-ONIXPD1ozmQ/AAAAAAAAAAI/AAAAAAAAD8Q/HB38gqJDdyU/s36-p-k-rw-no/photo.jpg"
                      class="img-circle">
-              </md-card-title-media>
-              <md-card-title-text>
-                <md-input-container>
-                  <label>Topic</label>
-                  <input ng-model="topicCtrl.newTopic.topic">
-                </md-input-container>
-                <md-input-container class="md-block">
-                  <label>Your story</label>
-                  <textarea ng-model="topicCtrl.newTopic.body" columns="1" md-maxlength="150" rows="5"></textarea>
-                </md-input-container>
-              </md-card-title-text>
-            </md-card-title>
+                <div class="md-list-item-text" layout="column">
 
-            <div flow-init
-                 flow-name="uploader.flow"
-                 flow-files-added="topicCtrl.uploadFile($files)">
-              <button flow-btn type="file">Upload Images</button>
-              <div ng-repeat="image in uploader.flow.files track by $index">
-                <!--<span class="text">Blob image displayed with "flow-img"</span>-->
-                <img class="preview" flow-img="image"/><br>
-                <!--<span class="text">Base64 image displayed with "ng-src"</span> <img class="preview" ng-src="{{imageStrings[$index]}}"/>-->
+                  <!-- Topics -->
+                  <md-input-container ng-click="topicCtrl.body.show = true" flex="">
+                    <label>Topic</label>
+                    <input ng-model="topicCtrl.newTopic.topic">
+                  </md-input-container>
+
+                  <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+
+                    <!-- Body -->
+                    <md-input-container class="md-block">
+                      <label>Your story</label>
+                      <textarea ng-model="topicCtrl.newTopic.body" columns="1" rows="5"></textarea>
+                    </md-input-container>
+
+                    <!-- Tags -->
+                    <md-input-container ng-click="topicCtrl.body.show = true" flex="">
+                      <label>#tags</label>
+                      <input ng-model="topicCtrl.newTopic.tags">
+                    </md-input-container>
+
+                  </div>
+                </div>
+              </md-list-item>
+            </md-list>
+
+            <!-- Optional -->
+            <div layout="row">
+              <div flow-init ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show"
+                   flow-name="uploader.flow"
+                   flow-files-added="topicCtrl.uploadFile($files)">
+                <md-button class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
+                <md-button class="md-primary md-fab md-mini ion-location"></md-button>
+                <md-button class="md-primary md-fab md-mini ion-link"></md-button>
+                <div ng-repeat="image in uploader.flow.files track by $index">
+                  <img class="preview" flow-img="image"/><br>
+                </div>
               </div>
+
+              <md-button ng-if="topicCtrl.newTopic.topic.length > 0" class="md-primary" type="submit">Save as draft</md-button>
             </div>
 
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-primary" type="submit">submit</md-button>
+            <md-card-actions layout="row" layout-align="end center" ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+              <md-button class="md-primary md-raised" type="submit">submit</md-button>
             </md-card-actions>
           </form>
-        </md-card>
+        </md-content>
       </div>
 
+
+      <h1 class="text-center md-headline">
+        {{cateCtrl.cateName.name}}
+      </h1>
 
       <!-- List topics here-->
       <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderObjectBy:'created':true">

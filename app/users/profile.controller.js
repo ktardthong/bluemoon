@@ -1,10 +1,11 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, auth, profile){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5,Auth, auth, profile){
     var profileCtrl = this;
 
     //Parser
     profileCtrl.profile = profile;
-    $rootScope.profile = profile;
+    profileCtrl.auth    = Auth;
+
 
 
     //Preset Parameters

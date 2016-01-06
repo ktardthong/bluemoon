@@ -6,6 +6,25 @@ body {
   background-color: #F5F8FA;
 }
 
+.gray-background{
+  background: #F6F9FA;
+}
+
+/*Space from toolbar at the top*/
+.margin-top{
+  margin-top: 65px;
+}
+
+a{
+  color: #4C9689;
+  text-decoration: none;
+}
+
+.fix-toolbar {
+  z-index: 100;
+  position: fixed;
+}
+
 .bg-image {
   position: relative;
 }

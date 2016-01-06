@@ -8,8 +8,6 @@ angular.module('App')
 
     var Category = {
       getName: function(slug){
-        console.log(slug);
-        console.log($firebaseObject(ref.child(slug)));
         var data = ref.child(slug);
         return $firebaseObject(data);
       },
