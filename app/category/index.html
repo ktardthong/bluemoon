@@ -64,9 +64,9 @@
       </div>
 
 
-      <h1 class="text-center md-headline">
+      <p class="text-center md-title">
         {{cateCtrl.cateName.name}}
-      </h1>
+      </p>
 
       <!-- List topics here-->
       <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderObjectBy:'created':true">
@@ -77,7 +77,7 @@
                 <i class="ion-ios-clock-outline"></i>
                 <span am-time-ago="topic.created"></span>
               </small>
-              <span class="md-headline text-center">
+              <span class="md-title text-center">
                 <a ui-sref="topic({Slug: topic.slug, Key: topicKey })">{{topic.topic}}</a>
               </span>
             </md-card-title-text>

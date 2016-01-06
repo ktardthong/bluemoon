@@ -114,15 +114,18 @@ angular
               },
               replyList:function($stateParams,Topics){
                 var topicKey = '';
-                /*return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
-                  console.log(data[0]);
-                  topicKey = data[0].$id;
+                return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
+                  if(data[0] != null)
+                  {
+                    topicKey = data[0].$id;
+                  }
                   return Topics.replyList(topicKey);
-                })*/
+                })
               }
             }
           },
           'header@topic': {
+            controller:  'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html',
           }
         }
@@ -130,7 +133,7 @@ angular
 
 
       .state('dashboard', {
-        url: '/dashboard',
+        url: '/user/dashboard',
         controller: 'DashboardCtrl as dashboardCtrl',
         views:{
           '':{
@@ -141,8 +144,6 @@ angular
                 return Auth.auth.$requireAuth().then(function(auth){
                   return Users.getProfile(auth.uid).$loaded().then(function (profile){
                     if(profile.displayName){
-                      console.log($rootScope);
-                      $rootScope.profile = profile;
                       return profile;
                     } else {
                       $state.go('get_started');
@@ -156,7 +157,6 @@ angular
                 return Auth.auth.$requireAuth().catch(function(){
                   $state.go('home');
                 });
-
               }
             }
           },
@@ -201,10 +201,9 @@ angular
 
 
       .state('login', {
-        url: '/auth/login',
+        url: '/user/login',
         views:{
           '':{
-            //controller: 'HomeCtrl as  homeCtrl',
             templateUrl: 'auth/login.html'
           },
           'login-form@login':{
@@ -219,7 +218,7 @@ angular
 
 
       .state('register', {
-        url: '/auth/register',
+        url: '/user/register',
         views:{
           '':{
             controller:  'AuthCtrl as authCtrl',
