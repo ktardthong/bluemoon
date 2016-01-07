@@ -99,7 +99,7 @@ angular.module('App')
       console.log(topic.$id +' '+ topicCtrl.uid + ' upvotes');
 
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
-        topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
+        topicCtrl.cancelDownvote(topic);
       }
 
       topicCtrl.userUpvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
@@ -111,7 +111,12 @@ angular.module('App')
 
     topicCtrl.cancelUpvote = function(topic){
       topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
-      topicCtrl.userUpvotedTopics.child(topic.$id).remove();
+      topicCtrl.userUpvotedTopics.child(topic.$id).remove(function(error){
+            if (error) {
+            console.log("Error:", error);
+          } else {
+            console.log("Removed successfully!");
+          }});
     };
 
     //downvote
@@ -119,7 +124,7 @@ angular.module('App')
       console.log(topic.$id+' '+ topicCtrl.uid + ' downvotes');
 
       if(topic.upvotes != undefined && topic.upvotes[topicCtrl.uid] != undefined){
-        topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
+        topicCtrl.cancelUpvote(topic);
       }
 
       topicCtrl.userDownvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
@@ -129,7 +134,12 @@ angular.module('App')
 
     topicCtrl.cancelDownvote = function(topic){
       topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
-      topicCtrl.userDownvotedTopics.child(topic.$id).remove();
+      topicCtrl.userDownvotedTopics.child(topic.$id).remove(function(error){
+            if (error) {
+            console.log("Error:", error);
+          } else {
+            console.log("Removed successfully!");
+          }});
     };
 
   });
