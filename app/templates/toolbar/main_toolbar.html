@@ -6,10 +6,20 @@
       </a>
     </h2>
     <span flex></span>
-    <md-button ng-click="authCtrl.toggleRight()"
-               ng-hide="isOpenRight()"
-               class="md-primary md-fab md-mini">
+
+    <md-button
+        aria-label="Explore Categories"
+        ng-click="authCtrl.toggleRight()"
+        class="md-primary md-fab md-mini">
       <i class="ion-grid"></i>
+    </md-button>
+
+    <md-button
+        aria-label="Dashboard"
+        class="md-primary md-fab md-mini"
+        ng-if="authCtrl.profile.$id"
+        ui-sref="dashboard">
+      <i class="ion-android-home"></i>
     </md-button>
 
     <!-- Profile Drop down -->
@@ -19,12 +29,12 @@
                 type="button"
                 id="profile_dd"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}">
+          <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
           {{authCtrl.profile.displayName}}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="profile_dd">
-          <li><a href="#">View Profile</a></li>
+          <li><a ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a></li>
           <li><a href="#">Setting</a></li>
           <li role="separator" class="divider"></li>
           <li><a href="#" ng-click="authCtrl.logout()">Logout</a></li>
@@ -38,24 +48,3 @@
 
   </div>
 </md-toolbar>
-
-
-
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-  <md-toolbar class="md-theme-light">
-    <h1 class="md-toolbar-tools">Sidenav Right</h1>
-  </md-toolbar>
-  <md-content ng-controller="AuthCtrl" layout-padding>
-    <form>
-      <md-input-container>
-        <label for="testInput">Test input</label>
-        <input type="text" id="testInput"
-               ng-model="data" md-autofocus>
-      </md-input-container>
-    </form>
-    <md-button ng-click="close()" class="md-primary">
-
-    </md-button>
-    <topic-grid ></topic-grid>
-  </md-content>
-</md-sidenav>

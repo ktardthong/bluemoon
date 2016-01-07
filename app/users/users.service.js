@@ -5,10 +5,14 @@ angular.module('App')
 
     var Users = {
       getProfile: function(uid){
+        //console.log($firebaseObject(usersRef.child(uid)));
         return $firebaseObject(usersRef.child(uid));
       },
       getDisplayName: function(uid){
         return users.$getRecord(uid).displayName;
+      },
+      userArrRef:function(uid){
+        return usersRef.child(uid);
       },
       all: users
     };

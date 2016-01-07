@@ -2,15 +2,17 @@
 
 <div>
 
-  <h5 class="md-display-1 text-center">Explore</h5>
+  <h5 class="md-display-1 text-center">
+    <i class="ion-grid"></i>
+    Explore
+  </h5>
 
   <md-button
     layout="column"
     ui-sref="category({Slug: cate.slug})"
     aria-label="{{cate.name}}"
     ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
-    class="md-fab">
-    <i class="ion-ios-football"></i>
+    class="md-raised">
     {{cate.name}}
   </md-button>
   <br>
