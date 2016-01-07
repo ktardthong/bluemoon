@@ -10,7 +10,7 @@ angular.module('App')
       controller:  'TopicCtrl as topicCtrl',
       templateUrl: 'templates/html/topic-list.html',
       scope: {
-            topics: "@"
+            topics: "="
         },
     };
   })

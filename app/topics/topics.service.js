@@ -52,7 +52,7 @@ angular.module('App')
       },
 
       //upvotes
-      upvotes:function(topicId){
+      getUpvotes:function(topicId){
         return {
           ref:  ref.child(topicId+"/upvotes"),
           array: $firebaseArray(ref.child(topicId+"/upvotes"))
@@ -60,12 +60,43 @@ angular.module('App')
       },
 
       //downvotes
-      downvotes:function(topicId){
+      getDownvotes:function(topicId){
         return {
           ref:  ref.child(topicId+"/downvotes"),
           array: $firebaseArray(ref.child(topicId+"/downvotes"))
         }
       },
+
+      upvoteTopic:function(topicId, uid){
+        ref.child(topicId+"/upvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+        return ref.child(topicId+"/upvotes").child(uid);
+      },
+
+      undoUpvote:function(topicId, uid){
+        ref.child(topicId+"/upvotes").child(uid).remove(function(error){
+            if (error) {
+            console.log("Error:", error);
+          } else {
+            console.log("Removed successfully!");
+          }});
+        return ref.child(topicId+"/upvotes");
+      },
+
+      downvoteTopic:function(topicId, uid){
+        ref.child(topicId+"/downvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+        return ref.child(topicId+"/downvotes").child(uid);
+      },
+
+      undoDownvote:function(topicId, uid){
+        ref.child(topicId+"/downvotes").child(uid).remove(function(error){
+            if (error) {
+            console.log("Error:", error);
+          } else {
+            console.log("Removed successfully!");
+          }});
+        return ref.child(topicId+"/downvotes");
+      },
+
 
       //Return array
       arr: $firebaseArray(ref),

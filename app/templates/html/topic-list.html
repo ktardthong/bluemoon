@@ -1,4 +1,4 @@
-      <div ng-repeat="topic in topics track by $index | orderBy:'-created'">
+      <div ng-repeat="topic in topics | orderBy:'-created'">
         <md-card class="md-whiteframe-2dp">
           <md-card-title>
             <md-card-title-text>
@@ -14,7 +14,10 @@
 
           <md-card-content>
             <p>
-              {{topic.body}}
+              {{topic.uid}} / 
+              {{topic.body}} / 
+              {{topic.upvotes}} / 
+              {{topic.downvotes}}
             </p>
           </md-card-content>
 
@@ -26,11 +29,12 @@
           <md-card-actions layout="row" layout-align="start center">
             <md-card-icon-actions>
 
-              <md-button ng-hide="topicCtrl.isUpvoted(topic.$id)" ng-click="topicCtrl.upvote(topic.$id)" class="ion-chevron-up" aria-label="Upvote"> Upvoted 268</md-button>
-              <md-button ng-show="topicCtrl.isUpvoted(topic.$id)" ng-click="topicCtrl.upvote(topic.$id)" class="md-primary md-raised ion-chevron-up" aria-label="Upvote"> Upvoted 269</md-button>
+              <md-button ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.upvote(topic)" class="ion-chevron-up" aria-label="Upvote"> Upvote 268</md-button>
 
-              <md-button ng-hide="topicCtrl.isDownvoted(topic.$id)" ng-click="topicCtrl.downvote(topic.$id)" class="ion-chevron-down" aria-label="Upvote"> Downvoted 59</md-button>
-              <md-button ng-show="topicCtrl.isDownvoted(topic.$id)" ng-click="topicCtrl.downvote(topic.$id)" class="md-primary md-raised md-hue-2 ion-chevron-down" aria-label="Upvote"> Downvoted 60</md-button>
+              <md-button ng-show="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.cancelUpvote(topic)" class="md-primary md-raised ion-chevron-up" aria-label="Upvote"> Upvoted 269</md-button>
+
+              <md-button ng-hide="topic.downvotes[topicCtrl.uid]" ng-click="topicCtrl.downvote(topic)" class="ion-chevron-down" aria-label="Upvote"> Downvote 59</md-button>
+              <md-button ng-show="topic.downvotes[topicCtrl.uid]" ng-click="topicCtrl.cancelDownvote(topic)" class="md-primary md-raised md-hue-2 ion-chevron-down" aria-label="Upvote"> Downvoted 60</md-button>
 
               <md-button class="ion-chatbubble-working"     aria-label="Comments"> Comments 2 </md-button>
               <md-button class="ion-share"     aria-label="Share"> Share </md-button>

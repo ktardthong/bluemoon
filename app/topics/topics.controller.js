@@ -11,14 +11,16 @@ angular.module('App')
       topicCtrl.profile  = topicCtrl.users.getProfile(topicCtrl.auth.ref.getAuth().uid);
       topicCtrl.uid = topicCtrl.profile.$id;
       topicCtrl.userRef = topicCtrl.users.userRef(topicCtrl.uid);
-      topicCtrl.upvotedTopics = topicCtrl.users.upvotes(topicCtrl.uid);
-      topicCtrl.downvotedTopics = topicCtrl.users.downvotes(topicCtrl.uid);
+      topicCtrl.userUpvotedTopics = topicCtrl.users.upvotes(topicCtrl.uid);
+      topicCtrl.userDownvotedTopics = topicCtrl.users.downvotes(topicCtrl.uid);
     }
     else{
       topicCtrl.profile ='';
       topicCtrl.uid = '';
       topicCtrl.userRef = '';
     }
+
+    console.log($scope.topics);
 
     topicCtrl.userName = function(userId){
       if(userId!= null){
@@ -84,7 +86,7 @@ angular.module('App')
           uid:      topicCtrl.uid,
           slug:     Slug.slugify(newTopic.topic),
           photos:   topicCtrl.imageStrings,
-          created:  moment().format("MM-DD-YYYY h:m:s")
+          created:  moment().format("MM-DD-YYYY hh:mm:ss")
         }).then(function(){
         topicCtrl.newTopic = {
           body: ''
@@ -93,66 +95,41 @@ angular.module('App')
     };
 
      //upvote
-     topicCtrl.isUpvoted = function(topicId){
-        if(topicCtrl.profile ==''){
-          return false
-        }
-        else{
-          topicCtrl.upvotedTopics.child(topicId).once('value', function(snapshot) {
-          return (snapshot.val() !== null);
-        });
-        }
-     };
+    topicCtrl.upvote = function(topic){
+      console.log(topic.$id +' '+ topicCtrl.uid + ' upvotes');
 
-    topicCtrl.upvote = function(topicId){
-      console.log(topicId+' '+ topicCtrl.uid + ' upvotes');
+      if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
+        topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
+      }
 
-      topicCtrl.upvotedTopics.child(topicId).set(true);
-      // topicCtrl.isUpvoted = !topicCtrl.isUpvoted;
+      topicCtrl.userUpvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+      // topic.child('upvotes/'+'topicCtrl.uid').set(moment().format("MM-DD-YYYY hh:mm:ss"));
+      topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid);
 
-      // topicCtrl.topics.upvotes(topicId).push(topicCtrl.uid).set(moment().format("MM-DD-YYYY hh:mm:ss")
-      // );
-      
-      // topicCtrl.topics.downvotes(topicId).child(topicCtrl.uid).remove(function(error){
-      //       if (error) {
-      //       console.log("Error:", error);
-      //     } else {
-      //       console.log("Removed successfully!");
-      //     }
-      //   });
+      console.log(topic);
+    };
+
+    topicCtrl.cancelUpvote = function(topic){
+      topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
+      topicCtrl.userUpvotedTopics.child(topic.$id).remove();
     };
 
     //downvote
-    topicCtrl.isDownvoted = function(topicId){
+    topicCtrl.downvote = function(topic){
+      console.log(topic.$id+' '+ topicCtrl.uid + ' downvotes');
 
-      if(topicCtrl.profile ==''){
-          return false
-        }
-        else{
-        topicCtrl.downvotedTopics.child(topicId).once('value', function(snapshot) {
-            return (snapshot.val() !== null);
-          });
+      if(topic.upvotes != undefined && topic.upvotes[topicCtrl.uid] != undefined){
+        topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
       }
 
+      topicCtrl.userDownvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+
+      topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid);
     };
 
-    topicCtrl.downvote = function(topicId){
-      console.log(topicId+' '+ topicCtrl.uid + ' downvotes');
-
-      topicCtrl.downvotedTopics.child(topicId).set(true);
-      // topicCtrl.isDownvoted = !topicCtrl.isDownvoted;
-      // topicCtrl.topics.downvotes(topicId).push(topicCtrl.uid).set(
-      //   moment().format("MM-DD-YYYY hh:mm:ss")
-      // );
-      
-      // topicCtrl.topics.upvotes(topicId).child(topicCtrl.uid).remove(function(error){
-      //       if (error) {
-      //       console.log("Error:", error);
-      //     } else {
-      //       console.log("Removed successfully!");
-      //     }
-      //   });
-      
+    topicCtrl.cancelDownvote = function(topic){
+      topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
+      topicCtrl.userDownvotedTopics.child(topic.$id).remove();
     };
 
   });

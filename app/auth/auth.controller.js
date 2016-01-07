@@ -19,7 +19,7 @@ angular.module('App')
     };
 
     authCtrl.login = function (){
-      Auth.$authWithPassword(authCtrl.user).then(function (auth){
+      authCtrl.auth.auth.$authWithPassword(authCtrl.user).then(function (auth){
         Users.getProfile(auth.uid).$loaded().then(function(profile){
           $rootScope.profile = profile;
         });
