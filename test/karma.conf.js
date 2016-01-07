@@ -33,8 +33,12 @@ module.exports = function(config) {
       'bower_components/flow.js/dist/flow.js',
       'bower_components/ng-flow/dist/ng-flow.js',
       'bower_components/moment/moment.js',
-      'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-moment/angular-moment.js',
+      'bower_components/slug/slug.js',
+      'bower_components/angular-slug/angular-slug.js',
+      'bower_components/speakingurl/speakingurl.min.js',
+      'bower_components/angular-speakingurl/src/angular-speakingurl.js',
+      'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

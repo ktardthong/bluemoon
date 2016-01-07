@@ -5,11 +5,13 @@ angular.module('App')
 
     var Users = {
       getProfile: function(uid){
+        //console.log($firebaseObject(usersRef.child(uid)));
         return $firebaseObject(usersRef.child(uid));
       },
       getDisplayName: function(uid){
         return users.$getRecord(uid).displayName;
       },
+<<<<<<< HEAD
 
       userRef: function(uid){
         return usersRef.child(uid);
@@ -23,6 +25,11 @@ angular.module('App')
         return usersRef.child(uid).child('downvotes');
       },
 
+=======
+      userArrRef:function(uid){
+        return usersRef.child(uid);
+      },
+>>>>>>> 37ef445eddbd901cb3c413bf655203c5e485bc04
       all: users
     };
 

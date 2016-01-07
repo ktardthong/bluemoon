@@ -47,9 +47,6 @@ angular.module('App')
       return function() {
         $mdSidenav(navID)
           .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
+      };
     }
   });

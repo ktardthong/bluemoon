@@ -1,8 +1,7 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope, $rootScope,Slug, Topics, Auth, Users){
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia, Topics, Auth, Users, Slug){
 
     var topicCtrl = this;
-
     //Parser here
     topicCtrl.topics  = Topics;
     topicCtrl.auth    = Auth;
@@ -48,6 +47,22 @@ angular.module('App')
       })
     };
 
+    topicCtrl.showConfirm = function(ev) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to delete your debt?')
+        .textContent('All of the banks have agreed to forgive you your debts.')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Please do it!')
+        .cancel('Sounds like a scam');
+      $mdDialog.show(confirm).then(function() {
+        $scope.status = 'You decided to get rid of your debt.';
+      }, function() {
+        $scope.status = 'You decided to keep your debt.';
+      });
+    };
+
     //Reply to topic
     topicCtrl.reply = function(topicId){
       console.log(topicId);
@@ -67,7 +82,7 @@ angular.module('App')
           body:     topicCtrl.newTopic.body,
           category: category,
           uid:      topicCtrl.uid,
-          slug:     Slug.slugify(topicCtrl.newTopic.topic),
+          slug:     Slug.slugify(newTopic.topic),
           photos:   topicCtrl.imageStrings,
           created:  moment().format("MM-DD-YYYY h:m:s")
         }).then(function(){

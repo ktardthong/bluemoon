@@ -14,9 +14,8 @@ angular
     'angular-md5',
     'ui.router',
     'ngMaterial',
-    'slugifier',
     'angularMoment',
-    'flow'
+    'flow','slugifier'
   ])
 
   .config(function($mdThemingProvider) {
@@ -26,7 +25,7 @@ angular
       '200': 'ef9a9a',
       '300': 'e57373',
       '400': 'ef5350',
-      '500': '4D394B',
+      '500': '340027',
       '600': 'e53935',
       '700': 'd32f2f',
       '800': 'c62828',
@@ -132,6 +131,96 @@ angular
       })
 
 
+      //Profile landing page
+      .state('profile',{
+        url: '/profile/{Name}',
+        views: {
+          '': {
+            controller: 'ProfileCtrl as profileCtrl',
+            templateUrl: 'profile/index.html',
+            resolve:{
+              profile: function ($state,$rootScope, Auth, Users){
+                return Auth.auth.$requireAuth().then(function(auth){
+                  return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                    if(profile.displayName){
+                      return profile;
+                    } else {
+                      $state.go('get_started');
+                    }
+                  });
+                }, function(error){
+                  $state.go('home');
+                });
+              },
+              auth: function($state, Users, Auth){
+                return Auth.auth.$requireAuth().catch(function(){
+                  $state.go('home');
+                });
+              }
+            }
+          },
+          'header@profile': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html',
+          }
+
+        }
+      })
+
+      //Profile landing page
+      .state('profileEdit',{
+        url: '/profile/{Name}/edit',
+        views: {
+          '': {
+            controller: 'ProfileCtrl as profileCtrl',
+            templateUrl: 'profile/edit.html',
+            resolve:{
+              profile: function ($state,$rootScope, Auth, Users){
+                return Auth.auth.$requireAuth().then(function(auth){
+                  return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                    if(profile.displayName){
+                      return profile;
+                    } else {
+                      $state.go('get_started');
+                    }
+                  });
+                }, function(error){
+                  $state.go('home');
+                });
+              },
+              auth: function($state, Users, Auth){
+                return Auth.auth.$requireAuth().catch(function(){
+                  $state.go('home');
+                });
+              }
+            }
+          },
+          'header@profileEdit': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html',
+          }
+
+        }
+      })
+
+
+      //Edit profile
+      /*.state('profileEdit',{
+        url: '/profile/{Name}/edit',
+        views: {
+          '': {
+            templateUrl: 'profile/edit.html',
+          },
+          'header@profileEdit ': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html',
+          }
+        }
+      })*/
+
+
+
+      //Dashboard
       .state('dashboard', {
         url: '/user/dashboard',
         controller: 'DashboardCtrl as dashboardCtrl',
@@ -159,10 +248,6 @@ angular
                 });
               }
             }
-          },
-          'topic-grid@dashboard':{
-            controller: 'HomeCtrl as  homeCtrl',
-            templateUrl: 'templates/html/category-grid.html'
           },
           'header@dashboard': {
             controller:  'AuthCtrl as authCtrl',
@@ -256,4 +341,5 @@ angular
     };
   })
 
-  .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/');
+  .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
+  .constant('Avatar','/images/avatar.jpg');

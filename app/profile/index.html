@@ -1,0 +1,59 @@
+<md-content>
+  <div ui-view="header"></div>
+
+  <section class="gray-background">
+
+    <div class="container margin-top animated slideInUp">
+
+      <md-button ui-sref="profileEdit({Name:profileCtrl.profile.displayName})">edit</md-button>
+
+      <div layout="row" class="md-padding">
+
+        <div flex-auto="">
+          <div flow-init
+               flow-name="uploader.flow"
+               flow-files-added="profileCtrl.uploadFile($files)">
+              <img  ng-src="{{profileCtrl.profile.photo}}" class="preview img-circle" flow-img="uploader.flow.files[0]" width="142px"/><br>
+            <md-button class="md-primary ion-camera" flow-btn type="file"></md-button>
+          </div>
+        </div>
+
+        <div flex>
+
+          <p class="md-title">
+            @{{ profileCtrl.profile.displayName }}
+          </p>
+
+
+
+          <p class="md-title"
+             ng-model="profileName"
+             ng-init="profileName=true"
+             ng-show="profileName"
+             ng-mouseover="showNameEdit=true"
+             ng-mouseleave="showNameEdit=false">
+
+              {{profileCtrl.profile.firstname}}
+
+              {{profileCtrl.profile.lastname}}
+
+
+            <md-button
+              ng-click="profileName=false"
+              ng-init="showNameEdit=false"
+              ng-show="showNameEdit"
+              class="text-muted">
+              Edit
+            </md-button>
+          </p>
+
+        </div>
+      </div>
+
+      <!--{{ profileCtrl.auth.ref.getAuth()}}-->
+      <!--{{profileCtrl.profile}}-->
+
+
+
+  </section>
+</md-content>

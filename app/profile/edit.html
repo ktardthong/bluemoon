@@ -1,0 +1,28 @@
+<md-content>
+  <div ui-view="header"></div>
+
+  <section class="gray-background">
+
+    <div layout="column" class="inner-container container margin-top  animated slideInUp">
+
+      <p class="md-title">
+        EDIT
+      </p>
+
+      <div layout="row">
+        <form ng-submit="">
+          <md-input-container class="md-block" flex>
+            <label>First name</label>
+            <input ng-model="profileCtrl.profile.firstname">
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>Last name</label>
+            <input ng-model="profileCtrl.profile.lastname">
+          </md-input-container>
+          <md-button class="md-primary">Save</md-button>
+        </form>
+      </div>
+    </div>
+
+  </section>
+</md-content>

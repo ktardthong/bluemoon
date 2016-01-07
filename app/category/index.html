@@ -3,7 +3,7 @@
 
   <section class="gray-background">
 
-    <div layout="column" class="inner-container container margin-top">
+    <div layout="column" class="inner-container container margin-top  animated slideInUp">
 
       <!-- Creation form -->
       <div ng-controller="TopicCtrl as topicCtrl">
@@ -20,6 +20,7 @@
                     <label>Topic</label>
                     <input ng-model="topicCtrl.newTopic.topic">
                   </md-input-container>
+
 
                   <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
 
@@ -42,12 +43,13 @@
 
             <!-- Optional -->
             <div layout="row">
+
               <div flow-init ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show"
                    flow-name="uploader.flow"
                    flow-files-added="topicCtrl.uploadFile($files)">
-                <md-button class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
-                <md-button class="md-primary md-fab md-mini ion-location"></md-button>
-                <md-button class="md-primary md-fab md-mini ion-link"></md-button>
+                <md-button aria-label="Photo" class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
+                <md-button aria-label="Location" class="md-primary md-fab md-mini ion-location" ng-click="topicCtrl.showConfirm($event)"></md-button>
+                <md-button aria-label="Link" class="md-primary md-fab md-mini ion-link"></md-button>
                 <div ng-repeat="image in uploader.flow.files track by $index">
                   <img class="preview" flow-img="image"/><br>
                 </div>
