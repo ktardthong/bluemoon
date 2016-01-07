@@ -13,7 +13,7 @@ angular.module('App')
       //Getting the list of topic base on category
       list:function(category){
         var data = ref.orderByChild("category").equalTo(category);
-        return $firebaseObject(data);
+        return $firebaseArray(data);
       },
 
       name: function(topic_slug){
@@ -49,6 +49,22 @@ angular.module('App')
       //Reply Array
       replyArr:function(topicId){
         return $firebaseArray(ref.child(topicId+"/replies"))
+      },
+
+      //upvotes
+      upvotes:function(topicId){
+        return {
+          ref:  ref.child(topicId+"/upvotes"),
+          array: $firebaseArray(ref.child(topicId+"/upvotes"))
+        }
+      },
+
+      //downvotes
+      downvotes:function(topicId){
+        return {
+          ref:  ref.child(topicId+"/downvotes"),
+          array: $firebaseArray(ref.child(topicId+"/downvotes"))
+        }
       },
 
       //Return array

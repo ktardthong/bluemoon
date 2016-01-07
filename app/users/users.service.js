@@ -10,6 +10,19 @@ angular.module('App')
       getDisplayName: function(uid){
         return users.$getRecord(uid).displayName;
       },
+
+      userRef: function(uid){
+        return usersRef.child(uid);
+      },
+
+      upvotes: function(uid){
+        return usersRef.child(uid).child('upvotes');
+      },
+
+      downvotes: function(uid){
+        return usersRef.child(uid).child('downvotes');
+      },
+
       all: users
     };
 

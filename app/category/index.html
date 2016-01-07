@@ -69,42 +69,7 @@
       </p>
 
       <!-- List topics here-->
-      <div ng-repeat="(topicKey, topic) in cateCtrl.cateTopics | orderObjectBy:'created':true">
-        <md-card class="md-whiteframe-2dp">
-          <md-card-title>
-            <md-card-title-text>
-              <small>
-                <i class="ion-ios-clock-outline"></i>
-                <span am-time-ago="topic.created"></span>
-              </small>
-              <span class="md-title text-center">
-                <a ui-sref="topic({Slug: topic.slug, Key: topicKey })">{{topic.topic}}</a>
-              </span>
-            </md-card-title-text>
-          </md-card-title>
-
-          <md-card-content>
-            <p>
-              {{topic.body}}
-            </p>
-          </md-card-content>
-
-          <div ng-if="topic.photos" ng-repeat="photo in topic.photos">
-            <img ng-src="{{photo}}" class="md-card-image" alt="Washed Out">
-          </div>
-
-
-          <md-card-actions layout="row" layout-align="start center">
-            <md-card-icon-actions>
-              <md-button class="md-primary ion-chevron-up"  aria-label="Upvote"> Upvote</md-button>
-              <md-button class="ion-chevron-down"           aria-label="Downvote"> Downvote</md-button>
-              <md-button class="ion-chatbubble-working"     aria-label="Comments"> Comments 2 </md-button>
-              <md-button class="ion-share"     aria-label="Share"> Share </md-button>
-            </md-card-icon-actions>
-          </md-card-actions>
-
-        </md-card>
-      </div>
+      <topic-list topics="cateCtrl.cateTopics"></topic-list>
     </div>
   </section>
 

@@ -5,5 +5,13 @@ angular.module('App')
       templateUrl: 'templates/html/category-grid.html'
     };
   })
-
+   .directive('topicList', function() {
+    return {
+      controller:  'TopicCtrl as topicCtrl',
+      templateUrl: 'templates/html/topic-list.html',
+      scope: {
+            topics: "@"
+        },
+    };
+  })
 ;
