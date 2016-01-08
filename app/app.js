@@ -11,11 +11,15 @@
 angular
   .module('App', [
     'firebase',
-    'angular-md5',
+    'angular-md5',    //Encrypt email
     'ui.router',
-    'ngMaterial',
-    'angularMoment',
-    'flow','slugifier'
+    'ngMaterial',     //Interface
+    'angularMoment',  //Time management
+    'flow',           //Image upload
+    'slugifier',      //Create Slugs
+    'ngAutocomplete', //Google places
+    'ngTagsInput'     //Tags
+    //'google.places',
   ])
 
   .config(function($mdThemingProvider) {
@@ -25,7 +29,7 @@ angular
       '200': 'ef9a9a',
       '300': 'e57373',
       '400': 'ef5350',
-      '500': '340027',
+      '500': '4D394B', //primary colour
       '600': 'e53935',
       '700': 'd32f2f',
       '800': 'c62828',
@@ -341,5 +345,4 @@ angular
     };
   })
 
-  .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
-  .constant('Avatar','/images/avatar.jpg');
+  .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/');

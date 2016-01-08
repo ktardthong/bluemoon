@@ -1,11 +1,13 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, profile){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, profile, Topics){
     var profileCtrl = this;
 
     //Parser
     profileCtrl.profile = profile;
     profileCtrl.auth    = Auth;
     profileCtrl.users   = Users;
+    profileCtrl.topics  = Topics;
+
 
     if(Auth.ref.getAuth() != null ){
       profileCtrl.profile  = profileCtrl.users.getProfile(Auth.ref.getAuth().uid);

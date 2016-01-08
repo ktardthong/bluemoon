@@ -1,50 +1,54 @@
 <md-toolbar class="fix-toolbar">
-  <div class="md-toolbar-tools page-wrapper">
-    <h2>
-      <a ui-sref="home">
-        <span>bluemooon</span>
-      </a>
-    </h2>
-    <span flex></span>
+  <div class="container">
+    <div class="md-toolbar-tools">
+      <h2>
+        <a ui-sref="home">
+          <span>bluemooon</span>
+        </a>
+      </h2>
+      <span flex></span>
 
-    <md-button
-        aria-label="Explore Categories"
-        ng-click="authCtrl.toggleRight()"
-        class="md-primary md-fab md-mini">
-      <i class="ion-grid"></i>
-    </md-button>
+      <md-button
+          aria-label="Explore Categories"
+          ng-click="authCtrl.toggleRight()"
+          class="md-primary md-fab md-mini">
+        <i class="ion-grid"></i>
+      </md-button>
 
-    <md-button
-        aria-label="Dashboard"
-        class="md-primary md-fab md-mini"
-        ng-if="authCtrl.profile.$id"
-        ui-sref="dashboard">
-      <i class="ion-android-home"></i>
-    </md-button>
+      <md-button
+          aria-label="Dashboard"
+          class="md-primary md-fab md-mini"
+          ng-if="authCtrl.profile.$id"
+          ui-sref="dashboard">
+        <i class="ion-android-home"></i>
+      </md-button>
 
-    <!-- Profile Drop down -->
-    <div ng-if="authCtrl.profile.$id">
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle"
-                type="button"
-                id="profile_dd"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
-          {{authCtrl.profile.displayName}}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="profile_dd">
-          <li><a ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a></li>
-          <li><a href="#">Setting</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#" ng-click="authCtrl.logout()">Logout</a></li>
-        </ul>
+      <!-- Profile Drop down -->
+      <div ng-if="authCtrl.profile.$id">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle"
+                  type="button"
+                  id="profile_dd"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+            {{authCtrl.profile.displayName}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="profile_dd">
+            <li><a ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a></li>
+            <li><a href="#">Setting</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" ng-click="authCtrl.logout()">Logout</a></li>
+          </ul>
+        </div>
       </div>
+
+      <md-button ng-if="!authCtrl.profile.$id" class="md-mini md-accent" aria-label="Login" ui-sref="login">
+        login
+      </md-button>
+      <md-button ng-if="!authCtrl.profile.$id" class="" aria-label="Register" ui-sref="register">
+        Register
+      </md-button>
     </div>
-
-    <md-button ng-if="!authCtrl.profile.$id" class="" aria-label="Register" ui-sref="register">
-      Register
-    </md-button>
-
   </div>
 </md-toolbar>
