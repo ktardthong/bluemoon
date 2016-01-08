@@ -9,7 +9,11 @@ angular.module('App')
         return $firebaseObject(usersRef.child(uid));
       },
       getDisplayName: function(uid){
-        return users.$getRecord(uid).displayName;
+        if(uid == null || uid == ''){
+          return '';
+        } else {
+          return users.$getRecord(uid).displayName;
+        }
       },
 
       userRef: function(uid){
@@ -27,7 +31,7 @@ angular.module('App')
       userArrRef:function(uid){
         return usersRef.child(uid);
       },
-      
+
       all: users
     };
 

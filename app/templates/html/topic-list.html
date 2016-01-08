@@ -31,11 +31,8 @@
             </p>
 
             <p>
-              {{topic.uid}} /
               {{topic.body.length}}
               {{topic.body | limitTo: 140 }} /
-              {{topic.upvotes}} /
-              {{topic.downvotes}}
             </p>
           </md-card-content>
 
@@ -50,7 +47,7 @@
 
             <md-card-header-text>
               <span class="md-title">Firstname Lastname</span>
-              <span class="md-subhead">subhead</span>
+              <span class="md-subhead">@{{topicCtrl.users.getDisplayName(topic.uid) || "A User"}} | {{topic.uid || "A User Id"}}</span>
             </md-card-header-text>
           </md-card-header>
 

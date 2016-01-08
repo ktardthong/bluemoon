@@ -24,9 +24,6 @@ angular.module('App')
       topicCtrl.userRef = '';
     }
 
-    console.log($scope.topics);
-
-
     topicCtrl.userName = function(userId){
       if(userId!= null){
         return topicCtrl.users.getDisplayName(userId);
