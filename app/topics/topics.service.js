@@ -69,7 +69,7 @@ angular.module('App')
 
       upvoteTopic:function(topicId, uid){
         ref.child(topicId+"/upvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
-        return ref.child(topicId+"/upvotes").child(uid);
+        return $firebaseObject(ref.child(topicId+"/upvotes").child(uid));
       },
 
       undoUpvote:function(topicId, uid){
@@ -84,7 +84,7 @@ angular.module('App')
 
       downvoteTopic:function(topicId, uid){
         ref.child(topicId+"/downvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
-        return ref.child(topicId+"/downvotes").child(uid);
+        return $firebaseObject(ref.child(topicId+"/downvotes").child(uid));
       },
 
       undoDownvote:function(topicId, uid){

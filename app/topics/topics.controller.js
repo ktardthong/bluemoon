@@ -101,12 +101,10 @@ angular.module('App')
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelDownvote(topic);
       }
-
-      topicCtrl.userUpvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
-      // topic.child('upvotes/'+'topicCtrl.uid').set(moment().format("MM-DD-YYYY hh:mm:ss"));
-      topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid);
-
-      console.log(topic);
+      
+      topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
+        topicCtrl.userUpvotedTopics.child(topic.$id).set(value.$value);
+      });
     };
 
     topicCtrl.cancelUpvote = function(topic){
@@ -127,9 +125,9 @@ angular.module('App')
         topicCtrl.cancelUpvote(topic);
       }
 
-      topicCtrl.userDownvotedTopics.child(topic.$id).set(moment().format("MM-DD-YYYY hh:mm:ss"));
-
-      topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid);
+      topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
+        topicCtrl.userDownvotedTopics.child(topic.$id).set(value.$value);
+      });
     };
 
     topicCtrl.cancelDownvote = function(topic){
