@@ -1,8 +1,9 @@
 body {
   @import url(https://fonts.googleapis.com/css?family=Lato);
   @import url(https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin);
-  font-family: 'Lato','Kanit', sans-serif;
+  font-family: 'Kanit', 'Lato', sans-serif;
   padding: 0;
+  line-height: 1.5em;
   background-color: #F5F8FA;
 }
 

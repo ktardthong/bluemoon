@@ -5,11 +5,8 @@
 
     <div class="container margin-top animated slideInUp">
 
-      <md-button ui-sref="profileEdit({Name:profileCtrl.profile.displayName})">edit</md-button>
-
       <div layout="row" class="md-padding">
-
-        <div flex-auto="">
+        <div flex-gt-md-auto="" class="md-padding">
           <div flow-init
                flow-name="uploader.flow"
                flow-files-added="profileCtrl.uploadFile($files)">
@@ -18,34 +15,39 @@
           </div>
         </div>
 
-        <div flex>
-
+        <div flex class="md-padding">
           <p class="md-title">
             @{{ profileCtrl.profile.displayName }}
           </p>
+          <p class="md-headline">
+            {{profileCtrl.profile.firstname}}
 
-
-
-          <p class="md-title"
-             ng-model="profileName"
-             ng-init="profileName=true"
-             ng-show="profileName"
-             ng-mouseover="showNameEdit=true"
-             ng-mouseleave="showNameEdit=false">
-
-              {{profileCtrl.profile.firstname}}
-
-              {{profileCtrl.profile.lastname}}
-
-
-            <md-button
-              ng-click="profileName=false"
-              ng-init="showNameEdit=false"
-              ng-show="showNameEdit"
-              class="text-muted">
-              Edit
-            </md-button>
+            {{profileCtrl.profile.lastname}}
           </p>
+          <p class="md-body-2">Bio about this person</p>
+          <md-button ui-sref="profileEdit({Name:profileCtrl.profile.displayName})">edit</md-button>
+        </div>
+      </div>
+
+      <md-divider></md-divider>
+
+      <div layout="row">
+        <div flex-gt-md-auto="" class="md-padding">
+          <md-list>
+            <md-subheader class="md-no-sticky"> feed </md-subheader>
+            <md-list-item><md-button>Activity</md-button></md-list-item>
+            <md-list-item>Posts</md-list-item>
+            <md-list-item>Questions</md-list-item>
+            <md-list-item>Reply</md-list-item>
+            <md-divider></md-divider>
+            <md-list-item>Log</md-list-item>
+          </md-list>
+        </div>
+        <div flex-gt-md-auto="" class="md-padding">
+          {{profileCtrl.topics.createdBy(profileCtrl.profile.$id)}}
+          <div ng-repeat="topics in profileCtrl.topics.createdBy(profileCtrl.profile.$id)">
+            {{topics}}
+          </div>
 
         </div>
       </div>

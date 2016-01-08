@@ -1,11 +1,15 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia, Topics, Auth, Users, Slug){
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia, Topics, Auth, Users, Slug,Languages){
 
     var topicCtrl = this;
+
+
     //Parser here
-    topicCtrl.topics  = Topics;
-    topicCtrl.auth    = Auth;
-    topicCtrl.users = Users;
+    topicCtrl.topics    = Topics;
+    topicCtrl.auth      = Auth;
+    topicCtrl.users     = Users;
+    topicCtrl.languages = Languages;
+
 
     if(topicCtrl.auth.ref.getAuth() != null ){
       topicCtrl.profile  = topicCtrl.users.getProfile(topicCtrl.auth.ref.getAuth().uid);
@@ -22,19 +26,20 @@ angular.module('App')
 
     console.log($scope.topics);
 
+
     topicCtrl.userName = function(userId){
       if(userId!= null){
         return topicCtrl.users.getDisplayName(userId);
       }
     }
 
-    //
-    topicCtrl.topic_landing = function(){
-
-    }
 
     //Preset Parameters
     topicCtrl.imageStrings = [];
+    topicCtrl.newTopic = {
+      'location': '',
+      'url' : ''
+  }
 
 
     //Upload Profile image
@@ -77,15 +82,31 @@ angular.module('App')
     }
 
     //Create new topic
-    topicCtrl.createTopic = function(category){
+    topicCtrl.createTopic = function(category,isDraft){
+
+      var locationDetail = '';
+
+      if(topicCtrl.newTopic.location.details){
+        locationDetail = {
+          place_id: topicCtrl.newTopic.location.details.place_id,
+          name:     topicCtrl.newTopic.location.details.name,
+          address:  topicCtrl.newTopic.location.details.formatted_address,
+          lat:      topicCtrl.newTopic.location.details.geometry.location.lat(),
+          lng:      topicCtrl.newTopic.location.details.geometry.location.lng(),
+        }
+        console.log(locationDetail);
+      }
 
       topicCtrl.topics.arr.$add({
           topic:    topicCtrl.newTopic.topic,
           body:     topicCtrl.newTopic.body,
           category: category,
           uid:      topicCtrl.uid,
-          slug:     Slug.slugify(newTopic.topic),
+          slug:     Slug.slugify(topicCtrl.newTopic.topic),
           photos:   topicCtrl.imageStrings,
+          location: locationDetail,
+          url:      topicCtrl.newTopic.url,
+          draft:    isDraft,
           created:  moment().format("MM-DD-YYYY hh:mm:ss")
         }).then(function(){
         topicCtrl.newTopic = {

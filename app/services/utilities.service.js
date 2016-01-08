@@ -17,9 +17,9 @@ angular.module('App')
     return Category;
   })
 
-  .factory('Languages', function($firebaseObject, FirebaseUrl){
-    var ref = new Firebase(FirebaseUrl+'languages/Language_feed/languages/');
-    var lang = $firebaseObject(ref);
+  .factory('Languages', function($firebaseArray, FirebaseUrl){
+    var ref = new Firebase(FirebaseUrl+'languages');
+    var lang = $firebaseArray(ref);
 
     return lang;
   });

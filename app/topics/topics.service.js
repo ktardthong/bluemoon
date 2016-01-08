@@ -10,6 +10,12 @@ angular.module('App')
 
     var Topics = {
 
+      //Getting the list of topics created by user_id
+      createdBy:function(uid){
+        var data = ref.orderByChild("uid").equalTo(uid);
+        return $firebaseArray(data);
+      },
+
       //Getting the list of topic base on category
       list:function(category){
         var data = ref.orderByChild("category").equalTo(category);

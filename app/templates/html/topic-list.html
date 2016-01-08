@@ -1,22 +1,40 @@
       <div ng-repeat="topic in topics | orderBy:'-created'">
         <md-card class="md-whiteframe-2dp">
+
           <md-card-title>
             <md-card-title-text>
-              <small>
+              <small class="right">
                 <i class="ion-ios-clock-outline"></i>
                 <span am-time-ago="topic.created"></span>
               </small>
-              <span class="md-title text-center">
+              <span class="md-title text-center md-padding">
                 <a ui-sref="topic({Slug: topic.slug, Key: topic.$id })">{{topic.topic}}</a>
               </span>
             </md-card-title-text>
           </md-card-title>
 
+
+
           <md-card-content>
+            <p class="md-body-2">
+              {{topic.body | limitTo: 140 }}
+            </p>
+
+            <!-- If there is location-->
+            <p ng-if="topic.location">
+              <p class="md-subheader">
+                {{topic.location.name}}
+              </p>
+              <img src="
+              https://maps.googleapis.com/maps/api/staticmap?size=600x300&maptype=roadmap&zoom=13
+              &markers=color:purple%7Clabel:S%7C{{topic.location.lat}},{{topic.location.lng}}">
+            </p>
+
             <p>
-              {{topic.uid}} / 
-              {{topic.body}} / 
-              {{topic.upvotes}} / 
+              {{topic.uid}} /
+              {{topic.body.length}}
+              {{topic.body | limitTo: 140 }} /
+              {{topic.upvotes}} /
               {{topic.downvotes}}
             </p>
           </md-card-content>
@@ -24,6 +42,17 @@
           <div ng-if="topic.photos" ng-repeat="photo in topic.photos">
             <img ng-src="{{photo}}" class="md-card-image" alt="Washed Out">
           </div>
+
+          <md-card-header>
+            <md-card-avatar>
+              <img class="md-user-avatar" src="/images/avatar.jpg"/>
+            </md-card-avatar>
+
+            <md-card-header-text>
+              <span class="md-title">Firstname Lastname</span>
+              <span class="md-subhead">subhead</span>
+            </md-card-header-text>
+          </md-card-header>
 
 
           <md-card-actions layout="row" layout-align="start center">

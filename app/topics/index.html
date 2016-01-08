@@ -6,17 +6,17 @@
 
   <div class="page-wrapper md-padding margin-top" layout="row">
 
-    <md-sidenav
+    <!--<md-sidenav
       flex
       layout="column"
       class="md-sidenav-left"
       md-component-id="left"
       md-is-locked-open="$mdMedia('gt-sm')">
         {{topicLandingCtrl.topicLanding[0].slug}}
-      </md-sidenav>
+      </md-sidenav>-->
 
 
-    <div flex flex-sm-grow="">
+    <div flex-auto="80">
       <div layout="column" ng-controller="TopicCtrl as topicCtrl">
         <md-card class="md-whiteframe-3dp md-padding">
           <small>
@@ -73,6 +73,19 @@
 
       </div>
     </div>
+
+    <md-sidenav
+      flex-auto=""
+      layout="column"
+      class="md-sidenav-left"
+      md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-sm')">
+
+      <div flex>
+        Login
+      </div>
+      Rules
+    </md-sidenav>
   </div>
 
 
