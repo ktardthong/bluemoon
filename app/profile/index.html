@@ -7,6 +7,7 @@
 
       <div layout="row" class="md-padding">
         <div flex-gt-md-auto="" class="md-padding">
+          <!--{{profileCtrl.profile}}-->
           <div flow-init
                flow-name="uploader.flow"
                flow-files-added="profileCtrl.uploadFile($files)">
@@ -20,13 +21,78 @@
             @{{ profileCtrl.profile.displayName }}
           </p>
           <p class="md-headline">
-            {{profileCtrl.profile.firstname}}
+            {{ profileCtrl.profile.firstname }}
 
             {{profileCtrl.profile.lastname}}
+
+            <md-button ng-click="nameEdit=true">Edit</md-button>
+
+            <!-- bio form -->
+            <section class="md-whiteframe-1dp md-padding" ng-show="nameEdit" ng-init="nameEdit=false">
+              <form ng-submit="profileCtrl.updateName(profileCtrl.profile.$id);nameEdit=false;">
+                <md-input-container class="md-block">
+                  <label>Firstname</label>
+                  <input ng-model="profileCtrl.profile.firstname">
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Lastname</label>
+                  <input ng-model="profileCtrl.profile.lastname">
+                </md-input-container>
+
+                <div class="end right">
+                  <md-button ng-click="nameEdit=false">Cancel</md-button>
+                  <md-button class="md-primary"
+                             type="submit"
+                             ng-if="(profileCtrl.profile.firstname.length && profileCtrl.profile.lastname.length) > 0 ">Update</md-button>
+                </div>
+              </form>
+            </section>
+
           </p>
-          <p class="md-body-2">Bio about this person</p>
+
+
+          <!-- Bio -->
+          <p class="md-body-2">
+
+            <p class="md-text" ng-mouseover="bioEdit=true">{{profileCtrl.profile.biography}}
+            <md-button ng-click="bioEdit=true">Add Profile Bio</md-button>
+
+            <!-- bio form -->
+            <section class="md-whiteframe-1dp md-padding" ng-show="bioEdit" ng-init="bioEdit=false">
+              <form ng-submit="profileCtrl.updateBio(profileCtrl.profile.$id);bioEdit=false;">
+                <md-input-container class="md-block">
+                  <label>Biography</label>
+                  <textarea ng-model="profileCtrl.profile.biography"
+                            columns="1" md-maxlength="140" rows="5"></textarea>
+                </md-input-container>
+                <div class="end right">
+                  <md-button ng-click="bioEdit=false">Cancel</md-button>
+                  <md-button class="md-primary" type="submit" ng-if="profileCtrl.profile.biography.length > 0 ">Update</md-button>
+                </div>
+              </form>
+            </section>
+            </p>
+          </p>
+
+          <!-- Description
+          <p class="md-body-2">
+            <md-button>Write a description about yourself</md-button>
+            <section class="md-whiteframe-1dp md-padding">
+              <md-input-container class="md-block">
+                <label>Description</label>
+                <textarea ng-model="user.biography" columns="1" md-maxlength="600" rows="5"></textarea>
+              </md-input-container>
+              <div class="end right">
+                <md-button>Cancel</md-button>
+                <md-button class="md-primary">Update</md-button>
+              </div>
+            </section>
+          </p>
+
           <md-button ui-sref="profileEdit({Name:profileCtrl.profile.displayName})">edit</md-button>
+          -->
         </div>
+        <div flex="">test</div>
       </div>
 
       <md-divider></md-divider>
@@ -44,10 +110,10 @@
           </md-list>
         </div>
         <div flex-gt-md-auto="" class="md-padding">
-          {{profileCtrl.topics.createdBy(profileCtrl.profile.$id)}}
-          <div ng-repeat="topics in profileCtrl.topics.createdBy(profileCtrl.profile.$id)">
+          {{profileCtrl.profile.$id}}
+          <!--<div ng-repeat="topics in profileCtrl.topics.createdBy(profileCtrl.profile.$id)">
             {{topics}}
-          </div>
+          </div>-->
 
         </div>
       </div>

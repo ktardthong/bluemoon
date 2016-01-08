@@ -18,6 +18,7 @@
       </md-sidenav>
 
       <div flex class="md-padding">
+
         <!-- Creation form -->
         <div ng-controller="TopicCtrl as topicCtrl">
 
@@ -31,6 +32,7 @@
                        class="img-circle" width="36px">
 
                   <div class="md-list-item-text" layout="column">
+
                     <!-- Topics -->
                     <md-input-container ng-click="topicCtrl.body.show = true" flex="">
                       <label>Topic</label>
@@ -75,7 +77,8 @@
                 <!-- Location input -->
                 <md-button aria-label="Location" class="md-primary md-fab md-mini ion-location" ng-click="locationInput=true"></md-button>
                   <md-input-container ng-show="locationInput" ng-init="locationInput=false">
-                    <input ng-autocomplete type="text"
+                    <input aria-label="Location Query"
+                           ng-autocomplete type="text"
                            ng-model = "topicCtrl.newTopic.location.query"
                            details  = "topicCtrl.newTopic.location.details"
                            options  = "topicCtrl.newTopic.location.options">
@@ -85,13 +88,14 @@
                 <!-- URL input -->
                 <md-button aria-label="Link" class="md-primary md-fab md-mini ion-link" ng-click="urlInput=true"></md-button>
                   <md-input-container ng-show="urlInput" ng-init="urlInput=false">
-                    <input ng-model = "topicCtrl.newTopic.url">
+                    <input aria-label="URL" ng-model="topicCtrl.newTopic.url">
                   </md-input-container>
 
 
                 <!-- Save as draft -->
                 <md-button ng-if="topicCtrl.newTopic.topic.length > 0"
                            class="md-primary" type="submit"
+                           aria-label="Save as Draft"
                            ng-click="topic.isDraft=1">Save as draft</md-button>
 
 

@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, profile, Topics){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, notify, profile, Topics){
     var profileCtrl = this;
 
     //Parser
@@ -9,11 +9,20 @@ angular.module('App')
     profileCtrl.topics  = Topics;
 
 
+    //The original value from profile
+    profileCtrl.oldProfileValue = profileCtrl.profile;
+
+
     if(Auth.ref.getAuth() != null ){
       profileCtrl.profile  = profileCtrl.users.getProfile(Auth.ref.getAuth().uid);
     }
     else{
       profileCtrl.profile =''
+    }
+
+
+    profileCtrl.userCreated = function(uid){
+      return profileCtrl.topics.createdBy(uid);
     }
 
 
@@ -29,10 +38,39 @@ angular.module('App')
           var uri = event.target.result;
           profileCtrl.imageStrings[i] = uri;
           profileCtrl.users.userArrRef(Auth.ref.getAuth().uid).update({"photo": uri})
+          notify({message:'Saved',position:'center',duration: 3000 });
         };
         fileReader.readAsDataURL(flowFile.file);
       })
     };
+
+
+    //Update name
+    profileCtrl.updateName = function(){
+
+      profileCtrl.users.userArrRef(Auth.ref.getAuth().uid).update(
+        {
+          "firstname":  profileCtrl.profile.firstname,
+          "lastname":   profileCtrl.profile.lastname,
+        }
+      )
+
+      profileCtrl.users.userArrRef(Auth.ref.getAuth().uid+'/log').push().set({
+        action:   "name_change",
+        oldname:  profileCtrl.oldProfileValue.firstname + "-" + profileCtrl.oldProfileValue.lastname,
+        created:  moment().format("MM-DD-YYYY hh:mm:ss")
+      });
+
+      notify({message:'Saved',position:'center',duration: 3000 });
+    }
+
+
+    //Update Bio
+    profileCtrl.updateBio = function(){
+      profileCtrl.users.userArrRef(Auth.ref.getAuth().uid).update({"biography": profileCtrl.profile.biography})
+
+      notify({message:'Saved',position:'center',duration: 3000 });
+    }
 
 
     profileCtrl.updateProfile = function(){

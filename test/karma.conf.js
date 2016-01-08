@@ -41,6 +41,8 @@ module.exports = function(config) {
       'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/ngAutocomplete/src/ngAutocomplete.js',
       'bower_components/ng-tags-input/ng-tags-input.min.js',
+      'bower_components/angular-notify/dist/angular-notify.js',
+      'bower_components/angular-translate/angular-translate.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

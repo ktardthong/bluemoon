@@ -23,6 +23,13 @@
         <i class="ion-android-home"></i>
       </md-button>
 
+      <md-button
+          aria-label="Dashboard"
+          class="md-primary md-fab md-mini"
+          ng-if="authCtrl.profile.$id">
+        <i class="ion-ios-bell"></i>
+      </md-button>
+
       <!-- Profile Drop down -->
       <div ng-if="authCtrl.profile.$id">
         <div class="dropdown">

@@ -3,7 +3,7 @@
 
   <section class="gray-background">
 
-    <div layout="column" class="inner-container container margin-top  animated slideInUp">
+    <div layout="column" class="container margin-top  animated slideInUp">
 
       <p class="md-title">
         EDIT
@@ -11,14 +11,19 @@
 
       <div layout="row">
         <form ng-submit="">
-          <md-input-container class="md-block" flex>
+
+          <md-input-container>
             <label>First name</label>
             <input ng-model="profileCtrl.profile.firstname">
           </md-input-container>
-          <md-input-container class="md-block" flex>
+
+          <md-input-container>
             <label>Last name</label>
             <input ng-model="profileCtrl.profile.lastname">
           </md-input-container>
+
+
+
           <md-button class="md-primary">Save</md-button>
         </form>
       </div>

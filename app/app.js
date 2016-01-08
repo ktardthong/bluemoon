@@ -11,15 +11,16 @@
 angular
   .module('App', [
     'firebase',
-    'angular-md5',    //Encrypt email
+    'angular-md5',            //Encrypt email
     'ui.router',
-    'ngMaterial',     //Interface
-    'angularMoment',  //Time management
-    'flow',           //Image upload
-    'slugifier',      //Create Slugs
-    'ngAutocomplete', //Google places
-    'ngTagsInput'     //Tags
-    //'google.places',
+    'ngMaterial',             //Interface
+    'angularMoment',          //Time management
+    'flow',                   //Image upload
+    'slugifier',              //Create Slugs
+    'ngAutocomplete',         //Google places
+    'ngTagsInput',            //Tags
+    'cgNotify',               //Notification - https://github.com/cgross/angular-notify
+    'pascalprecht.translate', //Translation - https://angular-translate.github.io/
   ])
 
   .config(function($mdThemingProvider) {

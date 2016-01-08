@@ -13,6 +13,7 @@ angular.module('App')
       authCtrl.profile =''
     }
 
+
     authCtrl.user = {
       email: '',
       password: ''
