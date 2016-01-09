@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, notify, profile, Topics){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, notify, profile, Topics, Facebook){
     var profileCtrl = this;
 
     //Parser
@@ -7,6 +7,27 @@ angular.module('App')
     profileCtrl.auth    = Auth;
     profileCtrl.users   = Users;
     profileCtrl.topics  = Topics;
+    profileCtrl.facebook= Facebook;
+
+
+    profileCtrl.linkFacebook = function(){
+
+      console.log("click");
+
+      profileCtrl.facebook.login(function(response) {
+
+        profileCtrl.facebook.getLoginStatus(function(response){
+          if(response.status === 'connected') {
+            $scope.loggedIn = true;
+            profileCtrl.facebook.api('/me', function(response) {
+              console.log(response);
+            });
+          } else {
+              console.log("not logged in");
+          }
+        });
+      });
+    }
 
 
     //The original value from profile

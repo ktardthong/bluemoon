@@ -51,6 +51,7 @@ angular.module('App')
       })
     };
 
+
     topicCtrl.showConfirm = function(ev) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
@@ -74,15 +75,16 @@ angular.module('App')
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
         uid:      topicCtrl.uid,
-        created:  moment().format("MM-DD-YYYY hh:mm:ss")
+        created:  moment().toISOString()
       })
     }
+
 
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
 
+      //Check if we hvae location details
       var locationDetail = '';
-
       if(topicCtrl.newTopic.location.details){
         locationDetail = {
           place_id: topicCtrl.newTopic.location.details.place_id,
@@ -104,7 +106,7 @@ angular.module('App')
           location: locationDetail,
           url:      topicCtrl.newTopic.url,
           draft:    isDraft,
-          created:  moment().format("MM-DD-YYYY hh:mm:ss")
+          created:  moment().toISOString()
         }).then(function(){
         topicCtrl.newTopic = {
           body: ''
@@ -119,7 +121,7 @@ angular.module('App')
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelDownvote(topic);
       }
-      
+
       topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
         topicCtrl.userUpvotedTopics.child(topic.$id).set(value.$value);
       });

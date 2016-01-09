@@ -21,7 +21,23 @@ angular
     'ngTagsInput',            //Tags
     'cgNotify',               //Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', //Translation - https://angular-translate.github.io/
+    'facebook',               //Facebook - https://github.com/Ciul/angular-facebook
   ])
+
+  .config(
+    function(FacebookProvider) {
+      var myAppId = '931376120263856';
+
+      // You can set appId with setApp method
+      FacebookProvider.setAppId(myAppId);
+
+      /**
+       * After setting appId you need to initialize the module.
+       * You can pass the appId on the init method as a shortcut too.
+       */
+      FacebookProvider.init(myAppId);
+    }
+  )
 
   .config(function($mdThemingProvider) {
     $mdThemingProvider.definePalette('slack', {
@@ -116,12 +132,15 @@ angular
               topicLanding: function($stateParams,Topics){
                 return Topics.fortopic($stateParams.Slug);
               },
-              replyList:function($stateParams,Topics){
+              replyList:function($stateParams,Topics,$state){
                 var topicKey = '';
                 return Topics.fortopic($stateParams.Slug).$loaded().then(function(data){
                   if(data[0] != null)
                   {
                     topicKey = data[0].$id;
+                  }
+                  else{
+                    $state.go('topic-notfound');
                   }
                   return Topics.replyList(topicKey);
                 })
@@ -133,6 +152,12 @@ angular
             templateUrl: 'templates/toolbar/main_toolbar.html',
           }
         }
+      })
+
+
+      //Topic not found
+      .state('topic-notfound',{
+        url:'/notfound',
       })
 
 
