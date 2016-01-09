@@ -34,11 +34,26 @@
                   <div class="md-list-item-text" layout="column">
 
                     <!-- Topics -->
-                    <md-input-container ng-click="topicCtrl.body.show = true" flex="">
+                    <md-input-container ng-click="topicCtrl.body.show = true" flex="" ng-keyup="topicCtrl.checkSlug()">
                       <label>Topic</label>
-                      <input ng-model="topicCtrl.newTopic.topic">
+                      <input ng-model="topicCtrl.newTopic.topic" autocomplete="off">
                     </md-input-container>
 
+                    <div ng-if="topicCtrl.slugReturn != null">
+                      <p class="md-title">Topic already exist</p>
+                      <!-- if the topic's slug exist list them here -->
+                      <div ng-repeat="data in topicCtrl.slugReturn">
+                        {{data}}
+                      </div>
+                    </div>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Create</label>
+                      <md-select ng-model="topicCtrl.type">
+                        <md-option><i class="ion-ios-help-outline"></i> Question</md-option>
+                        <md-option>Topic</md-option>
+                      </md-select>
+                    </md-input-container>
 
                     <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
 
@@ -108,7 +123,8 @@
                 </md-input-container>-->
               </div>
 
-              <md-card-actions layout="row" layout-align="end center" ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+              <md-card-actions layout="row" layout-align="end center"
+                               ng-if="!topicCtrl.slugReturn">
                 <md-button class="md-primary md-raised" type="submit">submit</md-button>
               </md-card-actions>
             </form>
