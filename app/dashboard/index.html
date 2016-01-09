@@ -1,12 +1,17 @@
 <md-content>
   <div ui-view="header"></div>
+
+  <section class="gray-background">
   <div class="container margin-top animated slideInUp" layout="row">
-    <div flex-gt-md-auto="">
+
+    <!-- Left -->
+    <div flex-auto>
       <md-sidenav
         layout="column"
-        class="md-sidenav-left"
+        class="md-sidenav-left gray-background"
         md-component-id="left"
         md-is-locked-open="$mdMedia('gt-sm')">
+
         <md-card>
           <md-card-title>
             <md-card-title-text>
@@ -14,7 +19,7 @@
               <span class="md-subhead"><a>edit</a> </span>
             </md-card-title-text>
             <md-card-title-media>
-              <img ng-src="{{profileCtrl.profile.photo}}">
+              <img ng-src="{{profileCtrl.profile.photo}}" class="img-circle">
             </md-card-title-media>
           </md-card-title>
           <md-card-actions layout="row">
@@ -25,24 +30,40 @@
 
         <md-card>
           <md-list>
-            <md-subheader class="md-no-sticky">3 line item</md-subheader>
-            <md-list-item class="md-3-line">test</md-list-item>
-            <md-divider ></md-divider>
+            <md-subheader class="md-no-sticky">Trends</md-subheader>
             <md-list-item class="md-3-line">test</md-list-item>
             <md-list-item class="md-3-line">test</md-list-item>
           </md-list>
         </md-card>
       </md-sidenav>
-
-
     </div>
 
 
+    <!-- Middle -->
+    <div flex layout-fill layout-align="top center">
+      <md-card>
+        <md-card-header>HEADER</md-card-header>
+      </md-card>
+    </div>
 
-    <div flex-auto="80" layout-fill layout-align="top center">
-      Dashboard where the feeds are
+    <!-- Right -->
+    <div flex layout-fill layout-align="top center">
+      <md-sidenav
+        layout="column"
+        class="md-sidenav-right gray-background"
+        md-component-id="right"
+        md-is-locked-open="$mdMedia('gt-sm')">
+
+      <md-card>
+        <md-list>
+          <md-subheader class="md-no-sticky">Popular Writer</md-subheader>
+          <md-list-item class="md-3-line">test</md-list-item>
+          <md-list-item class="md-3-line">test</md-list-item>
+        </md-list>
+      </md-card>
+      </md-sidenav>
     </div>
   </div>
-
+  </section>
 </md-content>
 

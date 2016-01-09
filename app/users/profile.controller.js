@@ -79,7 +79,7 @@ angular.module('App')
       profileCtrl.users.userArrRef(Auth.ref.getAuth().uid+'/log').push().set({
         action:   "name_change",
         oldname:  profileCtrl.oldProfileValue.firstname + "-" + profileCtrl.oldProfileValue.lastname,
-        created:  moment().format("MM-DD-YYYY hh:mm:ss")
+        created:  moment().toISOString()
       });
 
       notify({message:'Saved',position:'center',duration: 3000 });
