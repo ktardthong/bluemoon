@@ -103,6 +103,13 @@ angular.module('App')
         return ref.child(topicId+"/downvotes");
       },
 
+      getViews:function(topicId){
+        return{
+          ref: ref.child(topicId).child("views"),
+          obj: $firebaseObject(ref.child(topicId).child("views")), 
+        };
+      },
+
 
       //Return array
       arr: $firebaseArray(ref),

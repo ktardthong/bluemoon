@@ -108,6 +108,7 @@ angular
       //Topic landing page
       .state('topic',{
         url:'/{Slug}',
+        params: {Slug: null, Key: null},
         views:{
           '':{
             controller: 'TopicLandingCtrl as topicLandingCtrl',
@@ -125,7 +126,20 @@ angular
                   }
                   return Topics.replyList(topicKey);
                 })
+              },
+              viewData:function($stateParams,Topics,Auth){
+                var uid = Auth.auth.$requireAuth().then(function(auth){
+                 return auth.uid; }, function(error){ return;});
+
+                var data = Topics.getViews($stateParams.Key).obj.$loaded().then(function(data){
+                  data.count.set(data.count + 1);
+                  if(uid){
+                    data.history.child(uid).push().set(moment().format("MM-DD-YYYY hh:mm:ss"));
+                  }
+                  return data;
+                });
               }
+
             }
           },
           'header@topic': {
