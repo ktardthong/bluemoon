@@ -3,28 +3,22 @@
   <div ui-view="header"></div>
 
 
+  <section class="gray-background row">
+    <div class="container">
 
-  <div class="page-wrapper md-padding margin-top" layout="row">
+  <div class="inner-container container-fluid md-padding margin-top">
 
-    <!--<md-sidenav
-      flex
-      layout="column"
-      class="md-sidenav-left"
-      md-component-id="left"
-      md-is-locked-open="$mdMedia('gt-sm')">
-        {{topicLandingCtrl.topicLanding[0].slug}}
-      </md-sidenav>-->
-
-
-    <div flex-auto="80">
+    <div flex>
       <div layout="column" ng-controller="TopicCtrl as topicCtrl">
         <md-card class="md-whiteframe-3dp md-padding">
           <small>
             <i class="ion-ios-clock-outline"></i>
             <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
           </small>
+
+          <!-- Message Body -->
           <section class="text-center">
-            <span class="md-headline">
+            <span class="md-display-1">
               {{topicLandingCtrl.topicLanding[0].topic}}
             </span>
             <p class="md-padding">
@@ -46,47 +40,45 @@
         </md-card>
       </div>
 
-      <md-card class="md-whiteframe-2dp md-padding" ng-controller="TopicCtrl as topicCtrl">
-        <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
-          <div layout-gt-sm="row">
-            <md-card-title-media>
-              <img src="https://lh3.googleusercontent.com/-ONIXPD1ozmQ/AAAAAAAAAAI/AAAAAAAAD8Q/HB38gqJDdyU/s36-p-k-rw-no/photo.jpg"
-                   class="img-circle">
-            </md-card-title-media>
-            <md-input-container class="md-block" flex>
-              <label>Your Comment</label>
-              <textarea ng-model="topicCtrl.newReply.body" col
-                        umns="1" rows="3"></textarea>
-            </md-input-container>
 
-            <!--<md-input-container class="md-block" >-->
-            <md-button class="md-primary md-block md-mini" type="submit">submit</md-button>
-          </div>
-        </form>
-      </md-card>
+      <!-- Reply form -->
+      <div ng-controller="TopicCtrl as topicCtrl">
+        <md-content class="md-whiteframe-2dp md-padding"  ng-if="topicCtrl.auth.ref.getAuth().uid">
 
+          <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
+            <md-list>
+            <md-list-item class="md-3-line">
+              <img ng-src="{{topicCtrl.profile.photo}}"
+                   class="img-circle" width="36px">
+
+
+              <md-input-container class="md-block" flex>
+                <label>Your Comment</label>
+                <textarea ng-model="topicCtrl.newReply.body" col
+                          umns="1" rows="3"></textarea>
+              </md-input-container>
+
+              <!--<md-input-container class="md-block" >-->
+              <md-button class="md-primary md-block md-mini" type="submit">submit</md-button>
+              </md-list-item>
+            </md-list>
+          </form>
+        </md-content>
+      </div>
+
+      <!-- Reply body list-->
       <div ng-repeat="reply in topicLandingCtrl.replyList">
         <md-card class="md-padding">
           <span am-time-ago="reply.created"></span>
           {{reply.body}}
         </md-card>
-
       </div>
     </div>
 
-    <md-sidenav
-      flex-auto=""
-      layout="column"
-      class="md-sidenav-left"
-      md-component-id="left"
-      md-is-locked-open="$mdMedia('gt-sm')">
-
-      <div flex>
-        Login
-      </div>
-      Rules
-    </md-sidenav>
   </div>
+
+    </div>
+  </section>
 
 
 </md-content>

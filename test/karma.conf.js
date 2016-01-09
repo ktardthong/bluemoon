@@ -43,6 +43,7 @@ module.exports = function(config) {
       'bower_components/ng-tags-input/ng-tags-input.min.js',
       'bower_components/angular-notify/dist/angular-notify.js',
       'bower_components/angular-translate/angular-translate.js',
+      'bower_components/angular-facebook/lib/angular-facebook.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

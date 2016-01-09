@@ -31,11 +31,11 @@ angular.module('App')
     };
 
     authCtrl.logout = function(){
-      Auth.$unauth();
+      Auth.auth.$unauth();
     }
 
     authCtrl.register = function (){
-      Auth.$createUser(authCtrl.user).then(function (user){
+      Auth.auth.$createUser(authCtrl.user).then(function (user){
         authCtrl.login();
       }, function (error){
         authCtrl.error = error;
