@@ -33,6 +33,7 @@ angular.module('App')
 
     //Preset Parameters
     topicCtrl.imageStrings = [];
+    topicCtrl.slugReturn   = null;
     topicCtrl.newTopic = {
       'location': '',
       'url' : ''
@@ -79,6 +80,12 @@ angular.module('App')
       })
     }
 
+
+    //Check slug
+    topicCtrl.checkSlug =function(){
+      topicCtrl.slugReturn =  topicCtrl.topics.getSlug(topicCtrl.newTopic.topic);
+      console.log(topicCtrl.slugReturn);
+    }
 
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
