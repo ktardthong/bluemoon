@@ -124,7 +124,6 @@ angular
       //Topic landing page
       .state('topic',{
         url:'/{Slug}',
-        params: {Slug: null, Key: null},
         views:{
           '':{
             controller: 'TopicLandingCtrl as topicLandingCtrl',
@@ -146,25 +145,50 @@ angular
                   return Topics.replyList(topicKey);
                 })
               },
-              viewData:function($stateParams,Topics,Auth){
-                var uid = Auth.auth.$requireAuth().then(function(auth){
-                 return auth.uid; }, function(error){ return;});
+              viewData:function($stateParams,Topics,Users,Auth){
+                var topicKey;
+                var views;
+                return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function(data){
+                  if(data != null){
+                      topicKey = data[0].$id;
+                      views = Topics.getViews(topicKey);
 
-                var data = Topics.getViews($stateParams.Key).obj.$loaded().then(function(data){
-                  data.count.set(data.count + 1);
-                  if(uid){
-                    data.history.child(uid).push().set(moment().format("MM-DD-YYYY hh:mm:ss"));
+                      views.obj.$loaded().then(function(data){
+                        if(data.count == null) {
+                          views.ref.child('count').set(1);
+                        } else {
+                          views.ref.child('count').set(data.count+1);
+                        }
+                      });
+                      Auth.auth.$requireAuth().then(function(auth){  
+                          var uid = auth.uid;
+                          var time = moment().toISOString();
+                          views.ref.child('history').child(uid).push().set(time);
+
+                          Users.getProfile(auth.uid).$loaded().then(function(data){
+                              if(data.views == null){
+                                var obj = {topicKey: {   } };
+                                //obj.push().set(time);
+                                console.log(obj);
+                                Users.userRef(auth.uid).child('views').push().set(topicKey).push().set(time);
+                              } else {
+                                Users.userRef(auth.uid).child('views').child(topicKey).push().set(time);
+                              }
+                          });
+
+                      });
                   }
-                  return data;
+                  return views.obj;
                 });
-              }
-
+                // console.log(topicKey);
+                // var views = Topics.getViews(topicKey).ref;
+              },
             }
           },
           'header@topic': {
             controller:  'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html',
-          }
+          },
         }
       })
 

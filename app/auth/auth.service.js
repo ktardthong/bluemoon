@@ -5,7 +5,11 @@ angular.module('App')
 
     var Auth = {
       ref:ref,
-      auth: auth
+      auth: auth,
+
+      getUid:function(){
+        return ref.getAuth().uid;
+      },
     }
 
     return Auth;

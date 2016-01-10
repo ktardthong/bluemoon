@@ -37,6 +37,10 @@ angular.module('App')
 
       },
 
+      getTopicBySlug:function(topic_slug){
+        return $firebaseArray(ref.orderByChild("slug").equalTo(topic_slug).limitToFirst(1));
+      },
+
       incrementView: function(topic_slug){
 
       },
@@ -74,7 +78,7 @@ angular.module('App')
       },
 
       upvoteTopic:function(topicId, uid){
-        ref.child(topicId+"/upvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+        ref.child(topicId+"/upvotes").child(uid).set(moment().toISOString());
         return $firebaseObject(ref.child(topicId+"/upvotes").child(uid));
       },
 
@@ -89,7 +93,7 @@ angular.module('App')
       },
 
       downvoteTopic:function(topicId, uid){
-        ref.child(topicId+"/downvotes").child(uid).set(moment().format("MM-DD-YYYY hh:mm:ss"));
+        ref.child(topicId+"/downvotes").child(uid).set(moment().toISOString());
         return $firebaseObject(ref.child(topicId+"/downvotes").child(uid));
       },
 
