@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$log){
+  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav){
     var authCtrl = this;
 
 
@@ -19,6 +19,8 @@ angular.module('App')
       password: ''
     };
 
+
+    //Login
     authCtrl.login = function (){
       authCtrl.auth.auth.$authWithPassword(authCtrl.user).then(function (auth){
         Users.getProfile(auth.uid).$loaded().then(function(profile){

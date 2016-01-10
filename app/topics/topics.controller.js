@@ -1,5 +1,6 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia, Topics, Auth, Users, Slug,Languages){
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope, $http,
+                                    Topics, Auth, Users, Slug,Languages){
 
     var topicCtrl = this;
 
@@ -36,9 +37,18 @@ angular.module('App')
     topicCtrl.slugReturn   = null;
     topicCtrl.newTopic = {
       'location': '',
-      'url' : ''
+      'url' : '',
+      'ipInfo':''
   }
 
+
+    //Get user location
+    topicCtrl.userLocation = function() {
+      return $http.get('http://ipinfo.io/json').
+      success(function(data) {
+        topicCtrl.newTopic.ipInfo = data;
+      });
+    }
 
     //Upload Profile image
     topicCtrl.uploadFile = function(files) {
@@ -90,6 +100,7 @@ angular.module('App')
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
 
+      topicCtrl.userLocation();
       //Check if we hvae location details
       var locationDetail = '';
       if(topicCtrl.newTopic.location.details){
@@ -104,6 +115,8 @@ angular.module('App')
       }
 
       topicCtrl.topics.arr.$add({
+          type:     topicCtrl.type,
+          lang:     topicCtrl.newTopic.lang,
           topic:    topicCtrl.newTopic.topic,
           body:     topicCtrl.newTopic.body,
           category: category,
@@ -113,7 +126,8 @@ angular.module('App')
           location: locationDetail,
           url:      topicCtrl.newTopic.url,
           draft:    isDraft,
-          created:  moment().toISOString()
+          created:  moment().toISOString(),
+          userIP:   topicCtrl.newTopic.ipInfo
         }).then(function(){
         topicCtrl.newTopic = {
           body: ''
