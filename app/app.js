@@ -145,7 +145,7 @@ angular
                   return Topics.replyList(topicKey);
                 })
               },
-              viewData:function($stateParams,Topics,Users,Auth){
+              viewData:function($stateParams,Topics,Users,Auth, UniqueIDGenerator){
                 var topicKey;
                 var views;
                 return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function(data){
@@ -167,10 +167,11 @@ angular
 
                           Users.getProfile(auth.uid).$loaded().then(function(data){
                               if(data.views == null){
-                                var obj = {topicKey: {   } };
-                                //obj.push().set(time);
-                                console.log(obj);
-                                Users.userRef(auth.uid).child('views').push().set(topicKey).push().set(time);
+                                var pushId = UniqueIDGenerator.generatePushID();
+                                var obj = {};
+                                var pushObj = {};
+                                pushObj[pushId] = time;
+                                Users.userRef(auth.uid).child('views').child(topicKey).set(pushObj);
                               } else {
                                 Users.userRef(auth.uid).child('views').child(topicKey).push().set(time);
                               }
@@ -180,8 +181,6 @@ angular
                   }
                   return views.obj;
                 });
-                // console.log(topicKey);
-                // var views = Topics.getViews(topicKey).ref;
               },
             }
           },
