@@ -1,17 +1,25 @@
 angular.module('App')
-  .directive('topicGrid', function() {
+  .directive('topicGrid', function () {
     return {
-      controller:  'DashboardCtrl as dashboardCtrl',
+      controller: 'DashboardCtrl as dashboardCtrl',
       templateUrl: 'templates/html/category-grid.html'
-    };
+    }
   })
-   .directive('topicList', function() {
+  .directive('topicList', function () {
     return {
-      controller:  'TopicCtrl as topicCtrl',
+      controller: 'TopicCtrl as topicCtrl',
       templateUrl: 'templates/html/topic-list.html',
       scope: {
-            topics: "="
-        },
-    };
+        topics: '='
+      }
+    }
   })
-;
+  .directive('topicActionsCard', function () {
+    return {
+      controller: 'TopicCtrl as topicCtrl',
+      templateUrl: 'templates/html/topic-actions-card.html',
+      scope: {
+        topic: '='
+      }
+    }
+  })
