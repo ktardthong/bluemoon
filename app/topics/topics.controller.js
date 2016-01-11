@@ -38,17 +38,14 @@ angular.module('App')
     topicCtrl.newTopic = {
       'location': '',
       'url' : '',
-      'ipInfo':''
-  }
-
-
-    //Get user location
-    topicCtrl.userLocation = function() {
-      return $http.get('http://ipinfo.io/json').
-      success(function(data) {
-        topicCtrl.newTopic.ipInfo = data;
-      });
+      'ipInfo': ''
     }
+
+
+    topicCtrl.users.getLocationIP().success(function(data) {
+      topicCtrl.newTopic.ipInfo = data;
+    });
+
 
     //Upload Profile image
     topicCtrl.uploadFile = function(files) {
@@ -100,7 +97,7 @@ angular.module('App')
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
 
-      topicCtrl.userLocation();
+
       //Check if we hvae location details
       var locationDetail = '';
       if(topicCtrl.newTopic.location.details){
@@ -111,7 +108,6 @@ angular.module('App')
           lat:      topicCtrl.newTopic.location.details.geometry.location.lat(),
           lng:      topicCtrl.newTopic.location.details.geometry.location.lng(),
         }
-        console.log(locationDetail);
       }
 
       topicCtrl.topics.arr.$add({

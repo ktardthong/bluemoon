@@ -44,6 +44,11 @@ a{
   color: white;
 }
 
+.container{
+  max-width: 890px;
+  position: relative;
+  margin: 0 auto;
+}
 .inner-container{
   max-width:600px;
 }
