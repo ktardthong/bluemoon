@@ -133,12 +133,9 @@ angular.module('App')
 
      //upvote
     topicCtrl.upvote = function(topic){
-      console.log(topic.$id +' '+ topicCtrl.uid + ' upvotes');
-
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelDownvote(topic);
       }
-
       topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
         topicCtrl.userUpvotedTopics.child(topic.$id).set(value.$value);
       });
@@ -156,12 +153,9 @@ angular.module('App')
 
     //downvote
     topicCtrl.downvote = function(topic){
-      console.log(topic.$id+' '+ topicCtrl.uid + ' downvotes');
-
       if(topic.upvotes != undefined && topic.upvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelUpvote(topic);
       }
-
       topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
         topicCtrl.userDownvotedTopics.child(topic.$id).set(value.$value);
       });
@@ -176,5 +170,26 @@ angular.module('App')
             console.log("Removed successfully!");
           }});
     };
+
+    //follow topic
+    // topicCtrl.followTopic = function(topic){
+    //   if(topic.upvotes != undefined && topic.upvotes[topicCtrl.uid] != undefined){
+    //     topicCtrl.cancelUpvote(topic);
+    //   }
+
+    //   topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
+    //     topicCtrl.userDownvotedTopics.child(topic.$id).set(value.$value);
+    //   });
+    // };
+
+    // topicCtrl.unfollow = function(topic){
+    //   topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
+    //   topicCtrl.userDownvotedTopics.child(topic.$id).remove(function(error){
+    //         if (error) {
+    //         console.log("Error:", error);
+    //       } else {
+    //         console.log("Removed successfully!");
+    //       }});
+    // };
 
   });

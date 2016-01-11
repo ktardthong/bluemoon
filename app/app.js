@@ -140,7 +140,7 @@ angular
                   return Topics.replyList(topicKey)
                 })
               },
-              viewData: function ($stateParams, Topics, Users, Auth, UniqueIDGenerator) {
+              viewData: function ($stateParams, Topics, Users, Auth) {
                 var topicKey, views
                 var time = moment().toISOString()
                 var historyObj = {'userIP': '', 'created': time}
@@ -163,12 +163,22 @@ angular
                     })
                     Auth.auth.$requireAuth().then(function (auth) {
                       var uid = auth.uid
-                      console.log(historyObj)
                       views.ref.child('history').child(uid).push().set(historyObj)
                       Users.userRef(auth.uid).child('views').child(topicKey).push().set(historyObj)
                     })
                   }
                   return views.obj
+                })
+              },
+              followers: function ($stateParams, Topics) {
+                return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function (data) {
+                  var topicKey = data[0].$id
+                  return Topics.getFollowers(topicKey).array.$loaded().then(function (value) {
+                    var array = value
+                    var count = value.length
+                    var obj = {'count': count, 'array': array}
+                    return obj
+                  })
                 })
               }
             }

@@ -1,16 +1,20 @@
 angular.module('App')
-  .controller('TopicLandingCtrl', function ($state, $scope, $rootScope, Slug, Topics, Auth, Users, topicLanding, replyList, viewData) {
+  .controller('TopicLandingCtrl', function ($state, $scope, Slug, Topics, Auth, Users, topicLanding, replyList, viewData, followers) {
     var topicLandingCtrl = this
 
     topicLandingCtrl.topicLanding = topicLanding
     topicLandingCtrl.topics = Topics
     topicLandingCtrl.replyList = replyList
     topicLandingCtrl.views = viewData
+    topicLandingCtrl.followers = followers
 
-    topicLandingCtrl.incrementViews = function (topic_slug) {
-      console.log(topic_slug)
-      console.log(topic_slug.slug)
-    // return Topics.fortopicRef(topic_slug).update({view: topic_slug.view + 1})
-    }
-
+  // topicLandingCtrl.topicFollowers = function (topicKey) {
+  //   var count, array
+  //   topicLandingCtrl.topics.getFollowers(topicKey).array.$loaded().then(function (data) {
+  //     array = data
+  //     count = data.length
+  //   })
+  //   topicLandingCtrl.followers = {'count': count, 'array': array}
+  //   return topicLandingCtrl.followers
+  // }
   })
