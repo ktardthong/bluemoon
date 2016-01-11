@@ -141,8 +141,14 @@ angular
                 })
               },
               viewData: function ($stateParams, Topics, Users, Auth, UniqueIDGenerator) {
-                var topicKey
-                var views
+                var topicKey, views
+                var time = moment().toISOString()
+                var historyObj = {'userIP': '', 'created': time}
+                Users.getLocationIP().success(function (data) {
+                  historyObj.userIP = data.data
+                }).then(function (data) {
+                  historyObj.userIP = data.data
+                })
                 return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function (data) {
                   if (data != null) {
                     topicKey = data[0].$id
@@ -157,19 +163,9 @@ angular
                     })
                     Auth.auth.$requireAuth().then(function (auth) {
                       var uid = auth.uid
-                      var time = moment().toISOString()
-                      views.ref.child('history').child(uid).push().set(time)
-
-                      Users.getProfile(auth.uid).$loaded().then(function (data) {
-                        if (data.views == null) {
-                          var pushId = UniqueIDGenerator.generatePushID()
-                          var pushObj = {}
-                          pushObj[pushId] = time
-                          Users.userRef(auth.uid).child('views').child(topicKey).set(pushObj)
-                        } else {
-                          Users.userRef(auth.uid).child('views').child(topicKey).push().set(time)
-                        }
-                      })
+                      console.log(historyObj)
+                      views.ref.child('history').child(uid).push().set(historyObj)
+                      Users.userRef(auth.uid).child('views').child(topicKey).push().set(historyObj)
                     })
                   }
                   return views.obj

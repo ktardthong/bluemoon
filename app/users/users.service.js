@@ -1,49 +1,56 @@
 angular.module('App')
-  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl,$http){
-    var usersRef = new Firebase(FirebaseUrl+'users');
-    var users = $firebaseArray(usersRef);
+  .factory('Users', function ($firebaseArray, $firebaseObject, FirebaseUrl, $http) {
+    var usersRef = new Firebase(FirebaseUrl + 'users')
+    var users = $firebaseArray(usersRef)
 
     var Users = {
-
-      getLocationIP: function(){
+      getLocationIP: function () {
         return $http({
           url: 'http://ipinfo.io/json',
           method: 'GET'
         })
       },
 
-      getProfile: function(uid){
-        //console.log($firebaseObject(usersRef.child(uid)));
-        return $firebaseObject(usersRef.child(uid));
+      getLocationIPData: function () {
+        return $http({
+          url: 'http://ipinfo.io/json',
+          method: 'GET'
+        }).then(function (data) {
+          return data.data
+        })
       },
 
-      getDisplayName: function(uid){
-        if(uid == null || uid == ''){
-          return '';
+      getProfile: function (uid) {
+        // console.log($firebaseObject(usersRef.child(uid)))
+        return $firebaseObject(usersRef.child(uid))
+      },
+
+      getDisplayName: function (uid) {
+        if (uid == null || uid === '') {
+          return ''
         } else {
-          return users.$getRecord(uid).displayName;
+          return users.$getRecord(uid).displayName
         }
       },
 
-      userRef: function(uid){
-        return usersRef.child(uid);
+      userRef: function (uid) {
+        return usersRef.child(uid)
       },
 
-      upvotes: function(uid){
-        return usersRef.child(uid).child('upvotes');
+      upvotes: function (uid) {
+        return usersRef.child(uid).child('upvotes')
       },
 
-      downvotes: function(uid){
-        return usersRef.child(uid).child('downvotes');
+      downvotes: function (uid) {
+        return usersRef.child(uid).child('downvotes')
       },
 
-      userArrRef:function(uid){
-        return usersRef.child(uid);
+      userArrRef: function (uid) {
+        return usersRef.child(uid)
       },
 
       all: users
-    };
+    }
 
-    return Users;
-
-  });
+    return Users
+  })
