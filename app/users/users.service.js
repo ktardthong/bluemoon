@@ -45,6 +45,10 @@ angular.module('App')
         return usersRef.child(uid).child('downvotes')
       },
 
+      following: function (uid) {
+        return usersRef.child(uid).child('following')
+      },
+
       userArrRef: function (uid) {
         return usersRef.child(uid)
       },

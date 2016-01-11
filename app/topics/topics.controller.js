@@ -18,6 +18,7 @@ angular.module('App')
       topicCtrl.userRef = topicCtrl.users.userRef(topicCtrl.uid);
       topicCtrl.userUpvotedTopics = topicCtrl.users.upvotes(topicCtrl.uid);
       topicCtrl.userDownvotedTopics = topicCtrl.users.downvotes(topicCtrl.uid);
+      topicCtrl.userFollowing = topicCtrl.users.following(topicCtrl.uid);
     }
     else{
       topicCtrl.profile ='';
@@ -172,24 +173,24 @@ angular.module('App')
     };
 
     //follow topic
-    // topicCtrl.followTopic = function(topic){
-    //   if(topic.upvotes != undefined && topic.upvotes[topicCtrl.uid] != undefined){
-    //     topicCtrl.cancelUpvote(topic);
-    //   }
+    topicCtrl.followTopic = function(topic){
+      if(topic.followers != undefined && topic.followers[topicCtrl.uid] != undefined){
+        topicCtrl.unfollowTopic(topic);
+      }
 
-    //   topicCtrl.topics.downvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
-    //     topicCtrl.userDownvotedTopics.child(topic.$id).set(value.$value);
-    //   });
-    // };
+      topicCtrl.topics.follow(topic.$id, topicCtrl.uid).$loaded().then(function(value){
+        topicCtrl.userFollowing.child(topic.$id).set(value.$value);
+      });
+    };
 
-    // topicCtrl.unfollow = function(topic){
-    //   topicCtrl.topics.undoDownvote(topic.$id, topicCtrl.uid);
-    //   topicCtrl.userDownvotedTopics.child(topic.$id).remove(function(error){
-    //         if (error) {
-    //         console.log("Error:", error);
-    //       } else {
-    //         console.log("Removed successfully!");
-    //       }});
-    // };
+    topicCtrl.unfollowTopic = function(topic){
+      topicCtrl.topics.unfollow(topic.$id, topicCtrl.uid);
+      topicCtrl.userFollowing.child(topic.$id).remove(function(error){
+            if (error) {
+            console.log("Error:", error);
+          } else {
+            console.log("Removed successfully!");
+          }});
+    };
 
   });

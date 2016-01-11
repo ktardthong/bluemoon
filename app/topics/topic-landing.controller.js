@@ -7,14 +7,4 @@ angular.module('App')
     topicLandingCtrl.replyList = replyList
     topicLandingCtrl.views = viewData
     topicLandingCtrl.followers = followers
-
-  // topicLandingCtrl.topicFollowers = function (topicKey) {
-  //   var count, array
-  //   topicLandingCtrl.topics.getFollowers(topicKey).array.$loaded().then(function (data) {
-  //     array = data
-  //     count = data.length
-  //   })
-  //   topicLandingCtrl.followers = {'count': count, 'array': array}
-  //   return topicLandingCtrl.followers
-  // }
   })

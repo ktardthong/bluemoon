@@ -113,12 +113,12 @@ angular.module('App')
         return ref.child(topicId + '/downvotes')
       },
 
-      followTopic: function (topicId, uid) {
+      follow: function (topicId, uid) {
         ref.child(topicId + '/followers').child(uid).set(moment().toISOString())
         return $firebaseObject(ref.child(topicId + '/followers').child(uid))
       },
 
-      unfollowTopic: function (topicId, uid) {
+      unfollow: function (topicId, uid) {
         ref.child(topicId + '/followers').child(uid).remove(function (error) {
           if (error) {
             console.log('Error:', error)

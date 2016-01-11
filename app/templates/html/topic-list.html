@@ -3,9 +3,17 @@
 
           <md-card-title>
             <md-card-title-text>
-              <small class="right">
-                <i class="ion-ios-clock-outline"></i>
-                <span am-time-ago="topic.created"></span>
+              <small layout="row">
+                <div class="col-md-6">
+                  <i class="ion-ios-clock-outline"></i>
+                  <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
+                </div>
+                <div class="col-md-6">
+                  <span class="pull-right">
+                    <md-button ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="ion-plus-round" aria-label="Follow"> Follow 268</md-button>
+                    <md-button ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="md-primary md-raised ion-plus-round" aria-label="Follow"> Following 269</md-button>
+                  </span>
+                </div>
               </small>
               <span class="md-title text-center md-padding">
                 <a ui-sref="topic({Slug: topic.slug})">{{topic.topic}}</a>
