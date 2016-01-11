@@ -1,13 +1,22 @@
 angular.module('App')
-  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
+  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl,$http){
     var usersRef = new Firebase(FirebaseUrl+'users');
     var users = $firebaseArray(usersRef);
 
     var Users = {
+
+      getLocationIP: function(){
+        return $http({
+          url: 'http://ipinfo.io/json',
+          method: 'GET'
+        })
+      },
+
       getProfile: function(uid){
         //console.log($firebaseObject(usersRef.child(uid)));
         return $firebaseObject(usersRef.child(uid));
       },
+
       getDisplayName: function(uid){
         if(uid == null || uid == ''){
           return '';

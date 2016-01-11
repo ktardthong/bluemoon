@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bd30951-1681-47c3-808d-0c694116bc0c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/auth/auth.controller.js" afterPath="$PROJECT_DIR$/app/auth/auth.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/category/index.html" afterPath="$PROJECT_DIR$/app/category/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/utilities.service.js" afterPath="$PROJECT_DIR$/app/services/utilities.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.css" afterPath="$PROJECT_DIR$/app/styles/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html" afterPath="$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/index.html" afterPath="$PROJECT_DIR$/app/topics/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/topics.controller.js" afterPath="$PROJECT_DIR$/app/topics/topics.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/users/users.service.js" afterPath="$PROJECT_DIR$/app/users/users.service.js" />
     </list>
     <ignored path="bluemoon.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +33,42 @@
         <entry file="file://$PROJECT_DIR$/app/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="159" column="24" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
-              <folding />
+              <caret line="196" column="24" selection-start-line="196" selection-start-column="24" selection-end-line="196" selection-end-column="24" />
+              <folding>
+                <marker date="1452441971864" expanded="true" signature="15:149" placeholder="/** @ngdoc overview ...*/" />
+                <marker date="1452441971864" expanded="true" signature="175:777" placeholder="[...]" />
+                <marker date="1452441971864" expanded="true" signature="822:1150" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="959:1106" placeholder="/** After setting appId you need to initialize the module. ...*/" />
+                <marker date="1452441971864" expanded="true" signature="1195:2057" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="1243:1980" placeholder="{&quot;50&quot;: 'ffebee'...}" />
+                <marker date="1452441971864" expanded="true" signature="1629:1753" placeholder="//..." />
+                <marker date="1452441971864" expanded="true" signature="1782:1882" placeholder="[...]" />
+                <marker date="1452441971864" expanded="true" signature="2117:12432" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2159:2927" placeholder="{&quot;url&quot;: '/'...}" />
+                <marker date="1452441971864" expanded="true" signature="2193:2918" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2208:2604" placeholder="{&quot;controller&quot;: 'HomeCtrl as  homeCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="2322:2592" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2376:2578" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2444:2501" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2518:2559" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="2634:2754" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="2781:2907" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="2955:3709" placeholder="{&quot;url&quot;: '/category/{Slug}'...}" />
+                <marker date="1452441971864" expanded="true" signature="3004:3701" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="3019:3534" placeholder="{&quot;controller&quot;: 'CateCtrl as cateCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="3140:3522" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="3240:3327" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="3436:3508" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="3565:3691" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="3761:6533" placeholder="{&quot;url&quot;: '/{Slug}'...}" />
+                <marker date="1452441971864" expanded="true" signature="3800:6525" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="3815:4573" placeholder="{&quot;controller&quot;: 'TopicLandingCtrl as topicLandingCtrl'...}" />
+                <marker date="1452441971864" expanded="true" signature="3948:4573" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="4007:4083" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="4145:4573" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="4327:4392" placeholder="{...}" />
+                <marker date="1452441971864" expanded="true" signature="4415:4485" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,11 +93,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="topics.controller.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="topics.controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.37004405">
+              <caret line="46" column="6" selection-start-line="43" selection-start-column="0" selection-end-line="46" selection-end-column="6" />
+              <folding>
+                <element signature="e#1744#2324#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.service.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/users/users.service.js">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -70,17 +119,36 @@
         <entry file="file://$PROJECT_DIR$/app/topics/topics.service.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+              <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+              <folding>
+                <marker date="1452441971889" expanded="true" signature="114:3572" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="345:450" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="536:640" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="723:836" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="871:983" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="1061:1132" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="1168:1179" placeholder="{...}" />
+                <marker date="1452441971889" expanded="true" signature="3457:3466" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/topics/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.060606">
+              <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/topics/index.html">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/styles/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64342856">
-              <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
+            <state vertical-scroll-proportion="-11.636364">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -89,8 +157,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/category/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.272727">
-              <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+            <state vertical-scroll-proportion="-16.727272">
+              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#md-input-container#2;n#div#0;n#md-list-item#0;n#md-list#0;n#form#0;n#md-content#0;n#div#0;n#div#0;n#div#0;n#section#0;n#md-content#0;n#!!top" expanded="true" />
               </folding>
@@ -101,8 +169,8 @@
       <file leaf-file-name="main_toolbar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+            <state vertical-scroll-proportion="-0.72727275">
+              <caret line="1" column="23" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -138,8 +206,6 @@
         <option value="$PROJECT_DIR$/app/auth/register.html" />
         <option value="$PROJECT_DIR$/app/templates/html/category-grid.html" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app/users/users.service.js" />
-        <option value="$PROJECT_DIR$/app/styles/main.css" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/app/templates/html/topic-list.html" />
         <option value="$PROJECT_DIR$/app/profile/edit.html" />
@@ -148,13 +214,15 @@
         <option value="$PROJECT_DIR$/app/app.js" />
         <option value="$PROJECT_DIR$/app/users/profile.controller.js" />
         <option value="$PROJECT_DIR$/app/dashboard/index.html" />
-        <option value="$PROJECT_DIR$/app/topics/index.html" />
         <option value="$PROJECT_DIR$/app/topics/topics.service.js" />
-        <option value="$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html" />
         <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/services/utilities.service.js" />
         <option value="$PROJECT_DIR$/app/auth/auth.controller.js" />
+        <option value="$PROJECT_DIR$/app/topics/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html" />
+        <option value="$PROJECT_DIR$/app/styles/main.css" />
         <option value="$PROJECT_DIR$/app/category/index.html" />
+        <option value="$PROJECT_DIR$/app/users/users.service.js" />
         <option value="$PROJECT_DIR$/app/topics/topics.controller.js" />
       </list>
     </option>
@@ -606,6 +674,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="16" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -620,7 +689,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
-          <folding />
+          <folding>
+            <marker date="1452441971864" expanded="true" signature="15:149" placeholder="/** @ngdoc overview ...*/" />
+            <marker date="1452441971864" expanded="true" signature="175:777" placeholder="[...]" />
+            <marker date="1452441971864" expanded="true" signature="822:1150" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="959:1106" placeholder="/** After setting appId you need to initialize the module. ...*/" />
+            <marker date="1452441971864" expanded="true" signature="1195:2057" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="1243:1980" placeholder="{&quot;50&quot;: 'ffebee'...}" />
+            <marker date="1452441971864" expanded="true" signature="1629:1753" placeholder="//..." />
+            <marker date="1452441971864" expanded="true" signature="1782:1882" placeholder="[...]" />
+            <marker date="1452441971864" expanded="true" signature="2117:12432" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2159:2927" placeholder="{&quot;url&quot;: '/'...}" />
+            <marker date="1452441971864" expanded="true" signature="2193:2918" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2208:2604" placeholder="{&quot;controller&quot;: 'HomeCtrl as  homeCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2322:2592" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2376:2578" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2444:2501" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2518:2559" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2634:2754" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2781:2907" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2955:3709" placeholder="{&quot;url&quot;: '/category/{Slug}'...}" />
+            <marker date="1452441971864" expanded="true" signature="3004:3701" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3019:3534" placeholder="{&quot;controller&quot;: 'CateCtrl as cateCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3140:3522" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3240:3327" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3436:3508" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3565:3691" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3761:6533" placeholder="{&quot;url&quot;: '/{Slug}'...}" />
+            <marker date="1452441971864" expanded="true" signature="3800:6525" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3815:4573" placeholder="{&quot;controller&quot;: 'TopicLandingCtrl as topicLandingCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3948:4573" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4007:4083" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4145:4573" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4327:4392" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4415:4485" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -799,6 +902,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -856,24 +960,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/users/users.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/users/profile.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -888,24 +979,59 @@
     <entry file="file://$PROJECT_DIR$/app/topics/topics.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
-          <folding />
+          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+          <folding>
+            <marker date="1452441971889" expanded="true" signature="114:3572" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="345:450" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="536:640" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="723:836" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="871:983" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="1061:1132" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="1168:1179" placeholder="{...}" />
+            <marker date="1452441971889" expanded="true" signature="3457:3466" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="24" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
+          <caret line="196" column="24" selection-start-line="196" selection-start-column="24" selection-end-line="196" selection-end-column="24" />
+          <folding>
+            <marker date="1452441971864" expanded="true" signature="15:149" placeholder="/** @ngdoc overview ...*/" />
+            <marker date="1452441971864" expanded="true" signature="175:777" placeholder="[...]" />
+            <marker date="1452441971864" expanded="true" signature="822:1150" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="959:1106" placeholder="/** After setting appId you need to initialize the module. ...*/" />
+            <marker date="1452441971864" expanded="true" signature="1195:2057" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="1243:1980" placeholder="{&quot;50&quot;: 'ffebee'...}" />
+            <marker date="1452441971864" expanded="true" signature="1629:1753" placeholder="//..." />
+            <marker date="1452441971864" expanded="true" signature="1782:1882" placeholder="[...]" />
+            <marker date="1452441971864" expanded="true" signature="2117:12432" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2159:2927" placeholder="{&quot;url&quot;: '/'...}" />
+            <marker date="1452441971864" expanded="true" signature="2193:2918" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2208:2604" placeholder="{&quot;controller&quot;: 'HomeCtrl as  homeCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2322:2592" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2376:2578" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2444:2501" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2518:2559" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="2634:2754" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2781:2907" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="2955:3709" placeholder="{&quot;url&quot;: '/category/{Slug}'...}" />
+            <marker date="1452441971864" expanded="true" signature="3004:3701" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3019:3534" placeholder="{&quot;controller&quot;: 'CateCtrl as cateCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3140:3522" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3240:3327" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3436:3508" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3565:3691" placeholder="{&quot;controller&quot;: 'AuthCtrl as authCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3761:6533" placeholder="{&quot;url&quot;: '/{Slug}'...}" />
+            <marker date="1452441971864" expanded="true" signature="3800:6525" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="3815:4573" placeholder="{&quot;controller&quot;: 'TopicLandingCtrl as topicLandingCtrl'...}" />
+            <marker date="1452441971864" expanded="true" signature="3948:4573" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4007:4083" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4145:4573" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4327:4392" placeholder="{...}" />
+            <marker date="1452441971864" expanded="true" signature="4415:4485" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -948,29 +1074,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/topics/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.060606">
+          <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/toolbar/main_toolbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.72727275">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.636364">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/category/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.272727">
-          <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+        <state vertical-scroll-proportion="-16.727272">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#md-input-container#2;n#div#0;n#md-list-item#0;n#md-list#0;n#form#0;n#md-content#0;n#div#0;n#div#0;n#div#0;n#section#0;n#md-content#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
+    <entry file="file://$PROJECT_DIR$/app/users/users.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/topics/index.html">
+    <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64342856">
-          <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
-          <folding />
+        <state vertical-scroll-proportion="0.37004405">
+          <caret line="46" column="6" selection-start-line="43" selection-start-column="0" selection-end-line="46" selection-end-column="6" />
+          <folding>
+            <element signature="e#1744#2324#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

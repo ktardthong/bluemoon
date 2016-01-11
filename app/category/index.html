@@ -8,25 +8,59 @@
       <md-sidenav
         flex-auto
         layout="column"
-        class="md-sidenav-left"
+        class="md-sidenav-left gray-background md-padding"
         md-component-id="left"
         md-is-locked-open="$mdMedia('gt-sm')">
-        <div flex>
+
+        <md-content class="md-padding md-whiteframe-1dp">
           Login
-        </div>
-        Rules
+        </md-content>
+
+        <md-content class="md-whiteframe-1dp">
+          <md-list>
+            <md-subheader class="md-no-sticky">
+              <i class="ion-arrow-graph-up-right"></i>
+              Trending
+            </md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="item in todos">
+              <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ item.who }}</h3>
+                <h4>{{ item.what }}</h4>
+                <p>{{ item.notes }}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+
+        <md-content class="md-whiteframe-1dp">
+          <md-list>
+            <md-subheader class="md-no-sticky">Trending</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="item in todos">
+              <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ item.who }}</h3>
+                <h4>{{ item.what }}</h4>
+                <p>{{ item.notes }}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+
       </md-sidenav>
 
-      <div flex class="md-padding">
+
+      <div flex-auto class="md-padding">
 
         <!-- Creation form -->
         <div ng-controller="TopicCtrl as topicCtrl">
+
           <md-content ng-if="topicCtrl.auth.ref.getAuth().uid" class="md-padding md-whiteframe-1dp">
 
             <form ng-submit="topicCtrl.createTopic(cateCtrl.cateName.$id,topic.isDraft)"
                   ng-init="topic.isDraft = 0">
               <md-list>
-                <md-list-item class="md-3-line">
+                <md-list-item>
                   <img ng-src="{{topicCtrl.profile.photo}}"
                        class="img-circle" width="36px">
 
@@ -93,9 +127,7 @@
 
                       <p ng-if="locationDetail.details.place_id">location</p>
                     </div>
-                  </div>
-                </md-list-item>
-              </md-list>
+
 
               <!-- Optional -->
               <div layout="row" ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
@@ -137,7 +169,11 @@
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-primary md-raised" type="submit">submit</md-button>
               </md-card-actions>
+                  </div>
+                </md-list-item>
+              </md-list>
             </form>
+
           </md-content>
         </div>
 
