@@ -61,7 +61,7 @@
           </md-card-header>
 
 
-          <md-card-actions layout="row" layout-align="start center">
+          <!-- <md-card-actions layout="row" layout-align="start center">
             <md-card-icon-actions>
 
               <md-button ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.upvote(topic)" class="ion-chevron-up" aria-label="Upvote"> Upvote 268</md-button>
@@ -74,7 +74,8 @@
               <md-button class="ion-chatbubble-working"     aria-label="Comments"> Comments 2 </md-button>
               <md-button class="ion-share"     aria-label="Share"> Share </md-button>
             </md-card-icon-actions>
-          </md-card-actions>
+          </md-card-actions> -->
+          <topic-actions-card topic='topic'></topic-actions-card>
 
         </md-card>
       </div>
