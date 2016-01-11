@@ -31,7 +31,7 @@
 
           <div layout="row">
             {{ topicCtrl.userName(topicLandingCtrl.topicLanding[0].uid) }}
-            views:
+            [views: {{topicLandingCtrl.views.count}}]
             <a ui-sref="category({Slug: topicLandingCtrl.topicLanding[0].category})">
               {{topicLandingCtrl.topicLanding[0].category}}
             </a>
