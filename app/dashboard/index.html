@@ -2,9 +2,46 @@
   <div ui-view="header"></div>
 
   <section class="gray-background">
-  <div class="container margin-top animated slideInUp" layout="row">
 
-    <!-- Left -->
+    <div class="container margin-top animated slideInUp">
+      <div class="row">
+        <div class="col-md-3 hidden-sm-down">
+          <div class="card">
+            <img class="card-img-top" src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
+            <div class="card-block">
+              <h4 class="card-title">{{ profileCtrl.profile.displayName }}</h4>
+              <p class="card-text">{{ profileCtrl.profile.biography }}</p>
+            </div>
+          </div>
+
+          <div class="card card-block">
+            <h5 class="card-title">Trend</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          test mid
+        </div>
+
+        <!-- Right side-->
+        <div class="col-md-3">
+          <div class="card card-block">
+            <h5 class="card-title">Trend</h5>
+          </div>
+          <div class="card card-block">
+            <h5 class="card-title">Trend</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--  <div class="container margin-top animated slideInUp" layout="row">
+    &lt;!&ndash; Left &ndash;&gt;
     <div flex-auto>
       <md-sidenav
         layout="column"
@@ -39,14 +76,14 @@
     </div>
 
 
-    <!-- Middle -->
+    &lt;!&ndash; Middle &ndash;&gt;
     <div flex layout-fill layout-align="top center">
       <md-card>
         <md-card-header>HEADER</md-card-header>
       </md-card>
     </div>
 
-    <!-- Right -->
+    &lt;!&ndash; Right &ndash;&gt;
     <div flex layout-fill layout-align="top center">
       <md-sidenav
         layout="column"
@@ -63,7 +100,7 @@
       </md-card>
       </md-sidenav>
     </div>
-  </div>
+  </div>-->
   </section>
 </md-content>
 

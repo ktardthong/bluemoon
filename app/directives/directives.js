@@ -5,6 +5,21 @@ angular.module('App')
       templateUrl: 'templates/html/category-grid.html'
     }
   })
+
+
+  .directive('topicCreate', function(){
+
+    return {
+      controller: 'TopicCtrl as topicCtrl',
+      templateUrl: 'templates/html/topic-create.html',
+      scope: {
+        topic: '='
+      }
+    }
+
+  })
+
+
   .directive('topicList', function () {
     return {
       controller: 'TopicCtrl as topicCtrl',
@@ -14,6 +29,8 @@ angular.module('App')
       }
     }
   })
+
+
   .directive('topicActionsCard', function () {
     return {
       controller: 'TopicCtrl as topicCtrl',
