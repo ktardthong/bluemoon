@@ -39,7 +39,8 @@ angular.module('App')
     topicCtrl.newTopic = {
       'location': '',
       'url' : '',
-      'ipInfo': ''
+      'ipInfo': '',
+      'tags': ''
     }
 
 
@@ -111,7 +112,6 @@ angular.module('App')
         }
       }
 
-
       topicCtrl.topics.arr.$add({
           type:     topicCtrl.type,
           lang:     topicCtrl.newTopic.lang,
@@ -125,6 +125,7 @@ angular.module('App')
           url:      topicCtrl.newTopic.url,
           draft:    isDraft,
           created:  moment().toISOString(),
+          tags:     topicCtrl.newTopic.tags,
           userIP:   topicCtrl.newTopic.ipInfo
         }).then(function(){
         topicCtrl.newTopic = {

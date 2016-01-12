@@ -24,8 +24,8 @@ $scope:{topic}
 
           <!-- topic type -->
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary-outline">
-              <input type="radio" autocomplete="off" checked ng-click="topicCtrl.type = 'question'" value="question">
+            <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'question'" value="question">
+              <input type="radio" autocomplete="off" checked>
               <i class="ion-help"></i>
               Question
             </label>
@@ -71,8 +71,18 @@ $scope:{topic}
           <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
 
             <!-- Tags -->
-            <!--<input ng-model="topicCtrl.newTopic.tags">-->
-            <tags-input ng-model="tags"></tags-input>
+            <!--<input ng-model="topicCtrl.newTopic.tags">
+            ng-disabled="tagsLimitRearch"
+                        ng-if="(topicCtrl.newTopic.tags.length>0)"
+                        ng-init="tagsLimitRearch = false"
+            -->
+            <tags-input class="bootstrap"
+                        max-tags="4"
+                        enforce-max-tags
+                        ng-model="topicCtrl.newTopic.tags"
+                        placeholder="Add tags"
+                        replace-spaces-with-dashes="false">
+            </tags-input>
 
 
           </div>
@@ -85,8 +95,14 @@ $scope:{topic}
                  flow-name="uploader.flow"
                  flow-files-added="topicCtrl.uploadFile($files)">
               <md-button aria-label="Photo" class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
-              <div ng-repeat="image in uploader.flow.files track by $index">
-                <img class="preview" flow-img="image"/><br>
+              <div ng-repeat="image in uploader.flow.files track by $index" class="row">
+                <div class="card">
+                  <img class="card-img-top img-responsive" flow-img="image"/>
+                  <div class="card-block">
+                    <textarea></textarea>
+                  </div>
+                </div>
+
               </div>
             </div>
 
