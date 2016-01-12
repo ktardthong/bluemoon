@@ -114,7 +114,11 @@ angular.module('App')
       },
 
       follow: function (topicId, uid) {
-        ref.child(topicId + '/followers').child(uid).set(moment().toISOString())
+        // ref.child(topicId + '/followers').child('history').child(uid).set(moment().toISOString())
+        $firebaseObject(ref.child(topicId + '/followers').child('count')).$loaded().then(function (data) {
+          if (data.value === null || data.value === undefined)
+            ref.child(topicId + '/followers').child('count').set(data.value + 1)
+        })
         return $firebaseObject(ref.child(topicId + '/followers').child(uid))
       },
 
@@ -124,6 +128,9 @@ angular.module('App')
             console.log('Error:', error)
           } else {
             console.log('Removed successfully!')
+            $firebaseObject(ref.child(topicId + '/followers').child('count')).$loaded().then(function (data) {
+              ref.child(topicId + '/followers').child('count').set(data - 1)
+            })
           }})
         return ref.child(topicId + '/followers')
       },
@@ -131,7 +138,7 @@ angular.module('App')
       getViews: function (topicId) {
         return {
           ref: ref.child(topicId).child('views'),
-          obj: $firebaseObject(ref.child(topicId).child('views')),
+          obj: $firebaseObject(ref.child(topicId).child('views'))
         }
       },
 

@@ -174,10 +174,6 @@ angular.module('App')
 
     //follow topic
     topicCtrl.followTopic = function(topic){
-      if(topic.followers != undefined && topic.followers[topicCtrl.uid] != undefined){
-        topicCtrl.unfollowTopic(topic);
-      }
-
       topicCtrl.topics.follow(topic.$id, topicCtrl.uid).$loaded().then(function(value){
         topicCtrl.userFollowing.child(topic.$id).set(value.$value);
       });

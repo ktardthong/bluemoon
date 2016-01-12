@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-md-6">
                   <span class="pull-right">
-                    <md-button ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="ion-plus-round" aria-label="Follow"> Follow 268</md-button>
-                    <md-button ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="md-primary md-raised ion-plus-round" aria-label="Follow"> Unfollow 269</md-button>
+                    <md-button ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="ion-plus-round" aria-label="Follow"> Follow {{topic.followers.count || '0'}}</md-button>
+                    <md-button ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="md-primary md-raised ion-plus-round" aria-label="Follow"> Unfollow {{topic.followers.count || '0'}}</md-button>
                   </span>
                 </div>
               </small>
