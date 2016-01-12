@@ -173,11 +173,8 @@ angular
               followers: function ($stateParams, Topics) {
                 return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function (data) {
                   var topicKey = data[0].$id
-                  return Topics.getFollowers(topicKey).array.$loaded().then(function (value) {
-                    var array = value
-                    var count = value.length
-                    var obj = {'count': count, 'array': array}
-                    return obj
+                  return Topics.getFollowers(topicKey).obj.$loaded().then(function (value) {
+                    return value
                   })
                 })
               }

@@ -176,7 +176,7 @@ angular.module('App')
     //follow topic
     topicCtrl.followTopic = function(topic){
       topicCtrl.topics.follow(topic.$id, topicCtrl.uid).$loaded().then(function(value){
-        topicCtrl.userFollowing.child(topic.$id).set(value.$value);
+        topicCtrl.userFollowing.child(topic.$id).set(value.history[topicCtrl.uid]);
       });
     };
 

@@ -79,7 +79,7 @@ angular.module('App')
       getFollowers: function (topicId) {
         return {
           ref: ref.child(topicId + '/followers'),
-          array: $firebaseArray(ref.child(topicId + '/followers'))
+          obj: $firebaseObject(ref.child(topicId + '/followers'))
         }
       },
 
@@ -114,22 +114,26 @@ angular.module('App')
       },
 
       follow: function (topicId, uid) {
-        // ref.child(topicId + '/followers').child('history').child(uid).set(moment().toISOString())
+        ref.child(topicId + '/followers').child('history').child(uid).set(moment().toISOString())
         $firebaseObject(ref.child(topicId + '/followers').child('count')).$loaded().then(function (data) {
-          if (data.value === null || data.value === undefined)
-            ref.child(topicId + '/followers').child('count').set(data.value + 1)
+          if (data.value === null || data.value === undefined) {
+            ref.child(topicId + '/followers').child('count').set(1)
+          } else {
+            ref.child(topicId + '/followers').child('count').set(data.$value + 1)
+          }
         })
-        return $firebaseObject(ref.child(topicId + '/followers').child(uid))
+
+        return $firebaseObject(ref.child(topicId + '/followers'))
       },
 
       unfollow: function (topicId, uid) {
-        ref.child(topicId + '/followers').child(uid).remove(function (error) {
+        ref.child(topicId + '/followers').child('history').child(uid).remove(function (error) {
           if (error) {
             console.log('Error:', error)
           } else {
             console.log('Removed successfully!')
             $firebaseObject(ref.child(topicId + '/followers').child('count')).$loaded().then(function (data) {
-              ref.child(topicId + '/followers').child('count').set(data - 1)
+              ref.child(topicId + '/followers').child('count').set(data.$value - 1)
             })
           }})
         return ref.child(topicId + '/followers')
