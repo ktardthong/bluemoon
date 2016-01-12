@@ -7,20 +7,36 @@ body {
   background-color: #F5F8FA;
 }
 
+.red-font{
+  color: #EB4D5C;
+}
 .white-font{
-  color:whitesmoke;
+  color: #FFFFFF;
+}
+.white-font:hover{
+  color: #5DB09D;
+}
+.mint-font{
+  color: #5DB09D;
+}
+
+.purple-light-font{
+  color: #4D394B;
 }
 
 .purple-background {
-  background: #4d394b;
+  background: #4D394B;
 }
 .purple-background a{
   color:white;
 }
 
+.hand{
+  cursor: pointer;
+}
 
 .mint-background{
-  background: #4C9689;
+  background: #5DB09D;
 }
 
 .gray-background{
@@ -33,7 +49,7 @@ body {
 }
 
 a{
-  color: #4C9689;
+  color: #5DB09D;
   text-decoration: none;
 }
 

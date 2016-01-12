@@ -1,64 +1,80 @@
 <div class="purple-background">
 
-<header class="navbar navbar-light navbar-static-top bd-navbar container" role="banner">
+  <header class="navbar navbar-light navbar-static-top bd-navbar container" role="banner">
 
-  <div class="clearfix purple-background white-font">
-    <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
-      &#9776;
-    </button>
-    <a class="navbar-brand hidden-sm-up" href="/">
-      <span class="white-font">
-        Topikaday
-      </span>
-    </a>
-  </div>
-  <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-    <nav class="nav navbar-nav">
-      <a class="nav-item nav-link">Topikaday</a>
-      <a class="nav-item nav-link active" href="/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Documentation</a>
-      <a><button class="btn btn-link " ng-click="authCtrl.toggleRight()"><i class="ion-grid"></i></button></a>
-
-
-      <div class="pull-md-right">
-        <!-- Profile Drop down -->
-        <div ng-if="authCtrl.profile.$id">
-
-          <a class="nav-item nav-link" ui-sref="dashboard"><i class="fa fa-home fa-1x"></i> Home </a>
-          <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
-            <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
-            {{authCtrl.profile.displayName}}
-          </a>
-          <a class="nav-item nav-link" ui-sref="dashboard">
-            <i class="fa fa-cog"></i>
-          </a>
-
-            <!--<div class="dropdown nav-item nav-link">
-              <button class="btn btn-default dropdown-toggle"
-                      type="button"
-                      id="profile_dd"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
-                {{authCtrl.profile.displayName}}
-                <span class="caret"></span>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="profile dropdown">
-                <a class="dropdown-item" ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a>
-                <a class="dropdown-item" href="#">Setting</a></li>
-                <li role="separator" class="divider"></li>
-                <a class="dropdown-item" href="#" ng-click="authCtrl.logout()">Logout</a>
-              </ul>
-            </div>-->
-          </div>
-
-        <span ng-if="!authCtrl.profile.$id">
-          <a class="nav-item nav-link" ui-sref="register">Register</a>
-          <a class="nav-item nav-link" ui-sref="login">Login</a>
+    <div class="clearfix purple-background white-font">
+      <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+        &#9776;
+      </button>
+      <a class="navbar-brand hidden-sm-up" ui-sref="home">
+        <span class="white-font">
+          Topikaday
         </span>
-        </div>
-      </div>
-    </nav>
-  </div>
-</header>
+      </a>
+    </div>
+
+    <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+      <nav class="nav navbar-nav">
+        <a class="nav-item nav-link navbar-brand" ui-sref="home">
+          <span class="white-font">
+            Topikaday
+          </span>
+        </a>
+        <!--<a class="nav-item nav-link active" href="/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Documentation</a>-->
+
+        <a class="nav-item nav-link" ng-click="authCtrl.toggleRight()">
+          <i class="ion-grid white-font"></i>
+          <span class="white-font">
+            Dashboard
+          </span>
+        </a>
+
+
+        <div class="pull-md-right">
+          <!-- Profile Drop down -->
+          <div ng-if="authCtrl.profile.$id">
+
+            <a class="nav-item nav-link" ui-sref="dashboard">
+              <i class="fa fa-home fa-1x white-font"></i>
+              <span class="white-font">Home</span>
+            </a>
+
+            <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
+              <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+              <span class="white-font">
+                {{authCtrl.profile.displayName}}
+              </span>
+            </a>
+            <a class="nav-item nav-link" ui-sref="dashboard">
+              <i class="fa fa-cog white-font"></i>
+            </a>
+
+              <!--<div class="dropdown nav-item nav-link">
+                <button class="btn btn-default dropdown-toggle"
+                        type="button"
+                        id="profile_dd"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+                  {{authCtrl.profile.displayName}}
+                  <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="profile dropdown">
+                  <a class="dropdown-item" ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a>
+                  <a class="dropdown-item" href="#">Setting</a></li>
+                  <li role="separator" class="divider"></li>
+                  <a class="dropdown-item" href="#" ng-click="authCtrl.logout()">Logout</a>
+                </ul>
+              </div>-->
+            </div>
+
+          <span ng-if="!authCtrl.profile.$id">
+            <a class="nav-item nav-link" ui-sref="register">Register</a>
+            <a class="nav-item nav-link" ui-sref="login">Login</a>
+          </span>
+          </div>
+      </nav>
+    </div>
+  </header>
 </div>
 <!--
 <md-toolbar class="fix-toolbar">

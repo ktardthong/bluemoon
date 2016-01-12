@@ -102,7 +102,7 @@ angular.module('App')
 
       //Check if we hvae location details
       var locationDetail = '';
-      if(topicCtrl.newTopic.location.details){
+      if(topicCtrl.newTopic.location){
         locationDetail = {
           place_id: topicCtrl.newTopic.location.details.place_id,
           name:     topicCtrl.newTopic.location.details.name,
