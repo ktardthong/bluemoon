@@ -7,8 +7,24 @@ body {
   background-color: #F5F8FA;
 }
 
+.white-font{
+  color:whitesmoke;
+}
+
+.purple-background {
+  background: #4d394b;
+}
+.purple-background a{
+  color:white;
+}
+
+
+.mint-background{
+  background: #4C9689;
+}
+
 .gray-background{
-  background: #F6F9FA;
+  background: #F2F2F4;
 }
 
 /*Space from toolbar at the top*/
@@ -45,7 +61,7 @@ a{
 }
 
 .container{
-  max-width: 890px;
+  max-width: 1190px;
   position: relative;
   margin: 0 auto;
 }
@@ -54,7 +70,7 @@ a{
 }
 
 .page-wrapper {
-  max-width:890px;
+  max-width: 1190px;
   margin-right: auto;
   margin-left: auto;
   padding:15px;
@@ -72,6 +88,28 @@ a{
   height:100%;
   width:100%;
 }
+
+
+/* Custom bootstrap*/
+.btn-primary-outline {
+  color: #4D394B;
+  background-color: transparent;
+  background-image: none;
+  border-color: #4D394B;
+}
+.btn-primary-outline:hover {
+  color: #fff;
+  background-color: #4D394B;
+  border-color: #4D394B;
+}
+.btn-primary-outline:focus, .btn-primary-outline.focus, .btn-primary-outline:active, .btn-primary-outline.active, .open > .btn-primary-outline.dropdown-toggle {
+  color: #fff;
+  background-color: #4D394B;
+  border-color: #4D394B;
+}
+
+
+
 
 .sidebar {
   display:inline-block;

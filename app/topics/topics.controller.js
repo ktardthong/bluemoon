@@ -111,6 +111,7 @@ angular.module('App')
         }
       }
 
+
       topicCtrl.topics.arr.$add({
           type:     topicCtrl.type,
           lang:     topicCtrl.newTopic.lang,

@@ -1,0 +1,124 @@
+<!--
+topie-create.html
+$scope:{topic}
+-->
+<md-content ng-if="topicCtrl.auth.ref.getAuth().uid" class="md-padding md-whiteframe-1dp">
+
+  <form ng-submit="topicCtrl.createTopic(topic,topicCtrl.isDraft)"
+        ng-init="topicCtrl.isDraft = 0">
+    <md-list>
+      <md-list-item>
+        <img ng-src="{{topicCtrl.profile.photo}}"
+             class="img-circle" width="36px">
+
+        <md-button ng-show="showFormInputBtn"
+                   ng-init="showFormInputBtn = true"
+                   ng-click="formInput = true;
+                                       showFormInputBtn = false">What's on your mind?</md-button>
+      </md-list-item>
+    </md-list>
+
+        <div class="container"
+             ng-show="formInput"
+             ng-init="formInput = false">
+
+          <!-- topic type -->
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary-outline">
+              <input type="radio" autocomplete="off" checked ng-click="topicCtrl.type = 'question'" value="question">
+              <i class="ion-help"></i>
+              Question
+            </label>
+            <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'topic'" value="topic">
+              <input type="radio" autocomplete="off" >
+              <i class="ion-chatbubble-working"></i> Topic
+            </label>
+          </div>
+
+
+          <!-- Languages -->
+          <select ng-model="topicCtrl.newTopic.lang" class="form-control">
+            <option ng-repeat="lang in topicCtrl.languages"
+                    value="{{lang.$id}}">
+              {{lang.translated_name}}
+            </option>
+          </select>
+
+
+          <!-- Topics -->
+          <input ng-keyup="topicCtrl.checkSlug();topicCtrl.body.show = true"
+                 placeholder="topic"
+                 class="form-control"
+                 ng-model="topicCtrl.newTopic.topic" autocomplete="off">
+
+
+          <!-- Check slug -->
+          <div ng-if="topicCtrl.slugReturn != null">
+            <p class="md-caption">Topic already exist</p>
+            <!-- if the topic's slug exist list them here -->
+            <div ng-repeat="data in topicCtrl.slugReturn" class="alert alert-warning">
+              {{data.topic}}
+            </div>
+          </div>
+
+
+          <textarea ng-model="topicCtrl.newTopic.body" columns="1" rows="5" class="form-control"></textarea>
+
+          <!-- Preview location here-->
+          <p ng-if="locationDetail.details.place_id">location</p>
+
+
+          <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+
+            <!-- Tags -->
+            <!--<input ng-model="topicCtrl.newTopic.tags">-->
+            <tags-input ng-model="tags"></tags-input>
+
+
+          </div>
+
+
+          <!-- Optional -->
+          <div layout="row" ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+
+            <div flow-init
+                 flow-name="uploader.flow"
+                 flow-files-added="topicCtrl.uploadFile($files)">
+              <md-button aria-label="Photo" class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
+              <div ng-repeat="image in uploader.flow.files track by $index">
+                <img class="preview" flow-img="image"/><br>
+              </div>
+            </div>
+
+            <!-- Location input -->
+            <md-button aria-label="Location" class="md-primary md-fab md-mini ion-location" ng-click="locationInput=true"></md-button>
+            <md-input-container ng-show="locationInput" ng-init="locationInput=false">
+              <input aria-label="Location Query"
+                     ng-autocomplete type="text"
+                     ng-model = "topicCtrl.newTopic.location.query"
+                     details  = "topicCtrl.newTopic.location.details"
+                     options  = "topicCtrl.newTopic.location.options">
+            </md-input-container>
+
+
+            <!-- URL input -->
+            <md-button aria-label="Link" class="md-primary md-fab md-mini ion-link" ng-click="urlInput=true"></md-button>
+            <md-input-container ng-show="urlInput" ng-init="urlInput=false">
+              <input aria-label="URL" ng-model="topicCtrl.newTopic.url">
+            </md-input-container>
+
+
+            <!-- Save as draft -->
+            <md-button ng-if="topicCtrl.newTopic.topic.length > 0"
+                       class="md-primary" type="submit"
+                       aria-label="Save as Draft"
+                       ng-click="topicCtrl.isDraft=1">Save as draft</md-button>
+          </div>
+
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" type="submit">submit</md-button>
+          </md-card-actions>
+        </div>
+
+  </form>
+</md-content>

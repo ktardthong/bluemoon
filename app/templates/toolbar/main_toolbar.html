@@ -1,6 +1,69 @@
+<div class="mint-background">
+
+<header class="navbar navbar-light navbar-static-top bd-navbar container" role="banner">
+
+  <div class="clearfix purple-background white-font">
+    <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+      &#9776;
+    </button>
+    <a class="navbar-brand hidden-sm-up" href="/">
+      <span class="white-font">
+        Topikaday
+      </span>
+    </a>
+  </div>
+  <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+    <nav class="nav navbar-nav">
+      <a class="nav-item nav-link">Topikaday</a>
+      <a class="nav-item nav-link active" href="/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Documentation</a>
+      <a><button class="btn btn-link " ng-click="authCtrl.toggleRight()"><i class="ion-grid"></i></button></a>
+
+
+      <div class="pull-md-right">
+        <!-- Profile Drop down -->
+        <div ng-if="authCtrl.profile.$id">
+
+          <a class="nav-item nav-link" ui-sref="dashboard"><i class="fa fa-home fa-1x"></i> Home </a>
+          <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
+            <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+            {{authCtrl.profile.displayName}}
+          </a>
+          <a class="nav-item nav-link" ui-sref="dashboard">
+            <i class="fa fa-cog"></i>
+          </a>
+
+            <!--<div class="dropdown nav-item nav-link">
+              <button class="btn btn-default dropdown-toggle"
+                      type="button"
+                      id="profile_dd"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+                {{authCtrl.profile.displayName}}
+                <span class="caret"></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="profile dropdown">
+                <a class="dropdown-item" ui-sref="profile({Name:authCtrl.profile.displayName})">View Profile</a>
+                <a class="dropdown-item" href="#">Setting</a></li>
+                <li role="separator" class="divider"></li>
+                <a class="dropdown-item" href="#" ng-click="authCtrl.logout()">Logout</a>
+              </ul>
+            </div>-->
+          </div>
+
+        <span ng-if="!authCtrl.profile.$id">
+          <a class="nav-item nav-link" ui-sref="register">Register</a>
+          <a class="nav-item nav-link" ui-sref="login">Login</a>
+        </span>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+</div>
+<!--
 <md-toolbar class="fix-toolbar">
   <div class="container">
-    <div class="md-toolbar-tools">
+    <div class="">
       <h2>
         <a ui-sref="home">
           <span>bluemooon</span>
@@ -33,7 +96,7 @@
         <i class="ion-ios-bell"></i>
       </md-button>
 
-      <!-- Profile Drop down -->
+      &lt;!&ndash; Profile Drop down &ndash;&gt;
       <div ng-if="authCtrl.profile.$id">
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle"
@@ -62,3 +125,4 @@
     </div>
   </div>
 </md-toolbar>
+-->
