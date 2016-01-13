@@ -55,7 +55,7 @@ angular.module('App')
       // Reply listing
       replyList: function (topicId) {
         var data = ref.child(topicId + '/replies')
-        return $firebaseObject(data)
+        return $firebaseArray(data)
       },
 
       // Reply Array

@@ -1,94 +1,141 @@
-<md-content>
+<div class="gray-background">
 
   <div ui-view="header"></div>
 
 
-  <section class="gray-background row">
-    <div class="container">
+  <div class="inner-container container margin-top animated slideInUp">
 
-  <div class="inner-container container-fluid md-padding margin-top">
+    <div class="card md-padding" ng-controller="TopicCtrl as topicCtrl">
 
-    <div flex>
-      <div layout="column" ng-controller="TopicCtrl as topicCtrl">
-        <md-card class="md-whiteframe-3dp md-padding">
-          <small layout="row">
-            <div class="col-md-6">
-              <i class="ion-ios-clock-outline"></i>
-              <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
-            </div>
-            <div class="col-md-6">
-              <span class="pull-right" ng-init="topic = topicLandingCtrl.topicLanding[0]">
-                <md-button ng-hide="topic.followers.history[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="ion-plus-round" aria-label="Follow"> Follow {{topicLandingCtrl.followers.count || '0' }}</md-button>
-                <md-button ng-show="topic.followers.history[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="md-primary md-raised ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</md-button>
-              </span>
-            </div>
-          </small>
+        <small>
+          <div class="col-md-6">
+            <i class="ion-ios-clock-outline"></i>
+            <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
 
-          <!-- Message Body -->
-          <section class="text-center">
-            <span class="md-display-1">
-              {{topicLandingCtrl.topicLanding[0].topic}}
-            </span>
-            <p class="md-padding">
-              {{topicLandingCtrl.topicLanding[0].body}}
-            </p>
-            <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
-              <img ng-src="{{photo}}">
-            </div>
-          </section>
-
-          <div layout="row" >
-            {{ topicCtrl.userName(topicLandingCtrl.topicLanding[0].uid) }}
-            <p>[views: {{topicLandingCtrl.views.count || '0' }}]</p>
-            <p>[ followers: {{topicLandingCtrl.followers.count || '0' }} ]</p>
-            <a ui-sref="category({Slug: topicLandingCtrl.topicLanding[0].category})">
-              {{topicLandingCtrl.topicLanding[0].category}}
-            </a>
           </div>
+          <div class="col-md-6">
+            <i class="ion-android-bookmark"></i>
+            <span class="pull-right" ng-init="topic = topicLandingCtrl.topicLanding[0]">
+              <button ng-hide="topic.followers.history[topicCtrl.uid]"
+                      ng-click="topicCtrl.followTopic(topic)"
+                      class="btn btn-link mint-font ion-plus-round"
+                      aria-label="Follow"> Follow {{topicLandingCtrl.followers.count || '0' }}</button>
+              <button ng-show="topic.followers.history[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</button>
+            </span>s
+          </div>
+        </small>
 
-          <topic-actions-card topic='topicLandingCtrl.topicLanding[0]'></topic-actions-card>
-        </md-card>
+        <!-- Message Body -->
+        <div class="md-padding">
+          <h1>
+            {{topicLandingCtrl.topicLanding[0].topic}}
+          </h1>
+
+          <p class="topic-reading-font" ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></p>
+
+          <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
+            <img ng-src="{{photo}}">
+          </div>
+        </div>
+
+      <!-- Footer action -->
+        <div class="container" >
+          <div class="col-xs-6">
+            <topic-actions-card topic='topicLandingCtrl.topicLanding[0]'></topic-actions-card>
+          </div>
+          <div class="col-xs-6 text-muted">
+              views: {{topicLandingCtrl.views.count || '0' }}
+              &bull;
+              followers: {{topicLandingCtrl.followers.count || '0' }}
+              <a ui-sref="category({Slug: topicLandingCtrl.topicLanding[0].category})">
+                {{topicLandingCtrl.topicLanding[0].category}}
+              </a>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- Author section -->
+    <div class="media card md-padding" ng-controller="TopicCtrl as topicCtrl">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object img-circle"
+               src="{{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).photo }}"
+               width="32px" />
+        </a>
       </div>
+      <div class="media-body">
 
-
-      <!-- Reply form -->
-      <div ng-controller="TopicCtrl as topicCtrl">
-        <md-content class="md-whiteframe-2dp md-padding"  ng-if="topicCtrl.auth.ref.getAuth().uid">
-
-          <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
-            <md-list>
-            <md-list-item class="md-3-line">
-              <img ng-src="{{topicCtrl.profile.photo}}"
-                   class="img-circle" width="36px">
-
-
-              <md-input-container class="md-block" flex>
-                <label>Your Comment</label>
-                <textarea ng-model="topicCtrl.newReply.body" col
-                          umns="1" rows="3"></textarea>
-              </md-input-container>
-
-              <!--<md-input-container class="md-block" >-->
-              <md-button class="md-primary md-block md-mini" type="submit">submit</md-button>
-              </md-list-item>
-            </md-list>
-          </form>
-        </md-content>
+        <p class="media-heading">
+            <b>
+              <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
+                @{{topicCtrl.users.getDisplayName(topicLandingCtrl.topicLanding[0].uid) || "User"}}
+              </a>
+            </b>
+            | upvote reply 20 | upvote post 50
+        </p>
+        <small>
+        <p>{{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).biography }}</p>
+        </small>
       </div>
-
-      <!-- Reply body list-->
-      <div ng-repeat="reply in topicLandingCtrl.replyList">
-        <md-card class="md-padding">
-          <span am-time-ago="reply.created"></span>
-          {{reply.body}}
-        </md-card>
+      <div class="media-right">
+        <button class="btn btn-success-outline">Follow</button>
       </div>
     </div>
+
+
+    <!-- Reply form -->
+    <div ng-controller="TopicCtrl as topicCtrl" ng-if="topicLandingCtrl.auth.getUid()">
+      <div class="media card md-padding">
+        <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
+          <div class="media-left">
+            <a href="#">
+              <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
+                   class="img-circle" width="32px">
+            </a>
+          </div>
+          <div class="media-body">
+           <textarea ng-model="topicCtrl.newReply.body"
+                     class="form-control"
+                     placeholder="Write a comment"></textarea>
+          </div>
+          <div class="media-right">
+            <button class="btn btn-primary" type="submit">submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Reply body list-->
+    <h5>Comments</h5>
+    <div ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' " ng-controller="TopicCtrl as topicCtrl">
+      <div class="media card md-padding">
+        <div class="media-left">
+          <a href="#">
+            <img ng-src="{{ topicCtrl.users.profile(reply.uid).photo }}"
+                 class="img-circle" width="32px">
+          </a>
+        </div>
+        <div class="media-body">
+          <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
+            {{ topicCtrl.users.profile(reply.uid).firstname }}
+            {{ topicCtrl.users.profile(reply.uid).lastname }}
+          </a>
+
+          <div class="lead">
+            {{reply.body}}
+          </div>
+
+          <small>
+            <span am-time-ago="reply.created"></span>
+          </small>
+        </div>
+      </div>
+    </div>
+
 
   </div>
 
-    </div>
-  </section>
 
-
-</md-content>
+</div>

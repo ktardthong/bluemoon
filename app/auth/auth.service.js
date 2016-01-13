@@ -8,7 +8,13 @@ angular.module('App')
       auth: auth,
 
       getUid:function(){
-        return ref.getAuth().uid;
+        var uid = ref.getAuth();
+        if(uid != null ){
+          return ref.getAuth().uid;
+        }
+        else{
+          return false;
+        }
       },
     }
 

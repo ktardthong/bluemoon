@@ -82,7 +82,7 @@ a{
   margin: 0 auto;
 }
 .inner-container{
-  max-width:600px;
+  max-width: 700px;
 }
 
 .page-wrapper {
@@ -125,6 +125,15 @@ a{
 }
 
 
+
+/* READABILITY */
+.topic-reading-font{
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1.58;
+  letter-spacing: -0.003em;
+}
 
 
 .sidebar {

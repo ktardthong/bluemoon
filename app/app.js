@@ -21,49 +21,18 @@ angular
     'ngTagsInput', // Tags
     'cgNotify', // Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
-    'facebook' // Facebook - https://github.com/Ciul/angular-facebook
+    'facebook', // Facebook - https://github.com/Ciul/angular-facebook
   ])
 
+
+  //Facebook Config
   .config(
     function (FacebookProvider) {
       var myAppId = '931376120263856'
-
-      // You can set appId with setApp method
       FacebookProvider.setAppId(myAppId)
-
-      /**
-       * After setting appId you need to initialize the module.
-       * You can pass the appId on the init method as a shortcut too.
-       */
       FacebookProvider.init(myAppId)
     }
-)
-
-  .config(function ($mdThemingProvider) {
-    $mdThemingProvider.definePalette('slack', {
-      '50': 'ffebee',
-      '100': 'ffcdd2',
-      '200': 'ef9a9a',
-      '300': 'e57373',
-      '400': 'ef5350',
-      '500': '4D394B', // primary colour
-      '600': 'e53935',
-      '700': 'd32f2f',
-      '800': 'c62828',
-      '900': 'b71c1c',
-      'A100': 'ff8a80',
-      'A200': 'ff5252',
-      'A400': 'ff1744',
-      'A700': 'd50000',
-      'contrastDefaultColor': 'light', // whether, by default, text (contrast)
-      // on this palette should be dark or light
-      'contrastDarkColors': ['50', '100', // hues which contrast should be 'dark' by default
-        '200', '300', '400', 'A100'],
-      'contrastLightColors': undefined // could also specify this if default was 'dark'
-    })
-    $mdThemingProvider.theme('default')
-      .primaryPalette('slack')
-  })
+  )
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -126,6 +95,26 @@ angular
             controller: 'TopicLandingCtrl as topicLandingCtrl',
             templateUrl: 'topics/index.html',
             resolve: {
+              isOwner: function(Auth,Users,$stateParams,Topics){
+
+                var topicUid = '';
+                //If user login, check if they are the topic owner
+                if(Auth.ref.getAuth()){
+                  return Topics.fortopic($stateParams.Slug).$loaded().then(function (data) {
+                    if (data[0] != null) {
+                      topicUid = data[0].uid
+                      if(Auth.ref.getAuth().uid == topicUid )
+                      {
+                        return true;
+                      }else{
+                        return false;
+                      }
+                    }
+                  });
+                }else{
+                  return false;
+                }
+              },
               topicLanding: function ($stateParams, Topics) {
                 return Topics.fortopic($stateParams.Slug)
               },
@@ -201,13 +190,17 @@ angular
             templateUrl: 'profile/index.html',
             resolve: {
               isOwner: function(Auth,Users,$stateParams){
-                return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
-                  if(profile[0].$id == Auth.ref.getAuth().uid){
-                    return true;
-                  }else{
-                    return false;
-                  }
-                });
+                if(Auth.ref.getAuth()) {
+                  return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
+                    if (profile[0].$id == Auth.ref.getAuth().uid) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  })
+                }else{
+                  return false;
+                }
               },
               profile: function ($state,$stateParams, $rootScope, Auth, Users) {
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
@@ -260,19 +253,6 @@ angular
         }
       })
 
-      // Edit profile
-      /* .state('profileEdit',{
-        url: '/profile/{Name}/edit',
-        views: {
-          '': {
-            templateUrl: 'profile/edit.html',
-          },
-          'header@profileEdit ': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html',
-          }
-        }
-      })*/
 
       // Dashboard
       .state('dashboard', {
@@ -394,6 +374,12 @@ angular
       if (reverse) filtered.reverse()
       return filtered
     }
+  })
+
+  .filter('nl2br', function ($sce) {
+    return function (text) {
+      return text ? $sce.trustAsHtml(text.replace(/\n/g, '<br/>')) : '';
+    };
   })
 
   .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
