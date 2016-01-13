@@ -7,27 +7,40 @@
       <div class="pull-right">
         <a class="dropdown-item" href="#" ng-click="authCtrl.logout()">Logout</a>
       </div>
-      <div layout="row" class="md-padding">
-        <div flex-gt-md-auto="" class="md-padding">
-          <!--{{profileCtrl.profile}}-->
+
+      <div class="card  container-fluid">
+
+        <div class="md-padding col-xs-12 col-sm-3">
+
+
+          <div ng-if="profileCtrl.isOwner == true">true</div>
+          <div ng-if="profileCtrl.isOwner == false">false</div>
+
+
           <div flow-init
                flow-name="uploader.flow"
                flow-files-added="profileCtrl.uploadFile($files)">
-              <img  ng-src="{{profileCtrl.profile.photo}}" class="preview img-circle" flow-img="uploader.flow.files[0]" width="142px"/><br>
-            <md-button class="md-primary ion-camera" flow-btn type="file"></md-button>
+              <img  ng-src="{{profileCtrl.profile[0].photo}}"
+                    class="preview img-circle"
+                    flow-img="uploader.flow.files[0]" width="142px"/><br>
+            <md-button
+              ng-if="profileCtrl.isOwner"
+              class="md-primary ion-camera" flow-btn type="file"></md-button>
           </div>
+
+
         </div>
 
-        <div flex class="md-padding">
+        <div class="md-padding col-xs-12 col-sm-9">
           <p class="md-title">
-            @{{ profileCtrl.profile.displayName }}
+            @{{ profileCtrl.profile[0].displayName }}
           </p>
           <p class="md-headline">
-            {{ profileCtrl.profile.firstname }}
+            {{ profileCtrl.profile[0].firstname }}
 
-            {{profileCtrl.profile.lastname}}
+            {{profileCtrl.profile[0].lastname}}
 
-            <md-button ng-click="nameEdit=true">Edit</md-button>
+            <md-button ng-if="profileCtrl.isOwner" ng-click="nameEdit=true">Edit</md-button>
 
             <!-- bio form -->
             <section class="md-whiteframe-1dp md-padding" ng-show="nameEdit" ng-init="nameEdit=false">
@@ -57,7 +70,7 @@
           <p class="md-body-2">
 
             <p class="md-text" ng-mouseover="bioEdit=true">{{profileCtrl.profile.biography}}
-            <md-button ng-click="bioEdit=true">Add Profile Bio</md-button>
+            <md-button ng-if="profileCtrl.isOwner" ng-click="bioEdit=true">Add Profile Bio</md-button>
 
             <!-- bio form -->
             <section class="md-whiteframe-1dp md-padding" ng-show="bioEdit" ng-init="bioEdit=false">
@@ -93,9 +106,9 @@
 
           <md-button ui-sref="profileEdit({Name:profileCtrl.profile.displayName})">edit</md-button>
           -->
-          <md-button ng-click="profileCtrl.linkFacebook()">facebook </md-button>
+          <md-button ng-if="profileCtrl.isOwner"
+                     ng-click="profileCtrl.linkFacebook()">facebook </md-button>
         </div>
-        <div flex="">test</div>
       </div>
 
       <md-divider></md-divider>
@@ -105,7 +118,7 @@
           <md-list>
             <md-subheader class="md-no-sticky"> feed </md-subheader>
             <md-list-item><md-button>Activity</md-button></md-list-item>
-            <md-list-item>Posts</md-list-item>
+            <md-list-item ng-click="profileCtrl.getUserPost(profileCtrl.profile.$id)">Posts</md-list-item>
             <md-list-item>Questions</md-list-item>
             <md-list-item>Reply</md-list-item>
             <md-divider></md-divider>
@@ -113,10 +126,8 @@
           </md-list>
         </div>
         <div flex-gt-md-auto="" class="md-padding">
-          {{profileCtrl.profile.$id}}
-          <!--<div ng-repeat="topics in profileCtrl.topics.createdBy(profileCtrl.profile.$id)">
-            {{topics}}
-          </div>-->
+
+          <topic-list topics="profileCtrl.feed"></topic-list>
 
         </div>
       </div>

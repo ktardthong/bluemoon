@@ -200,25 +200,20 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/index.html',
             resolve: {
-              profile: function ($state, $rootScope, Auth, Users) {
-                return Auth.auth.$requireAuth().then(function (auth) {
-                  return Users.getProfile(auth.uid).$loaded().then(function (profile) {
-                    if (profile.displayName) {
-                      return profile
-                    } else {
-                      $state.go('get_started')
-                    }
-                  })
-                }, function (error) {
-                  $state.go('home')
-                  return error
-                })
+              isOwner: function(Auth,Users,$stateParams){
+                return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
+                  if(profile[0].$id == Auth.ref.getAuth().uid){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                });
               },
-              auth: function ($state, Users, Auth) {
-                return Auth.auth.$requireAuth().catch(function () {
-                  $state.go('home')
-                })
-              }
+              profile: function ($state,$stateParams, $rootScope, Auth, Users) {
+                return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
+                  return profile;
+                });
+              },
             }
           },
           'header@profile': {
@@ -284,10 +279,14 @@ angular
         url: '/user/dashboard',
         controller: 'DashboardCtrl as dashboardCtrl',
         views: {
+
           '': {
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'dashboard/index.html',
             resolve: {
+              isOwner: function(){
+                return true;
+              },
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded().then(function (profile) {

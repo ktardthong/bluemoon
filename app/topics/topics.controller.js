@@ -80,7 +80,6 @@ angular.module('App')
 
     //Reply to topic
     topicCtrl.reply = function(topicId){
-      console.log(topicId);
       topicCtrl.topics.replyArr(topicId).$add({
         topicId:  topicId,
         body:     topicCtrl.newReply.body,

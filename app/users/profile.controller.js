@@ -1,5 +1,9 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5, Auth,Users, auth, notify, profile, Topics, Facebook){
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5,
+                                      //Services
+                                      Auth,Users,Topics, Facebook,notify,
+                                      //Resolve
+                                      profile,isOwner){
     var profileCtrl = this;
 
     //Parser
@@ -8,11 +12,18 @@ angular.module('App')
     profileCtrl.users   = Users;
     profileCtrl.topics  = Topics;
     profileCtrl.facebook= Facebook;
+    profileCtrl.isOwner = isOwner;
+
+    profileCtrl.feed = '';
+
+    profileCtrl.getUserPost = function(uid,postType){
+      profileCtrl.feed = profileCtrl.topics.createdBy(profileCtrl.profile.$id);
+    }
 
 
+
+    /*Link account with facebook*/
     profileCtrl.linkFacebook = function(){
-
-      console.log("click");
 
       profileCtrl.facebook.login(function(response) {
 
@@ -32,14 +43,6 @@ angular.module('App')
 
     //The original value from profile
     profileCtrl.oldProfileValue = profileCtrl.profile;
-
-
-    if(Auth.ref.getAuth() != null ){
-      profileCtrl.profile  = profileCtrl.users.getProfile(Auth.ref.getAuth().uid);
-    }
-    else{
-      profileCtrl.profile =''
-    }
 
 
     profileCtrl.userCreated = function(uid){
@@ -95,7 +98,7 @@ angular.module('App')
 
 
     profileCtrl.updateProfile = function(){
-      profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
+      //profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
       profileCtrl.profile.$save().then(function(){
         $state.go('dashboard');
       });

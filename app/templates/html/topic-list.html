@@ -6,6 +6,12 @@
               <i class="ion-ios-clock-outline"></i>
               <span am-time-ago="topic.created"></span>
             </small>
+
+            <small class="pull-left">
+              <i ng-if="topic.type == 'question'" class="ion-help"></i>
+              <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
+            </small>
+
             <small class="pull-right">
               <a ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Follow {{topic.followers.count || '0'}}</a>
               <a ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="red-font ion-plus-round" aria-label="Follow"> Unfollow {{topic.followers.count || '0'}}</a>
@@ -15,9 +21,11 @@
           <br/>
 
           <h4 class="card-title">
+
             <a ui-sref="topic({Slug: topic.slug})" class="purple-light-font">
               {{topic.topic}}
             </a>
+
           </h4>
 
           <p class="card-text">
@@ -52,13 +60,20 @@
           <div class="media">
             <div class="media-left">
               <a href="#">
-                <img class="media-object img-circle" src="/images/avatar.jpg" width="32px" />
+                <img class="media-object img-circle" src="{{topicCtrl.users.profile(topic.uid).photo }}" width="32px" />
               </a>
             </div>
             <div class="media-body">
               <p class="media-heading">
                 <small>
-                  Firstname Lastname &bull; @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}} | {{topic.uid || "UserId"}}
+                  <b>
+                    <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
+                      @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
+                    </a>
+                  </b>
+
+                  | upvote reply 20 | upvote post 50
+
                 </small>
               </p>
               <!--<p>@{{topicCtrl.users.getDisplayName(topic.uid) || "User"}} | {{topic.uid || "UserId"}}</p>-->

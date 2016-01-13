@@ -15,8 +15,12 @@ angular.module('App')
 
       // Getting the list of topics created by user_id
       createdBy: function (uid) {
-        var data = ref.orderByChild('uid').equalTo(uid)
-        return $firebaseObject(data)
+        return $firebaseArray(ref.orderByChild('uid').equalTo(uid));
+
+      },
+
+      countUserTopics:function(){
+
       },
 
       // Getting the list of topic base on category

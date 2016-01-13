@@ -20,6 +20,15 @@ angular.module('App')
         })
       },
 
+      profile: function(uid){
+        return users.$getRecord(uid);
+      },
+
+
+      getProfileByUsername:function(username){
+        return $firebaseArray(usersRef.orderByChild('displayName').equalTo(username));
+      },
+
       getProfile: function (uid) {
         // console.log($firebaseObject(usersRef.child(uid)))
         return $firebaseObject(usersRef.child(uid))
