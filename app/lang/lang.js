@@ -29,6 +29,7 @@ angular.module('App')
       'KEY_MALE':       'Male',
       'KEY_FEMALE':     'Female',
       'KEY_USERNAME':   'Username',
+      'KEY_LOCATION':   'Location',
 
 
     });

@@ -75,6 +75,20 @@ angular.module('App')
     //params: redirect, if exist then redirect after save
     profileCtrl.saveProfile = function(redirect){
       profileCtrl.profile.updated = moment().toISOString();
+
+
+      if(profileCtrl.location !== null ) {
+        locationDetail = {
+          place_id: profileCtrl.location.details.place_id,
+          name: profileCtrl.location.details.name,
+          address: profileCtrl.location.details.formatted_address,
+          lat: profileCtrl.location.details.geometry.location.lat(),
+          lng: profileCtrl.location.details.geometry.location.lng(),
+        }
+        
+        profileCtrl.profile.userLocation = locationDetail;
+      }
+
       profileCtrl.profile.$save().then(function() {
         notify({message:'Saved',position:'center',duration: 3000 });
         console.log(redirect);

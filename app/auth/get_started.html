@@ -44,6 +44,16 @@
                placeholder="{{ 'KEY_LASTNAME' | translate}}"
                ng-model="profileCtrl.profile.lastname">
       </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control"
+               placeholder="{{ 'KEY_LOCATION' | translate}}"
+               ng-autocomplete
+               ng-model = "profileCtrl.location.query"
+               details  = "profileCtrl.location.details"
+               options  = "{ types: '(cities)'}">
+      </div>
+
       <div class="form-group">
         <label>{{ 'KEY_BIRTHDAY' | translate }}</label>
         <div>
