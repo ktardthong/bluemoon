@@ -332,6 +332,7 @@ angular
             templateUrl: 'templates/html/login-form.html'
           },
           'header@login': {
+            controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
           }
         }
@@ -345,6 +346,7 @@ angular
             templateUrl: 'auth/register.html'
           },
           'header@register': {
+            controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
           }
         },

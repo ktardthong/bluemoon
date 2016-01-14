@@ -1,4 +1,4 @@
-<md-card class="md-margin">
+<div>
 
   <div ng-show="authCtrl.error" class="md-padding">
     <span>{{ authCtrl.error.message }}</span>
@@ -20,8 +20,11 @@
              placeholder="{{ 'KEY_PASSWORD' | translate}}">
     </div>
 
-    <button type="submit" class="btn btn-success-outline">{{ 'KEY_LOGIN' | translate }}</button>
+    <small>
+      <a ui-sref="register">{{ 'KEY_NO_ACCT_REGISTER' | translate }}</a>
+    </small>
+    <button type="submit" class="pull-right btn btn-success-outline">{{ 'KEY_LOGIN' | translate }}</button>
 
   </form>
 
-</md-card>
+</div>

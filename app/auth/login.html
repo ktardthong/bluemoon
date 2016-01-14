@@ -3,13 +3,11 @@
 
   <div class="container md-padding" style="max-width:400px">
 
-    <div class="page-header">
-      <h1>
-        <a ui-sref="home">
-          Log In
-        </a>
-      </h1>
-    </div>
+    <h1 class="text-xs-center">
+      <a ui-sref="home">
+        {{ 'KEY_LOGIN' | translate }}
+      </a>
+    </h1>
 
     <div ui-view="login-form"></div>
 

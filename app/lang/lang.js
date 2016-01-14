@@ -13,6 +13,8 @@ angular.module('App')
       'KEY_EMAIL':      'Email',
       'KEY_PASSWORD':   'Password',
       'KEY_SAVE_DRAFT': 'Save as draft',
+
+      'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register'
     });
 
     $translateProvider.translations('ไทย', {
