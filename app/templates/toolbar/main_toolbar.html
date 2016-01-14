@@ -13,25 +13,55 @@
         </a>
       </div>
 
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../navbar/">Default</a></li>
+          <li><a href="../navbar-static-top/">Static top</a></li>
+          <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+
       <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-        <nav class="nav navbar-nav">
-          <a class="nav-item nav-link navbar-brand" ui-sref="home">
+        <ul class="nav navbar-nav">
+          <li class="">
+            <a class="nav-item nav-link navbar-brand" ui-sref="home">
             <span class="white-font">
               Topikaday
             </span>
           </a>
+          </li>
 
-          <div class="pull-md-right">
 
-            <a class="nav-item nav-link" ng-click="authCtrl.toggleRight()">
+          <div class="pull-right" style="width:50%">
+
+            <li>
+              <a class="nav-item nav-link pull-right" ng-click="authCtrl.toggleRight()">
               <i class="ion-grid white-font"></i>
-            <span class="white-font">
-              {{ 'KEY_DASHBOARD' | translate }}
-            </span>
-            </a>
+              <span class="white-font">
+                {{ 'KEY_DASHBOARD' | translate }}
+              </span>
+              </a>
+            </li>
 
             <!-- Languages -->
-            <div class="dropdown nav-item">
+            <li class="dropdown nav-item ">
 
               <button class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <i class="fa fa-globe fa-1x white-font"></i>
@@ -50,26 +80,32 @@
                 </a>
               </div>
 
-            </div>
+            </li>
 
             <!-- If user is logged in -->
             <div ng-if="authCtrl.profile.$id">
 
-              <a class="nav-item nav-link" ui-sref="dashboard">
-                <i class="fa fa-home fa-1x white-font"></i>
-                <span class="white-font">{{'KEY_HOME' | translate}}</span>
-              </a>
+              <li>
+                <a class="nav-item nav-link" ui-sref="dashboard">
+                  <i class="fa fa-home fa-1x white-font"></i>
+                  <span class="white-font">{{'KEY_HOME' | translate}}</span>
+                </a>
+              </li>
 
-              <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
-                <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
-                <span class="white-font">
-                  {{authCtrl.profile.displayName}}
-                </span>
-              </a>
+              <li>
+                <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
+                  <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+                  <span class="white-font">
+                    {{authCtrl.profile.displayName}}
+                  </span>
+                </a>
+              </li>
 
-              <a class="nav-item nav-link" ui-sref="dashboard">
-                <i class="fa fa-cog white-font"></i>
-              </a>
+              <li>
+                <a class="nav-item nav-link" ui-sref="dashboard">
+                  <i class="fa fa-cog white-font"></i>
+                </a>
+              </li>
             </div>
 
             <span ng-if="!authCtrl.profile.$id">
@@ -84,8 +120,8 @@
                 </span>
               </a>
             </span>
-            </div>
-        </nav>
+            </div> <!-- end pull right -->
+        </ul>
       </div>
     </header>
   </div>

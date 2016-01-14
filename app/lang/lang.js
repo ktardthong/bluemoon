@@ -10,11 +10,27 @@ angular.module('App')
       'KEY_POST':       'Post',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
-      'KEY_EMAIL':      'Email',
       'KEY_PASSWORD':   'Password',
       'KEY_SAVE_DRAFT': 'Save as draft',
 
-      'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register'
+      //SENTENCE
+      'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',
+
+
+      //USER INPUT
+      'KEY_FIRSTNAME':  'First name',
+      'KEY_LASTNAME':   'Last name',
+      'KEY_BIRTHDAY':   'Birthday',
+      'KEY_MONTH':      'Month',
+      'KEY_DAY':        'Day',
+      'KEY_EMAIL':      'Email',
+      'KEY_CONF_EMAIL': 'Confirm Email',
+      'KEY_GENDER':     'Gender',
+      'KEY_MALE':       'Male',
+      'KEY_FEMALE':     'Female',
+      'KEY_USERNAME':   'Username',
+
+
     });
 
     $translateProvider.translations('ไทย', {

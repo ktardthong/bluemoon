@@ -2,7 +2,7 @@
 topie-create.html
 $scope:{topic}
 -->
-<md-content ng-if="topicCtrl.auth.ref.getAuth().uid" class="md-padding md-whiteframe-1dp">
+<md-content ng-if=" (topicCtrl.auth.ref.getAuth().uid) && (topicCtrl.profile.displayName)" class="md-padding md-whiteframe-1dp">
 
   <form ng-submit="topicCtrl.createTopic(topic,topicCtrl.isDraft)"
         ng-init="topicCtrl.isDraft = 0">

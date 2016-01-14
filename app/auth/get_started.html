@@ -1,15 +1,89 @@
 <md-content>
   <div ui-view="header"></div>
 
-  <form ng-submit="profileCtrl.updateProfile()">
-    <p ng-hide="profileCtrl.profile.displayName">
-      You'll need a display name before you can start chatting.
-    </p>
+  <div class="container">
 
-    <div class="input-group">
-      <input required type="text" class="form-control" placeholder="Display Name" ng-model="profileCtrl.profile.displayName">
+    <!-- Upload image-->
+    <div flow-init
+         flow-name="uploader.flow"
+         flow-files-added="profileCtrl.uploadFile($files)">
+      <img  ng-src="{{profileCtrl.profile.photo}}"
+            class="preview img-circle"
+            flow-img="uploader.flow.files[0]" width="142px"/><br>
+      <md-button
+        ng-if="profileCtrl.isOwner"
+        class="md-primary ion-camera" flow-btn type="file"></md-button>
     </div>
-    <input type="submit" class="btn btn-default" value="Set Display Name">
-  </form>
+
+
+    <form ng-submit="profileCtrl.saveProfile('dashboard')">
+
+      <div class="input-group">
+
+        <p class="alert-warning">*username cannot be change</p>
+
+        <input required type="text"
+               class="form-control"
+               placeholder="{{ 'KEY_USERNAME' | translate }}"
+               ng-keyup="profileCtrl.checkUsername()"
+               ng-model="profileCtrl.profile.displayName">
+
+        <label ng-if="profileCtrl.nameExist">username exist!</label>
+
+        >>> {{ profileCtrl.nameExist }}
+
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control"
+               placeholder="{{ 'KEY_FIRSTNAME' | translate}}"
+               ng-model="profileCtrl.profile.firstname">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control"
+               placeholder="{{ 'KEY_LASTNAME' | translate}}"
+               ng-model="profileCtrl.profile.lastname">
+      </div>
+      <div class="form-group">
+        <label>{{ 'KEY_BIRTHDAY' | translate }}</label>
+        <div>
+          <input type="number" ng-model="profileCtrl.profile.bmonth" placeholder="{{ 'KEY_MONTH' | translate}}" class="col-xs-12 col-sm-4">
+          <input type="number" ng-model="profileCtrl.profile.bday"   placeholder="{{ 'KEY_DAY' | translate}}"   class="col-xs-12 col-sm-4">
+          <input type="number" ng-model="profileCtrl.profile.byear"  placeholder="{{ 'KEY_YEAR' | translate}}"  class="col-xs-12 col-sm-4">
+        </div>
+      </div>
+      <br/>
+      <label>{{ 'KEY_GENDER' | translate }}</label>
+      <label>
+        <input type="radio" ng-model="profileCtrl.profile.gender" value="female">
+        {{ 'KEY_FEMALE' | translate }}
+      </label>
+      <label>
+        <input type="radio" ng-model="profileCtrl.profile.gender" value="male">
+        {{ 'KEY_MALE' | translate }}
+      </label>
+
+      <button
+        ng-if="!profileCtrl.nameExist"
+        class="btn btn-success-outline" type="submit">submit</button>
+    </form>
+
+
+    <!-- Step 2-->
+    <form ng-submit="profileCtrl.updateProfile()" ng-init="setupStep2=hide" ng-show="setupStep2">
+      <p ng-hide="profileCtrl.profile.displayName">
+        You'll need a display name before you can start chatting.
+      </p>
+
+      <div class="input-group">
+        <input required type="text"
+               class="form-control"
+               placeholder="Display Name"
+               ng-keyup=""
+               ng-model="profileCtrl.profile.displayName">
+      </div>
+      <input type="submit" class="btn btn-default" value="Set Display Name">
+    </form>
+  </div>
 
 </md-content>

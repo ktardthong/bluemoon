@@ -16,6 +16,8 @@ angular.module('App')
 
     profileCtrl.feed = '';
 
+    profileCtrl.nameExist= false;
+
     profileCtrl.getUserPost = function(uid,postType){
       profileCtrl.feed = profileCtrl.topics.createdBy(profileCtrl.profile.$id);
     }
@@ -69,6 +71,22 @@ angular.module('App')
     };
 
 
+    //Save profile with profileCtrl.profile
+    //params: redirect, if exist then redirect after save
+    profileCtrl.saveProfile = function(redirect){
+      profileCtrl.profile.updated = moment().toISOString();
+      profileCtrl.profile.$save().then(function() {
+        notify({message:'Saved',position:'center',duration: 3000 });
+        console.log(redirect);
+        if(redirect !== undefined){
+          $state.go(redirect);
+        }
+      }).catch(function(error) {
+        notify({message:'Error saving data',position:'center',duration: 3000 });
+      });
+    }
+
+
     //Update name
     profileCtrl.updateName = function(){
 
@@ -78,6 +96,7 @@ angular.module('App')
           "lastname":   profileCtrl.profile.lastname,
         }
       )
+
 
       profileCtrl.users.userArrRef(Auth.ref.getAuth().uid+'/log').push().set({
         action:   "name_change",
@@ -104,5 +123,17 @@ angular.module('App')
       });
     };
 
+
+    //Check if user exist, return false if they do
+    profileCtrl.checkUsername = function(){
+
+      profileCtrl.users.checkUsernameExist(profileCtrl.profile.displayName).once('value', function(snapshot) {
+        if(snapshot.val() !== null){
+          return profileCtrl.nameExist=true;
+        }else {
+          return profileCtrl.nameExist=false;
+        }
+      });
+    }
 
   });

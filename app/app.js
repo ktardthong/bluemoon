@@ -296,12 +296,15 @@ angular
       })
 
       .state('get_started', {
-        url: '/get_started',
+        url: '/user/get_started',
         views: {
           '': {
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'auth/get_started.html',
             resolve: {
+              isOwner: function(){
+                return true;
+              },
               profile: function (Users, Auth) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded()

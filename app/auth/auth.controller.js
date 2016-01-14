@@ -6,6 +6,8 @@ angular.module('App')
     //Parser
     authCtrl.auth     = Auth;
     authCtrl.users    = Users;
+
+
     if(Auth.ref.getAuth() != null ){
       authCtrl.profile  = authCtrl.users.getProfile(Auth.ref.getAuth().uid);
     }
@@ -28,7 +30,7 @@ angular.module('App')
       //If user registered
       if(Auth.ref.getAuth())
       {
-        authCtrl.users.ref(Auth.ref.getAuth().uid).update({lang: langKey});
+        //authCtrl.users.ref(Auth.ref.getAuth().uid).update({lang: langKey});
       }
     }
 
@@ -44,19 +46,18 @@ angular.module('App')
     //Login
     authCtrl.login = function (){
       authCtrl.auth.auth.$authWithPassword(authCtrl.user).then(function (auth){
-        Users.getProfile(auth.uid).$loaded().then(function(profile){
-          $rootScope.profile = profile;
-        });
         $state.go('dashboard');
       }, function (error){
         authCtrl.error = error;
       });
     };
 
+    //Logout
     authCtrl.logout = function(){
       Auth.auth.$unauth();
     }
 
+    //Register user
     authCtrl.register = function (){
       Auth.auth.$createUser(authCtrl.user).then(function (user){
         authCtrl.login();

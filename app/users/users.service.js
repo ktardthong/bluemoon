@@ -25,9 +25,16 @@ angular.module('App')
       },
 
 
+      //Search and return username
       getProfileByUsername:function(username){
         return $firebaseArray(usersRef.orderByChild('displayName').equalTo(username));
       },
+
+      //Check if username exist, if not return null
+      checkUsernameExist:function(username){
+        return usersRef.orderByChild('displayName').equalTo(username);
+      },
+
 
       getProfile: function (uid) {
         // console.log($firebaseObject(usersRef.child(uid)))
