@@ -14,7 +14,7 @@ $scope:{topic}
         <md-button ng-show="showFormInputBtn"
                    ng-init="showFormInputBtn = true"
                    ng-click="formInput = true;
-                                       showFormInputBtn = false">What's on your mind?</md-button>
+                             showFormInputBtn = false">What's on your mind?</md-button>
       </md-list-item>
     </md-list>
 
@@ -27,11 +27,12 @@ $scope:{topic}
             <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'question'" value="question">
               <input type="radio" autocomplete="off" checked>
               <i class="ion-help"></i>
-              Question
+              {{ 'KEY_QUESTION' | translate }}
             </label>
             <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'topic'" value="topic">
               <input type="radio" autocomplete="off" >
-              <i class="ion-chatbubble-working"></i> Topic
+              <i class="ion-chatbubble-working"></i>
+              {{ 'KEY_TOPIC' | translate }}
             </label>
           </div>
 
@@ -128,11 +129,11 @@ $scope:{topic}
             <md-button ng-if="topicCtrl.newTopic.topic.length > 0"
                        class="md-primary" type="submit"
                        aria-label="Save as Draft"
-                       ng-click="topicCtrl.isDraft=1">Save as draft</md-button>
+                       ng-click="topicCtrl.isDraft=1">{{ 'KEY_SAVE_DRAFT' | translate }}</md-button>
           </div>
 
           <md-card-actions layout="row" layout-align="end center">
-            <md-button class="md-primary md-raised" type="submit">submit</md-button>
+            <md-button class="md-primary md-raised" type="submit">{{ 'KEY_POST' | translate }}</md-button>
           </md-card-actions>
         </div>
 

@@ -5,6 +5,7 @@ body {
   padding: 0;
   line-height: 1.5em;
   background-color: #F5F8FA;
+  padding-top:70px;
 }
 
 .red-font{
@@ -22,6 +23,10 @@ body {
 
 .purple-light-font{
   color: #4D394B;
+}
+
+.purple-light-font:hover{
+  color: #5DB09D;
 }
 
 .purple-background {

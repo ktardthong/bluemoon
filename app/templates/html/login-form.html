@@ -7,33 +7,21 @@
   <form ng-submit="authCtrl.login()" class="md-padding">
 
     <div class="form-group">
-      <label class="sr-only" for="email">Email</label>
+      <label class="sr-only" for="email">{{ 'KEY_EMAIL' | translate }}</label>
       <input ng-model="authCtrl.user.email"
              type="text"
-             class="form-control" id="email" placeholder="Email">
+             class="form-control" id="email" placeholder="{{ 'KEY_EMAIL' | translate }}">
     </div>
 
     <div class="form-group">
-      <label class="sr-only" for="password">Password</label>
+      <label class="sr-only" for="password">{{ 'KEY_PASSWORD' | translate}}</label>
       <input ng-model="authCtrl.user.password"
              type="password" class="form-control" id="password"
-             placeholder="Password">
+             placeholder="{{ 'KEY_PASSWORD' | translate}}">
     </div>
 
-    <!--
-    <md-input-container class="md-block md-accent" flex-gt-sm>
-      <label>email</label>
-      <input type="email" ng-model="authCtrl.user.email">
-    </md-input-container>
+    <button type="submit" class="btn btn-success-outline">{{ 'KEY_LOGIN' | translate }}</button>
 
-    <md-input-container class="md-block md-accent" flex-gt-sm>
-      <label>password</label>
-      <input type="password" placeholder="Password" ng-model="authCtrl.user.password">
-    </md-input-container>
-    -->
-
-    <!--<md-button class="md-accent md-raised" type="submit">Login</md-button>-->
-    <button type="submit" class="btn btn-primary-outline">Login</button>
   </form>
 
 </md-card>

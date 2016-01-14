@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav){
+  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate){
     var authCtrl = this;
 
 
@@ -18,6 +18,27 @@ angular.module('App')
       email: '',
       password: ''
     };
+
+
+
+    //Change language
+    authCtrl.toggleLang = function (langKey) {
+      $translate.use(langKey);
+      console.log(langKey);
+      //If user registered
+      if(Auth.ref.getAuth())
+      {
+        authCtrl.users.ref(Auth.ref.getAuth().uid).update({lang: langKey});
+      }
+    }
+
+    //Checkk user selected language
+    if(!authCtrl.profile.lang){
+      authCtrl.toggleLang('Eng');
+    }
+    else{
+      authCtrl.toggleLang(authCtrl.profile.lang);
+    }
 
 
     //Login

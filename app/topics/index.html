@@ -27,9 +27,9 @@
 
         <!-- Message Body -->
         <div class="md-padding">
-          <h1>
+          <h2>
             {{topicLandingCtrl.topicLanding[0].topic}}
-          </h1>
+          </h2>
 
           <p class="topic-reading-font" ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></p>
 
@@ -79,7 +79,7 @@
         </small>
       </div>
       <div class="media-right">
-        <button class="btn btn-success-outline">Follow</button>
+        <button class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
       </div>
     </div>
 
@@ -100,7 +100,7 @@
                      placeholder="Write a comment"></textarea>
           </div>
           <div class="media-right">
-            <button class="btn btn-primary" type="submit">submit</button>
+            <button class="btn btn-primary" type="submit">{{ 'KEY_POST' | translate }}</button>
           </div>
         </form>
       </div>
