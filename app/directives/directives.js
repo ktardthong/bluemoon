@@ -1,8 +1,19 @@
 angular.module('App')
+
+
+  //List of categories on the siderbar
   .directive('topicGrid', function () {
     return {
       controller: 'DashboardCtrl as dashboardCtrl',
       templateUrl: 'templates/html/category-grid.html'
+    }
+  })
+
+  //Grid Tags for sidebar
+  .directive('tagGrid', function () {
+    return {
+      controller: 'DashboardCtrl as dashboardCtrl',
+      templateUrl: 'templates/html/tag-grid.html'
     }
   })
 

@@ -12,6 +12,8 @@ angular.module('App')
       'KEY_TOPIC':      'Topic',
       'KEY_PASSWORD':   'Password',
       'KEY_SAVE_DRAFT': 'Save as draft',
+      'KEY_TAGS':       'Tags',
+      'KEY_EXPLORE':    'Explore',
 
       //SENTENCE
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',

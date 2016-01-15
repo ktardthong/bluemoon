@@ -7,6 +7,12 @@ angular.module('App')
     var topicKey = ''
 
     var Topics = {
+
+      // Get topic tag
+      getTag: function (tag) {
+        return $firebaseArray(ref.orderByChild('tags').equalTo(tag));
+      },
+
       // Get topic slug
       getSlug: function (slug) {
         var data = ref.orderByChild('slug').equalTo(slug)
@@ -153,7 +159,8 @@ angular.module('App')
       // Return array
       arr: $firebaseArray(ref),
 
-      all: topics
+      all: topics,
+      ref: ref
     }
 
     return Topics

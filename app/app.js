@@ -87,6 +87,42 @@ angular
         }
       })
 
+
+      //Tag landing page
+      .state('tag',{
+        url: '/tag/{Tag}',
+        views: {
+          'header@tag': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html'
+          },
+          '':{
+            controller: 'TagCtrl as tagCtrl',
+            templateUrl: 'tag/index.html',
+            resolve:{
+              tagName: function($stateParams){
+                return $stateParams.Tag;
+              },
+              tagLanding:function(Tags,Topics,$stateParams,$firebaseArray){
+                var topicId;
+                Tags.getTagRef($stateParams.Tag).on('value', function (snapshot) {
+                  console.log(snapshot);
+                  console.log(snapshot.val());
+                  topicId = snapshot.val().$id; // line 1 (results like 1,2,3,4,5,6)
+                  console.log(topicId);
+                  Topics.ref.child(topicId).once('value', function(mediaSnap) {
+                    console.log(topicId + ":" + mediaSnap.val().name);
+                  });
+                });
+
+                return  $firebaseArray(Tags.getTagRef($stateParams.Tag));
+              }
+            }
+          }
+        }
+      })
+
+
       // Topic landing page
       .state('topic', {
         url: '/{Slug}',
@@ -204,6 +240,7 @@ angular
               },
               profile: function ($state,$stateParams, $rootScope, Auth, Users) {
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
+                  console.log(profile);
                   return profile;
                 });
               },

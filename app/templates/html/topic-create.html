@@ -80,9 +80,11 @@ $scope:{topic}
             <tags-input class="bootstrap"
                         max-tags="4"
                         enforce-max-tags
+                        ng-keyup="topicCtrl.newTopic.tags($query)"
                         ng-model="topicCtrl.newTopic.tags"
                         placeholder="Add tags"
                         replace-spaces-with-dashes="false">
+              <auto-complete source="topicCtrl.loadTags($query)"></auto-complete>
             </tags-input>
 
 

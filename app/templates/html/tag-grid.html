@@ -1,0 +1,17 @@
+<!--
+  Tags grid for sidebar
+ -->
+
+
+<h5 class="md-display-1 text-center">
+  {{ 'KEY_TAGS' | translate }}
+</h5>
+
+
+<button
+  ui-sref="tag({Tag: tag.$id})"
+  ng-repeat="tag in dashboardCtrl.tags"
+  type="button"
+  class="btn btn-success-outline">
+  {{ tag.$id }}
+</button>

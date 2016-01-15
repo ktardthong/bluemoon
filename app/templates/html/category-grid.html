@@ -1,20 +1,15 @@
-<!-- -->
+<!-- Category Grid  -->
 
-<div>
 
-  <h5 class="md-display-1 text-center">
-    <i class="ion-grid"></i>
-    Explore
-  </h5>
+<h5 class="md-display-1 text-center">
+  {{ 'KEY_EXPLORE' | translate }}
+</h5>
 
-  <md-button
-    layout="column"
-    ui-sref="category({Slug: cate.slug})"
-    aria-label="{{cate.name}}"
-    ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
-    class="md-raised">
-    {{cate.name}}
-  </md-button>
-  <br>
 
-</div>
+<button
+  ui-sref="category({Slug: cate.slug})"
+  ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
+  type="button"
+  class="btn btn-success-outline md-margin">
+  {{cate.name}}
+</button>

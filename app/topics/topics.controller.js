@@ -1,11 +1,13 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope, $http,
-                                    Topics, Auth, Users, Slug,Languages){
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,$http,FirebaseUrl,
+                                    //Services
+                                    Tags, Topics, Auth, Users, Slug,Languages){
 
     var topicCtrl = this;
 
 
     //Parser here
+    topicCtrl.tags      = Tags;
     topicCtrl.topics    = Topics;
     topicCtrl.auth      = Auth;
     topicCtrl.users     = Users;
@@ -42,6 +44,12 @@ angular.module('App')
       'ipInfo': '',
       'tags': ''
     }
+
+
+
+    topicCtrl.loadTags = function(query) {
+      console.log(topicCtrl.tags.tagsUrl());
+    };
 
 
     topicCtrl.users.getLocationIP().success(function(data) {
@@ -99,7 +107,7 @@ angular.module('App')
     topicCtrl.createTopic = function(category,isDraft){
 
 
-      //Check if we hvae location details
+      //Check if we have location details
       var locationDetail = '';
       if(topicCtrl.newTopic.location){
         locationDetail = {
@@ -126,7 +134,17 @@ angular.module('App')
           created:  moment().toISOString(),
           tags:     topicCtrl.newTopic.tags,
           userIP:   topicCtrl.newTopic.ipInfo
-        }).then(function(){
+        }).then(function(topic){
+
+          console.log(topic.key());
+
+          if(topicCtrl.newTopic.tags !== null){
+            for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
+              console.log(topicCtrl.newTopic.tags[index]);
+              topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text).child(topic.key()).push().set(topic.key());
+            }
+          }
+
         topicCtrl.newTopic = {
           body: ''
         };

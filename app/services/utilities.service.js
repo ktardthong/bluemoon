@@ -17,6 +17,8 @@ angular.module('App')
     return Category;
   })
 
+
+  //Languages
   .factory('Languages', function($firebaseArray, FirebaseUrl){
     var ref = new Firebase(FirebaseUrl+'languages');
     var lang = $firebaseArray(ref);

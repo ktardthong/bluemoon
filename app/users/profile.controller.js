@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('ProfileCtrl', function($scope, $rootScope, $state, md5,
+  .controller('ProfileCtrl', function($scope, $rootScope, $state, $filter, md5,
                                       //Services
                                       Auth,Users,Topics, Facebook,notify,
                                       //Resolve
@@ -85,7 +85,7 @@ angular.module('App')
           lat: profileCtrl.location.details.geometry.location.lat(),
           lng: profileCtrl.location.details.geometry.location.lng(),
         }
-        
+
         profileCtrl.profile.userLocation = locationDetail;
       }
 

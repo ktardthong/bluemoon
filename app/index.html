@@ -73,6 +73,7 @@
     <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
     <script src="bower_components/tether/dist/js/tether.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/ngSanitize/index.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -90,6 +91,8 @@
     <script src="topics/topics.service.js"></script>
     <script src="topics/topics.controller.js"></script>
     <script src="topics/topic-landing.controller.js"></script>
+    <script src="tag/tag.service.js"></script>
+    <script src="tag/tag.controller.js"></script>
     <script src="dashboard/dashboard.controller.js"></script>
     <script src="directives/directives.js"></script>
     <script src="helpers/helpers.service.js"></script>
@@ -102,13 +105,8 @@
         <h1 class="md-toolbar-tools">Sidenav Right</h1>
       </md-toolbar>
       <md-content ng-controller="AuthCtrl" layout-padding>
-        <form>
-          <md-input>
-            <label>Search</label>
-            <input>
-          </md-input>
-        </form>
         <topic-grid ></topic-grid>
+        <tag-grid></tag-grid>
       </md-content>
     </md-sidenav>
 
