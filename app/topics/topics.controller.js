@@ -37,6 +37,8 @@ angular.module('App')
 
     //Preset Parameters
     topicCtrl.imageStrings = [];
+    topicCtrl.imageText    = [];
+
     topicCtrl.slugReturn   = null;
     topicCtrl.newTopic = {
       'location': '',
@@ -63,28 +65,13 @@ angular.module('App')
         var fileReader = new FileReader();
         fileReader.onload = function (event) {
           var uri = event.target.result;
+          console.log(uri);
           topicCtrl.imageStrings[i] = uri;
         };
         fileReader.readAsDataURL(flowFile.file);
       })
     };
 
-
-    topicCtrl.showConfirm = function(ev) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('Would you like to delete your debt?')
-        .textContent('All of the banks have agreed to forgive you your debts.')
-        .ariaLabel('Lucky day')
-        .targetEvent(ev)
-        .ok('Please do it!')
-        .cancel('Sounds like a scam');
-      $mdDialog.show(confirm).then(function() {
-        $scope.status = 'You decided to get rid of your debt.';
-      }, function() {
-        $scope.status = 'You decided to keep your debt.';
-      });
-    };
 
     //Reply to topic
     topicCtrl.reply = function(topicId){
@@ -119,24 +106,42 @@ angular.module('App')
         }
       }
 
-      topicCtrl.topics.arr.$add({
-          type:     topicCtrl.type,
-          lang:     topicCtrl.newTopic.lang,
-          topic:    topicCtrl.newTopic.topic,
-          body:     topicCtrl.newTopic.body,
-          category: category,
-          uid:      topicCtrl.uid,
-          slug:     Slug.slugify(topicCtrl.newTopic.topic),
-          photos:   topicCtrl.imageStrings,
-          location: locationDetail,
-          url:      topicCtrl.newTopic.url,
-          draft:    isDraft,
-          created:  moment().toISOString(),
-          tags:     topicCtrl.newTopic.tags,
-          userIP:   topicCtrl.newTopic.ipInfo
-        }).then(function(topic){
+      var data = {
+        type:           topicCtrl.type,
+        lang:           topicCtrl.newTopic.lang,
+        topic:          topicCtrl.newTopic.topic,
+        body:           topicCtrl.newTopic.body,
+        category:       category,
+        uid:            topicCtrl.uid,
+        slug:           Slug.slugify(topicCtrl.newTopic.topic),
+        photos:         topicCtrl.imageStrings,
+        photos_text:    topicCtrl.imageText,
+        location:       locationDetail,
+        url:            topicCtrl.newTopic.url,
+        draft:          isDraft,
+        created:        moment().toISOString(),
+        tags:           topicCtrl.newTopic.tags,
+        userIP:       topicCtrl.newTopic.ipInfo
+      };
+      console.log(data);
 
-          console.log(topic.key());
+      topicCtrl.topics.arr.$add({
+          type:           topicCtrl.type,
+          lang:           topicCtrl.newTopic.lang,
+          topic:          topicCtrl.newTopic.topic,
+          body:           topicCtrl.newTopic.body,
+          category:       category,
+          uid:            topicCtrl.uid,
+          slug:           Slug.slugify(topicCtrl.newTopic.topic),
+          photos:         topicCtrl.imageStrings,
+          photos_text:    topicCtrl.imageText,
+          location:       locationDetail,
+          url:            topicCtrl.newTopic.url,
+          draft:          isDraft,
+          created:        moment().toISOString(),
+          tags:           topicCtrl.newTopic.tags,
+          userIP:       topicCtrl.newTopic.ipInfo
+        }).then(function(topic){
 
           if(topicCtrl.newTopic.tags !== null){
             for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {

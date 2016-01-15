@@ -6,30 +6,49 @@ $scope:{topic}
 
   <form ng-submit="topicCtrl.createTopic(topic,topicCtrl.isDraft)"
         ng-init="topicCtrl.isDraft = 0">
-    <md-list>
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <img ng-src="{{topicCtrl.profile.photo}}"
+               class="img-circle" width="36px">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <md-button ng-show="showFormInputBtn"
+                  ng-init="showFormInputBtn = true"
+                  ng-click="formInput = true;
+                             showFormInputBtn = false">What's on your mind?</md-button>
+        </h4>
+
+      </div>
+    </div>
+
+    <!--<md-list>
       <md-list-item>
         <img ng-src="{{topicCtrl.profile.photo}}"
              class="img-circle" width="36px">
 
-        <md-button ng-show="showFormInputBtn"
+        <button ng-show="showFormInputBtn"
                    ng-init="showFormInputBtn = true"
                    ng-click="formInput = true;
-                             showFormInputBtn = false">What's on your mind?</md-button>
+                             showFormInputBtn = false">What's on your mind?</button>
       </md-list-item>
-    </md-list>
+    </md-list>-->
 
         <div class="container"
              ng-show="formInput"
              ng-init="formInput = false">
 
+
           <!-- topic type -->
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'question'" value="question">
+            <label class="btn btn-success-outline"  ng-click="topicCtrl.type = 'question'" value="question">
               <input type="radio" autocomplete="off" checked>
               <i class="ion-help"></i>
               {{ 'KEY_QUESTION' | translate }}
             </label>
-            <label class="btn btn-primary-outline"  ng-click="topicCtrl.type = 'topic'" value="topic">
+            <label class="btn btn-success-outline"  ng-click="topicCtrl.type = 'topic'" value="topic">
               <input type="radio" autocomplete="off" >
               <i class="ion-chatbubble-working"></i>
               {{ 'KEY_TOPIC' | translate }}
@@ -39,12 +58,15 @@ $scope:{topic}
 
           <!-- Languages -->
           <select ng-model="topicCtrl.newTopic.lang" class="form-control">
-            <option ng-repeat="lang in topicCtrl.languages"
+            <!--<option ng-repeat="lang in topicCtrl.languages"
                     value="{{lang.$id}}">
               {{lang.translated_name}}
-            </option>
+            </option>-->
+            <option value="Thai">ภาษาไทย</option>
+            <option value="English">English</option>
           </select>
 
+          <br/>
 
           <!-- Topics -->
           <input ng-keyup="topicCtrl.checkSlug();topicCtrl.body.show = true"
@@ -62,22 +84,17 @@ $scope:{topic}
             </div>
           </div>
 
+          <br/>
 
+          <!-- BODY -->
           <textarea ng-model="topicCtrl.newTopic.body" columns="1" rows="5" class="form-control"></textarea>
 
-          <!-- Preview location here-->
-          <p ng-if="locationDetail.details.place_id">location</p>
 
+
+          <br/>
 
           <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
-
-            <!-- Tags -->
-            <!--<input ng-model="topicCtrl.newTopic.tags">
-            ng-disabled="tagsLimitRearch"
-                        ng-if="(topicCtrl.newTopic.tags.length>0)"
-                        ng-init="tagsLimitRearch = false"
-            -->
-            <tags-input class="bootstrap"
+            <tags-input class=""
                         max-tags="4"
                         enforce-max-tags
                         ng-keyup="topicCtrl.newTopic.tags($query)"
@@ -95,48 +112,74 @@ $scope:{topic}
           <div layout="row" ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
 
             <div flow-init
-                 flow-name="uploader.flow"
+                 flow-name="topicCtrl.uploader.flow"
                  flow-files-added="topicCtrl.uploadFile($files)">
-              <md-button aria-label="Photo" class="md-primary md-fab md-mini ion-camera" flow-btn type="file"></md-button>
-              <div ng-repeat="image in uploader.flow.files track by $index" class="row">
-                <div class="card">
-                  <img class="card-img-top img-responsive" flow-img="image"/>
-                  <div class="card-block">
-                    <textarea></textarea>
-                  </div>
-                </div>
+              <md-button
+                         class="md-primary md-fab md-mini ion-camera"
+                         flow-btn></md-button>
 
-              </div>
             </div>
 
             <!-- Location input -->
-            <md-button aria-label="Location" class="md-primary md-fab md-mini ion-location" ng-click="locationInput=true"></md-button>
-            <md-input-container ng-show="locationInput" ng-init="locationInput=false">
-              <input aria-label="Location Query"
-                     ng-autocomplete type="text"
+            <md-button aria-label="Location" class="md-primary md-fab md-mini ion-location"
+                       ng-click="locationInput=true"></md-button>
+
+              <input ng-show="locationInput"
+                     ng-init="locationInput=false"
+                     ng-autocomplete
+                     type="text"
+                     class="form-control"
                      ng-model = "topicCtrl.newTopic.location.query"
                      details  = "topicCtrl.newTopic.location.details"
                      options  = "topicCtrl.newTopic.location.options">
-            </md-input-container>
+
 
 
             <!-- URL input -->
-            <md-button aria-label="Link" class="md-primary md-fab md-mini ion-link" ng-click="urlInput=true"></md-button>
+            <!--<md-button aria-label="Link" class="md-primary md-fab md-mini ion-link" ng-click="urlInput=true"></md-button>
             <md-input-container ng-show="urlInput" ng-init="urlInput=false">
               <input aria-label="URL" ng-model="topicCtrl.newTopic.url">
-            </md-input-container>
+            </md-input-container>-->
 
 
             <!-- Save as draft -->
-            <md-button ng-if="topicCtrl.newTopic.topic.length > 0"
-                       class="md-primary" type="submit"
-                       aria-label="Save as Draft"
-                       ng-click="topicCtrl.isDraft=1">{{ 'KEY_SAVE_DRAFT' | translate }}</md-button>
+            <button ng-if="topicCtrl.newTopic.topic.length > 0"
+                    class="btn btn-link"
+                    type="submit"
+                    aria-label="Save as Draft"
+                    ng-click="topicCtrl.isDraft=1">{{ 'KEY_SAVE_DRAFT' | translate }}</button>
+          </div>
+          <!-- End optional -->
+
+
+          <!-- Preview location here-->
+          <p ng-if="topicCtrl.newTopic.location.details.place_id">
+            <br/>
+            <img
+              class="img-fluid"
+              src="https://maps.googleapis.com/maps/api/staticmap?size=600x200&maptype=roadmap&zoom=14
+              &markers=color:purple%7Clabel:S%7C{{topicCtrl.newTopic.location.details.geometry.location.lat()}},{{topicCtrl.newTopic.location.details.geometry.location.lng()}}">
+          </p>
+
+          <!-- Preview image -->
+          <div flow-init="">
+            <div ng-repeat="image in topicCtrl.uploader.flow.files track by $index" class="row">
+
+              <div class="card">
+                <img class="card-img-top img-fluid" flow-img="image" ng-model="topicCtrl.imageStrings[$index]" />
+                <div class="card-block">
+                  <textarea class="form-control"
+                            rows="3"
+                            ng-model="topicCtrl.imageText[$index]"></textarea>
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button class="md-primary md-raised" type="submit">{{ 'KEY_POST' | translate }}</md-button>
-          </md-card-actions>
+          <br/>
+          <button class="btn btn-primary-outline pull-right"
+                  type="submit">{{ 'KEY_POST' | translate }}</button>
         </div>
 
   </form>

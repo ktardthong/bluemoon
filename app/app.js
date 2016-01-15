@@ -24,6 +24,32 @@ angular
     'facebook', // Facebook - https://github.com/Ciul/angular-facebook
   ])
 
+  .config(function ($mdThemingProvider) {
+    $mdThemingProvider.definePalette('slack', {
+      '50': 'ffebee',
+      '100': 'ffcdd2',
+      '200': 'ef9a9a',
+      '300': 'e57373',
+      '400': 'ef5350',
+      '500': '4D394B', // primary colour
+      '600': 'e53935',
+      '700': 'd32f2f',
+      '800': 'c62828',
+      '900': 'b71c1c',
+      'A100': 'ff8a80',
+      'A200': 'ff5252',
+      'A400': 'ff1744',
+      'A700': 'd50000',
+      'contrastDefaultColor': 'light', // whether, by default, text (contrast)
+      // on this palette should be dark or light
+      'contrastDarkColors': ['50', '100', // hues which contrast should be 'dark' by default
+        '200', '300', '400', 'A100'],
+      'contrastLightColors': undefined // could also specify this if default was 'dark'
+    })
+    $mdThemingProvider.theme('default')
+      .primaryPalette('slack')
+  })
+
 
   //Facebook Config
   .config(
@@ -104,17 +130,6 @@ angular
                 return $stateParams.Tag;
               },
               tagLanding:function(Tags,Topics,$stateParams,$firebaseArray){
-                var topicId;
-                Tags.getTagRef($stateParams.Tag).on('value', function (snapshot) {
-                  console.log(snapshot);
-                  console.log(snapshot.val());
-                  topicId = snapshot.val().$id; // line 1 (results like 1,2,3,4,5,6)
-                  console.log(topicId);
-                  Topics.ref.child(topicId).once('value', function(mediaSnap) {
-                    console.log(topicId + ":" + mediaSnap.val().name);
-                  });
-                });
-
                 return  $firebaseArray(Tags.getTagRef($stateParams.Tag));
               }
             }
