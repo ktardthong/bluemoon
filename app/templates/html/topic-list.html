@@ -33,16 +33,19 @@
           </p>
 
           <!-- If there is location-->
-          <p ng-if="topic.location">
-          <p class="md-subheader">
-            {{topic.location.name}}
-          </p>
+          <div ng-if="topic.location.name">
+            <p class="md-subheader">
+              <a ui-sref="places({place_slug: topic.location.slug,
+                                  place_id: topic.location.place_id})">
+                {{topic.location.name}}
+              </a>
+            </p>
 
-          <img
-            class="img-fluid"
-            src="https://maps.googleapis.com/maps/api/staticmap?size=600x200&maptype=roadmap&zoom=13
-              &markers=color:purple%7Clabel:S%7C{{topic.location.lat}},{{topic.location.lng}}">
-          </p>
+            <img
+              class="img-fluid"
+              src="https://maps.googleapis.com/maps/api/staticmap?size=600x160&maptype=roadmap&zoom=13
+                &markers=color:purple%7Clabel:S%7C{{topic.location.lat}},{{topic.location.lng}}">
+          </div>
 
 
 
@@ -53,8 +56,13 @@
             </span>
           </div>
 
-          <div ng-if="topic.photos" ng-repeat="photo in topic.photos">
-            <img ng-src="{{photo}}" class="img-fluid" alt="Washed Out">
+          <div ng-if="topic.photos">
+            <flex-slider flex-slide="photo in topic.photos">
+              <li>
+                <img ng-src="{{photo}}" class="img-fluid" alt="Washed Out">
+              </li>
+            </flex-slider>
+
           </div>
 
           <div class="media">

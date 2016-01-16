@@ -11,6 +11,8 @@
 
       <div class="card  container-fluid">
 
+
+
         <div class="md-padding col-xs-12 col-sm-3">
 
           <div ng-if="profileCtrl.isOwner == true">true</div>
@@ -29,6 +31,12 @@
         </div>
 
         <div class="md-padding col-xs-12 col-sm-9">
+
+          <div class="pull-right"
+               ng-if="profileCtrl.isOwner == false">
+            <button class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
+          </div>
+
           <p class="md-title">
             @{{ profileCtrl.profile[0].displayName }}
           </p>

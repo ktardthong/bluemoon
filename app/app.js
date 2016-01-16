@@ -22,6 +22,14 @@ angular
     'cgNotify', // Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
     'facebook', // Facebook - https://github.com/Ciul/angular-facebook
+    'angular-web-notification', //https://github.com/sagiegurari/angular-web-notification
+    'angular-flexslider', //IMage slider - https://github.com/thenikso/angular-flexslider
+
+    //Emoticon -- http://mistic100.github.io/angular-smilies/
+    'ngSanitize',
+    'ui.bootstrap', // OR mgcrea.ngStrap
+    'angular-smilies'
+
   ])
 
   .config(function ($mdThemingProvider) {
@@ -109,6 +117,33 @@ angular
           'header@category': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
+          }
+        }
+      })
+
+
+      //Places landing page
+      .state('places',{
+        url: '/places/{place_slug}/{place_id}',
+        views: {
+          'header@places': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html'
+          },
+          '':{
+            controller: 'PlacesCtrl as placesCtrl',
+            templateUrl: 'place/index.html',
+            resolve:{
+              placeLanding:function(Places,Topics,$stateParams,$firebaseArray){
+                var data;
+                Places.getPlaceRef($stateParams.place_id).on("value", function(snapshot) {
+                  data = snapshot.val();
+                  console.log(snapshot.val());
+                });
+                return data;
+                //return  $firebaseArray(Places.getPlaceRef($stateParams.place_id));
+              }
+            }
           }
         }
       })

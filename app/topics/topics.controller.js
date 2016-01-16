@@ -1,7 +1,7 @@
 angular.module('App')
   .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,$http,FirebaseUrl,
                                     //Services
-                                    Tags, Topics, Auth, Users, Slug,Languages){
+                                    Tags, Topics, Auth, Users, Slug,Places, Languages){
 
     var topicCtrl = this;
 
@@ -12,6 +12,7 @@ angular.module('App')
     topicCtrl.auth      = Auth;
     topicCtrl.users     = Users;
     topicCtrl.languages = Languages;
+    topicCtrl.places    = Places;
 
 
     if(topicCtrl.auth.ref.getAuth() != null ){
@@ -93,20 +94,28 @@ angular.module('App')
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
 
-
       //Check if we have location details
       var locationDetail = '';
-      if(topicCtrl.newTopic.location){
+
+
+      if(topicCtrl.newTopic.location !== '' ){
+
+        console.log(topicCtrl.newTopic.location);
+
         locationDetail = {
           place_id: topicCtrl.newTopic.location.details.place_id,
+          slug:     Slug.slugify(topicCtrl.newTopic.location.details.name),
           name:     topicCtrl.newTopic.location.details.name,
           address:  topicCtrl.newTopic.location.details.formatted_address,
           lat:      topicCtrl.newTopic.location.details.geometry.location.lat(),
           lng:      topicCtrl.newTopic.location.details.geometry.location.lng(),
+          lng:      topicCtrl.newTopic.location.details.geometry.location.lng(),
+          lng:      topicCtrl.newTopic.location.details.geometry.location.lng(),
         }
       }
 
-      var data = {
+     /* DEBUG FORM VALUE
+        var data = {
         type:           topicCtrl.type,
         lang:           topicCtrl.newTopic.lang,
         topic:          topicCtrl.newTopic.topic,
@@ -124,6 +133,7 @@ angular.module('App')
         userIP:       topicCtrl.newTopic.ipInfo
       };
       console.log(data);
+      */
 
       topicCtrl.topics.arr.$add({
           type:           topicCtrl.type,
@@ -140,16 +150,27 @@ angular.module('App')
           draft:          isDraft,
           created:        moment().toISOString(),
           tags:           topicCtrl.newTopic.tags,
-          userIP:       topicCtrl.newTopic.ipInfo
+          userIP:        topicCtrl.newTopic.ipInfo
         }).then(function(topic){
 
-          if(topicCtrl.newTopic.tags !== null){
-            for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
-              console.log(topicCtrl.newTopic.tags[index]);
-              topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text).child(topic.key()).push().set(topic.key());
-            }
+          //If there is location
+          if(locationDetail !== ''){
+
+            topicCtrl.places.addChild(locationDetail.place_id)
+                      .child(topic.key())
+                      .push().set(moment().toISOString());
+
+            topicCtrl.places.addChild(locationDetail.place_id)
+              .child('info').set(locationDetail);
           }
 
+          //if there are tags
+          if(topicCtrl.newTopic.tags !== null){
+            for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
+              topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text)
+                .child(topic.key()).push().set(moment().toISOString());
+            }
+          }
         topicCtrl.newTopic = {
           body: ''
         };

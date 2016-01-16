@@ -26,7 +26,6 @@ angular.module('App')
     //Change language
     authCtrl.toggleLang = function (langKey) {
       $translate.use(langKey);
-      console.log(langKey);
       //If user registered
       if(Auth.ref.getAuth())
       {

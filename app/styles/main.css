@@ -128,6 +128,24 @@ a{
   background-color: #4D394B;
   border-color: #4D394B;
 }
+.btn-success-outline {
+  color: #5DB09D;
+  background-color: transparent;
+  background-image: none;
+  border-color: #5DB09D;
+}
+.btn-success-outline:hover {
+  color: #fff;
+  background-color: #5DB09D;
+  border-color: #5DB09D;
+}
+.btn-success-outline:focus, .btn-success-outline.focus, .btn-success-outline:active,
+.btn-success-outline.active, .open > .btn-success-outline.dropdown-toggle {
+  color: #fff;
+  background-color: #5DB09D;
+  border-color: #5DB09D;
+}
+
 
 
 
