@@ -18,16 +18,16 @@ angular.module('App')
 
 
 
+    //Getting Replies in replies
     topicLandingCtrl.inReplyArr = [];
     topicLandingCtrl.replyInReply = function(){
 
       for(i=0; i<topicLandingCtrl.replyList.length;i++){
-
         var topicId = topicLandingCtrl.replyList[i].topicId;
         var replyId = topicLandingCtrl.replyList[i].$id;
         topicLandingCtrl.inReplyArr[i] = topicLandingCtrl.topics.replyInReply(topicId,replyId);
-
       }
     }
+
     topicLandingCtrl.replyInReply();
   })

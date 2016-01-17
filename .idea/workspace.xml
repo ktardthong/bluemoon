@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bd30951-1681-47c3-808d-0c694116bc0c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/html/topic-create.html" afterPath="$PROJECT_DIR$/app/templates/html/topic-create.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/html/topic-list.html" afterPath="$PROJECT_DIR$/app/templates/html/topic-list.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/index.html" afterPath="$PROJECT_DIR$/app/topics/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/topics.controller.js" afterPath="$PROJECT_DIR$/app/topics/topics.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/topics.service.js" afterPath="$PROJECT_DIR$/app/topics/topics.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/topics/topic-landing.controller.js" afterPath="$PROJECT_DIR$/app/topics/topic-landing.controller.js" />
     </list>
     <ignored path="bluemoon.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +40,8 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/topics/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3782857">
-                  <caret line="112" column="6" selection-start-line="112" selection-start-column="6" selection-end-line="112" selection-end-column="6" />
+                <state vertical-scroll-proportion="0.59871244">
+                  <caret line="174" column="42" selection-start-line="174" selection-start-column="42" selection-end-line="174" selection-end-column="42" />
                   <folding />
                 </state>
               </provider>
@@ -75,8 +72,8 @@
           <file leaf-file-name="topic-create.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/templates/html/topic-create.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.8846154">
-                  <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+                <state vertical-scroll-proportion="-26.038462">
+                  <caret line="169" column="16" selection-start-line="155" selection-start-column="10" selection-end-line="169" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
@@ -90,7 +87,7 @@
             <entry file="file://$PROJECT_DIR$/app/lang/lang.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+                  <caret line="18" column="22" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -140,7 +137,7 @@
             <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="79" column="29" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
+                  <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
@@ -149,8 +146,8 @@
           <file leaf-file-name="topic-landing.controller.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/topics/topic-landing.controller.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.40814197">
-                  <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+                <state vertical-scroll-proportion="0.16469322">
+                  <caret line="9" column="20" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -241,10 +238,10 @@
         <option value="$PROJECT_DIR$/app/templates/html/in-reply.html" />
         <option value="$PROJECT_DIR$/app/app.js" />
         <option value="$PROJECT_DIR$/app/directives/directives.js" />
-        <option value="$PROJECT_DIR$/app/templates/html/topic-create.html" />
         <option value="$PROJECT_DIR$/app/templates/html/topic-list.html" />
         <option value="$PROJECT_DIR$/app/topics/topics.controller.js" />
         <option value="$PROJECT_DIR$/app/topics/topics.service.js" />
+        <option value="$PROJECT_DIR$/app/templates/html/topic-create.html" />
         <option value="$PROJECT_DIR$/app/topics/topic-landing.controller.js" />
         <option value="$PROJECT_DIR$/app/topics/index.html" />
       </list>
@@ -874,14 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/lang/lang.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/html/topic-actions-card.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2553648">
@@ -944,22 +933,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/html/topic-create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="29" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/html/topic-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.038462">
@@ -976,18 +949,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/html/topic-create.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.038462">
+          <caret line="169" column="16" selection-start-line="155" selection-start-column="10" selection-end-line="169" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/lang/lang.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/topics/topics.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/topics/topic-landing.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40814197">
-          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.16469322">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/topics/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3782857">
-          <caret line="112" column="6" selection-start-line="112" selection-start-column="6" selection-end-line="112" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.59871244">
+          <caret line="174" column="42" selection-start-line="174" selection-start-column="42" selection-end-line="174" selection-end-column="42" />
           <folding />
         </state>
       </provider>

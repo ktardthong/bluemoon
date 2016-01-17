@@ -110,7 +110,7 @@
     <!-- Reply body list-->
     <div  ng-repeat="reply in topicLandingCtrl.replyList track by $index | orderBy:'-created' "
           ng-controller="TopicCtrl as topicCtrl">
-      
+
       <div class="media card md-padding">
         <div class="media-left">
           <a href="#">
@@ -131,8 +131,6 @@
           </div>
 
           <!-- footer action -->
-
-          {{ topicCtrl.replyContent[$index] }}
           <div ng-if="topicLandingCtrl.auth.getUid()">
             <a ng-click="topicCtrl.replyContent[$index] = true">
               <i class="fa fa-reply"></i>
@@ -143,52 +141,52 @@
               &hybull;
             </small>
           </div>
+          <!-- end footer-->
 
           <!-- reply  in reply form-->
-          <div class="media blockquote md-padding">
-            <form ng-submit="topicCtrl.replyInReply(topicLandingCtrl.topicLanding[0].$id,reply.$id)">
+          <div class="media blockquote md-padding"
+               ng-show="topicCtrl.replyContent[$index]"
+               ng-init="topicCtrl.replyContent[$index] = false">
+
+            <form ng-submit="topicCtrl.replyInReply(topicLandingCtrl.topicLanding[0].$id,reply.$id)"
+                  ng-if="topicLandingCtrl.auth.getUid()">
               <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
                    class="img-circle" width="32px">
+              <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
+                {{ topicCtrl.users.profile(reply.uid).firstname }}
+                {{ topicCtrl.users.profile(reply.uid).lastname }}
+              </a>
               <br>
               <div class="input-group">
                 <input type="text" class="form-control"
                        ng-model="topicCtrl.replyInReply.body"
-                       placeholder="Recipient's username"
-                       aria-describedby="basic-addon2">
-                    <span class="input-group-btn">
-                      <button class="btn btn-warning-outline fa fa-camera" type="submit"></button>
-                    </span>
+                       placeholder=" {{ 'KEY_WRITE_REPLY' | translate }}"
+                       aria-describedby=" {{ 'KEY_WRITE_REPLY' | translate }}">
                     <span class="input-group-btn">
                       <button class="btn btn-primary-outline" type="submit">{{ 'KEY_POST' | translate }}</button>
                     </span>
               </div>
             </form>
+
           </div>
 
           <!-- reply in reply -->
-          <div ng-repeat="inreply in topicLandingCtrl.inReplyArr[$index]">
+          <div ng-repeat="inreply in topicLandingCtrl.inReplyArr[$index] | orderBy:'-created' ">
             <div class="media md-padding">
               <div class="media-left">
                 <img ng-src="{{ topicCtrl.users.profile(inreply.uid).photo }}"
                      class="img-circle" width="32px">
-
               </div>
               <div class="media-body">
-                <span am-time-ago="inreply.created"></span>
+                <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
+                  {{ topicCtrl.users.profile(reply.uid).firstname }}
+                  {{ topicCtrl.users.profile(reply.uid).lastname }}
+                </a>
+                <span class="text-muted" am-time-ago="inreply.created"></span>
                 <div class="lead">
                   {{ inreply.body }}
                 </div>
               </div>
-            </div>
-
-
-
-            <div ng-init="topicCtrl.replyContent[$index] = false"
-                 ng-show="topicCtrl.replyContent[$index]">
-              {{$index}}
-              {{topicCtrl.replyContent[$index]}}
-              test
-
             </div>
           </div>
 

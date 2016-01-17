@@ -84,11 +84,10 @@ $scope:{topic}
           <!-- BODY -->
           <textarea ng-model="topicCtrl.newTopic.body" columns="1" rows="5" class="form-control"></textarea>
 
-
-
           <br/>
 
-          <div ng-init="topicCtrl.body.show = false" ng-show="topicCtrl.body.show">
+          <div ng-init="topicCtrl.body.show = false"
+               ng-show="topicCtrl.body.show">
             <tags-input class=""
                         max-tags="4"
                         enforce-max-tags
@@ -98,8 +97,6 @@ $scope:{topic}
                         replace-spaces-with-dashes="false">
               <auto-complete source="topicCtrl.loadTags($query)"></auto-complete>
             </tags-input>
-
-
           </div>
 
 
