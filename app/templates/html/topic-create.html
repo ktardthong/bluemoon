@@ -6,6 +6,7 @@ $scope:{topic}
 
   <form ng-submit="topicCtrl.createTopic(topic,topicCtrl.isDraft)"
         ng-init="topicCtrl.isDraft = 0">
+
     <div class="media">
       <div class="media-left">
         <a href="#">
@@ -23,18 +24,6 @@ $scope:{topic}
 
       </div>
     </div>
-
-    <!--<md-list>
-      <md-list-item>
-        <img ng-src="{{topicCtrl.profile.photo}}"
-             class="img-circle" width="36px">
-
-        <button ng-show="showFormInputBtn"
-                   ng-init="showFormInputBtn = true"
-                   ng-click="formInput = true;
-                             showFormInputBtn = false">What's on your mind?</button>
-      </md-list-item>
-    </md-list>-->
 
         <div class="container"
              ng-show="formInput"

@@ -85,10 +85,6 @@ angular.module('App')
       })
     }
 
-    topicCtrl.getInReply = function(topicId){
-
-
-    }
 
     //Reply in reply
     topicCtrl.replyInReply = function(topicId,replyId){
