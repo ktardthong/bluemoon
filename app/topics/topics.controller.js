@@ -39,6 +39,7 @@ angular.module('App')
     //Preset Parameters
     topicCtrl.imageStrings = [];
     topicCtrl.imageText    = [];
+    topicCtrl.inReplyArr    = [];
 
     topicCtrl.slugReturn   = null;
     topicCtrl.newTopic = {
@@ -79,6 +80,20 @@ angular.module('App')
       topicCtrl.topics.replyArr(topicId).$add({
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
+        uid:      topicCtrl.uid,
+        created:  moment().toISOString()
+      })
+    }
+
+    topicCtrl.getInReply = function(topicId){
+
+
+    }
+
+    //Reply in reply
+    topicCtrl.replyInReply = function(topicId,replyId){
+      topicCtrl.topics.replyInReplyArr(topicId,replyId).$add({
+        body:     topicCtrl.replyInReply.body,
         uid:      topicCtrl.uid,
         created:  moment().toISOString()
       })

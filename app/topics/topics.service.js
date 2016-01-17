@@ -65,8 +65,20 @@ angular.module('App')
       },
 
       // Reply Array
-      replyArr: function (topicId) {
-        return $firebaseArray(ref.child(topicId + '/replies'))
+      replyArr: function (topicId,replyId) {
+        return ref.child(topicId + '/replies/'+replyId+'/inReply');
+      },
+
+
+      replyInReply:function(topicId,replyId){
+        return $firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply'))
+      },
+
+
+      // Reply in Reply Array
+      replyInReplyArr: function (topicId,replyId) {
+        //console.log($firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply')));
+        return $firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply'))
       },
 
       // upvotes

@@ -14,6 +14,9 @@ angular.module('App')
       'KEY_SAVE_DRAFT': 'Save as draft',
       'KEY_TAGS':       'Tags',
       'KEY_EXPLORE':    'Explore',
+      'KEY_COMMENTS':   'Comments',
+      'KEY_REPLY':      'Reply',
+      'KEY_WRITE_REPLY':'Write a reply',
 
       //SENTENCE
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',

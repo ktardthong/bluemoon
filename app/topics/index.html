@@ -2,7 +2,6 @@
 
   <div ui-view="header"></div>
 
-
   <div class="inner-container container margin-top animated slideInUp">
 
     <div class="card md-padding" ng-controller="TopicCtrl as topicCtrl">
@@ -83,6 +82,7 @@
       </div>
     </div>
 
+    <h5>{{ 'KEY_COMMENTS' | translate }}</h5>
 
     <!-- Reply form -->
     <div ng-controller="TopicCtrl as topicCtrl" ng-if="topicLandingCtrl.auth.getUid()">
@@ -108,8 +108,8 @@
 
 
     <!-- Reply body list-->
-    <h5>Comments</h5>
-    <div ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' " ng-controller="TopicCtrl as topicCtrl">
+    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "
+         ng-controller="TopicCtrl as topicCtrl">
       <div class="media card md-padding">
         <div class="media-left">
           <a href="#">
@@ -123,13 +123,80 @@
             {{ topicCtrl.users.profile(reply.uid).lastname }}
           </a>
 
-          <div class="lead">
+          <span class="text-muted" am-time-ago="reply.created"></span>
+
+          <div class="lead layout-padding">
             {{reply.body}}
           </div>
 
-          <small>
-            <span am-time-ago="reply.created"></span>
-          </small>
+          <!-- footer action -->
+          <div ng-if="topicLandingCtrl.auth.getUid()">
+            <a ng-click="topicCtrl.replyContent[$index] = true">
+              <i class="fa fa-reply"></i>
+              {{ 'KEY_REPLY' | translate }} </a>
+            <small>
+              <a class="layout-padding hand purple-light-font ion-chevron-up" aria-label="Upvote"> Upvote 268</a>
+              <a class="layout-padding hand purple-light-font ion-chevron-down" aria-label="Upvote"> Upvote 268</a>
+              &hybull;
+            </small>
+          </div>
+
+          <!-- reply in reply -->
+          <div ng-repeat="inreply in topicLandingCtrl.inReplyArr[$index]">
+            <div class="media md-padding">
+              <div class="media-left">
+                <img ng-src="{{ topicCtrl.users.profile(inreply.uid).photo }}"
+                     class="img-circle" width="32px">
+
+              </div>
+              <div class="media-body">
+                <span am-time-ago="inreply.created"></span>
+                <div class="lead">
+                  {{ inreply.body }}
+                </div>
+              </div>
+          </div>
+
+          <div ng-init="topicCtrl.replyContent[$index] = false"
+               ng-show="topicCtrl.replyContent[$index]">
+            <div class="media blockquote md-padding">
+              <form ng-submit="topicCtrl.replyInReply(topicLandingCtrl.topicLanding[0].$id,reply.$id)">
+                <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
+                     class="img-circle" width="32px">
+                <br>
+                <div class="input-group">
+                  <input type="text" class="form-control"
+                         ng-model="topicCtrl.replyInReply.body"
+                         placeholder="Recipient's username"
+                         aria-describedby="basic-addon2">
+                  <span class="input-group-btn">
+                    <button class="btn btn-warning-outline fa fa-camera" type="submit"></button>
+                  </span>
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary-outline" type="submit">{{ 'KEY_POST' | translate }}</button>
+                  </span>
+                </div>
+              </form>
+
+              <!--<form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
+                <div class="media-left">
+                  <a href="#">
+                    <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
+                         class="img-circle" width="32px">
+                  </a>
+                </div>
+                <div class="media-body">
+                    <textarea ng-model="topicCtrl.newReply.body"
+                              class="form-control"
+                              placeholder="Write a comment"></textarea>
+                </div>
+                <div class="media-right">
+                  <button class="btn btn-primary" type="submit">{{ 'KEY_POST' | translate }}</button>
+                </div>
+              </form>-->
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
