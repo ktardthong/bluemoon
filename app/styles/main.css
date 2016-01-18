@@ -4,7 +4,7 @@ body {
   font-family: 'Kanit', 'Lato', sans-serif;
   padding: 0;
   line-height: 1.5em;
-  background-color: #F5F8FA;
+  background-color: #fafafa;
   padding-top:70px;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .gray-background{
-  background: #F2F2F4;
+  background: #fafafa;
 }
 
 /*Space from toolbar at the top*/
@@ -128,6 +128,14 @@ a{
   background-color: #4D394B;
   border-color: #4D394B;
 }
+
+/*4c9689*/
+
+.btn-success{
+   color: #fff;
+   background-color: #4c9689;
+ }
+
 .btn-success-outline {
   color: #5DB09D;
   background-color: transparent;

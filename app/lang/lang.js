@@ -5,21 +5,25 @@ angular.module('App')
       'KEY_LANGUAGES':  'Languages',
       'KEY_HOME':       'Home',
       'KEY_REGISTER':   'Register',
-      'KEY_LOGIN':      'Login',
+      'KEY_LOGIN':      'Log in',
+      'KEY_LOGOUT':     'Log out',
       'KEY_FOLLOW':     'Follow',
       'KEY_POST':       'Post',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
       'KEY_PASSWORD':   'Password',
+      'KEY_SAVE':       'Save',
       'KEY_SAVE_DRAFT': 'Save as draft',
       'KEY_TAGS':       'Tags',
       'KEY_EXPLORE':    'Explore',
       'KEY_COMMENTS':   'Comments',
       'KEY_REPLY':      'Reply',
+      'KEY_EDIT':       'Edit',
       'KEY_WRITE_REPLY':'Write a reply',
 
       //SENTENCE
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',
+      'KEY_YOUR_ACCOUNT':'Your account',
 
 
       //USER INPUT
@@ -36,6 +40,13 @@ angular.module('App')
       'KEY_USERNAME':   'Username',
       'KEY_LOCATION':   'Location',
 
+      //User Edit
+      'KEY_ED_PROFILE': 'Edit Profile',
+      'KEY_ED_CHG_PWD': 'Change Password',
+      'KEY_ED_PROFILE': 'Edit Profile',
+      'KEY_ED_SITE':    'Website',
+      'KEY_ED_PHONE':   'Phone',
+      'KEY_ED_BIO':     'Biography',
 
     });
 

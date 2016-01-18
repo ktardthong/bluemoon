@@ -305,13 +305,16 @@ angular
       })
 
       // Profile landing page
-      .state('profileEdit', {
-        url: '/profile/{Name}/edit',
+      .state('acccountEdit', {
+        url: '/account/edit',
         views: {
           '': {
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/edit.html',
             resolve: {
+              isOwner: function(){
+                return true;
+              },
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded().then(function (profile) {
@@ -332,7 +335,7 @@ angular
               }
             }
           },
-          'header@profileEdit': {
+          'header@acccountEdit': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
           }
