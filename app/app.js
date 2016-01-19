@@ -175,7 +175,7 @@ angular
 
       // Topic landing page
       .state('topic', {
-        url: '/Slug',
+        url: '/:Slug',
         resolve:{
           Slug:function($stateParams){
             console.log(decodeURIComponent($stateParams.Slug));
@@ -391,7 +391,7 @@ angular
         }
       })
 
-      //Test
+
       .state('follow_cates', {
         url: '/user/follow-categories',
         views: {
