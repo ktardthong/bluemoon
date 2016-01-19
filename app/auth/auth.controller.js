@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate){
+  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies){
     var authCtrl = this;
 
 
@@ -26,6 +26,10 @@ angular.module('App')
     //Change language
     authCtrl.toggleLang = function (langKey) {
       $translate.use(langKey);
+
+      // Setting a cookie
+      $cookies.put('userLang', langKey);
+
       //If user registered
       if(Auth.ref.getAuth())
       {
@@ -35,7 +39,12 @@ angular.module('App')
 
     //Checkk user selected language
     if(!authCtrl.profile.lang){
-      authCtrl.toggleLang('Eng');
+
+      if($cookies.get('userLang')){
+        authCtrl.toggleLang($cookies.get('userLang'));
+      }else{
+        authCtrl.toggleLang('Eng');
+      }
     }
     else{
       authCtrl.toggleLang(authCtrl.profile.lang);

@@ -29,6 +29,7 @@ angular
     'ngSanitize',
     'ui.bootstrap', // OR mgcrea.ngStrap
     'angular-smilies',
+    'ngCookies',
 
   ])
 
