@@ -23,12 +23,12 @@ angular
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
     'facebook', // Facebook - https://github.com/Ciul/angular-facebook
     'angular-web-notification', //https://github.com/sagiegurari/angular-web-notification
-    'angular-flexslider', //IMage slider - https://github.com/thenikso/angular-flexslider
+    'angular-flexslider', //Image slider - https://github.com/thenikso/angular-flexslider
 
     //Emoticon -- http://mistic100.github.io/angular-smilies/
     'ngSanitize',
     'ui.bootstrap', // OR mgcrea.ngStrap
-    'angular-smilies'
+    'angular-smilies',
 
   ])
 
@@ -175,7 +175,13 @@ angular
 
       // Topic landing page
       .state('topic', {
-        url: '/{Slug}',
+        url: '/Slug',
+        resolve:{
+          Slug:function($stateParams){
+            console.log(decodeURIComponent($stateParams.Slug));
+            $stateParams.Slug = decodeURIComponent($stateParams.Slug);
+          }
+        },
         views: {
           '': {
             controller: 'TopicLandingCtrl as topicLandingCtrl',
@@ -264,7 +270,7 @@ angular
 
       // Topic not found
       .state('topic-notfound', {
-        url: '/notfound'
+        url: '/err/notfound'
       })
 
       // Profile landing page
@@ -385,6 +391,36 @@ angular
         }
       })
 
+      //Test
+      .state('follow_cates', {
+        url: '/user/follow-categories',
+        views: {
+          '': {
+            controller: 'ProfileCtrl as profileCtrl',
+            templateUrl: 'auth/follow-categories.html',
+            resolve: {
+              isOwner: function(){
+                return true;
+              },
+              profile: function (Users, Auth) {
+                return Auth.auth.$requireAuth().then(function (auth) {
+                  return Users.getProfile(auth.uid).$loaded()
+                })
+              },
+              auth: function ($state, Users, Auth) {
+                return Auth.auth.$requireAuth().catch(function () {
+                  $state.go('home')
+                })
+              }
+            }
+          },
+          'header@follow_cates': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html'
+          }
+        }
+      })
+
       .state('get_started', {
         url: '/user/get_started',
         views: {
@@ -469,6 +505,14 @@ angular
       if (reverse) filtered.reverse()
       return filtered
     }
+  })
+
+
+  .filter('decodeURI',function(){
+    return function(text){
+      return text ? decodeURI(text) : '';
+    }
+
   })
 
 

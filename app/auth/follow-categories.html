@@ -1,0 +1,35 @@
+<div ui-view="header"></div>
+
+<div class="container inner-container">
+
+  <h1>You may want to follow</h1>
+
+  <div class="card" ng-repeat="cate in profileCtrl.cate.all | orderBy: '-slug' ">
+
+    <div class="checkbox">
+
+      <label ng-if="!profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+        <input ng-model="profileCtrl.userCateFollow[$index]"
+               ng-click="profileCtrl.followCate($index,cate.slug)"
+               type="checkbox"
+               value="{{cate.slug}}">
+        {{cate.name}}
+      </label>
+
+      <div ng-if="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)"
+           ng-show="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+        {{cate.name}} &bull; {{ 'KEY_FOLLOWING' | translate }}
+        <a ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+          {{ 'KEY_UNFOLLOW' | translate }}
+        </a>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div>
+    <button ng-click="profileCtrl.$state.go('dashboard')">{{ 'KEY_SAVE' | translate }}</button>
+  </div>
+
+</div>

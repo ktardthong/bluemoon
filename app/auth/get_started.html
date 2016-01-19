@@ -1,27 +1,33 @@
-<md-content>
-  <div ui-view="header"></div>
+<div ui-view="header"></div>
 
-  <div class="container">
+<div class="container inner-container">
 
+  <div class="col-xs-12 col-sm-4">
     <!-- Upload image-->
     <div flow-init
          flow-name="uploader.flow"
          flow-files-added="profileCtrl.uploadFile($files)">
-      <img  ng-src="{{profileCtrl.profile.photo}}"
-            class="preview img-circle"
-            flow-img="uploader.flow.files[0]" width="142px"/><br>
+
+      <img ng-if="!profileCtrl.profile.photo"
+           src="images/profile.png"
+           class="img-circle"
+           width="142px">
+
+      <img ng-src="{{profileCtrl.profile.photo}}"
+           class="preview img-circle"
+           flow-img="uploader.flow.files[0]"
+           width="142px"/><br>
       <md-button
         ng-if="profileCtrl.isOwner"
         class="md-primary ion-camera" flow-btn type="file"></md-button>
     </div>
+  </div>
 
+  <div class="col-xs-12 col-sm-8">
+    <form ng-submit="profileCtrl.saveProfile('follow_cates')">
 
-    <form ng-submit="profileCtrl.saveProfile('dashboard')">
-
-      <div class="input-group">
-
+      <div class="form-group card">
         <p class="alert-warning">*username cannot be change</p>
-
         <input required type="text"
                class="form-control"
                placeholder="{{ 'KEY_USERNAME' | translate }}"
@@ -35,11 +41,12 @@
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control"
+        <input type="text" class="form-control "
                placeholder="{{ 'KEY_FIRSTNAME' | translate}}"
                ng-model="profileCtrl.profile.firstname">
       </div>
-      <div class="form-group">
+
+      <div class="form-group col-xs-12 col-sm-6">
         <input type="text" class="form-control"
                placeholder="{{ 'KEY_LASTNAME' | translate}}"
                ng-model="profileCtrl.profile.lastname">
@@ -75,25 +82,26 @@
 
       <button
         ng-if="!profileCtrl.nameExist"
-        class="btn btn-success-outline" type="submit">submit</button>
-    </form>
-
-
-    <!-- Step 2-->
-    <form ng-submit="profileCtrl.updateProfile()" ng-init="setupStep2=hide" ng-show="setupStep2">
-      <p ng-hide="profileCtrl.profile.displayName">
-        You'll need a display name before you can start chatting.
-      </p>
-
-      <div class="input-group">
-        <input required type="text"
-               class="form-control"
-               placeholder="Display Name"
-               ng-keyup=""
-               ng-model="profileCtrl.profile.displayName">
-      </div>
-      <input type="submit" class="btn btn-default" value="Set Display Name">
+        class="btn btn-success-outline" type="submit">{{ 'KEY_SAVE' | translate}}</button>
     </form>
   </div>
 
-</md-content>
+
+  <!-- Step 2-->
+  <form ng-submit="profileCtrl.updateProfile()" ng-init="setupStep2=hide" ng-show="setupStep2">
+    <p ng-hide="profileCtrl.profile.displayName">
+      You'll need a display name before you can start chatting.
+    </p>
+
+    <div class="input-group">
+      <input required type="text"
+             class="form-control"
+             placeholder="Display Name"
+             ng-keyup=""
+             ng-model="profileCtrl.profile.displayName">
+    </div>
+    <input type="submit" class="btn btn-default" value="Set Display Name">
+  </form>
+</div>
+
+

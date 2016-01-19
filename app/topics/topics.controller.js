@@ -40,7 +40,7 @@ angular.module('App')
     topicCtrl.imageStrings = [];
     topicCtrl.imageText    = [];
     topicCtrl.inReplyArr    = [];
-
+    topicCtrl.loadBusy = false;
     topicCtrl.slugReturn   = null;
     topicCtrl.newTopic = {
       'location': '',
@@ -50,6 +50,23 @@ angular.module('App')
     }
 
 
+
+    topicCtrl.decodeText = function(text){
+      //return $filter('slugify')(item.name);
+      console.log(decodeURI(text));
+      return decodeURI(text);
+    }
+
+
+    topicCtrl.loadMore = function(items) {
+      topicCtrl.loadBusy = true;
+      var data = [];
+      for (var i = 0; i < items.length; i++) {
+        data.push(items[i]);
+      }
+      console.log(data);
+      return data
+    };
 
     topicCtrl.loadTags = function(query) {
       console.log(topicCtrl.tags.tagsUrl());
@@ -153,7 +170,8 @@ angular.module('App')
           body:           topicCtrl.newTopic.body,
           category:       category,
           uid:            topicCtrl.uid,
-          slug:           Slug.slugify(topicCtrl.newTopic.topic),
+          //slug:           Slug.slugify(topicCtrl.newTopic.topic),
+          slug:           topicCtrl.newTopic.topic,
           photos:         topicCtrl.imageStrings,
           photos_text:    topicCtrl.imageText,
           location:       locationDetail,
@@ -179,7 +197,7 @@ angular.module('App')
           if(topicCtrl.newTopic.tags !== null){
             for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
               topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text)
-                .child(topic.key()).push().set(moment().toISOString());
+                .child(category).push().set(moment().toISOString());
             }
           }
         topicCtrl.newTopic = {

@@ -63,11 +63,15 @@ $scope:{topic}
                  class="form-control"
                  ng-model="topicCtrl.newTopic.topic" autocomplete="off">
 
+          >> {{ topicCtrl.newTopic.topic | slugify | decodeURI}} <<
+
+          <!--
           <p ng-bind-html="message | smilies"></p>
           <div class="input-group">
             <input ng-model="message" focus-on-change="message" class="form-control">
             <span class="input-group-addon" smilies-selector="message" smilies-placement="right" smilies-title="Smilies"></span>
           </div>
+          -->
 
 
           <!-- Check slug -->

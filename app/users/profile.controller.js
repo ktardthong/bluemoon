@@ -1,7 +1,7 @@
 angular.module('App')
   .controller('ProfileCtrl', function($scope, $rootScope, $state, $filter, md5,
                                       //Services
-                                      Auth,Users,Topics, Facebook,notify,
+                                      Auth,Users,Topics, Facebook,notify,CateService,
                                       //Resolve
                                       profile,isOwner){
     var profileCtrl = this;
@@ -13,6 +13,8 @@ angular.module('App')
     profileCtrl.topics  = Topics;
     profileCtrl.facebook= Facebook;
     profileCtrl.isOwner = isOwner;
+    profileCtrl.cate    = CateService;
+    profileCtrl.$state  = $state;
 
     profileCtrl.feed = '';
 
@@ -53,7 +55,24 @@ angular.module('App')
 
 
     //Preset Parameters
-    profileCtrl.imageStrings = [];
+    profileCtrl.imageStrings    = [];
+    profileCtrl.userCateFollow  = [];
+    profileCtrl.cateIsFollow    = [];
+
+
+    profileCtrl.followCate = function(index,cate_slug){
+      console.log(cate_slug);
+      //profileCtrl.userCateFollow[index] = cate_slug;
+      profileCtrl.cateIsFollow[index]  = true;
+
+      console.log(profileCtrl.cate.userFollow(cate_slug,Auth.ref.getAuth().uid));
+
+      profileCtrl.cate.addChild(cate_slug+'/follower')
+        .child(Auth.ref.getAuth().uid).push().set(moment().toISOString());
+    }
+
+
+
 
 
     //Upload Profile image

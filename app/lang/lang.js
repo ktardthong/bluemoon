@@ -8,6 +8,8 @@ angular.module('App')
       'KEY_LOGIN':      'Log in',
       'KEY_LOGOUT':     'Log out',
       'KEY_FOLLOW':     'Follow',
+      'KEY_UNFOLLOW':   'Unfollow',
+      'KEY_FOLLOWING':  'Following',
       'KEY_POST':       'Post',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
@@ -23,7 +25,8 @@ angular.module('App')
 
       //SENTENCE
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',
-      'KEY_YOUR_ACCOUNT':'Your account',
+      'KEY_CANT_CHNG_USER':   'Don\'t have account? Register',
+      'KEY_YOUR_ACCOUNT':     'Your account',
 
 
       //USER INPUT
