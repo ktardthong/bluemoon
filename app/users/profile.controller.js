@@ -69,7 +69,9 @@ angular.module('App')
       console.log(profileCtrl.followList);
     }
 
-    profileCtrl.followCateListArr(Auth.ref.getAuth().uid);
+    if(Auth.ref.getAuth()){
+      profileCtrl.followCateListArr(Auth.ref.getAuth().uid);
+    }
 
     profileCtrl.followCate = function(index,cate_slug){
       console.log(cate_slug);

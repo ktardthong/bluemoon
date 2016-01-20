@@ -169,12 +169,20 @@ angular
                 return $stateParams.Tag;
               },
 
-              tagLanding:function(Tags,Topics,$stateParams,$firebaseArray,FirebaseUrl){
+              tagLanding:function(Tags,Topics,$stateParams){
+
+                return Tags.topicTags($stateParams.Tag);
+                /*return Tags.topicTags($stateParams.Tag).$loaded().then(function(data){
+                  return data;
+                });*/
+                /*
+
 
                 Tags.topicTags($stateParams.Tag).$loaded().then(function(data){
-                  console.log(data);
+                 console.log(data);
                 });
                 return Tags.topicTags($stateParams.Tag);
+                */
               }
             }
           }
