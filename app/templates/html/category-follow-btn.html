@@ -1,0 +1,12 @@
+<!-- Follow Category -->
+<span ng-if="dashboardCtrl.auth.ref.getAuth().uid">
+  <button
+    ng-if="!dashboardCtrl.cate.userFollow(cate,dashboardCtrl.auth.ref.getAuth().uid)"
+    ng-click="dashboardCtrl.followCate(cate)"
+    class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
+
+  <button
+    ng-if="dashboardCtrl.cate.userFollow(cate,dashboardCtrl.auth.ref.getAuth().uid)"
+    ng-click="dashboardCtrl.cate.unFollow(cate,dashboardCtrl.auth.ref.getAuth().uid)"
+    class="btn btn-danger-outline">{{ 'KEY_UNFOLLOW' | translate }}</button>
+</span>

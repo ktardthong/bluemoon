@@ -20,6 +20,7 @@ angular.module('App')
 
     profileCtrl.nameExist= false;
 
+
     profileCtrl.getUserPost = function(uid,postType){
       profileCtrl.feed = profileCtrl.topics.createdBy(profileCtrl.profile.$id);
     }
@@ -30,7 +31,6 @@ angular.module('App')
     profileCtrl.linkFacebook = function(){
 
       profileCtrl.facebook.login(function(response) {
-
         profileCtrl.facebook.getLoginStatus(function(response){
           if(response.status === 'connected') {
             $scope.loggedIn = true;
@@ -58,7 +58,18 @@ angular.module('App')
     profileCtrl.imageStrings    = [];
     profileCtrl.userCateFollow  = [];
     profileCtrl.cateIsFollow    = [];
+    profileCtrl.followList      = '';
 
+
+
+
+
+    profileCtrl.followCateListArr = function(uid){
+      profileCtrl.followList = profileCtrl.cate.followList(uid);
+      console.log(profileCtrl.followList);
+    }
+
+    profileCtrl.followCateListArr(Auth.ref.getAuth().uid);
 
     profileCtrl.followCate = function(index,cate_slug){
       console.log(cate_slug);

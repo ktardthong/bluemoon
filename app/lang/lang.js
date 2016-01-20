@@ -21,13 +21,18 @@ angular.module('App')
       'KEY_COMMENTS':   'Comments',
       'KEY_REPLY':      'Reply',
       'KEY_EDIT':       'Edit',
+      'KEY_TREND':      'Trend',
       'KEY_WRITE_REPLY':'Write a reply',
 
+
       //SENTENCE
+      'KEY_YOU_WANT_FOLLOW':  'You may want to follow',
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',
       'KEY_CANT_CHNG_USER':   'Don\'t have account? Register',
       'KEY_YOUR_ACCOUNT':     'Your account',
-
+      'KEY_NOTHING_HERE':     'Nothing here, yet',
+      'KEY_WHO_TO_FOLLOW':    'Who to follow',
+      'KEY_CAT_WILL_APPEAR':  'Follow some categories and it will appear here',
 
       //USER INPUT
       'KEY_FIRSTNAME':  'First name',

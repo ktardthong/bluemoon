@@ -1,4 +1,4 @@
-<section class="gray-background">
+ <section class="gray-background">
 
   <div ui-view="header"></div>
 
@@ -14,7 +14,10 @@
         <button class="pull-right btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
       </div>
 
+      {{ tagCtrl.tagLanding }}
+
       <div ng-repeat="tag in tagCtrl.tagLanding">
+        {{ tag }}
         {{tag.$id}}
       </div>
 

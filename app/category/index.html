@@ -36,6 +36,12 @@
             {{cateCtrl.cateName.name}}
           </p>
 
+          <cate-follow-btn cate="cateCtrl.cateName.slug"></cate-follow-btn>
+
+          <!--<button
+            ng-if="!profileCtrl.cate.userFollow(cateCtrl.cateName.slug,Auth.ref.getAuth().uid)"
+            class="btn btn-success-outline"> {{ 'KEY_FOLLOW' | translate }}</button>-->
+
           <!-- List topics here-->
           <topic-list topics="cateCtrl.cateTopics"></topic-list>
 

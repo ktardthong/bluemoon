@@ -26,20 +26,16 @@ angular.module('App')
     //Change language
     authCtrl.toggleLang = function (langKey) {
       $translate.use(langKey);
-
       // Setting a cookie
       $cookies.put('userLang', langKey);
-
-      //If user registered
-      if(Auth.ref.getAuth())
-      {
-        //authCtrl.users.ref(Auth.ref.getAuth().uid).update({lang: langKey});
+      //If user registered - update this in their preference
+      if(Auth.ref.getAuth()){
+        authCtrl.users.userArrRef(Auth.ref.getAuth().uid).update({"lang":langKey})
       }
     }
 
     //Checkk user selected language
     if(!authCtrl.profile.lang){
-
       if($cookies.get('userLang')){
         authCtrl.toggleLang($cookies.get('userLang'));
       }else{

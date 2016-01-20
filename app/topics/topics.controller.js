@@ -125,11 +125,8 @@ angular.module('App')
       //Check if we have location details
       var locationDetail = '';
 
-
       if(topicCtrl.newTopic.location !== '' ){
-
         console.log(topicCtrl.newTopic.location);
-
         locationDetail = {
           place_id: topicCtrl.newTopic.location.details.place_id,
           slug:     Slug.slugify(topicCtrl.newTopic.location.details.name),
@@ -197,7 +194,7 @@ angular.module('App')
           if(topicCtrl.newTopic.tags !== null){
             for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
               topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text)
-                .child(category).push().set(moment().toISOString());
+                .child(topic.key()).push().set(moment().toISOString());
             }
           }
         topicCtrl.newTopic = {

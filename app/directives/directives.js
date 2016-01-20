@@ -1,5 +1,15 @@
 angular.module('App')
 
+  //Category follow button
+  .directive('cateFollowBtn',function(){
+    return {
+      controller: 'DashboardCtrl as dashboardCtrl',
+      templateUrl: 'templates/html/category-follow-btn.html',
+      scope: {
+        cate: '='
+      }
+    }
+  })
 
   //List of categories on the siderbar
   .directive('topicGrid', function () {

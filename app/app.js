@@ -98,6 +98,8 @@ angular
         }
       })
 
+
+      //Category Landing
       .state('category', {
         url: '/category/{Slug}',
         views: {
@@ -162,11 +164,17 @@ angular
             controller: 'TagCtrl as tagCtrl',
             templateUrl: 'tag/index.html',
             resolve:{
+
               tagName: function($stateParams){
                 return $stateParams.Tag;
               },
-              tagLanding:function(Tags,Topics,$stateParams,$firebaseArray){
-                return  $firebaseArray(Tags.getTagRef($stateParams.Tag));
+
+              tagLanding:function(Tags,Topics,$stateParams,$firebaseArray,FirebaseUrl){
+
+                Tags.topicTags($stateParams.Tag).$loaded().then(function(data){
+                  console.log(data);
+                });
+                return Tags.topicTags($stateParams.Tag);
               }
             }
           }
@@ -269,10 +277,12 @@ angular
         }
       })
 
+
       // Topic not found
       .state('topic-notfound', {
         url: '/err/notfound'
       })
+
 
       // Profile landing page
       .state('profile', {
@@ -310,6 +320,7 @@ angular
 
         }
       })
+
 
       // Profile landing page
       .state('acccountEdit', {
@@ -393,6 +404,7 @@ angular
       })
 
 
+      //Folllow Category
       .state('follow_cates', {
         url: '/user/follow-categories',
         views: {
@@ -422,6 +434,8 @@ angular
         }
       })
 
+
+      //Getting started
       .state('get_started', {
         url: '/user/get_started',
         views: {
@@ -450,6 +464,8 @@ angular
           }
         }
       })
+
+
 
       .state('login', {
         url: '/user/login',
@@ -525,3 +541,18 @@ angular
   })
 
   .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
+
+  //for joining - https://gist.github.com/katowulf/6598238
+  function extend(base) {
+      var parts = Array.prototype.slice.call(arguments, 1);
+      parts.forEach(function (p) {
+        if (p && typeof (p) === 'object') {
+          for (var k in p) {
+            if (p.hasOwnProperty(k)) {
+              base[k] = p[k];
+            }
+          }
+        }
+      });
+      return base;
+    }

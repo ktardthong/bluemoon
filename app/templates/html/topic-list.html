@@ -57,7 +57,7 @@
 
 
       <div ng-if="topic.tags">
-        <span>Tags</span>
+        <span>{{ 'KEY_TAGS' | translate }}</span>
         <span ng-repeat="tag in topic.tags">
           {{tag.text}}
         </span>

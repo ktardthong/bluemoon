@@ -7,32 +7,69 @@
 
       <!-- Three columns -->
       <div class="row">
+
         <!-- LEFT -->
         <div class="col-md-3 hidden-sm-down">
           <div class="card">
             <img class="card-img-top" src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
             <div class="card-block">
-              <h4 class="card-title">{{ profileCtrl.profile.displayName }}</h4>
+              <h4 class="card-title">
+                <a ui-sref="profile({Name: profileCtrl.users.getDisplayName(profileCtrl.auth.ref.getAuth().uid) })">
+                  {{ profileCtrl.profile.displayName }}
+                </a>
+              </h4>
               <p class="card-text">{{ profileCtrl.profile.biography }}</p>
             </div>
           </div>
 
           <div class="card card-block">
-            <h5 class="card-title">Trend</h5>
+            <h5 class="card-title">{{ 'KEY_FOLLOWING' | translate }}</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item list-unstyled"
+                    ng-repeat="cate in profileCtrl.cate.all | orderBy: '-slug' "
+                    ng-if="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)"
+                    ng-show="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                    <a ui-sref="category({Slug: cate.slug})">
+                      {{cate.name}}
+                    </a>
+                    &bull;
+                    <a ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                      {{ 'KEY_UNFOLLOW' | translate }}
+                    </a>
+                </li>
+              </ul>
+
+            <!--
+            <div ng-repeat="cate in profileCtrl.cate.all | orderBy: '-slug' ">
+              <div ng-if="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)"
+                   ng-show="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                {{cate.name}} &bull; {{ 'KEY_FOLLOWING' | translate }}
+                <a ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                  {{ 'KEY_UNFOLLOW' | translate }}
+                </a>
+              </div>
+            </div>
+            -->
+          </div>
+
+          <div class="card card-block">
+            <h5 class="card-title">{{ 'KEY_TREND' | translate }}</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item list-unstyled">Cras justo odio</li>
-              <li class="list-group-item list-unstyled">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+              <li class="list-group-item list-unstyled"
+                  ng-repeat="cate in profileCtrl.followList">
+                  {{cate}}
+              </li>
             </ul>
           </div>
         </div>
 
 
         <div class="col-md-6">
+          {{ profileCtrl.profile.$id }}
           <div class="card " layout-align="start center" layout="column" >
             <div class="md-padding" layout-align="start center" layout="column" style="min-height:150px;" >
-              <h2 class="md-title">Nothing here, yet</h2>
-              <p>Follow some categories and it will appear here</p>
+              <h2 class="md-title">{{ 'KEY_NOTHING_HERE' | translate }}</h2>
+              <p>{{ 'KEY_CAT_WILL_APPEAR' | translate }}</p>
               <hr/>
             </div>
           </div>
@@ -41,7 +78,7 @@
         <!-- Right side-->
         <div class="col-md-3">
           <div class="card card-block">
-            <h5 class="lead">Who to follow</h5>
+            <h5 class="lead">{{ 'KEY_WHO_TO_FOLLOW' | translate }}</h5>
             <div class="list"></div>
           </div>
           <div class="card card-block">

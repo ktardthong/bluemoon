@@ -6,15 +6,24 @@ angular.module('App')
     var categories = $firebaseObject(ref);
 
     var Cate = {
+
       name: function(topic_slug){
         var data = ref.orderByChild("slug").equalTo(topic_slug);
         return $firebaseObject(data);
       },
+
       fortopic: function(topic_slug){
         return $firebaseObject(usersRef.child(uid));
       },
+
       addChild: function(childname){
         return ref.child(childname)
+      },
+
+      followList:function(uid){
+        console.log(uid);
+        var data = ref.orderByChild("news/follower").equalTo(uid);
+        return $firebaseArray(data);
       },
 
       unFollow:function(slug,uid){
