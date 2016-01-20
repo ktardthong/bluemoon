@@ -19,6 +19,25 @@
                 </a>
               </h4>
               <p class="card-text">{{ profileCtrl.profile.biography }}</p>
+              <p class="card-text">
+                <h5>
+                  {{ profileCtrl.profile.stat.posted }}
+                  <small>posted</small>
+                </h5>
+              </p>
+              <p class="card-text">
+                <h5>
+                  {{ profileCtrl.profile.stat.upvoted }}
+                  <small>upvoted</small>
+                </h5>
+              </p>
+              <p class="card-text">
+                <h5>
+                  {{ profileCtrl.profile.stat.follower }}
+                  <small>follower</small>
+                </h5>
+              </p>
+
             </div>
           </div>
 
@@ -63,9 +82,8 @@
           </div>
         </div>
 
-
+        <!-- Middle section-->
         <div class="col-md-6">
-          {{ profileCtrl.profile.$id }}
           <div class="card " layout-align="start center" layout="column" >
             <div class="md-padding" layout-align="start center" layout="column" style="min-height:150px;" >
               <h2 class="md-title">{{ 'KEY_NOTHING_HERE' | translate }}</h2>

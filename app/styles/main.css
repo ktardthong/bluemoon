@@ -2,12 +2,16 @@ body {
   /*@import url(https://fonts.googleapis.com/css?family=Lato);*/
   /*@import url(https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin);*/
   /*font-family: 'Kanit', 'Lato', sans-serif;*/
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
+  font-family: 'Lato','Kanit', sans-serif;
   padding: 0;
   line-height: 1.5em;
   background-color: #fafafa;
   padding-top:70px;
+}
+
+.lato-font{
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 
 .red-font{

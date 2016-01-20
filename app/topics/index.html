@@ -14,12 +14,16 @@
           </div>
           <div class="col-md-6">
             <i class="ion-android-bookmark"></i>
-            <span class="pull-right" ng-init="topic = topicLandingCtrl.topicLanding[0]">
+            <span ng-if="!topicLandingCtrl.isOwner"
+                  class="pull-right"
+                  ng-init="topic = topicLandingCtrl.topicLanding[0]">
               <button ng-hide="topic.followers.history[topicCtrl.uid]"
                       ng-click="topicCtrl.followTopic(topic)"
                       class="btn btn-link mint-font ion-plus-round"
                       aria-label="Follow"> Follow {{topicLandingCtrl.followers.count || '0' }}</button>
-              <button ng-show="topic.followers.history[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</button>
+              <button
+                      ng-show="topic.followers.history[topicCtrl.uid]"
+                      ng-click="topicCtrl.unfollowTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</button>
             </span>s
           </div>
         </small>
@@ -30,7 +34,8 @@
             {{topicLandingCtrl.topicLanding[0].topic}}
           </h2>
 
-          <p class="topic-reading-font" ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></p>
+          <span class="topic-reading-font lato-font"
+             ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></span>
 
           <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
             <img ng-src="{{photo}}">
@@ -56,6 +61,7 @@
 
     <!-- Author section -->
     <div class="media card md-padding" ng-controller="TopicCtrl as topicCtrl">
+
       <div class="media-left">
         <a href="#">
           <img class="media-object img-circle"
@@ -63,6 +69,7 @@
                width="32px" />
         </a>
       </div>
+
       <div class="media-body">
 
         <p class="media-heading">
@@ -77,7 +84,8 @@
         <p>{{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).biography }}</p>
         </small>
       </div>
-      <div class="media-right">
+
+      <div class="media-right" ng-if="!topicLandingCtrl.isOwner">
         <button class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
       </div>
     </div>

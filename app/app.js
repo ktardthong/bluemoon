@@ -375,7 +375,6 @@ angular
         url: '/user/dashboard',
         controller: 'DashboardCtrl as dashboardCtrl',
         views: {
-
           '': {
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'dashboard/index.html',
@@ -386,6 +385,17 @@ angular
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded().then(function (profile) {
+
+                    //if no stat object
+                    if(!profile.stat){
+                      Users.userRef(auth.uid).child('stat/upvoted').set(0);
+                      Users.userRef(auth.uid).child('stat/posted').set(0);
+                      Users.userRef(auth.uid).child('stat/comment').set(0);
+                      Users.userRef(auth.uid).child('stat/follower').set(0);
+                      Users.userRef(auth.uid).child('stat/following').set(0);
+                    }
+
+                    //if no displayname - go to get_started
                     if (profile.displayName) {
                       return profile
                     } else {

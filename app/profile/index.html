@@ -42,25 +42,25 @@
           <div>
             <div class="col-xs-4">
               <h4>
-                10
+                {{ profileCtrl.profile[0].stat.posted }}
                 <small>
-                  <span class="text-muted">follower</span>
+                  <span class="text-muted">{{ 'KEY_POST' | translate }}</span>
                 </small>
               </h4>
             </div>
             <div class="col-xs-4">
               <h4>
-                10
-                <small>
-                  <span class="text-muted">follower</span>
-                </small>
+              {{ profileCtrl.profile[0].stat.upvoted }}
+              <small>
+                <span class="text-muted">{{ 'KEY_UPVOTED' | translate }}</span>
+              </small>
               </h4>
             </div>
             <div class="col-xs-4">
               <h4>
-                10
+                {{ profileCtrl.profile[0].stat.follower }}
                 <small>
-                  <span class="text-muted">follower</span>
+                  <span class="text-muted">{{ 'KEY_FOLLOWER' | translate }}</span>
                 </small>
               </h4>
             </div>
