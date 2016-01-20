@@ -28,15 +28,21 @@
         <!-- Feed -->
         <div class="col-md-6">
 
+          <div class="container-fluid">
+            <div class="pull-left">
+              <!-- Topic Category -->
+              <p class="text-center md-headline md-padding">
+                {{cateCtrl.cateName.name}}
+              </p>
+            </div>
+
+            <div class="pull-right">
+              <cate-follow-btn cate="cateCtrl.cateName.slug"></cate-follow-btn>
+            </div>
+          </div>
+
           <!-- Creation form -->
           <topic-create topic="cateCtrl.cateName.$id"></topic-create>
-
-          <!-- Topic Category -->
-          <p class="text-center md-headline md-padding">
-            {{cateCtrl.cateName.name}}
-          </p>
-
-          <cate-follow-btn cate="cateCtrl.cateName.slug"></cate-follow-btn>
 
           <!--<button
             ng-if="!profileCtrl.cate.userFollow(cateCtrl.cateName.slug,Auth.ref.getAuth().uid)"

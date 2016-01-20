@@ -1,33 +1,35 @@
-
-  <div ng-repeat="topic in topics | orderBy:'-created'">
-
   <br/>
-  {{topic.$id}}
-  <br>
+  <div ng-repeat="topic in topics | orderBy:'-created'">
 
     <div class="card card-block container-fluid">
 
       <div class="card-title">
-        <small class="pull-left">
-          <i class="ion-ios-clock-outline"></i>
-          <span am-time-ago="topic.created"></span>
-        </small>
 
-        <small class="pull-left">
-          <i ng-if="topic.type == 'question'" class="ion-help"></i>
+        <span class="pull-left">
+          <i ng-if="topic.type == 'question'" class="fa fa-question-circle fa-x"></i>
           <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
-        </small>
+        </span>
+
+
 
         <small class="pull-right">
-          <a ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Follow {{topic.followers.count || '0'}}</a>
-          <a ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="red-font ion-plus-round" aria-label="Follow"> Unfollow {{topic.followers.count || '0'}}</a>
+          <span>
+            <i class="ion-ios-clock-outline"></i>
+            <span am-time-ago="topic.created"></span>
+          </span>
+          &nbsp;
+          &bull;
+          <a ng-hide="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)"
+             aria-label="Follow" class="hand"> Follow {{topic.followers.count || '0'}}</a>
+          <a ng-show="topic.followers[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)"
+             class="red-font ion-plus-round" aria-label="Follow"> Unfollow {{topic.followers.count || '0'}}</a>
         </small>
       </div>
 
       <br/>
 
+      <!-- Title -->
       <h4 class="card-title">
-        
         <!-- ui-sref="topic({ Slug: (topic.slug | decodeURI) })" -->
         <!-- href="/#/{{(topic.slug | decodeURI)}}" -->
         <a  href="/#/{{(topic.slug | decodeURI)}}"
@@ -35,6 +37,7 @@
           {{topic.topic | decodeURI}}
         </a>
       </h4>
+
 
       <p class="card-text">
         {{topic.body | limitTo: 140 }}
@@ -56,47 +59,54 @@
       </div>
 
 
-
+      <!-- Tags -->
       <div ng-if="topic.tags">
-        <span>{{ 'KEY_TAGS' | translate }}</span>
+        <span>
+          <i class="fa fa-tag"></i>
+          {{ 'KEY_TAGS' | translate }}</span>
         <span ng-repeat="tag in topic.tags">
-          {{tag.text}}
+          <a ui-sref="tag({Tag: tag.text})">
+            {{tag.text}}
+          </a>
         </span>
       </div>
 
+
+      <!-- Photos -->
       <div ng-if="topic.photos">
         <flex-slider flex-slide="photo in topic.photos">
           <li>
             <img ng-src="{{photo}}" class="img-fluid" alt="Washed Out">
           </li>
         </flex-slider>
-
       </div>
 
-        <div class="media">
-          <div class="media-left">
-            <a href="#">
-              <img class="media-object img-circle" src="{{topicCtrl.users.profile(topic.uid).photo }}" width="32px" />
-            </a>
-          </div>
-          <div class="media-body">
-            <p class="media-heading">
-              <small>
-                <b>
-                  <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
-                    @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
-                  </a>
-                </b>
 
-                | upvote reply 20 | upvote post 50
-
-              </small>
-            </p>
-            <!--<p>@{{topicCtrl.users.getDisplayName(topic.uid) || "User"}} | {{topic.uid || "UserId"}}</p>-->
-          </div>
+      <!-- Writer -->
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object img-circle" src="{{topicCtrl.users.profile(topic.uid).photo }}" width="32px" />
+          </a>
         </div>
-        <br/>
-        <topic-actions-card topic='topic'></topic-actions-card>
+        <div class="media-body">
+          <p class="media-heading">
+            <small>
+              <b>
+                <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
+                  @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
+                </a>
+              </b>
+
+              | upvote reply 20 | upvote post 50
+
+            </small>
+          </p>
+          <!--<p>@{{topicCtrl.users.getDisplayName(topic.uid) || "User"}} | {{topic.uid || "UserId"}}</p>-->
+        </div>
+      </div>
+      <br/>
+      <topic-actions-card topic='topic'></topic-actions-card>
     </div>
   </div>
 
