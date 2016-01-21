@@ -1,26 +1,27 @@
-<!--
-<md-card-actions layout="row" layout-align="start center">
-	<md-card-icon-actions>
-	  <md-button ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.followTopic(topic)" class="ion-plus-round" aria-label="Follow"> Follow 268</md-button>
-	  <md-button ng-show="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.unfollowTopic(topic)" class="md-primary md-raised ion-plus-round" aria-label="Follow"> Following 269</md-button>
+<!-- topic action card-->
 
-	  <a class="purple-light-font ion-share"     aria-label="Share"> Share </a>
-	</md-card-icon-actions>
-</md-card-actions>
--->
-
-
-
-    <span class="text-muted">
-      <a ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.upvote(topic)" class="layout-padding hand purple-light-font ion-chevron-up" aria-label="Upvote"> Upvote 268</a>
-      <a ng-show="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.cancelUpvote(topic)" class="card-link md-primary md-raised ion-chevron-up" aria-label="Upvote"> Upvoted 269</a>
-    </span>
-    &nbsp;
-    <span class="text-muted">
-      <a ng-hide="topic.downvotes[topicCtrl.uid]" ng-click="topicCtrl.downvote(topic)" class="purple-light-font ion-chevron-down" aria-label="Downvotw"> Downvote 59</a>
-      <a ng-show="topic.downvotes[topicCtrl.uid]" ng-click="topicCtrl.cancelDownvote(topic)" class="red-font ion-chevron-down" aria-label="Downvote"> Downvoted 60</a>
-    </span>
-    &nbsp;
-    <span class="text-muted">
-      <a class="purple-light-font ion-chatbubble-working"     aria-label="Comments"> Comments 2 </a>
-    </span>
+<span class="text-muted">
+  <a ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.upvote(topic)"
+     class="layout-padding hand purple-light-font ion-chevron-up"
+     aria-label="Upvote">  {{ 'KEY_UPVOTE' | translate }} </a>
+  <a ng-show="topic.upvotes[topicCtrl.uid]"
+     ng-click="topicCtrl.cancelUpvote(topic)"
+     class="card-link md-primary md-raised ion-chevron-up hand"
+     aria-label="Upvote"> {{ 'KEY_UPVOTED' | translate }} </a>
+</span>
+&nbsp;
+<span class="text-muted">
+  <a ng-hide="topic.downvotes[topicCtrl.uid]"
+     ng-click="topicCtrl.downvote(topic)"
+     class="purple-light-font ion-chevron-down hand"
+     aria-label="Downvotw"> {{ 'KEY_DWN_VOTE' | translate }}</a>
+  <a ng-show="topic.downvotes[topicCtrl.uid]"
+     ng-click="topicCtrl.cancelDownvote(topic)"
+     class="red-font ion-chevron-down hand"
+     aria-label="Downvote"> {{ 'KEY_DWN_VOTED' | translate }}</a>
+</span>
+&nbsp;
+<span class="text-muted">
+  <a class="purple-light-font ion-chatbubble-working"
+     aria-label="Comments"> {{ 'KEY_COMMENTS' | translate }} </a>
+</span>

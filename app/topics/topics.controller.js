@@ -219,6 +219,11 @@ angular.module('App')
 
      //upvote
     topicCtrl.upvote = function(topic){
+
+
+
+
+
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelDownvote(topic);
       }
@@ -226,21 +231,40 @@ angular.module('App')
         topicCtrl.userUpvotedTopics.child(topic.$id).set(value.$value);
 
         //Stat update
-        topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/count')
-          .set(topicCtrl.profile.stat.upvoted.count + 1);
-        topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/topics/'+topic.$id)
+        topicCtrl.users.getProfile(topic.uid).$loaded().then(function (data) {
+          console.log(data.lastname)
+          console.log(data.stat.upvoted.count);
+          console.log(data)
+
+        //Stat update
+        topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')
+          .set(data.stat.upvoted.count + 1);
+        topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id)
           .push().set(moment().toISOString());
+        });
+
       });
     };
- 
+
     topicCtrl.cancelUpvote = function(topic){
       topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
 
-      //Stat update
-      topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/count')
-        .set(topicCtrl.profile.stat.upvoted.count - 1);
+      topicCtrl.users.getProfile(topic.uid).$loaded().then(function (data) {
+        console.log(data.lastname)
+        console.log(data.stat.upvoted.count);
+        console.log(data)
 
-      topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/topics/'+topic.$id).remove();
+        //Stat update
+        topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')
+          .set(data.stat.upvoted.count - 1);
+
+        topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id).remove();
+      });
+
+      //Stat update
+      /*topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')
+        .set(topicCtrl.profile.stat.upvoted.count - 1);
+      topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id).remove();*/
 
 
       topicCtrl.userUpvotedTopics.child(topic.$id).remove(function(error){
