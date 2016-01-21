@@ -38,19 +38,19 @@
           </div>
 
 
-
+          <!-- User stat -->
           <div>
             <div class="col-xs-4">
               <h4>
-                {{ profileCtrl.profile[0].stat.posted }}
-                <small>
+                {{ profileCtrl.profile[0].stat.posted.count }}
+                  <small>
                   <span class="text-muted">{{ 'KEY_POST' | translate }}</span>
                 </small>
               </h4>
             </div>
             <div class="col-xs-4">
               <h4>
-              {{ profileCtrl.profile[0].stat.upvoted }}
+              {{ profileCtrl.profile[0].stat.upvoted.count }}
               <small>
                 <span class="text-muted">{{ 'KEY_UPVOTED' | translate }}</span>
               </small>
@@ -58,7 +58,7 @@
             </div>
             <div class="col-xs-4">
               <h4>
-                {{ profileCtrl.profile[0].stat.follower }}
+                {{ profileCtrl.profile[0].stat.follower.count }}
                 <small>
                   <span class="text-muted">{{ 'KEY_FOLLOWER' | translate }}</span>
                 </small>

@@ -388,11 +388,11 @@ angular
 
                     //if no stat object
                     if(!profile.stat){
-                      Users.userRef(auth.uid).child('stat/upvoted').set(0);
-                      Users.userRef(auth.uid).child('stat/posted').set(0);
-                      Users.userRef(auth.uid).child('stat/comment').set(0);
-                      Users.userRef(auth.uid).child('stat/follower').set(0);
-                      Users.userRef(auth.uid).child('stat/following').set(0);
+                      Users.userRef(auth.uid).child('stat/upvoted/count').set(0);
+                      Users.userRef(auth.uid).child('stat/posted/count').set(0);
+                      Users.userRef(auth.uid).child('stat/comment/count').set(0);
+                      Users.userRef(auth.uid).child('stat/follower/count').set(0);
+                      Users.userRef(auth.uid).child('stat/following/count').set(0);
                     }
 
                     //if no displayname - go to get_started

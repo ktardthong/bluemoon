@@ -179,6 +179,17 @@ angular.module('App')
           userIP:        topicCtrl.newTopic.ipInfo
         }).then(function(topic){
 
+          console.log(topicCtrl.profile.stat.posted);
+
+          topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/count')
+            .set(topicCtrl.profile.stat.posted.count + 1);
+
+          topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/topics/'+topic.key())
+            .push().set(moment().toISOString());
+
+
+
+
           //If there is location
           if(locationDetail !== ''){
 

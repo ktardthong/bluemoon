@@ -21,20 +21,20 @@
               <p class="card-text">{{ profileCtrl.profile.biography }}</p>
               <p class="card-text">
                 <h5>
-                  {{ profileCtrl.profile.stat.posted }}
-                  <small>posted</small>
+                  {{ profileCtrl.profile.stat.posted.count }}
+                  <small>{{ 'KEY_POSTED' | translate }}</small>
                 </h5>
               </p>
               <p class="card-text">
                 <h5>
-                  {{ profileCtrl.profile.stat.upvoted }}
-                  <small>upvoted</small>
+                  {{ profileCtrl.profile.stat.upvoted.count }}
+                  <small>{{ 'KEY_UPVOTED' | translate }}</small>
                 </h5>
               </p>
               <p class="card-text">
                 <h5>
-                  {{ profileCtrl.profile.stat.follower }}
-                  <small>follower</small>
+                  {{ profileCtrl.profile.stat.follower.count }}
+                  <small>{{ 'KEY_FOLLOWER' | translate }}</small>
                 </h5>
               </p>
 
@@ -52,7 +52,8 @@
                       {{cate.name}}
                     </a>
                     &bull;
-                    <a ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                    <a class="hand"
+                       ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
                       {{ 'KEY_UNFOLLOW' | translate }}
                     </a>
                 </li>

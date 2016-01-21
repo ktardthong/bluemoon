@@ -12,6 +12,7 @@ angular.module('App')
       'KEY_UNFOLLOW':   'Unfollow',
       'KEY_FOLLOWING':  'Following',
       'KEY_POST':       'Post',
+      'KEY_POSTED':     'Posted',
       'KEY_UPVOTED':    'Upvoted',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
