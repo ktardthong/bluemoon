@@ -100,6 +100,13 @@ angular.module('App')
         uid:      topicCtrl.uid,
         created:  moment().toISOString()
       })
+
+      //Stat update
+      topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/count')
+        .set(topicCtrl.profile.stat.comment.count + 1);
+
+      topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/topics/'+topicId)
+        .push().set(moment().toISOString());
     }
 
 
@@ -179,16 +186,12 @@ angular.module('App')
           userIP:        topicCtrl.newTopic.ipInfo
         }).then(function(topic){
 
-          console.log(topicCtrl.profile.stat.posted);
-
+          //Stat update
           topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/count')
             .set(topicCtrl.profile.stat.posted.count + 1);
 
           topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/topics/'+topic.key())
             .push().set(moment().toISOString());
-
-
-
 
           //If there is location
           if(locationDetail !== ''){
@@ -221,11 +224,25 @@ angular.module('App')
       }
       topicCtrl.topics.upvoteTopic(topic.$id, topicCtrl.uid).$loaded().then(function(value){
         topicCtrl.userUpvotedTopics.child(topic.$id).set(value.$value);
+
+        //Stat update
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/count')
+          .set(topicCtrl.profile.stat.upvoted.count + 1);
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/topics/'+topic.$id)
+          .push().set(moment().toISOString());
       });
     };
-
+ 
     topicCtrl.cancelUpvote = function(topic){
       topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
+
+      //Stat update
+      topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/count')
+        .set(topicCtrl.profile.stat.upvoted.count - 1);
+
+      topicCtrl.users.userRef(topicCtrl.uid).child('stat/upvoted/topics/'+topic.$id).remove();
+
+
       topicCtrl.userUpvotedTopics.child(topic.$id).remove(function(error){
             if (error) {
             console.log("Error:", error);
