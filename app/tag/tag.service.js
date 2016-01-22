@@ -21,18 +21,19 @@ angular.module('App')
       topicTags:function(tag){
         var fb = new Firebase(FirebaseUrl);
         var dataRet = '';
-        return fb.child('tags/'+tag)
-          .once('value', function(tagSnap) {
-         return fb.child('topics')
+
+        fb.child('tags/'+tag)
+          .on('child_added', function(tagSnap){
+            fb.child('topics')
               .orderByChild("tags")
               .equalTo(tag)
-              .once('value', function(topicSnap) {
-                var dataRet  = extend({}, tagSnap.val(), topicSnap.val());
+              .on('child_added', function(topicSnap) {
+                var dataRet =  extend({}, tagSnap.val(), topicSnap.val());
                 console.log(dataRet);
-                return dataRet;
               });
-          })
-        console.log(dataRet);
+            })
+
+        return dataRet;
       },
 
       arr: tags

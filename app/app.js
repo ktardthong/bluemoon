@@ -169,20 +169,24 @@ angular
                 return $stateParams.Tag;
               },
 
-              tagLanding:function(Tags,Topics,$stateParams){
+              tagLanding:function(Tags,Topics,$stateParams,FirebaseUrl){
 
-                return Tags.topicTags($stateParams.Tag);
-                /*return Tags.topicTags($stateParams.Tag).$loaded().then(function(data){
-                  return data;
-                });*/
-                /*
+                var tag = $stateParams.Tag;
+                var fb = new Firebase(FirebaseUrl);
+                var dataRet= '';
+                return fb.child('tags/'+tag)
+                  .on('child_added', function(tagSnap){
 
+                    return fb.child('topics')
+                      .orderByChild("tags")
+                      .equalTo(tag)
+                      .once('child_added', function(topicSnap) {
 
-                Tags.topicTags($stateParams.Tag).$loaded().then(function(data){
-                 console.log(data);
-                });
-                return Tags.topicTags($stateParams.Tag);
-                */
+                        dataRet =  extend({}, tagSnap.val(), topicSnap.val());
+                        console.log(dataRet);
+                        return dataRet;
+                      });
+                  })
               }
             }
           }
@@ -547,7 +551,6 @@ angular
     return function(text){
       return text ? decodeURI(text) : '';
     }
-
   })
 
 

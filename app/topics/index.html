@@ -6,27 +6,34 @@
 
     <div class="card md-padding" ng-controller="TopicCtrl as topicCtrl">
 
-        <small>
-          <div class="col-md-6">
-            <i class="ion-ios-clock-outline"></i>
-            <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
+      <!-- remove topic btn-->
+      <div class="pull-right">
+        <span ng-if="topicLandingCtrl.isOwner">
+          <a class="btn btn-link">{{ 'KEY_REMOVE' | translate }}</a>
+        </span>
+      </div>
 
-          </div>
-          <div class="col-md-6">
-            <i class="ion-android-bookmark"></i>
-            <span ng-if="!topicLandingCtrl.isOwner"
-                  class="pull-right"
-                  ng-init="topic = topicLandingCtrl.topicLanding[0]">
-              <button ng-hide="topic.followers.history[topicCtrl.uid]"
-                      ng-click="topicCtrl.followTopic(topic)"
-                      class="btn btn-link mint-font ion-plus-round"
-                      aria-label="Follow"> Follow {{topicLandingCtrl.followers.count || '0' }}</button>
-              <button
-                      ng-show="topic.followers.history[topicCtrl.uid]"
-                      ng-click="topicCtrl.unfollowTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</button>
-            </span>s
-          </div>
-        </small>
+      <small>
+        <div class="col-md-6">
+          <i class="ion-ios-clock-outline"></i>
+          <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
+
+        </div>
+        <div class="col-md-6">
+          <i class="ion-android-bookmark"></i>
+          <span ng-if="!topicLandingCtrl.isOwner"
+                class="pull-right"
+                ng-init="topic = topicLandingCtrl.topicLanding[0]">
+            <button ng-hide="topic.followers.history[topicCtrl.uid]"
+                    ng-click="topicCtrl.followTopic(topic)"
+                    class="btn btn-link mint-font ion-plus-round"
+                    aria-label="Follow"> Follow {{topicLandingCtrl.followers.count || '0' }}</button>
+            <button
+                    ng-show="topic.followers.history[topicCtrl.uid]"
+                    ng-click="topicCtrl.unfollowTopic(topic)" class="purple-light-font ion-plus-round" aria-label="Follow"> Unfollow {{topicLandingCtrl.followers.count || '0' }}</button>
+          </span>s
+        </div>
+      </small>
 
         <!-- Message Body -->
         <div class="md-padding">

@@ -17,6 +17,7 @@ angular.module('App')
       'KEY_UPVOTED':    'Upvoted',
       'KEY_DWN_VOTE':   'Downvote',
       'KEY_DWN_VOTED':  'Downvoted',
+      'KEY_REMOVE':     'Remove',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
       'KEY_PASSWORD':   'Password',

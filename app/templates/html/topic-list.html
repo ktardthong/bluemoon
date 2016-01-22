@@ -1,6 +1,5 @@
   <br/>
   <div ng-repeat="topic in topics | orderBy:'-created'">
-
     <div class="card card-block container-fluid">
 
       <div class="card-title">
@@ -97,16 +96,36 @@
                   @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
                 </a>
               </b>
+              <div>
+                <span class="text-muted">
+                  {{ 'KEY_POSTED' | translate }}
+                  {{ topicCtrl.users.profile(topic.uid).stat.posted.count }}
+                </span>
 
-              | upvote reply 20 | upvote post 50
+                <span class="text-muted">
+                  &bull;
+                  {{ 'KEY_UPVOTED' | translate }}
+                  {{ topicCtrl.users.profile(topic.uid).stat.upvoted.count }}
+                </span>
 
+                <span class="text-muted">
+                  &bull;
+                  {{ 'KEY_FOLLOWER' | translate }}
+                  {{ topicCtrl.users.profile(topic.uid).stat.follower.count }}
+                </span>
+              </div>
             </small>
           </p>
-          <!--<p>@{{topicCtrl.users.getDisplayName(topic.uid) || "User"}} | {{topic.uid || "UserId"}}</p>-->
         </div>
       </div>
       <br/>
       <topic-actions-card topic='topic'></topic-actions-card>
+
+      <div class="pull-right">
+        <span ng-if="topicCtrl.uid == topic.uid">
+              remove
+        </span>
+      </div>
     </div>
   </div>
 

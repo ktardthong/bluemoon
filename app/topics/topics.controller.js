@@ -49,8 +49,6 @@ angular.module('App')
       'tags': ''
     }
 
-
-
     topicCtrl.decodeText = function(text){
       //return $filter('slugify')(item.name);
       console.log(decodeURI(text));
