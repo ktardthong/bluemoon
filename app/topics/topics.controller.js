@@ -94,6 +94,21 @@ angular.module('App')
 
     //Reply to topic
     topicCtrl.reply = function(topicId){
+
+      topicCtrl.topics.replyCount(topicId).$loaded().then(function(data){
+        if(!data.count){
+
+          topicCtrl.topics.replyCountRef(topicId).set(1);
+        }else{
+          console.log('increment here');
+          topicCtrl.topics.replyCountRef(topicId)
+            .set(data.count +1);
+        }
+
+      });
+
+
+
       topicCtrl.topics.replyArr(topicId).$add({
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
@@ -219,10 +234,6 @@ angular.module('App')
 
      //upvote
     topicCtrl.upvote = function(topic){
-
-
-
-
 
       if(topic.downvotes != undefined && topic.downvotes[topicCtrl.uid] != undefined){
         topicCtrl.cancelDownvote(topic);

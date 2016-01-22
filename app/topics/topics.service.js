@@ -69,6 +69,13 @@ angular.module('App')
         return $firebaseArray(ref.child(topicId + '/replies'));
       },
 
+      //Reply count
+      replyCount: function(topicId){
+        return $firebaseObject(ref.child(topicId + '/replies/'));
+      },
+      replyCountRef: function(topicId){
+        return ref.child(topicId + '/replies/count');
+      },
 
       replyInReply:function(topicId,replyId){
         return $firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply'))

@@ -23,5 +23,10 @@
 &nbsp;
 <span class="text-muted">
   <a class="purple-light-font ion-chatbubble-working"
-     aria-label="Comments"> {{ 'KEY_COMMENTS' | translate }} </a>
+     aria-label="Comments">
+    {{ 'KEY_COMMENTS' | translate }}
+    {{topic.replies.count || 0}}
+  </a>
 </span>
+
+
