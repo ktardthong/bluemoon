@@ -6,11 +6,11 @@
 
   <div class="col-sm-4">
     <h5>{{ 'KEY_YOUR_ACCOUNT' | translate }}</h5>
-    <div class="list-group">
+    <div class="list-group" ng-controller="AuthCtrl as authCtrl">
       <a href="#" class="list-group-item">{{ 'KEY_ED_PROFILE' | translate }}</a>
       <a href="#" class="list-group-item">{{ 'KEY_ED_CHG_PWD' | translate }}</a>
       <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-      <a ng-click="authCtrl.logout()" class="list-group-item">{{ 'KEY_LOGOUT' | translate }} </a>
+      <a ng-click="authCtrl.logout()" class="list-group-item hand">{{ 'KEY_LOGOUT' | translate }} </a>
     </div>
   </div>
 

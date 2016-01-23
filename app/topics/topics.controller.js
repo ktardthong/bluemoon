@@ -49,6 +49,26 @@ angular.module('App')
       'tags': ''
     }
 
+
+    topicCtrl.showAdvanced = function(ev) {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+      $mdDialog.show({
+          controller: 'AuthCtrl as authCtrl',
+          templateUrl: 'templates/html/md-login-form.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: useFullScreen
+        })
+/*        .then(function (answer) {
+          $scope.status = 'You said the information was "' + answer + '".';
+        }, function () {
+          $scope.status = 'You cancelled the dialog.';
+        });*/
+    }
+
+
+
     topicCtrl.decodeText = function(text){
       //return $filter('slugify')(item.name);
       console.log(decodeURI(text));
@@ -230,6 +250,13 @@ angular.module('App')
       });
     };
 
+
+    topicCtrl.followUser = function(){
+      if(!topicCtrl.profile){
+
+      }
+    }
+
      //upvote
     topicCtrl.upvote = function(topic){
 
@@ -269,11 +296,6 @@ angular.module('App')
 
         topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id).remove();
       });
-
-      //Stat update
-      /*topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')
-        .set(topicCtrl.profile.stat.upvoted.count - 1);
-      topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id).remove();*/
 
 
       topicCtrl.userUpvotedTopics.child(topic.$id).remove(function(error){

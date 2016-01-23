@@ -1,108 +1,120 @@
-<md-content>
-  <div ui-view="header"></div>
 
-  <section class="gray-background">
+<div ui-view="header"></div>
 
-    <div class="container margin-top animated slideInUp">
-      <div class="container-fluid">
-        <div class="md-padding col-xs-12 col-sm-5 text-xs-center">
-          <div flow-init
-               flow-name="uploader.flow"
-               flow-files-added="profileCtrl.uploadFile($files)">
+<section class="gray-background">
 
-              <img  ng-src="{{profileCtrl.profile[0].photo}}"
-                    class="preview img-circle"
-                    flow-img="uploader.flow.files[0]" width="142px"/>
-            <br>
-            <md-button
-              ng-if="profileCtrl.isOwner"
-              class="md-primary ion-camera" flow-btn type="file"></md-button>
-          </div>
+  <div class="container margin-top animated slideInUp">
+    <div class="container-fluid">
+      <div class="md-padding col-xs-12 col-sm-5 text-xs-center">
+        <div flow-init
+             flow-name="uploader.flow"
+             flow-files-added="profileCtrl.uploadFile($files)">
+
+            <img  ng-src="{{profileCtrl.profile[0].photo}}"
+                  class="preview img-circle"
+                  flow-img="uploader.flow.files[0]" width="142px"/>
+          <br>
+          <md-button
+            ng-if="profileCtrl.isOwner"
+            class="md-primary ion-camera" flow-btn type="file"></md-button>
+        </div>
+      </div>
+
+      <div class="md-padding col-xs-12 col-sm-7">
+        <p class="md-title">
+          @{{ profileCtrl.profile[0].displayName }}
+        </p>
+
+        <div class="md-headline">
+          {{ profileCtrl.profile[0].firstname }} {{profileCtrl.profile[0].lastname}}
+
+          <button ng-if="profileCtrl.isOwner"
+                  ui-sref="acccountEdit"
+                  class="btn btn-primary-outline">{{ 'KEY_EDIT' | translate }}</button>
+          <button
+            ng-if="!profileCtrl.isOwner"
+            style="padding-left:10px"
+            class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
         </div>
 
-        <div class="md-padding col-xs-12 col-sm-7">
-          <p class="md-title">
-            @{{ profileCtrl.profile[0].displayName }}
-          </p>
 
-          <div class="md-headline">
-            {{ profileCtrl.profile[0].firstname }} {{profileCtrl.profile[0].lastname}}
-
-            <button ng-if="profileCtrl.isOwner"
-                    ui-sref="acccountEdit"
-                    class="btn btn-primary-outline">{{ 'KEY_EDIT' | translate }}</button>
-            <button
-              ng-if="!profileCtrl.isOwner"
-              style="padding-left:10px"
-              class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
-          </div>
-
-
-          <!-- User stat -->
-          <div>
-            <div class="col-xs-4">
-              <h4>
-                {{ profileCtrl.profile[0].stat.posted.count }}
-                  <small>
-                  <span class="text-muted">{{ 'KEY_POST' | translate }}</span>
-                </small>
-              </h4>
-            </div>
-            <div class="col-xs-4">
-              <h4>
-              {{ profileCtrl.profile[0].stat.upvoted.count }}
-              <small>
-                <span class="text-muted">{{ 'KEY_UPVOTED' | translate }}</span>
-              </small>
-              </h4>
-            </div>
-            <div class="col-xs-4">
-              <h4>
-                {{ profileCtrl.profile[0].stat.follower.count }}
+        <!-- User stat -->
+        <div>
+          <div class="col-xs-4">
+            <h4>
+              {{ profileCtrl.profile[0].stat.posted.count }}
                 <small>
-                  <span class="text-muted">{{ 'KEY_FOLLOWER' | translate }}</span>
-                </small>
-              </h4>
-            </div>
+                <span class="text-muted">{{ 'KEY_POST' | translate }}</span>
+              </small>
+            </h4>
           </div>
-
-          {{ profileCtrl.profile.firstname }}
-          <p>
-            {{ profileCtrl.profile.userLocation.name }}
-          </p>
-
-          <p>
-            {{ profileCtrl.profile.biography }}
-          </p>
-
-          <md-button ng-if="profileCtrl.isOwner"
-                     ng-click="profileCtrl.linkFacebook()">facebook </md-button>
+          <div class="col-xs-4">
+            <h4>
+            {{ profileCtrl.profile[0].stat.upvoted.count }}
+            <small>
+              <span class="text-muted">{{ 'KEY_UPVOTED' | translate }}</span>
+            </small>
+            </h4>
+          </div>
+          <div class="col-xs-4">
+            <h4>
+              {{ profileCtrl.profile[0].stat.follower.count }}
+              <small>
+                <span class="text-muted">{{ 'KEY_FOLLOWER' | translate }}</span>
+              </small>
+            </h4>
+          </div>
         </div>
+
+        {{ profileCtrl.profile.firstname }}
+        <p>
+          {{ profileCtrl.profile.userLocation.name }}
+        </p>
+
+        <p>
+          {{ profileCtrl.profile.biography }}
+        </p>
+
+        <md-button ng-if="profileCtrl.isOwner"
+                   ng-click="profileCtrl.linkFacebook()">facebook </md-button>
       </div>
+    </div>
 
-      <md-divider></md-divider>
+    <md-divider></md-divider>
 
-      <div layout="row">
-        <div flex-gt-md-auto="" class="md-padding">
-          <md-list>
-            <md-subheader class="md-no-sticky"> feed </md-subheader>
-            <md-list-item><md-button>Activity</md-button></md-list-item>
-            <md-list-item ng-click="profileCtrl.getUserPost(profileCtrl.profile.$id)">Posts</md-list-item>
-            <md-list-item>Questions</md-list-item>
-            <md-list-item>Reply</md-list-item>
-            <md-divider></md-divider>
-            <md-list-item>Log</md-list-item>
-          </md-list>
+    <div layout="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="card card-block">
+          <h5 class="card-title">{{ 'KEY_FOLLOWING' | translate }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-unstyled"
+                ng-repeat="cate in profileCtrl.cate.all | orderBy: '-slug' "
+                ng-if="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)"
+                ng-show="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+              <a ui-sref="category({Slug: cate.slug})">
+                {{cate.name}}
+              </a>
+              &bull;
+              <a class="hand"
+                 ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
+                {{ 'KEY_UNFOLLOW' | translate }}
+              </a>
+            </li>
+          </ul>
         </div>
-        <div flex-gt-md-auto="" class="md-padding">
-          <topic-list topics="profileCtrl.feed"></topic-list>
-        </div>
+
+        <md-list>
+          <md-subheader class="md-no-sticky"> feed </md-subheader>
+          <md-list-item><md-button>Activity</md-button></md-list-item>
+          <md-list-item ng-click="profileCtrl.getUserPost(profileCtrl.profile.$id)">Posts</md-list-item>
+          <md-list-item>Questions</md-list-item>
+          <md-list-item>Reply</md-list-item>
+          <md-divider></md-divider>
+          <md-list-item>Log</md-list-item>
+        </md-list>
       </div>
-
-      <!--{{ profileCtrl.auth.ref.getAuth()}}-->
-      <!--{{profileCtrl.profile}}-->
-
-
-
-  </section>
-</md-content>
+      <div class="col-xs-12 col-sm-8">
+        <topic-list topics="profileCtrl.userPosts"></topic-list>
+      </div>
+    </div>
+</section>

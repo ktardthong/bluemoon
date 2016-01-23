@@ -1,5 +1,5 @@
 angular.module('App')
-  .factory('Tags', function($firebaseArray, $firebaseObject, FirebaseUrl,FirebaseUrl,$http){
+  .factory('Tags', function($firebaseArray, $firebaseObject, FirebaseUrl,FirebaseUrl,$q){
 
     var ref = new Firebase(FirebaseUrl+'tags');
     var tags = $firebaseArray(ref);
@@ -19,21 +19,23 @@ angular.module('App')
       },
 
       topicTags:function(tag){
+        var deferred = $q.defer();
+
         var fb = new Firebase(FirebaseUrl);
         var dataRet = '';
 
-        fb.child('tags/'+tag)
+        return fb.child('tags/'+tag)
           .on('child_added', function(tagSnap){
             fb.child('topics')
               .orderByChild("tags")
               .equalTo(tag)
               .on('child_added', function(topicSnap) {
-                var dataRet =  extend({}, tagSnap.val(), topicSnap.val());
-                console.log(dataRet);
+                deferred.resolve();
+                //show( extend({}, tagSnap.val(), topicSnap.val()) );
+                return extend({}, tagSnap.val(), topicSnap.val());
+                //console.log(dataRet);
               });
             })
-
-        return dataRet;
       },
 
       arr: tags

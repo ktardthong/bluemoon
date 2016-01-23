@@ -1,0 +1,10 @@
+<!-- If user doesn't login and is not owner-->
+<md-button class="md-primary md-raised" ng-click="topicCtrl.showAdvanced($event)" flex="100" flex-gt-md="auto">
+  Custom Dialog
+</md-button>
+
+
+<!-- If user doesn't login and is not owner-->
+<button
+  ng-if="topicLandingCtrl.auth.getUid()"
+  class="btn btn-success-outline" >{{ 'KEY_FOLLOW' | translate }}</button>

@@ -1,5 +1,16 @@
 angular.module('App')
 
+  //Follow Button
+  .directive('userFollowerBtn',function(){
+    return {
+      controller: 'TopicCtrl as topicCtrl',
+      templateUrl: 'templates/html/follow-user.html',
+      scope: {
+        cate: '='
+      }
+    }
+  })
+
   //Category follow button
   .directive('cateFollowBtn',function(){
     return {

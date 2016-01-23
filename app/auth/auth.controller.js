@@ -59,6 +59,7 @@ angular.module('App')
     //Logout
     authCtrl.logout = function(){
       Auth.auth.$unauth();
+      $state.go('login');
     }
 
     //Register user

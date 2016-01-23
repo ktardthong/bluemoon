@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{ 'KEY_LOGIN' | translate }}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+
+    <div ng-show="authCtrl.error" class="md-padding">
+      <span>{{ authCtrl.error.message }}</span>
+    </div>
+
+    <form ng-submit="authCtrl.login()" class="md-padding">
+
+      <div class="form-group">
+        <label class="sr-only" for="email">{{ 'KEY_EMAIL' | translate }}</label>
+        <input ng-model="authCtrl.user.email"
+               type="text"
+               class="form-control" id="email" placeholder="{{ 'KEY_EMAIL' | translate }}">
+      </div>
+
+      <div class="form-group">
+        <label class="sr-only" for="password">{{ 'KEY_PASSWORD' | translate}}</label>
+        <input ng-model="authCtrl.user.password"
+               type="password" class="form-control" id="password"
+               placeholder="{{ 'KEY_PASSWORD' | translate}}">
+      </div>
+
+      <small>
+        <a ui-sref="register">{{ 'KEY_NO_ACCT_REGISTER' | translate }}</a>
+      </small>
+      <button type="submit" class="pull-right btn btn-success-outline">{{ 'KEY_LOGIN' | translate }}</button>
+
+    </form>
+
+  </md-dialog-content>
+</md-dialog>

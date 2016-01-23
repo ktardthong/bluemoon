@@ -169,29 +169,32 @@ angular
                 return $stateParams.Tag;
               },
 
-              tagLanding:function(Tags,Topics,$stateParams,FirebaseUrl){
+              tagLanding:function(Tags,Topics,$stateParams,$firebaseObject, $firebaseArray,FirebaseUrl){
 
                 var tag = $stateParams.Tag;
                 var fb = new Firebase(FirebaseUrl);
                 var dataRet= '';
-                return fb.child('tags/'+tag)
-                  .on('child_added', function(tagSnap){
 
-                    return fb.child('topics')
-                      .orderByChild("tags")
-                      .equalTo(tag)
-                      .once('child_added', function(topicSnap) {
-
-                        dataRet =  extend({}, tagSnap.val(), topicSnap.val());
-                        console.log(dataRet);
-                        return dataRet;
-                      });
-                  })
+                return show(Tags.topicTags(tag));
+                /*return fb.child('tags/' + tag)
+                    .on('value', function (tagSnap) {
+                      return fb.child('topics')
+                        .orderByChild("tags")
+                        .equalTo(tag)
+                        .on('value', function (topicSnap) {
+                          return show( extend({}, tagSnap.val(), topicSnap.val()) );
+                          /!*dataRet = extend({}, tagSnap.val(), topicSnap.val());
+                          console.log($firebaseArray(dataRet));
+                          return dataRet;
+                           *!/
+                        });
+                    })*/
               }
             }
           }
         }
       })
+
 
 
       // Topic landing page
@@ -317,12 +320,18 @@ angular
                   return false;
                 }
               },
-              profile: function ($state,$stateParams, $rootScope, Auth, Users) {
+              userPosts: function(Users,Topics,$stateParams){
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
-                  console.log(profile);
-                  return profile;
+                  if(profile[0].$id){
+                    return Topics.createdBy(profile[0].$id);
+                  }
                 });
               },
+              profile: function ($state,$stateParams, $rootScope, Auth, Users) {
+                return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
+                  return profile;
+                });
+              }
             }
           },
           'header@profile': {
@@ -335,6 +344,7 @@ angular
 
 
       // Profile landing page
+      // @profileCtrl
       .state('acccountEdit', {
         url: '/account/edit',
         views: {
@@ -342,6 +352,9 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/edit.html',
             resolve: {
+              userPosts:function(){
+                return false;
+              },
               isOwner: function(){
                 return true;
               },
@@ -375,14 +388,18 @@ angular
 
 
       // Dashboard
+      // @profileCtrl
       .state('dashboard', {
         url: '/user/dashboard',
         controller: 'DashboardCtrl as dashboardCtrl',
         views: {
           '': {
-            controller: 'ProfileCtrl as profileCtrl',
-            templateUrl: 'dashboard/index.html',
+            controller:   'ProfileCtrl as profileCtrl',
+            templateUrl:  'dashboard/index.html',
             resolve: {
+              userPosts:function(){
+                return false;
+              },
               isOwner: function(){
                 return true;
               },
@@ -426,7 +443,8 @@ angular
       })
 
 
-      //Folllow Category
+      // Folllow Category
+      // @profileCtrl
       .state('follow_cates', {
         url: '/user/follow-categories',
         views: {
@@ -434,6 +452,9 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'auth/follow-categories.html',
             resolve: {
+              userPosts:function(){
+                return false;
+              },
               isOwner: function(){
                 return true;
               },
@@ -458,6 +479,7 @@ angular
 
 
       //Getting started
+      // @profileCtrl
       .state('get_started', {
         url: '/user/get_started',
         views: {
@@ -465,6 +487,9 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'auth/get_started.html',
             resolve: {
+              userPosts:function(){
+                return false;
+              },
               isOwner: function(){
                 return true;
               },
@@ -562,6 +587,12 @@ angular
   })
 
   .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
+
+
+  function show(data) {
+    console.log(data);
+    return JSON.stringify(data, null, 2);
+  }
 
   //for joining - https://gist.github.com/katowulf/6598238
   function extend(base) {

@@ -17,7 +17,6 @@
         <div class="col-md-6">
           <i class="ion-ios-clock-outline"></i>
           <span am-time-ago="topicLandingCtrl.topicLanding[0].created"></span>
-
         </div>
         <div class="col-md-6">
           <i class="ion-android-bookmark"></i>
@@ -45,7 +44,7 @@
              ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></span>
 
           <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
-            <img ng-src="{{photo}}">
+            <img ng-src="{{photo}}" class="img-fluid">
           </div>
         </div>
 
@@ -93,7 +92,7 @@
       </div>
 
       <div class="media-right" ng-if="!topicLandingCtrl.isOwner">
-        <button class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
+          <user-follower-btn></user-follower-btn>
       </div>
     </div>
 

@@ -3,33 +3,34 @@ angular.module('App')
                                       //Services
                                       Auth,Users,Topics, Facebook,notify,CateService,
                                       //Resolve
-                                      profile,isOwner){
+                                      profile,isOwner,userPosts){
     var profileCtrl = this;
 
     //Parser
-    profileCtrl.profile = profile;
-    profileCtrl.auth    = Auth;
-    profileCtrl.users   = Users;
-    profileCtrl.topics  = Topics;
-    profileCtrl.facebook= Facebook;
-    profileCtrl.isOwner = isOwner;
-    profileCtrl.cate    = CateService;
-    profileCtrl.$state  = $state;
+    profileCtrl.profile   = profile;
+    profileCtrl.auth      = Auth;
+    profileCtrl.users     = Users;
+    profileCtrl.topics    = Topics;
+    profileCtrl.facebook  = Facebook;
+    profileCtrl.isOwner   = isOwner;
+    profileCtrl.cate      = CateService;
+    profileCtrl.$state    = $state;
+    profileCtrl.userPosts = userPosts;
 
     profileCtrl.feed = '';
 
     profileCtrl.nameExist= false;
 
 
-    profileCtrl.getUserPost = function(uid,postType){
-      profileCtrl.feed = profileCtrl.topics.createdBy(profileCtrl.profile.$id);
+    profileCtrl.getUserPost = function(uid){
+      console.log(uid);
+      profileCtrl.feed = profileCtrl.topics.createdBy(uid);
     }
 
 
 
     /*Link account with facebook*/
     profileCtrl.linkFacebook = function(){
-
       profileCtrl.facebook.login(function(response) {
         profileCtrl.facebook.getLoginStatus(function(response){
           if(response.status === 'connected') {
