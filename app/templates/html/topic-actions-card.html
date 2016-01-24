@@ -1,6 +1,11 @@
 <!-- topic action card-->
 
-<span class="text-muted">
+<a ng-if="!topicCtrl.uid"
+   class="layout-padding hand purple-light-font ion-chevron-up"
+   ng-click="topicCtrl.showMdLogin($event)">
+   {{ 'KEY_UPVOTE' | translate }}</a>
+
+<span class="text-muted" ng-if="topicCtrl.uid">
   <a ng-hide="topic.upvotes[topicCtrl.uid]" ng-click="topicCtrl.upvote(topic)"
      class="layout-padding hand purple-light-font ion-chevron-up"
      aria-label="Upvote">  {{ 'KEY_UPVOTE' | translate }} </a>
@@ -10,7 +15,13 @@
      aria-label="Upvote"> {{ 'KEY_UPVOTED' | translate }} </a>
 </span>
 &nbsp;
-<span class="text-muted">
+
+<a ng-if="!topicCtrl.uid"
+   class="layout-padding hand purple-light-font ion-chevron-up"
+   ng-click="topicCtrl.showMdLogin($event)">
+  {{ 'KEY_DWN_VOTE' | translate }}</a>
+
+<span class="text-muted" ng-if="topicCtrl.uid">>
   <a ng-hide="topic.downvotes[topicCtrl.uid]"
      ng-click="topicCtrl.downvote(topic)"
      class="purple-light-font ion-chevron-down hand"
@@ -23,6 +34,7 @@
 &nbsp;
 <span class="text-muted">
   <a class="purple-light-font ion-chatbubble-working"
+     href="/#/{{topic.slug}}"
      aria-label="Comments">
     {{ 'KEY_COMMENTS' | translate }}
     {{topic.replies.count || 0}}

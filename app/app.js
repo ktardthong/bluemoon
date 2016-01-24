@@ -413,7 +413,7 @@ angular
                       Users.userRef(auth.uid).child('stat/posted/count').set(0);
                       Users.userRef(auth.uid).child('stat/comment/count').set(0);
                       Users.userRef(auth.uid).child('stat/follower/count').set(0);
-                      Users.userRef(auth.uid).child('stat/following-user/count').set(0);
+                      Users.userRef(auth.uid).child('stat/following/count').set(0);
                     }
 
                     //if no displayname - go to get_started

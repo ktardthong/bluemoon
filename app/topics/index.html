@@ -80,11 +80,28 @@
 
         <p class="media-heading">
             <b>
-              <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
+              <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topicLandingCtrl.topicLanding[0].uid) })">
                 @{{topicCtrl.users.getDisplayName(topicLandingCtrl.topicLanding[0].uid) || "User"}}
               </a>
             </b>
-            | upvote reply 20 | upvote post 50
+            <div>
+              <span class="text-muted">
+                {{ 'KEY_POSTED' | translate }}
+                {{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).stat.posted.count }}
+              </span>
+
+              <span class="text-muted">
+                &bull;
+                {{ 'KEY_UPVOTED' | translate }}
+                {{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).stat.upvoted.count }}
+              </span>
+
+              <span class="text-muted">
+                &bull;
+                {{ 'KEY_FOLLOWER' | translate }}
+                {{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).stat.follower.count }}
+              </span>
+            </div>
         </p>
         <small>
         <p>{{ topicCtrl.users.profile(topicLandingCtrl.topicLanding[0].uid).biography }}</p>
@@ -146,13 +163,15 @@
 
           <!-- footer action -->
           <div ng-if="topicLandingCtrl.auth.getUid()">
-            <a ng-click="topicCtrl.replyContent[$index] = true">
+            <a class="hand"
+               ng-click="topicCtrl.replyContent[$index] = true">
               <i class="fa fa-reply"></i>
               {{ 'KEY_REPLY' | translate }} </a>
             <small>
-              <a class="layout-padding hand purple-light-font ion-chevron-up" aria-label="Upvote"> Upvote 268</a>
-              <a class="layout-padding hand purple-light-font ion-chevron-down" aria-label="Upvote"> Upvote 268</a>
-              &hybull;
+              <a class="layout-padding hand purple-light-font ion-chevron-up hand"
+                 aria-label="Upvote"> {{ 'KEY_UPVOTE' | translate }}</a>
+              <a class="layout-padding hand purple-light-font ion-chevron-down hand"
+                 aria-label="Upvote"> {{ 'KEY_DWN_VOTE' | translate }}</a>
             </small>
           </div>
           <!-- end footer-->

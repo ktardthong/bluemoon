@@ -26,15 +26,21 @@
         </p>
 
         <div class="md-headline">
-          {{ profileCtrl.profile[0].firstname }} {{profileCtrl.profile[0].lastname}}
+          {{ profileCtrl.profile[0].firstname }} {{ profileCtrl.profile[0].lastname }}
 
           <button ng-if="profileCtrl.isOwner"
                   ui-sref="acccountEdit"
                   class="btn btn-primary-outline">{{ 'KEY_EDIT' | translate }}</button>
-          <button
+<!--          <button
             ng-if="!profileCtrl.isOwner"
             style="padding-left:10px"
-            class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>
+            class="btn btn-success-outline">{{ 'KEY_FOLLOW' | translate }}</button>-->
+
+          <div
+            ng-if="!profileCtrl.isOwner">
+            <user-follower-btn follow="profileCtrl.profile[0].$id"></user-follower-btn>
+          </div>
+
         </div>
 
 
@@ -82,8 +88,8 @@
 
     <md-divider></md-divider>
 
-    <div layout="row">
-      <div class="col-xs-12 col-sm-4">
+    <div class="container-fluid">
+      <div class="col-xs-12 col-sm-4 hidden-xs-down">
         <div class="card card-block">
           <h5 class="card-title">{{ 'KEY_FOLLOWING' | translate }}</h5>
           <ul class="list-group list-group-flush">
@@ -114,7 +120,9 @@
         </md-list>
       </div>
       <div class="col-xs-12 col-sm-8">
-        <topic-list topics="profileCtrl.userPosts"></topic-list>
+        <div class="container-fluid">
+          <topic-list topics="profileCtrl.userPosts"></topic-list>
+        </div>
       </div>
     </div>
 </section>

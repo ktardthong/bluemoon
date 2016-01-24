@@ -1,5 +1,6 @@
 angular.module('App')
-  .controller('DashboardCtrl', function(Auth, $state,Category,CateService,Tags) {
+  .controller('DashboardCtrl', function(Auth, $state,Category,CateService,Tags,
+                                        $timeout, $mdSidenav, $log) {
     var dashboardCtrl = this;
 
     dashboardCtrl.auth = Auth;
@@ -14,16 +15,20 @@ angular.module('App')
     dashboardCtrl.followList      = '';
 
 
-
+    //Close Side bar
+    dashboardCtrl.close = function () {
+      $mdSidenav('right').close()
+        .then(function () {
+          $log.debug("close RIGHT is done");
+        });
+    };
 
 
     dashboardCtrl.unfollowCate =function(cate_slug){
 
     }
+
     dashboardCtrl.followCate = function(cate_slug){
-
-      console.log(dashboardCtrl.cate.userFollow(cate_slug,Auth.ref.getAuth().uid));
-
       dashboardCtrl.cate.addChild(cate_slug+'/follower')
         .child(Auth.ref.getAuth().uid).push().set(moment().toISOString());
     }

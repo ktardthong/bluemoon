@@ -4,12 +4,19 @@
 
       <div class="card-title">
 
+        <!-- Type -->
         <span class="pull-left">
           <i ng-if="topic.type == 'question'" class="fa fa-question-circle fa-x"></i>
           <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
         </span>
-
-
+        &nbsp;
+        <!-- Language -->
+        <span class="text-muted">
+          <small>
+            <i class="fa fa-globe"></i>
+            {{ topic.lang }}
+          </small>
+        </span>
 
         <small class="pull-right">
           <span>
@@ -119,11 +126,14 @@
         </div>
       </div>
       <br/>
-      <topic-actions-card topic='topic'></topic-actions-card>
+
+      <small>
+        <topic-actions-card topic='topic'></topic-actions-card>
+      </small>
 
       <div class="pull-right">
         <span ng-if="topicCtrl.uid == topic.uid">
-              remove
+          {{ 'KEY_REMOVE' | translate }}
         </span>
       </div>
     </div>

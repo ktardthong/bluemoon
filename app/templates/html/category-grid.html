@@ -1,12 +1,12 @@
 <!-- Category Grid  -->
 
-
 <h5 class="md-display-1 text-center">
   {{ 'KEY_EXPLORE' | translate }}
 </h5>
 
 
 <button
+  ng-click="dashboardCtrl.close()"
   ui-sref="category({Slug: cate.slug})"
   ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
   type="button"
