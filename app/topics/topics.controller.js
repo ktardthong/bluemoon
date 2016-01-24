@@ -50,7 +50,7 @@ angular.module('App')
     }
 
 
-    topicCtrl.showAdvanced = function(ev) {
+    topicCtrl.showMdLogin = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       $mdDialog.show({
           controller: 'AuthCtrl as authCtrl',
@@ -159,6 +159,7 @@ angular.module('App')
       console.log(topicCtrl.slugReturn);
     }
 
+
     //Create new topic
     topicCtrl.createTopic = function(category,isDraft){
 
@@ -251,11 +252,65 @@ angular.module('App')
     };
 
 
-    topicCtrl.followUser = function(){
-      if(!topicCtrl.profile){
-
+    //Check if user is already following user
+    topicCtrl.checkFollow = function(follow_uid){
+      if(topicCtrl.users.checkFollow(topicCtrl.uid,follow_uid)){
+        return true;
+      }else{
+        return false;
       }
     }
+
+
+    //Follow User
+    topicCtrl.followUser = function(follow_uid){
+
+      //Update the person that being follow, credit them for having follower
+      topicCtrl.users.getProfile(follow_uid).$loaded().then(function (data) {
+
+        topicCtrl.users.userRef(follow_uid).child('stat/follower/count')
+          .set(data.stat.follower.count + 1);
+
+        topicCtrl.users.userRef(follow_uid).child('stat/follower/uid/'+ topicCtrl.uid)
+          .push().set(moment().toISOString());
+      });
+
+      //Update the person that is following, credit them for having following
+      topicCtrl.users.getProfile(topicCtrl.uid).$loaded().then(function (data) {
+
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/following/count')
+          .set(data.stat.follower.count + 1);
+
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/following/uid/'+ follow_uid)
+          .push().set(moment().toISOString());
+      });
+    }
+
+
+    //Unfollow User
+    topicCtrl.unfollowUser = function(follow_uid){
+
+      //Update the person that being follow, credit them for having follower
+      topicCtrl.users.getProfile(follow_uid).$loaded().then(function (data) {
+
+        topicCtrl.users.userRef(follow_uid).child('stat/follower/count')
+          .set(data.stat.follower.count - 1);
+
+        topicCtrl.users.userRef(follow_uid).child('stat/follower/uid/'+ topicCtrl.uid).remove();
+      });
+
+      //Update the person that is following, credit them for having following
+      topicCtrl.users.getProfile(topicCtrl.uid).$loaded().then(function (data) {
+
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/following/count')
+          .set(data.stat.following.count - 1);
+
+        topicCtrl.users.userRef(topicCtrl.uid).child('stat/following/uid/'+ follow_uid).remove();
+      });
+
+    }
+
+
 
      //upvote
     topicCtrl.upvote = function(topic){
@@ -268,11 +323,7 @@ angular.module('App')
 
         //Stat update
         topicCtrl.users.getProfile(topic.uid).$loaded().then(function (data) {
-          console.log(data.lastname)
-          console.log(data.stat.upvoted.count);
-          console.log(data)
 
-        //Stat update
         topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')
           .set(data.stat.upvoted.count + 1);
         topicCtrl.users.userRef(topic.uid).child('stat/upvoted/topics/'+topic.$id)
@@ -286,9 +337,6 @@ angular.module('App')
       topicCtrl.topics.undoUpvote(topic.$id, topicCtrl.uid);
 
       topicCtrl.users.getProfile(topic.uid).$loaded().then(function (data) {
-        console.log(data.lastname)
-        console.log(data.stat.upvoted.count);
-        console.log(data)
 
         //Stat update
         topicCtrl.users.userRef(topic.uid).child('stat/upvoted/count')

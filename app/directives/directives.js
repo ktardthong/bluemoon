@@ -3,10 +3,12 @@ angular.module('App')
   //Follow Button
   .directive('userFollowerBtn',function(){
     return {
-      controller: 'TopicCtrl as topicCtrl',
-      templateUrl: 'templates/html/follow-user.html',
+      restrict:     'E',
+      transclude:   true,
+      controller:   'TopicCtrl as topicCtrl',
+      templateUrl:  'templates/html/follow-user.html',
       scope: {
-        cate: '='
+        follow: '='
       }
     }
   })

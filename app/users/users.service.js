@@ -48,6 +48,17 @@ angular.module('App')
         }
       },
 
+      //Check if user is already following
+      checkFollow:function(uid,follow_id){
+
+        var follow=false;
+        var ref    = new Firebase(FirebaseUrl+'users/'+uid+'/stat/following/uid/'+follow_id);
+        ref.once("value", function(snapshot) {
+          follow = snapshot.exists();
+        })
+        return follow;
+      },
+
       userRef: function (uid) {
         return usersRef.child(uid)
       },

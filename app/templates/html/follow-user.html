@@ -1,10 +1,21 @@
 <!-- If user doesn't login and is not owner-->
-<md-button class="md-primary md-raised" ng-click="topicCtrl.showAdvanced($event)" flex="100" flex-gt-md="auto">
-  Custom Dialog
-</md-button>
-
-
-<!-- If user doesn't login and is not owner-->
 <button
-  ng-if="topicLandingCtrl.auth.getUid()"
-  class="btn btn-success-outline" >{{ 'KEY_FOLLOW' | translate }}</button>
+  ng-if="!topicCtrl.profile"
+  class="btn btn-success-outline"
+  ng-click="topicCtrl.showMdLogin($event)">
+  {{ 'KEY_FOLLOW' | translate }}</button>
+
+
+<!-- If login but is not currently follow -->
+<button
+  ng-if="topicCtrl.profile && (!topicCtrl.checkFollow(follow))"
+  class="btn btn-success-outline"
+  ng-click="topicCtrl.followUser(follow)">{{ 'KEY_FOLLOW' | translate }}</button>
+
+
+<!-- If user is currently following -->
+<button
+  ng-if="topicCtrl.checkFollow(follow)"
+  class="btn btn-link"
+  ng-click="topicCtrl.unfollowUser(follow)">
+  {{ 'KEY_FOLLOWING' | translate  }}</button>
