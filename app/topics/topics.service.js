@@ -175,6 +175,10 @@ angular.module('App')
         }
       },
 
+      latestFeed:function(){
+        return $firebaseArray(ref.orderByChild("created").limitToLast(10));
+      },
+
       // Return array
       arr: $firebaseArray(ref),
 

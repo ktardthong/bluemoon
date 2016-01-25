@@ -6,6 +6,7 @@
 
         <!-- Type -->
         <span class="pull-left">
+
           <i ng-if="topic.type == 'question'" class="fa fa-question-circle fa-x"></i>
           <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
         </span>
@@ -13,8 +14,9 @@
         <!-- Language -->
         <span class="text-muted">
           <small>
-            <i class="fa fa-globe"></i>
-            {{ topic.lang }}
+            <a ui-sref="category({Slug: topic.category })">
+              {{ topic.category }}
+            </a>
           </small>
         </span>
 
@@ -47,6 +49,14 @@
 
       <p class="card-text">
         {{topic.body | limitTo: 140 }}
+        <!-- Tags -->
+        <div ng-if="topic.tags">
+          <span ng-repeat="tag in topic.tags">
+            <a ui-sref="tag({Tag: tag.text})">
+              #{{tag.text}}
+            </a>
+          </span>
+        </div>
       </p>
 
       <!-- If there is location-->
@@ -65,17 +75,7 @@
       </div>
 
 
-      <!-- Tags -->
-      <div ng-if="topic.tags">
-        <span>
-          <i class="fa fa-tag"></i>
-          {{ 'KEY_TAGS' | translate }}</span>
-        <span ng-repeat="tag in topic.tags">
-          <a ui-sref="tag({Tag: tag.text})">
-            {{tag.text}}
-          </a>
-        </span>
-      </div>
+
 
 
       <!-- Photos -->

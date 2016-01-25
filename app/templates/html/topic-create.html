@@ -46,47 +46,30 @@ $scope:{topic}
 
 
           <!-- Languages -->
-          <select ng-model="topicCtrl.newTopic.lang" class="form-control">
-            <!--<option ng-repeat="lang in topicCtrl.languages"
-                    value="{{lang.$id}}">
-              {{lang.translated_name}}
-            </option>-->
-            <option value="Thai">ภาษาไทย</option>
-            <option value="English">English</option>
-          </select>
+          <div class="form-group">
+            <select ng-model="topicCtrl.newTopic.lang" class="form-control">
+              <option value="">--- {{ 'KEY_LANGUAGES' | translate }} ---</option>
+              <option value="Thai">ภาษาไทย</option>
+              <option value="English">English</option>
+            </select>
+          </div>
 
           <br/>
 
           <!-- Topics -->
-          <input ng-keyup="topicCtrl.checkSlug();topicCtrl.body.show = true"
+          <input ng-keyup="topicCtrl.body.show = true"
                  placeholder="topic"
                  class="form-control"
                  ng-model="topicCtrl.newTopic.topic" autocomplete="off">
 
-          >> {{ topicCtrl.newTopic.topic | slugify | decodeURI}} <<
-
-          <!--
-          <p ng-bind-html="message | smilies"></p>
-          <div class="input-group">
-            <input ng-model="message" focus-on-change="message" class="form-control">
-            <span class="input-group-addon" smilies-selector="message" smilies-placement="right" smilies-title="Smilies"></span>
-          </div>
-          -->
-
-
-          <!-- Check slug -->
-          <div ng-if="topicCtrl.slugReturn != null">
-            <p class="md-caption">Topic already exist</p>
-            <!-- if the topic's slug exist list them here -->
-            <div ng-repeat="data in topicCtrl.slugReturn" class="alert alert-warning">
-              {{data.topic}}
-            </div>
-          </div>
-
           <br/>
 
           <!-- BODY -->
-          <textarea ng-model="topicCtrl.newTopic.body" columns="1" rows="5" class="form-control"></textarea>
+          <textarea ng-model="topicCtrl.newTopic.body"
+                    placeholder="{{ 'KEY_WHT_UR_STORY' | translate }}"
+                    columns="1" rows="5"
+                    class="form-control">
+          </textarea>
 
           <br/>
 

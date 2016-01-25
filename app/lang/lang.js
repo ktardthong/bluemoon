@@ -17,6 +17,7 @@ angular.module('App')
       'KEY_UPVOTED':    'Upvoted',
       'KEY_DWN_VOTE':   'Downvote',
       'KEY_DWN_VOTED':  'Downvoted',
+      'KEY_VIEW':       'View',
       'KEY_REMOVE':     'Remove',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
@@ -30,6 +31,7 @@ angular.module('App')
       'KEY_EDIT':       'Edit',
       'KEY_TREND':      'Trend',
       'KEY_WRITE_REPLY':'Write a reply',
+      'KEY_LATEST_FEED':'Latest Feed',
 
 
       //SENTENCE
@@ -40,6 +42,7 @@ angular.module('App')
       'KEY_NOTHING_HERE':     'Nothing here, yet',
       'KEY_WHO_TO_FOLLOW':    'Who to follow',
       'KEY_CAT_WILL_APPEAR':  'Follow some categories and it will appear here',
+      'KEY_WHT_UR_STORY':     'What\'s your story',
 
       //USER INPUT
       'KEY_FIRSTNAME':  'First name',

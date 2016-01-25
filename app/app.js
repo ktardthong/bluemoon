@@ -84,6 +84,9 @@ angular
                 }, function (error) {
                   return error
                 })
+              },
+              feed: function(Topics){
+                return Topics.latestFeed();
               }
             }
           },

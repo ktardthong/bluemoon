@@ -48,25 +48,32 @@
           </div>
         </div>
 
-      <!-- Footer action -->
+        <!-- Share -->
+      Share here
+        <div class="fb-share-button"
+             data-href="https://developers.facebook.com/docs/plugins/"
+             data-layout="button_count"></div>
+
+        <!-- Footer action -->
         <div class="container" >
           <div class="col-xs-6">
             <topic-actions-card topic='topicLandingCtrl.topicLanding[0]'></topic-actions-card>
           </div>
           <div class="col-xs-6 text-muted">
-              views: {{topicLandingCtrl.views.count || '0' }}
+              {{ 'KEY_DWN_VOTE' | translate }}: {{topicLandingCtrl.views.count || '0' }}
               &bull;
-              followers: {{topicLandingCtrl.followers.count || '0' }}
+              {{ 'KEY_FOLLOWER' | translate }}: {{topicLandingCtrl.followers.count || '0' }}
               <a ui-sref="category({Slug: topicLandingCtrl.topicLanding[0].category})">
                 {{topicLandingCtrl.topicLanding[0].category}}
               </a>
           </div>
         </div>
+
     </div>
 
 
     <!-- Author section -->
-    <div class="media card md-padding" ng-controller="TopicCtrl as topicCtrl">
+    <div class="media md-padding" ng-controller="TopicCtrl as topicCtrl">
 
       <div class="media-left">
         <a href="#">
@@ -77,7 +84,6 @@
       </div>
 
       <div class="media-body">
-
         <p class="media-heading">
             <b>
               <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topicLandingCtrl.topicLanding[0].uid) })">
