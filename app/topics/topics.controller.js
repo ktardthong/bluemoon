@@ -220,8 +220,16 @@ angular.module('App')
           userIP:        topicCtrl.newTopic.ipInfo
         }).then(function(topic){
 
+          var slugText ='';
+          //if we are unable to convert to slug then we use the topic text, else use slug
+          if(Slug.slugify(topicCtrl.newTopic.topic) ==''){
+            slugText = topicCtrl.newTopic.topic;
+          }else{
+            slugText = Slug.slugify(topicCtrl.newTopic.topic);
+          }
+
           //Update slug with topic Key
-          topicCtrl.topics.getTopicByKey(topic.key()).update({"slug":topicCtrl.newTopic.topic+topic.key()});
+          topicCtrl.topics.getTopicByKey(topic.key()).update({"slug":slugText+topic.key()});
 
           //Stat update
           topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/count')
