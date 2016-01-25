@@ -69,7 +69,20 @@ angular
     }
   )
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider,
+                    $urlMatcherFactoryProvider){
+    function valToString(val) {
+      console.log(val);
+      return val !== null ? val.toString() : val;
+    }
+
+    $urlMatcherFactoryProvider.type('nonURIEncoded', {
+      encode: valToString,
+      decode: valToString,
+      //is: function () { return true; }
+      is: angular.isString
+    })
+
     $stateProvider
       .state('home', {
         url: '/',
@@ -202,7 +215,7 @@ angular
 
       // Topic landing page
       .state('topic', {
-        url: '/:Slug',
+        url: '/{Slug:nonURIEncoded}',
         resolve:{
           Slug:function($stateParams){
             console.log(decodeURIComponent($stateParams.Slug));

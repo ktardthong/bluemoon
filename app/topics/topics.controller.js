@@ -131,6 +131,7 @@ angular.module('App')
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
         uid:      topicCtrl.uid,
+        review:   topicCtrl.criteria,
         created:  moment().toISOString()
       })
 
@@ -225,7 +226,7 @@ angular.module('App')
           userIP:         topicCtrl.newTopic.ipInfo,
           review:         topicCtrl.reviewCriteria,
         }).then(function(topic){
-         
+
           var slugText ='';
           //if we are unable to convert to slug then we use the topic text, else use slug
           if(Slug.slugify(topicCtrl.newTopic.topic) ==''){
