@@ -32,6 +32,7 @@ angular.module('App')
       'KEY_EXPLORE':    'Explore',
       'KEY_COMMENTS':   'Comments',
       'KEY_REPLY':      'Reply',
+      'KEY_REVIEW':     'Review',
       'KEY_EDIT':       'Edit',
       'KEY_TREND':      'Trend',
       'KEY_WRITE_REPLY':'Write a reply',
@@ -39,6 +40,7 @@ angular.module('App')
 
 
       //SENTENCE
+      'KEY_WHAT_ON_UR_MIND':  'What\'s on your mind?',
       'KEY_YOU_WANT_FOLLOW':  'You may want to follow',
       'KEY_NO_ACCT_REGISTER': 'Don\'t have account? Register',
       'KEY_CANT_CHNG_USER':   'Don\'t have account? Register',

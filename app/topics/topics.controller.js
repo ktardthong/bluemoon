@@ -153,11 +153,16 @@ angular.module('App')
     }
 
 
-    //Check slug
-    topicCtrl.checkSlug =function(){
-      topicCtrl.slugReturn =  topicCtrl.topics.getSlug(topicCtrl.newTopic.topic);
-      console.log(topicCtrl.slugReturn);
-    }
+    topicCtrl.reviewCriteria = [{id: 'choice1'}, {id: 'choice2'}];
+    topicCtrl.addNewChoice = function() {
+      var newItemNo = topicCtrl.reviewCriteria.length+1;
+      topicCtrl.reviewCriteria.push({'id':'criteria'+newItemNo});
+    };
+
+    topicCtrl.removeChoice = function() {
+      var lastItem = topicCtrl.reviewCriteria.length-1;
+      topicCtrl.reviewCriteria.splice(lastItem);
+    };
 
 
     //Create new topic
@@ -217,9 +222,10 @@ angular.module('App')
           draft:          isDraft,
           created:        moment().toISOString(),
           tags:           topicCtrl.newTopic.tags,
-          userIP:        topicCtrl.newTopic.ipInfo
+          userIP:         topicCtrl.newTopic.ipInfo,
+          review:         topicCtrl.reviewCriteria,
         }).then(function(topic){
-
+         
           var slugText ='';
           //if we are unable to convert to slug then we use the topic text, else use slug
           if(Slug.slugify(topicCtrl.newTopic.topic) ==''){
