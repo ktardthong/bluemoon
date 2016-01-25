@@ -59,6 +59,35 @@ angular.module('App')
         return follow;
       },
 
+      userChangePassword:function(email,oldpass,newpass){
+
+        console.log('email '+email);
+        console.log('oldpass '+oldpass);
+        console.log('newpass '+newpass);
+
+        var ref = new Firebase(FirebaseUrl);
+        ref.changePassword({
+          email: email,
+          oldPassword: oldpass,
+          newPassword: newpass
+        }, function(error) {
+          if (error) {
+            switch (error.code) {
+              case "INVALID_PASSWORD":
+                console.log("The specified user account password is incorrect.");
+                break;
+              case "INVALID_USER":
+                console.log("The specified user account does not exist.");
+                break;
+              default:
+                console.log("Error changing password:", error);
+            }
+          } else {
+            console.log("User password changed successfully!");
+          }
+        });
+      },
+
       userRef: function (uid) {
         return usersRef.child(uid)
       },

@@ -1,0 +1,38 @@
+<h1>{{ 'KEY_CHG_PWD' | translate }}</h1>
+
+
+
+<div class="inner-container" ng-controller="TopicCtrl as topicCtrl">
+  <form ng-submit="topicCtrl.users.userChangePassword(topicCtrl.auth.ref.getAuth().password.email,oldPassword,newPassword)">
+    <fieldset class="form-group">
+      <div class="form-group">
+        <label for="oldpasswd">{{ 'KEY_OLD_PWD' | translate }}</label>
+        <input type="password" class="form-control" id="oldpasswd"
+               ng-model="oldPassword"
+               placeholder="{{ 'KEY_OLD_PWD' | translate }}">
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <div class="form-group">
+        <label for="newpasswd">{{ 'KEY_NEW_PWD' | translate }}</label>
+        <input type="password" class="form-control" id="newpasswd"
+               ng-model="newPassword"
+               placeholder="{{ 'KEY_NEW_PWD' | translate }}">
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <div class="form-group">
+        <label for="newpasswd_c">{{ 'KEY_NEW_PWD_C' | translate }}</label>
+        <input type="password" class="form-control" id="newpasswd_c"
+               placeholder="{{ 'KEY_NEW_PWD_C' | translate }}">
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">{{ 'KEY_SAVE' | translate }}</button>
+
+  </form>
+
+
+</div>

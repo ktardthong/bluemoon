@@ -18,6 +18,7 @@ angular.module('App')
     profileCtrl.userPosts = userPosts;
 
     profileCtrl.feed = '';
+    profileCtrl.editInit = 'userEdit';
 
     profileCtrl.nameExist= false;
 

@@ -7,86 +7,19 @@
   <div class="col-sm-4">
     <h5>{{ 'KEY_YOUR_ACCOUNT' | translate }}</h5>
     <div class="list-group" ng-controller="AuthCtrl as authCtrl">
-      <a href="#" class="list-group-item">{{ 'KEY_ED_PROFILE' | translate }}</a>
-      <a href="#" class="list-group-item">{{ 'KEY_ED_CHG_PWD' | translate }}</a>
-      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+      <a ng-click="profileCtrl.editInit='userEdit'"
+         class="list-group-item hand">{{ 'KEY_ED_PROFILE' | translate }}</a>
+      <a ng-click="profileCtrl.editInit='passwordEdit'"
+         class="list-group-item hand">{{ 'KEY_ED_CHG_PWD' | translate }}</a>
+      <a href="#"
+         class="list-group-item">Porta ac consectetur ac</a>
       <a ng-click="authCtrl.logout()" class="list-group-item hand">{{ 'KEY_LOGOUT' | translate }} </a>
     </div>
   </div>
 
   <div class="col-sm-8">
-
-    <h1>{{ 'KEY_EDIT' | translate }}</h1>
-
-    <div class="inner-container">
-      <form ng-submit="profileCtrl.saveProfile()">
-        <fieldset class="form-group col-sm-6">
-          <label for="formfirstname">{{ 'KEY_FIRSTNAME' | translate }}</label>
-          <input type="text" class="form-control" id="formfirstname"
-                 ng-model="profileCtrl.profile.firstname"
-                 placeholder="{{ 'KEY_FIRSTNAME' | translate }}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-6">
-          <label for="formlastname">{{ 'KEY_LASTNAME' | translate }}</label>
-          <input type="text" class="form-control" id="formlastname"
-                 ng-model="profileCtrl.profile.lastname"
-                 placeholder="{{ 'KEY_LASTNAME' | translate }}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label for="formlocation">{{ 'KEY_LOCATION' | translate }}</label>
-          <input type="text" class="form-control"
-                 id="formlocation"
-                 placeholder="{{ 'KEY_LOCATION' | translate}}"
-                 ng-autocomplete
-                 ng-model = "profileCtrl.profile.userLocation.name"
-                 details  = "profileCtrl.location.details"
-                 options  = "{ types: '(cities)'}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label for="formemail">{{ 'KEY_EMAIL' | translate }}</label>
-          <input type="email" class="form-control" id="formemail"
-                 ng-model="profileCtrl.profile.email"
-                 placeholder="{{ 'KEY_EMAIL' | translate }}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label for="formphone">{{ 'KEY_ED_PHONE' | translate }}</label>
-          <input type="number" class="form-control" id="formphone"
-                 ng-model="profileCtrl.profile.phone"
-                 placeholder="{{ 'KEY_ED_PHONE' | translate }}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label>{{ 'KEY_GENDER' | translate }}</label>
-          <select ng-model="profileCtrl.profile.gender" class="form-control">
-            <option value="female">{{ 'KEY_FEMALE' | translate }}</option>
-            <option value="male">{{ 'KEY_MALE' | translate }}</option>
-          </select>
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label for="formsite">{{ 'KEY_ED_SITE' | translate }}</label>
-          <input type="text" class="form-control" id="formsite"
-                 ng-model="profileCtrl.profile.website"
-                 placeholder="{{ 'KEY_ED_SITE' | translate }}">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-12">
-          <label for="formbio">{{ 'KEY_ED_BIO' | translate }}</label>
-          <textarea ng-model="profileCtrl.profile.biography"
-                    class="form-control"
-                    id="formbio"
-                    rows="3"></textarea>
-        </fieldset>
-
-        <button class="btn btn-success">{{ 'KEY_SAVE' | translate }}</button>
-
-      </form>
-    </div>
-
+    <div ui-view="userEdit" ng-hide></div>
+    <div ui-view="passwordEdit"></div>
   </div>
 
 </section>

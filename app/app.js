@@ -351,6 +351,14 @@ angular
       .state('acccountEdit', {
         url: '/account/edit',
         views: {
+          'passwordEdit@acccountEdit':{
+            url: '/account/changePassword',
+            templateUrl: 'profile/passwd.html'
+          },
+          'userEdit@acccountEdit':{
+            url: '/account/edit-form',
+            templateUrl: 'profile/edit-form.html'
+          },
           '': {
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/edit.html',
@@ -387,6 +395,18 @@ angular
           }
 
         }
+      })
+
+
+
+      .state('accountPassword',{
+        url: '/account/changePassword',
+        templateUrl: 'profile/passwd.html'
+      })
+
+      .state('accountUserEdit',{
+        url: '/account/edit-form',
+        templateUrl: 'profile/edit-form.html'
       })
 
 
