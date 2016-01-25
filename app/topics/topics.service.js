@@ -45,7 +45,9 @@ angular.module('App')
         return ref.orderByChild('slug').equalTo(topic_slug)
       },
 
-      getKey: function (topic_slug) {},
+      getTopicByKey: function (topic_key) {
+        return new Firebase(FirebaseUrl + 'topics/'+topic_key);
+      },
 
       getTopicBySlug: function (topic_slug) {
         return $firebaseArray(ref.orderByChild('slug').equalTo(topic_slug).limitToFirst(1))

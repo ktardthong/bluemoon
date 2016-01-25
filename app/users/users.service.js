@@ -61,10 +61,6 @@ angular.module('App')
 
       userChangePassword:function(email,oldpass,newpass){
 
-        console.log('email '+email);
-        console.log('oldpass '+oldpass);
-        console.log('newpass '+newpass);
-
         var ref = new Firebase(FirebaseUrl);
         ref.changePassword({
           email: email,

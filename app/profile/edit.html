@@ -2,24 +2,34 @@
 
 <div class="container margin-top  animated slideInUp">
 
-<section class="gray-background">
+<section class="gray-background" ng-controller="TopicCtrl as topicCtrl">
 
   <div class="col-sm-4">
     <h5>{{ 'KEY_YOUR_ACCOUNT' | translate }}</h5>
+
     <div class="list-group" ng-controller="AuthCtrl as authCtrl">
-      <a ng-click="profileCtrl.editInit='userEdit'"
+
+      <a ng-click="topicCtrl.userEditShow=true; topicCtrl.userPasswordShow=false"
          class="list-group-item hand">{{ 'KEY_ED_PROFILE' | translate }}</a>
-      <a ng-click="profileCtrl.editInit='passwordEdit'"
+
+      <a ng-click="topicCtrl.userEditShow=false; topicCtrl.userPasswordShow=true"
          class="list-group-item hand">{{ 'KEY_ED_CHG_PWD' | translate }}</a>
-      <a href="#"
-         class="list-group-item">Porta ac consectetur ac</a>
+
       <a ng-click="authCtrl.logout()" class="list-group-item hand">{{ 'KEY_LOGOUT' | translate }} </a>
+
     </div>
   </div>
 
   <div class="col-sm-8">
-    <div ui-view="userEdit" ng-hide></div>
-    <div ui-view="passwordEdit"></div>
+
+    <div ui-view="userEdit"
+         ng-show="topicCtrl.userEditShow"
+         ng-init="topicCtrl.userEditShow = true"></div>
+
+    <div ui-view="passwordEdit"
+         ng-show="topicCtrl.userPasswordShow"
+         ng-init="topicCtrl.userPasswordShow=false"></div>
+
   </div>
 
 </section>

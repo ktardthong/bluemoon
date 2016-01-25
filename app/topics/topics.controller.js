@@ -220,6 +220,9 @@ angular.module('App')
           userIP:        topicCtrl.newTopic.ipInfo
         }).then(function(topic){
 
+          //Update slug with topic Key
+          topicCtrl.topics.getTopicByKey(topic.key()).update({"slug":topicCtrl.newTopic.topic+topic.key()});
+
           //Stat update
           topicCtrl.users.userRef(topicCtrl.uid).child('stat/posted/count')
             .set(topicCtrl.profile.stat.posted.count + 1);
