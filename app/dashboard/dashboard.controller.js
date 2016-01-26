@@ -17,16 +17,9 @@ angular.module('App')
 
     //Close Side bar
     dashboardCtrl.close = function () {
-      $mdSidenav('right').close()
-        .then(function () {
-          $log.debug("close RIGHT is done");
-        });
+      $mdSidenav('right').close();
     };
 
-
-    dashboardCtrl.unfollowCate =function(cate_slug){
-
-    }
 
     dashboardCtrl.followCate = function(cate_slug){
       dashboardCtrl.cate.addChild(cate_slug+'/follower')

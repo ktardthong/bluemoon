@@ -57,12 +57,13 @@ angular.module('App')
 
 
     //Preset Parameters
-    topicCtrl.imageStrings = [];
-    topicCtrl.imageText    = [];
+    topicCtrl.imageStrings  = [];
+    topicCtrl.imageText     = [];
     topicCtrl.inReplyArr    = [];
-    topicCtrl.loadBusy = false;
-    topicCtrl.slugReturn   = null;
-    topicCtrl.newTopic = {
+    topicCtrl.loadBusy      = false;
+    topicCtrl.slugReturn    = null;
+    topicCtrl.criteria      = false;
+    topicCtrl.newTopic      = {
       'location': '',
       'url' : '',
       'ipInfo': '',
@@ -122,7 +123,6 @@ angular.module('App')
         var fileReader = new FileReader();
         fileReader.onload = function (event) {
           var uri = event.target.result;
-          console.log(uri);
           topicCtrl.imageStrings[i] = uri;
         };
         fileReader.readAsDataURL(flowFile.file);
@@ -163,18 +163,6 @@ angular.module('App')
     //Reply to topic
     topicCtrl.reply = function(topicId){
 
-      topicCtrl.topics.replyCount(topicId).$loaded().then(function(data){
-        if(!data.count){
-
-          topicCtrl.topics.replyCountRef(topicId).set(1);
-        }else{
-          console.log('increment here');
-          topicCtrl.topics.replyCountRef(topicId)
-            .set(data.count +1);
-        }
-
-      });
-
 
       topicCtrl.topics.replyArr(topicId).$add({
         topicId:  topicId,
@@ -184,7 +172,18 @@ angular.module('App')
         created:  moment().toISOString()
       })
 
-      //Stat update
+      topicCtrl.topics.replyCount(topicId).$loaded().then(function(data){
+        if(!data.count){
+          topicCtrl.topics.replyCountRef(topicId).set(1);
+        }else{
+          console.log('increment here');
+          topicCtrl.topics.replyCountRef(topicId)
+            .set(data.count +1);
+        }
+
+      });
+
+      //Stat update for user
       topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/count')
         .set(topicCtrl.profile.stat.comment.count + 1);
 

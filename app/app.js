@@ -70,7 +70,6 @@ angular
 
   //Security for Translate
   .config(function ($translateProvider) {
-    //$translateProvider.translations('Eng', translations);
     $translateProvider.preferredLanguage('Eng');
     // Enable escaping of HTML
     $translateProvider.useSanitizeValueStrategy('escape');

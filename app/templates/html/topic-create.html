@@ -122,10 +122,10 @@ $scope:{topic}
           <div flow-init
                flow-name="topicCtrl.uploader.flow"
                flow-files-added="topicCtrl.uploadFile($files)">
-            <md-button
-                       class="md-primary md-fab md-mini ion-camera"
-                       flow-btn></md-button>
-
+              <md-button
+                aria-label=""
+               class="md-primary md-fab md-mini ion-camera"
+               flow-btn></md-button>
           </div>
 
           <!-- Location input -->
@@ -140,14 +140,6 @@ $scope:{topic}
                    ng-model = "topicCtrl.newTopic.location.query"
                    details  = "topicCtrl.newTopic.location.details"
                    options  = "topicCtrl.newTopic.location.options">
-
-
-
-          <!-- URL input -->
-          <!--<md-button aria-label="Link" class="md-primary md-fab md-mini ion-link" ng-click="urlInput=true"></md-button>
-          <md-input-container ng-show="urlInput" ng-init="urlInput=false">
-            <input aria-label="URL" ng-model="topicCtrl.newTopic.url">
-          </md-input-container>-->
 
 
           <!-- Save as draft -->

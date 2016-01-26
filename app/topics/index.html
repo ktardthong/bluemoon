@@ -124,9 +124,6 @@
     </div>
 
 
-
-    <h5>{{ 'KEY_COMMENTS' | translate }}</h5>
-
     <!-- Reply form -->
     <div ng-controller="TopicCtrl as topicCtrl" ng-if="topicLandingCtrl.auth.getUid()">
       <div class="media card md-padding">
@@ -157,12 +154,15 @@
       </div>
     </div>
 
-
+    <h5>
+      {{ 'KEY_COMMENTS' | translate }}
+      {{ topicLandingCtrl.topicLanding[0].replies.count }}
+    </h5>
     <!-- Reply body list-->
     <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "
           ng-controller="TopicCtrl as topicCtrl">
 
-      <div class="media card md-padding">
+      <div class="media card md-padding" ng-if="reply.body">
         <div class="media-left">
           <a href="#">
             <img ng-src="{{ topicCtrl.users.profile(reply.uid).photo }}"
