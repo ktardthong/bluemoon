@@ -18,6 +18,10 @@ angular.module('App')
         return ref.child(tag);
       },
 
+      getTagObject:function(tag){
+        return $firebaseObject(ref.child(tag))
+      },
+
       topicTags:function(tag){
         var deferred = $q.defer();
 

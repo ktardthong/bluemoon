@@ -159,7 +159,7 @@
 
 
     <!-- Reply body list-->
-    <div  ng-repeat="reply in topicLandingCtrl.replyList track by $index | orderBy:'-created' "
+    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "
           ng-controller="TopicCtrl as topicCtrl">
 
       <div class="media card md-padding">

@@ -22,10 +22,10 @@ angular
     'cgNotify', // Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
     'facebook', // Facebook - https://github.com/Ciul/angular-facebook
-    'angular-web-notification', //https://github.com/sagiegurari/angular-web-notification
-    'angular-flexslider', //Image slider - https://github.com/thenikso/angular-flexslider
+    'angular-web-notification', // https://github.com/sagiegurari/angular-web-notification
+    'angular-flexslider', // Image slider - https://github.com/thenikso/angular-flexslider
 
-    //Emoticon -- http://mistic100.github.io/angular-smilies/
+    // Emoticon -- http://mistic100.github.io/angular-smilies/
     'ngSanitize',
     'ui.bootstrap', // OR mgcrea.ngStrap
     'angular-smilies',
@@ -59,17 +59,16 @@ angular
       .primaryPalette('slack')
   })
 
-
-  //Facebook Config
+  // Facebook Config
   .config(
     function (FacebookProvider) {
       var myAppId = '931376120263856'
       FacebookProvider.setAppId(myAppId)
       FacebookProvider.init(myAppId)
     }
-  )
+)
 
-  .config(function ($stateProvider, $urlRouterProvider){
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -85,8 +84,8 @@ angular
                   return error
                 })
               },
-              feed: function(Topics){
-                return Topics.latestFeed();
+              feed: function (Topics) {
+                return Topics.latestFeed()
               }
             }
           },
@@ -101,8 +100,7 @@ angular
         }
       })
 
-
-      //Category Landing
+      // Category Landing
       .state('category', {
         url: '/category/{Slug}',
         views: {
@@ -127,86 +125,106 @@ angular
         }
       })
 
-
-      //Places landing page
-      .state('places',{
+      // Places landing page
+      .state('places', {
         url: '/places/{place_slug}/{place_id}',
         views: {
           'header@places': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
           },
-          '':{
+          '': {
             controller: 'PlacesCtrl as placesCtrl',
             templateUrl: 'place/index.html',
-            resolve:{
-              placeLanding:function(Places,Topics,$stateParams,$firebaseArray){
-                var data;
-                Places.getPlaceRef($stateParams.place_id).on("value", function(snapshot) {
-                  data = snapshot.val();
-                  console.log(snapshot.val());
-                });
-                return data;
-                //return  $firebaseArray(Places.getPlaceRef($stateParams.place_id));
+            resolve: {
+              placeLanding: function (Places, Topics, $stateParams, $firebaseArray) {
+                var data
+                Places.getPlaceRef($stateParams.place_id).on('value', function (snapshot) {
+                  data = snapshot.val()
+                  console.log(snapshot.val())
+                })
+                return data
+              // return  $firebaseArray(Places.getPlaceRef($stateParams.place_id))
               }
             }
           }
         }
       })
 
-
-      //Tag landing page
-      .state('tag',{
+      // Tag landing page
+      .state('tag', {
         url: '/tag/{Tag}',
         views: {
           'header@tag': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/toolbar/main_toolbar.html'
           },
-          '':{
+          '': {
             controller: 'TagCtrl as tagCtrl',
             templateUrl: 'tag/index.html',
-            resolve:{
-
-              tagName: function($stateParams){
-                return $stateParams.Tag;
+            resolve: {
+              tagName: function ($stateParams) {
+                return $stateParams.Tag
               },
 
-              tagLanding:function(Tags,Topics,$stateParams,$firebaseObject, $firebaseArray,FirebaseUrl){
-
-                var tag = $stateParams.Tag;
-                var fb = new Firebase(FirebaseUrl);
-                var dataRet= '';
-
-                return show(Tags.topicTags(tag));
+              tagLanding: function (Topics, $stateParams, Tags) {
+                var tag = $stateParams.Tag
+                // var fb = new Firebase(FirebaseUrl)
+                // var dataRet = ''
+                // return show(Tags.topicTags(tag))
                 /*return fb.child('tags/' + tag)
                     .on('value', function (tagSnap) {
                       return fb.child('topics')
                         .orderByChild("tags")
                         .equalTo(tag)
                         .on('value', function (topicSnap) {
-                          return show( extend({}, tagSnap.val(), topicSnap.val()) );
-                          /!*dataRet = extend({}, tagSnap.val(), topicSnap.val());
-                          console.log($firebaseArray(dataRet));
-                          return dataRet;
+                          return show( extend({}, tagSnap.val(), topicSnap.val()) )
+                          /!*dataRet = extend({}, tagSnap.val(), topicSnap.val())
+                          console.log($firebaseArray(dataRet))
+                          return dataRet
                            *!/
-                        });
+                        })
                     })*/
+                // var tagObj = Tags.getTagObject(tag)
+                // return tagObj.$loaded().then(function () {
+                //   return Topics.topicsByTag(tag).once('value', function (snap) {
+                //     console.log(extend({}, tagObj.$value, snap.val()))
+                //     return extend({}, tagObj.$value, snap.val())
+                //   })
+                // })
+
+                // return new Promise(function(resolve, reject) { 
+                //     fb.once('value', function(snapshot) {
+                //         var data = snapshot.val()
+                //         data.forEach(function(dataSnap) {
+                //             var index = word.indexOf(' ')
+                //             var first = dataSnap.Name.substring(0, index)
+                //             var last = word.substring(index + 1)
+                //             var candidate = dataSnap.Name
+                //             if (candidate.indexOf(first) >= 0 && candidate.indexOf(last) >= 0)
+                //               resolve(dataSnap.CID)
+                //             else
+                //               reject('Some sort of failure')
+                //         })
+                //     })
+                // })
+
+                return Topics.topicsByTag(tag)
+              // .once('value', function(snap){
+              // })
               }
             }
           }
         }
       })
 
-
-
       // Topic landing page
       .state('topic', {
         url: '/{Slug}',
-        resolve:{
-          Slug:function($stateParams){
-            console.log(decodeURIComponent($stateParams.Slug));
-            $stateParams.Slug = decodeURIComponent($stateParams.Slug);
+        resolve: {
+          Slug: function ($stateParams) {
+            console.log(decodeURIComponent($stateParams.Slug))
+            $stateParams.Slug = decodeURIComponent($stateParams.Slug)
           }
         },
         views: {
@@ -214,23 +232,22 @@ angular
             controller: 'TopicLandingCtrl as topicLandingCtrl',
             templateUrl: 'topics/index.html',
             resolve: {
-              isOwner: function(Auth,Users,$stateParams,Topics){
-                var topicUid = '';
-                //If user login, check if they are the topic owner
-                if(Auth.ref.getAuth()){
+              isOwner: function (Auth, Users, $stateParams, Topics) {
+                var topicUid = ''
+                // If user login, check if they are the topic owner
+                if (Auth.ref.getAuth()) {
                   return Topics.fortopic($stateParams.Slug).$loaded().then(function (data) {
                     if (data[0] != null) {
                       topicUid = data[0].uid
-                      if(Auth.ref.getAuth().uid == topicUid )
-                      {
-                        return true;
-                      }else{
-                        return false;
+                      if (Auth.ref.getAuth().uid == topicUid) {
+                        return true
+                      } else {
+                        return false
                       }
                     }
-                  });
-                }else{
-                  return false;
+                  })
+                } else {
+                  return false
                 }
               },
               topicLanding: function ($stateParams, Topics) {
@@ -294,12 +311,10 @@ angular
         }
       })
 
-
       // Topic not found
       .state('topic-notfound', {
         url: '/err/notfound'
       })
-
 
       // Profile landing page
       .state('profile', {
@@ -309,30 +324,30 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/index.html',
             resolve: {
-              isOwner: function(Auth,Users,$stateParams){
-                if(Auth.ref.getAuth()) {
+              isOwner: function (Auth, Users, $stateParams) {
+                if (Auth.ref.getAuth()) {
                   return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
                     if (profile[0].$id == Auth.ref.getAuth().uid) {
-                      return true;
+                      return true
                     } else {
-                      return false;
+                      return false
                     }
                   })
-                }else{
-                  return false;
+                } else {
+                  return false
                 }
               },
-              userPosts: function(Users,Topics,$stateParams){
+              userPosts: function (Users, Topics, $stateParams) {
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
-                  if(profile[0].$id){
-                    return Topics.createdBy(profile[0].$id);
+                  if (profile[0].$id) {
+                    return Topics.createdBy(profile[0].$id)
                   }
-                });
+                })
               },
-              profile: function ($state,$stateParams, $rootScope, Auth, Users) {
+              profile: function ($state, $stateParams, $rootScope, Auth, Users) {
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
-                  return profile;
-                });
+                  return profile
+                })
               }
             }
           },
@@ -344,17 +359,16 @@ angular
         }
       })
 
-
       // Profile landing page
       // @profileCtrl
       .state('acccountEdit', {
         url: '/account/edit',
         views: {
-          'passwordEdit@acccountEdit':{
+          'passwordEdit@acccountEdit': {
             url: '/account/changePassword',
             templateUrl: 'profile/passwd.html'
           },
-          'userEdit@acccountEdit':{
+          'userEdit@acccountEdit': {
             url: '/account/edit-form',
             templateUrl: 'profile/edit-form.html'
           },
@@ -362,11 +376,11 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'profile/edit.html',
             resolve: {
-              userPosts:function(){
-                return false;
+              userPosts: function () {
+                return false
               },
-              isOwner: function(){
-                return true;
+              isOwner: function () {
+                return true
               },
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
@@ -396,18 +410,15 @@ angular
         }
       })
 
-
-
-      .state('accountPassword',{
+      .state('accountPassword', {
         url: '/account/changePassword',
         templateUrl: 'profile/passwd.html'
       })
 
-      .state('accountUserEdit',{
+      .state('accountUserEdit', {
         url: '/account/edit-form',
         templateUrl: 'profile/edit-form.html'
       })
-
 
       // Dashboard
       // @profileCtrl
@@ -416,29 +427,28 @@ angular
         controller: 'DashboardCtrl as dashboardCtrl',
         views: {
           '': {
-            controller:   'ProfileCtrl as profileCtrl',
-            templateUrl:  'dashboard/index.html',
+            controller: 'ProfileCtrl as profileCtrl',
+            templateUrl: 'dashboard/index.html',
             resolve: {
-              userPosts:function(){
-                return false;
+              userPosts: function () {
+                return false
               },
-              isOwner: function(){
-                return true;
+              isOwner: function () {
+                return true
               },
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded().then(function (profile) {
-
-                    //if no stat object
-                    if(!profile.stat){
-                      Users.userRef(auth.uid).child('stat/upvoted/count').set(0);
-                      Users.userRef(auth.uid).child('stat/posted/count').set(0);
-                      Users.userRef(auth.uid).child('stat/comment/count').set(0);
-                      Users.userRef(auth.uid).child('stat/follower/count').set(0);
-                      Users.userRef(auth.uid).child('stat/following/count').set(0);
+                    // if no stat object
+                    if (!profile.stat) {
+                      Users.userRef(auth.uid).child('stat/upvoted/count').set(0)
+                      Users.userRef(auth.uid).child('stat/posted/count').set(0)
+                      Users.userRef(auth.uid).child('stat/comment/count').set(0)
+                      Users.userRef(auth.uid).child('stat/follower/count').set(0)
+                      Users.userRef(auth.uid).child('stat/following/count').set(0)
                     }
 
-                    //if no displayname - go to get_started
+                    // if no displayname - go to get_started
                     if (profile.displayName) {
                       return profile
                     } else {
@@ -464,7 +474,6 @@ angular
         }
       })
 
-
       // Folllow Category
       // @profileCtrl
       .state('follow_cates', {
@@ -474,11 +483,11 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'auth/follow-categories.html',
             resolve: {
-              userPosts:function(){
-                return false;
+              userPosts: function () {
+                return false
               },
-              isOwner: function(){
-                return true;
+              isOwner: function () {
+                return true
               },
               profile: function (Users, Auth) {
                 return Auth.auth.$requireAuth().then(function (auth) {
@@ -499,8 +508,7 @@ angular
         }
       })
 
-
-      //Getting started
+      // Getting started
       // @profileCtrl
       .state('get_started', {
         url: '/user/get_started',
@@ -509,11 +517,11 @@ angular
             controller: 'ProfileCtrl as profileCtrl',
             templateUrl: 'auth/get_started.html',
             resolve: {
-              userPosts:function(){
-                return false;
+              userPosts: function () {
+                return false
               },
-              isOwner: function(){
-                return true;
+              isOwner: function () {
+                return true
               },
               profile: function (Users, Auth) {
                 return Auth.auth.$requireAuth().then(function (auth) {
@@ -533,8 +541,6 @@ angular
           }
         }
       })
-
-
 
       .state('login', {
         url: '/user/login',
@@ -593,40 +599,37 @@ angular
     }
   })
 
-
-  .filter('decodeURI',function(){
-    return function(text){
-      return text ? decodeURI(text) : '';
+  .filter('decodeURI', function () {
+    return function (text) {
+      return text ? decodeURI(text) : ''
     }
   })
 
-
-  //Formatting texts to include new line
+  // Formatting texts to include new line
   .filter('nl2br', function ($sce) {
     return function (text) {
-      return text ? $sce.trustAsHtml(text.replace(/\n/g, '<br/>')) : '';
-    };
+      return text ? $sce.trustAsHtml(text.replace(/\n/g, '<br/>')) : ''
+    }
   })
 
   .constant('FirebaseUrl', 'https://bmxyz.firebaseio.com/')
 
+function show (data) {
+  console.log(data)
+  return JSON.stringify(data, null, 2)
+}
 
-  function show(data) {
-    console.log(data);
-    return JSON.stringify(data, null, 2);
-  }
-
-  //for joining - https://gist.github.com/katowulf/6598238
-  function extend(base) {
-      var parts = Array.prototype.slice.call(arguments, 1);
-      parts.forEach(function (p) {
-        if (p && typeof (p) === 'object') {
-          for (var k in p) {
-            if (p.hasOwnProperty(k)) {
-              base[k] = p[k];
-            }
-          }
+// for joining - https://gist.github.com/katowulf/6598238
+function extend (base) {
+  var parts = Array.prototype.slice.call(arguments, 1)
+  parts.forEach(function (p) {
+    if (p && typeof (p) === 'object') {
+      for (var k in p) {
+        if (p.hasOwnProperty(k)) {
+          base[k] = p[k]
         }
-      });
-      return base;
+      }
     }
+  })
+  return base
+}

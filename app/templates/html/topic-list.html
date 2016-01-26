@@ -50,9 +50,9 @@
         {{topic.body | limitTo: 140 }}
         <!-- Tags -->
         <div ng-if="topic.tags">
-          <span ng-repeat="tag in topic.tags">
-            <a ui-sref="tag({Tag: tag.text})">
-              #{{tag.text}}
+          <span ng-repeat="t in topic.tags">
+            <a ui-sref="tag({Tag: t.text})">
+              #{{t.text}}
             </a>
           </span>
         </div>

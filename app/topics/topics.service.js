@@ -7,10 +7,9 @@ angular.module('App')
     var topicKey = ''
 
     var Topics = {
-
       // Get topic tag
       getTag: function (tag) {
-        return $firebaseArray(ref.orderByChild('tags').equalTo(tag));
+        return $firebaseArray(ref.orderByChild('tags').equalTo(tag))
       },
 
       // Get topic slug
@@ -21,15 +20,13 @@ angular.module('App')
 
       // Getting the list of topics created by user_id
       createdBy: function (uid) {
-        return $firebaseArray(ref.orderByChild('uid').equalTo(uid));
+        return $firebaseArray(ref.orderByChild('uid').equalTo(uid))
 
       },
-      refChild:function(child){
-        return ref.child(child);
+      refChild: function (child) {
+        return ref.child(child)
       },
-      countUserTopics:function(){
-
-      },
+      countUserTopics: function () {},
 
       // Getting the list of topic base on category
       list: function (category) {
@@ -48,7 +45,7 @@ angular.module('App')
       },
 
       getTopicByKey: function (topic_key) {
-        return new Firebase(FirebaseUrl + 'topics/'+topic_key);
+        return new Firebase(FirebaseUrl + 'topics/' + topic_key)
       },
 
       getTopicBySlug: function (topic_slug) {
@@ -70,26 +67,25 @@ angular.module('App')
 
       // Reply Array
       replyArr: function (topicId) {
-        return $firebaseArray(ref.child(topicId + '/replies'));
+        return $firebaseArray(ref.child(topicId + '/replies'))
       },
 
-      //Reply count
-      replyCount: function(topicId){
-        return $firebaseObject(ref.child(topicId + '/replies/'));
+      // Reply count
+      replyCount: function (topicId) {
+        return $firebaseObject(ref.child(topicId + '/replies/'))
       },
-      replyCountRef: function(topicId){
-        return ref.child(topicId + '/replies/count');
-      },
-
-      replyInReply:function(topicId,replyId){
-        return $firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply'))
+      replyCountRef: function (topicId) {
+        return ref.child(topicId + '/replies/count')
       },
 
+      replyInReply: function (topicId, replyId) {
+        return $firebaseArray(ref.child(topicId + '/replies/' + replyId + '/inReply'))
+      },
 
       // Reply in Reply Array
-      replyInReplyArr: function (topicId,replyId) {
-        //console.log($firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply')));
-        return $firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply'))
+      replyInReplyArr: function (topicId, replyId) {
+        // console.log($firebaseArray(ref.child(topicId + '/replies/'+replyId+'/inReply')))
+        return $firebaseArray(ref.child(topicId + '/replies/' + replyId + '/inReply'))
       },
 
       // upvotes
@@ -179,8 +175,12 @@ angular.module('App')
         }
       },
 
-      latestFeed:function(){
-        return $firebaseArray(ref.orderByChild("created").limitToLast(10));
+      latestFeed: function () {
+        return $firebaseArray(ref.orderByChild('created').limitToLast(10))
+      },
+
+      topicsByTag: function (tag) {
+        return $firebaseArray(ref.orderByChild('tags').equalTo(tag))
       },
 
       // Return array
