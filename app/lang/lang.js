@@ -19,6 +19,7 @@ angular.module('App')
       'KEY_DWN_VOTED':  'Downvoted',
       'KEY_VIEW':       'View',
       'KEY_REMOVE':     'Remove',
+      'KEY_CANCEL':     'Cancel',
       'KEY_QUESTION':   'Question',
       'KEY_TOPIC':      'Topic',
       'KEY_CHG_PWD':    'Change Password',
@@ -37,6 +38,10 @@ angular.module('App')
       'KEY_TREND':      'Trend',
       'KEY_WRITE_REPLY':'Write a reply',
       'KEY_LATEST_FEED':'Latest Feed',
+
+      //Remove topic
+      'KEY_CONF_REMOVE':'Are you sure you want to remove?',
+      'KEY_CONF_REM_C': 'Once remove, you will not be ableto to get this topic back',
 
 
       //SENTENCE

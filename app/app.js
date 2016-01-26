@@ -69,20 +69,7 @@ angular
     }
   )
 
-  .config(function ($stateProvider, $urlRouterProvider,
-                    $urlMatcherFactoryProvider){
-    function valToString(val) {
-      console.log(val);
-      return val !== null ? val.toString() : val;
-    }
-
-    $urlMatcherFactoryProvider.type('nonURIEncoded', {
-      encode: valToString,
-      decode: valToString,
-      //is: function () { return true; }
-      is: angular.isString
-    })
-
+  .config(function ($stateProvider, $urlRouterProvider){
     $stateProvider
       .state('home', {
         url: '/',
@@ -215,7 +202,7 @@ angular
 
       // Topic landing page
       .state('topic', {
-        url: '/{Slug:nonURIEncoded}',
+        url: '/{Slug}',
         resolve:{
           Slug:function($stateParams){
             console.log(decodeURIComponent($stateParams.Slug));
@@ -228,7 +215,6 @@ angular
             templateUrl: 'topics/index.html',
             resolve: {
               isOwner: function(Auth,Users,$stateParams,Topics){
-
                 var topicUid = '';
                 //If user login, check if they are the topic owner
                 if(Auth.ref.getAuth()){
@@ -271,7 +257,7 @@ angular
                   historyObj.userIP = data.data
                 })
                 return Topics.getTopicBySlug($stateParams.Slug).$loaded().then(function (data) {
-                  if (data != null) {
+                  if (data[0].$id !== 'undefined') {
                     topicKey = data[0].$id
                     views = Topics.getViews(topicKey)
 

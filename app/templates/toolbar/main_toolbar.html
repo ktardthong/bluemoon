@@ -70,7 +70,9 @@
 
               <li>
                 <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
-                  <img ng-if="authCtrl.profile.photo" ng-src="{{authCtrl.profile.photo}}" class="img-circle" width="32px">
+                  <img ng-if="authCtrl.profile.photo"
+                       ng-src="{{authCtrl.profile.photo}}"
+                       class="img-circle" width="32px">
                   <span class="white-font">
                     {{authCtrl.profile.displayName}}
                   </span>

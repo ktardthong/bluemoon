@@ -24,7 +24,9 @@ angular.module('App')
         return $firebaseArray(ref.orderByChild('uid').equalTo(uid));
 
       },
-
+      refChild:function(child){
+        return ref.child(child);
+      },
       countUserTopics:function(){
 
       },

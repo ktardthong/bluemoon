@@ -24,4 +24,20 @@ angular.module('App')
     var lang = $firebaseArray(ref);
 
     return lang;
+  })
+
+
+  //Languages
+  .factory('Archive', function($firebaseArray, FirebaseUrl){
+    var ref = new Firebase(FirebaseUrl+'archive');
+    var archive = $firebaseArray(ref);
+
+    var Archive ={
+      addChild: function(slug){
+        return ref.child(slug);
+      },
+      ref: ref,
+      arr: archive
+    }
+    return Archive;
   });

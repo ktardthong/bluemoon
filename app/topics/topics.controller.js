@@ -1,7 +1,8 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,$http,FirebaseUrl,
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,
+                                    $http,FirebaseUrl,$translate,
                                     //Services
-                                    Tags, Topics, Auth, Users, Slug,Places, Languages){
+                                    Tags, Topics, Auth, Users, Slug,Places, Languages,Archive){
 
     var topicCtrl = this;
 
@@ -13,7 +14,7 @@ angular.module('App')
     topicCtrl.users     = Users;
     topicCtrl.languages = Languages;
     topicCtrl.places    = Places;
-
+    topicCtrl.archive   = Archive;
 
     if(topicCtrl.auth.ref.getAuth() != null ){
       topicCtrl.profile  = topicCtrl.users.getProfile(topicCtrl.auth.ref.getAuth().uid);
@@ -28,6 +29,16 @@ angular.module('App')
       topicCtrl.uid = '';
       topicCtrl.userRef = '';
     }
+
+
+    //Label for remove topics
+    $translate(['KEY_REMOVE', 'KEY_CANCEL','KEY_CONF_REMOVE','KEY_CONF_REM_C']).then(function (translations) {
+      topicCtrl.removeTrans = translations.KEY_REMOVE;
+      topicCtrl.cancelTrans = translations.KEY_CANCEL;
+      topicCtrl.confirmRem  = translations.KEY_CONF_REMOVE;
+      topicCtrl.confirmRemContent =  translations.KEY_CONF_REM_C;
+    });
+
 
     topicCtrl.userName = function(userId){
       if(userId!= null){
@@ -110,6 +121,36 @@ angular.module('App')
     };
 
 
+    topicCtrl.showConfirmRemove = function(ev,topic_owner,obj){
+
+
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title(topicCtrl.confirmRem)
+        .textContent(topicCtrl.confirmRemContent)
+        .targetEvent(ev)
+        .ok(topicCtrl.removeTrans)
+        .cancel(topicCtrl.cancelTrans);
+      $mdDialog.show(confirm).then(function() {
+        if(topicCtrl.removeTopic(topic_owner,obj)){
+          $state.go('dashboard');
+        }
+      }, function() {
+        topicCtrl.status = 'You decided to keep your debt.';
+      });
+    };
+
+    //Remove topic
+    topicCtrl.removeTopic = function(topic_owner,obj){
+      //verify if the topic owner and the login owner is the same ppl
+      if(topic_owner == topicCtrl.uid){
+        moveFbRecord(topicCtrl.topics.refChild(obj.$id), topicCtrl.archive.addChild(obj.$id));
+        return true;
+       }else{
+        return false;
+       }
+    }
+
     //Reply to topic
     topicCtrl.reply = function(topicId){
 
@@ -124,7 +165,6 @@ angular.module('App')
         }
 
       });
-
 
 
       topicCtrl.topics.replyArr(topicId).$add({
@@ -410,3 +450,18 @@ angular.module('App')
     };
 
   });
+
+
+//https://gist.github.com/katowulf/6099042
+function moveFbRecord(oldRef, newRef) {
+  oldRef.once('value', function (snap) {
+    newRef.set(snap.val(), function (error) {
+      if (!error) {
+        oldRef.remove();
+      }
+      else if (typeof(console) !== 'undefined' && console.error) {
+        console.error(error);
+      }
+    });
+  });
+}
