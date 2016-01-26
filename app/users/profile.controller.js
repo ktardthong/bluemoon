@@ -24,7 +24,6 @@ angular.module('App')
 
 
     profileCtrl.getUserPost = function(uid){
-      console.log(uid);
       profileCtrl.feed = profileCtrl.topics.createdBy(uid);
     }
 
@@ -68,7 +67,6 @@ angular.module('App')
 
     profileCtrl.followCateListArr = function(uid){
       profileCtrl.followList = profileCtrl.cate.followList(uid);
-      console.log(profileCtrl.followList);
     }
 
     if(Auth.ref.getAuth()){
@@ -76,12 +74,7 @@ angular.module('App')
     }
 
     profileCtrl.followCate = function(index,cate_slug){
-      console.log(cate_slug);
-      //profileCtrl.userCateFollow[index] = cate_slug;
       profileCtrl.cateIsFollow[index]  = true;
-
-      console.log(profileCtrl.cate.userFollow(cate_slug,Auth.ref.getAuth().uid));
-
       profileCtrl.cate.addChild(cate_slug+'/follower')
         .child(Auth.ref.getAuth().uid).push().set(moment().toISOString());
     }
@@ -125,7 +118,6 @@ angular.module('App')
 
       profileCtrl.profile.$save().then(function() {
         notify({message:'Saved',position:'center',duration: 3000 });
-        console.log(redirect);
         if(redirect !== undefined){
           $state.go(redirect);
         }

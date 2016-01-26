@@ -66,7 +66,17 @@ angular
       FacebookProvider.setAppId(myAppId)
       FacebookProvider.init(myAppId)
     }
-)
+  )
+
+  //Security for Translate
+  .config(function ($translateProvider) {
+    //$translateProvider.translations('Eng', translations);
+    $translateProvider.preferredLanguage('Eng');
+    // Enable escaping of HTML
+    $translateProvider.useSanitizeValueStrategy('escape');
+  })
+
+
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -193,7 +203,7 @@ angular
                 //   })
                 // })
 
-                // return new Promise(function(resolve, reject) { 
+                // return new Promise(function(resolve, reject) {
                 //     fb.once('value', function(snapshot) {
                 //         var data = snapshot.val()
                 //         data.forEach(function(dataSnap) {
@@ -222,9 +232,12 @@ angular
       .state('topic', {
         url: '/{Slug}',
         resolve: {
-          Slug: function ($stateParams) {
+          Slug: function ($stateParams,$state) {
             console.log(decodeURIComponent($stateParams.Slug))
             $stateParams.Slug = decodeURIComponent($stateParams.Slug)
+            if($stateParams.Slug == ''){
+              $state.go('dashboard');
+            }
           }
         },
         views: {

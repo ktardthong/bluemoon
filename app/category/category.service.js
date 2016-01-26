@@ -21,7 +21,6 @@ angular.module('App')
       },
 
       followList:function(uid){
-        console.log(uid);
         var data = ref.orderByChild("news/follower").equalTo(uid);
         return $firebaseArray(data);
       },
