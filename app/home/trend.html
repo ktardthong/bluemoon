@@ -1,0 +1,13 @@
+<!-- Front page home page -->
+<div ui-view="header"></div>
+
+
+<!-- Latest feed-->
+<div class="container md-padding">
+  <h4>
+    {{ 'KEY_LATEST_FEED' | translate }}
+  </h4>
+  <div class="card-columns">
+    <topic-list topics="homeCtrl.feed""></topic-list>
+  </div>
+</div>

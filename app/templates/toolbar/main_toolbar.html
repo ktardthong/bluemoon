@@ -24,9 +24,16 @@
           </a>
           </li>
 
+          <div class="pull-right" style="width:50%">
+          <!-- Trending -->
+          <li>
+            <a ui-sref="trending"> {{ 'KEY_TRENDING' | translate }} </a>
+          </li>
+          </div>
+
 
           <div class="pull-right" style="width:50%">
-
+            <!-- Dashboard -->
             <li>
               <a class="nav-item nav-link pull-right hand" ng-click="authCtrl.toggleRight()">
               <i class="ion-grid white-font"></i>

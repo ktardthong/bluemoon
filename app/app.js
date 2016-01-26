@@ -109,6 +109,28 @@ angular
         }
       })
 
+
+      //Trending
+      .state('trending', {
+        url: '/explore/trending',
+        views: {
+          '': {
+            controller: 'HomeCtrl as  homeCtrl',
+            templateUrl: 'home/trend.html',
+            resolve: {
+              feed: function (Topics) {
+                return Topics.latestFeed()
+              }
+            }
+          },
+          'header@trending': {
+            controller: 'AuthCtrl as authCtrl',
+            templateUrl: 'templates/toolbar/main_toolbar.html'
+          }
+        }
+      })
+
+
       // Category Landing
       .state('category', {
         url: '/category/{Slug}',

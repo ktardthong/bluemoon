@@ -36,6 +36,7 @@ angular.module('App')
       'KEY_REVIEW':     'Review',
       'KEY_EDIT':       'Edit',
       'KEY_TREND':      'Trend',
+      'KEY_TRENDING':   'Trending',
       'KEY_WRITE_REPLY':'Write a reply',
       'KEY_LATEST_FEED':'Latest Feed',
 
