@@ -30,6 +30,15 @@ angular.module('App')
       topicCtrl.userRef = '';
     }
 
+    //Get the average score from criteria values
+    topicCtrl.avgReviewScore = function(data){
+      var avg =0;
+      for(i=0;i<data.length;i++){
+        avg = avg + data[i].rating;
+        console.log(data[i].rating);
+      }
+      return avg/data.length;
+    }
 
     //Label for remove topics
     $translate(['KEY_REMOVE', 'KEY_CANCEL','KEY_CONF_REMOVE','KEY_CONF_REM_C']).then(function (translations) {

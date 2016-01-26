@@ -1,0 +1,15 @@
+<div class="container-fluid">
+
+  <div ng-repeat="data in review" class="pull-left col-xs-8">
+    <span>{{data.name}}</span>
+    <progress class="progress progress-info"
+              value="{{data.rating}}" max="10"></progress>
+  </div>
+
+  <div class="pull-right col-xs-4">
+    <p class="display-4">
+      {{topicCtrl.avgReviewScore(review)}}
+    </p>
+  </div>
+
+</div>

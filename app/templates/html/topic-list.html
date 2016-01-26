@@ -6,11 +6,12 @@
 
         <!-- Type -->
         <span class="pull-left">
-
           <i ng-if="topic.type == 'question'" class="fa fa-question-circle fa-x"></i>
           <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
         </span>
+
         &nbsp;
+
         <!-- Language -->
         <span class="text-muted">
           <small>
@@ -57,6 +58,8 @@
         </div>
       </p>
 
+
+
       <!-- If there is location-->
       <div ng-if="topic.location.name">
         <p class="md-subheader">
@@ -74,8 +77,6 @@
 
 
 
-
-
       <!-- Photos -->
       <div ng-if="topic.photos">
         <flex-slider flex-slide="photo in topic.photos">
@@ -84,6 +85,14 @@
           </li>
         </flex-slider>
       </div>
+
+
+
+      <!-- If there is review -->
+      <div ng-if="topic.review">
+        <review-score review="topic.review"></review-score>
+      </div>
+
 
 
       <!-- Writer -->

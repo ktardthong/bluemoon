@@ -1,5 +1,19 @@
 angular.module('App')
 
+
+  //List of categories on the siderbar
+  .directive('reviewScore', function () {
+    return {
+      restrict:     'E',
+      transclude:   true,
+      controller:   'TopicCtrl as topicCtrl',
+      templateUrl:  'templates/html/review-summary-list.html',
+      scope: {
+        review: '='
+      }
+    }
+  })
+
   //Follow Button
   .directive('userFollowerBtn',function(){
     return {
