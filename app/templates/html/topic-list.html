@@ -48,11 +48,13 @@
 
       <p class="card-text">
         {{topic.body | limitTo: 140 }}
+
+        {{  topic.tags }}
         <!-- Tags -->
         <div ng-if="topic.tags">
-          <span ng-repeat="t in topic.tags">
-            <a ui-sref="tag({Tag: t.text})">
-              #{{t.text}}
+          <span ng-repeat="tag in topic.tags track by $index">
+            <a ui-sref="tag({Tag: tag.text})">
+              #{{tag.text}}
             </a>
           </span>
         </div>
@@ -140,11 +142,6 @@
         <topic-actions-card topic='topic'></topic-actions-card>
       </small>
 
-      <div class="pull-right">
-        <span ng-if="topicCtrl.uid == topic.uid">
-          {{ 'KEY_REMOVE' | translate }}
-        </span>
-      </div>
     </div>
   </div>
 
