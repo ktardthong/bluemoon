@@ -30,15 +30,56 @@ angular.module('App')
       topicCtrl.userRef = '';
     }
 
+
+
+    //Preset Parameters
+    topicCtrl.imageStrings  = [];
+    topicCtrl.imageText     = [];
+    topicCtrl.inReplyArr    = [];
+    topicCtrl.loadBusy      = false;
+    topicCtrl.slugReturn    = null;
+    topicCtrl.criteria      = false;
+    topicCtrl.criteriaReply = null;
+    topicCtrl.reviewCriteria=false;
+    topicCtrl.critReplyData = null;
+
+    topicCtrl.newTopic      = {
+      'location': '',
+      'url' : '',
+      'ipInfo': '',
+      'tags': ''
+    }
+
+
+    //Calc average review input in reply
+    topicCtrl.avgReviewReply = function(){
+
+      var objCount = Object.keys(topicCtrl.criteriaReply).length;
+      var avg = 0
+      for(i=0;i<objCount;i++){
+        avg = avg + topicCtrl.criteriaReply[i];
+      }
+
+      topicCtrl.replyReviewAverage = avg/objCount;
+
+      console.log(topicCtrl.criteriaReply);
+
+      topicCtrl.critReplyData = { avg: topicCtrl.replyReviewAverage, data: topicCtrl.criteriaReply}
+    }
+
+
     //Get the average score from criteria values
     topicCtrl.avgReviewScore = function(data){
+      if(data)
+      {
       var avg =0;
       for(i=0;i<data.length;i++){
         avg = avg + data[i].rating;
-        console.log(data[i].rating);
       }
       return avg/data.length;
+      }
     }
+
 
     //Label for remove topics
     $translate(['KEY_REMOVE', 'KEY_CANCEL','KEY_CONF_REMOVE','KEY_CONF_REM_C']).then(function (translations) {
@@ -56,21 +97,9 @@ angular.module('App')
     }
 
 
-    //Preset Parameters
-    topicCtrl.imageStrings  = [];
-    topicCtrl.imageText     = [];
-    topicCtrl.inReplyArr    = [];
-    topicCtrl.loadBusy      = false;
-    topicCtrl.slugReturn    = null;
-    topicCtrl.criteria      = false;
-    topicCtrl.newTopic      = {
-      'location': '',
-      'url' : '',
-      'ipInfo': '',
-      'tags': ''
-    }
 
 
+    //Login for material
     topicCtrl.showMdLogin = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       $mdDialog.show({
@@ -81,11 +110,6 @@ angular.module('App')
           clickOutsideToClose: true,
           fullscreen: useFullScreen
         })
-/*        .then(function (answer) {
-          $scope.status = 'You said the information was "' + answer + '".';
-        }, function () {
-          $scope.status = 'You cancelled the dialog.';
-        });*/
     }
 
 
@@ -118,21 +142,20 @@ angular.module('App')
 
 
     //Upload Profile image
-    topicCtrl.uploadFile = function(files) {
-      angular.forEach(files, function (flowFile, i) {
+    topicCtrl.uploadFile = function(files,index) {
+      angular.forEach(files, function (flowFile, index) {
         var fileReader = new FileReader();
         fileReader.onload = function (event) {
           var uri = event.target.result;
-          topicCtrl.imageStrings[i] = uri;
+          topicCtrl.imageStrings[index] = uri;
         };
         fileReader.readAsDataURL(flowFile.file);
       })
     };
 
 
+    //Show confirm remove topic
     topicCtrl.showConfirmRemove = function(ev,topic_owner,obj){
-
-
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
         .title(topicCtrl.confirmRem)
@@ -144,10 +167,9 @@ angular.module('App')
         if(topicCtrl.removeTopic(topic_owner,obj)){
           $state.go('dashboard');
         }
-      }, function() {
-        topicCtrl.status = 'You decided to keep your debt.';
       });
     };
+
 
     //Remove topic
     topicCtrl.removeTopic = function(topic_owner,obj){
@@ -160,15 +182,17 @@ angular.module('App')
        }
     }
 
+
     //Reply to topic
     topicCtrl.reply = function(topicId){
 
+      console.log(topicCtrl.critReplyData);
 
       topicCtrl.topics.replyArr(topicId).$add({
         topicId:  topicId,
         body:     topicCtrl.newReply.body,
         uid:      topicCtrl.uid,
-        review:   topicCtrl.criteria,
+        review:   topicCtrl.critReplyData,
         created:  moment().toISOString()
       })
 
@@ -176,7 +200,6 @@ angular.module('App')
         if(!data.count){
           topicCtrl.topics.replyCountRef(topicId).set(1);
         }else{
-          console.log('increment here');
           topicCtrl.topics.replyCountRef(topicId)
             .set(data.count +1);
         }
@@ -202,7 +225,7 @@ angular.module('App')
     }
 
 
-    topicCtrl.reviewCriteria = [{id: 'choice1'}, {id: 'choice2'}];
+
     topicCtrl.addNewChoice = function() {
       var newItemNo = topicCtrl.reviewCriteria.length+1;
       topicCtrl.reviewCriteria.push({'id':'criteria'+newItemNo});

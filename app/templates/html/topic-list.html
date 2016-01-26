@@ -49,7 +49,6 @@
       <p class="card-text">
         {{topic.body | limitTo: 140 }}
 
-        {{  topic.tags }}
         <!-- Tags -->
         <div ng-if="topic.tags">
           <span ng-repeat="tag in topic.tags track by $index">

@@ -32,7 +32,6 @@ $scope:{topic}
            ng-show="formInput"
            ng-init="formInput = false">
 
-
         <!-- topic type -->
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-success-outline"  ng-click="topicCtrl.type = 'question'" value="question">
@@ -47,6 +46,7 @@ $scope:{topic}
           </label>
           <label class="btn btn-success-outline"
                  ng-click="topicCtrl.type = 'review';
+                           topicCtrl.reviewCriteria = [{id: 'choice1'}, {id: 'choice2'}];
                            topicCtrl.showReview=true" value="review">
             <input type="radio" autocomplete="off" >
             <i class="ion-checkmark-round"></i>
@@ -121,7 +121,7 @@ $scope:{topic}
 
           <div flow-init
                flow-name="topicCtrl.uploader.flow"
-               flow-files-added="topicCtrl.uploadFile($files)">
+               flow-files-added="topicCtrl.uploadFile($files,$index)">
               <md-button
                 aria-label="upload"
                class="md-primary md-fab md-mini ion-camera"

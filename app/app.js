@@ -232,7 +232,6 @@ angular
         url: '/{Slug}',
         resolve: {
           Slug: function ($stateParams,$state) {
-            console.log(decodeURIComponent($stateParams.Slug))
             $stateParams.Slug = decodeURIComponent($stateParams.Slug)
             if($stateParams.Slug == ''){
               $state.go('dashboard');

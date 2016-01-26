@@ -54,6 +54,9 @@ angular.module('App')
       'KEY_WHO_TO_FOLLOW':    'Who to follow',
       'KEY_CAT_WILL_APPEAR':  'Follow some categories and it will appear here',
       'KEY_WHT_UR_STORY':     'What\'s your story',
+      'KEY_WRT_COMMENT':      'Write a comment',
+
+
 
       //USER INPUT
       'KEY_FIRSTNAME':  'First name',

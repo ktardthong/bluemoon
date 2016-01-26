@@ -52,6 +52,11 @@
         </div>
 
 
+        <!-- If there is review -->
+        <div ng-if="topicLandingCtrl.topicLanding[0].review">
+          <review-score review="topicLandingCtrl.topicLanding[0].review"></review-score>
+        </div>
+
         <!-- Share -->
         Share here
         <div class="fb-share-button"
@@ -121,6 +126,8 @@
       <div class="media-right" ng-if="!topicLandingCtrl.isOwner">
           <user-follower-btn follow="topicLandingCtrl.topicLanding[0].uid"></user-follower-btn>
       </div>
+
+
     </div>
 
 
@@ -134,19 +141,38 @@
                    class="img-circle" width="32px">
             </a>
           </div>
+
           <div class="media-body">
-           <textarea ng-model="topicCtrl.newReply.body"
-                     class="form-control"
-                     placeholder="Write a comment"></textarea>
+           <textarea ng-model="topicCtrl.newReply.body" class="form-control"
+                     placeholder="{{ 'KEY_WRT_COMMENT' | translate }} "></textarea>
+
+            <!-- IF there is review -->
             <div ng-if="topicLandingCtrl.topicLanding[0].review">
-              review
-              <div ng-repeat="criteria in topicLandingCtrl.topicLanding[0].review">
+              <div ng-repeat="criteria in topicLandingCtrl.topicLanding[0].review"
+                   class="pull-left col-xs-8">
+                <div class="col-xs-4">
                   <span >{{ criteria.name }}</span>
+                </div>
+                <div class="col-xs-8">
                   <input type="number" max="10" min="1"
-                         ng-model="topicCtrl.criteria[$index].rating">
+                         ng-keyup="topicCtrl.avgReviewReply()"
+                         ng-model="topicCtrl.criteriaReply[$index]">
+                  <progress class="progress progress-info"
+                            value="{{topicCtrl.criteriaReply[$index]}}"
+                            max="10">{{ topicCtrl.criteria[$index].rating }} </progress>
+                  {{ topicCtrl.criteria[$index].rating }}
+                </div>
+              </div>
+
+              <div class="pull-right col-xs-4">
+                <p class="display-4">
+                  {{ topicCtrl.replyReviewAverage }}
+                </p>
               </div>
             </div>
+
           </div>
+
           <div class="media-right">
             <button class="btn btn-success" type="submit">{{ 'KEY_POST' | translate }}</button>
           </div>
@@ -178,7 +204,20 @@
           <span class="text-muted" am-time-ago="reply.created"></span>
 
           <div class="lead layout-padding">
+
             {{reply.body}}
+          </div>
+
+          <div ng-if="reply.review" class="container-fluid md-padding">
+            <div class="pull-left">
+              <div ng-repeat="reviewName in topicLandingCtrl.topicLanding[0].review">
+                {{ reviewName.name }}
+                {{ reply.review.data[$index] }}
+              </div>
+            </div>
+            <div class="pull-right display-4">
+              {{ reply.review.avg }}
+            </div>
           </div>
 
           <!-- footer action -->
