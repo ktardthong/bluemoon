@@ -188,8 +188,8 @@ angular.module('App')
 
       all: topics,
       ref: ref
-    }
+    };
 
     return Topics
 
-  })
+  });

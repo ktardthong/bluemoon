@@ -1,5 +1,5 @@
 angular.module('App')
-  .factory('Tags', function($firebaseArray, $firebaseObject, FirebaseUrl,FirebaseUrl,$q){
+  .factory('Tags', function($firebaseArray, $firebaseObject, FirebaseUrl, $q){
 
     var ref = new Firebase(FirebaseUrl+'tags');
     var tags = $firebaseArray(ref);

@@ -30,10 +30,12 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Kanit:400,300' rel='stylesheet' type='text/css'>
 
+
   </head>
+
   <body ng-app="App">
 
-<!--
+    <!-- Facebook stuff-->
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -41,7 +43,7 @@
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=931376120263856";
     fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>-->
+    }(document, 'script', 'facebook-jssdk'));</script>
 
 
     <!--[if lt IE 7]>
@@ -103,28 +105,7 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="app.js"></script>
-    <script src="lang/lang.js"></script>
-    <script src="auth/auth.service.js"></script>
-    <script src="auth/auth.controller.js"></script>
-    <script src="users/users.service.js"></script>
-    <script src="users/profile.controller.js"></script>
-    <script src="services/utilities.service.js"></script>
-    <script src="home/home.controller.js"></script>
-    <script src="category/category.service.js"></script>
-    <script src="category/category.controller.js"></script>
-    <script src="topics/topics.service.js"></script>
-    <script src="topics/topics.controller.js"></script>
-    <script src="topics/topic-landing.controller.js"></script>
-    <script src="tag/tag.service.js"></script>
-    <script src="tag/tag.controller.js"></script>
-    <script src="place/place.service.js"></script>
-    <script src="place/place.controller.js"></script>
-    <script src="notification/notification.service.js"></script>
-    <script src="notification/notification.controller.js"></script>
-    <script src="dashboard/dashboard.controller.js"></script>
-    <script src="directives/directives.js"></script>
-    <script src="helpers/helpers.service.js"></script>
+    <script src="/build/build.js"></script>
     <!-- endbuild -->
 
 

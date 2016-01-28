@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,
+  .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,
                                     $http,FirebaseUrl,$translate,
                                     //Services
                                     NotiService,Tags, Topics, Auth, Users,
@@ -60,7 +60,7 @@ angular.module('App')
 
       var objCount = Object.keys(topicCtrl.criteriaReply).length;
       var avg = 0
-      for(i=0;i<objCount;i++){
+      for(var i=0;i<objCount;i++){
         avg = avg + topicCtrl.criteriaReply[i];
       }
 
@@ -77,7 +77,7 @@ angular.module('App')
       if(data)
       {
       var avg =0;
-      for(i=0;i<data.length;i++){
+      for(var i=0;i<data.length;i++){
         avg = avg + data[i].rating;
       }
       return avg/data.length;

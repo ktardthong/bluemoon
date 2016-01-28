@@ -1,111 +1,82 @@
 <div class="pos-f-t">
-  <div class="purple-background">
-    <header class="navbar navbar-light navbar-static-top bd-navbar container" role="banner">
 
-      <div class="clearfix purple-background white-font">
-        <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
-          &#9776;
-        </button>
-        <a class="navbar-brand hidden-sm-up" ui-sref="home">
-          <span class="white-font">
-            Oi!
-          </span>
+  <nav class="navbar navbar-fixed-top purple-background bg-inverse">
+    <a class="navbar-brand" href="#">Qanya</a>
+    <ul class="nav navbar-nav">
+
+
+
+      <!-- Right Side -->
+      <li class="nav-item" ng-if="authCtrl.profile.$id">
+        <a class="hand nav-link" ng-model="authCtrl.badgeNotification" ng-click="authCtrl.resetCounter()">
+          <i class="fa fa-bell-o fa-x"></i>{{ authCtrl.badgeNotification.$value }}
         </a>
-      </div>
+      </li>
 
-      <nav class="navbar">
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header">
-          ☰
-        </button>
-        <div class="collapse navbar-toggleable-xs" id="navbar-header">
-          <a class="navbar-brand" href="#">
-            <span class="white-font">Qanya</span>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="dashboard">
+          <i class="fa fa-home fa-1x white-font"></i>
+          <span class="white-font">{{'KEY_HOME' | translate}}</span>
+        </a>
+      </li>
+    </ul>
+
+
+
+
+    <ul class="nav navbar-nav pull-right">
+
+      <!-- Languages -->
+      <li class="nav-item">
+        <a class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fa fa-globe fa-1x white-font"></i>
+          <span class="white-font">{{ 'KEY_LANGUAGES' | translate }}</span>
+          <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <a class="dropdown-item purple-light-font hand"
+             ng-click="authCtrl.toggleLang('ไทย')">
+            <span class="purple-light-font">ไทย</span>
           </a>
-          <ul class="nav navbar-nav">
-            <li class="nav-item nav-link active">
-              <a ui-sref="trending"> {{ 'KEY_TRENDING' | translate }} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item nav-link pull-right hand" ng-click="authCtrl.toggleRight()">
-                <i class="ion-grid white-font"></i>
+          <a class="dropdown-item purple-light-font hand"
+             ng-click="authCtrl.toggleLang('Eng')">
+            <span class="purple-light-font">English</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- Trending -->
+      <li class="nav-item active">
+        <a class="nav-link" ui-sref="trending"> {{ 'KEY_TRENDING' | translate }} </a>
+      </li>
+
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link hand" ng-click="authCtrl.toggleRight()">
+          <i class="ion-grid"></i>
               <span class="white-font">
                 {{ 'KEY_DASHBOARD' | translate }}
               </span>
-              </a>
-            </li>
+        </a>
+      </li>
 
-            <li class="nav-item">
-              <button class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <i class="fa fa-globe fa-1x white-font"></i>
-                <span class="white-font">{{ 'KEY_LANGUAGES' | translate }}</span>
-                <span class="caret"></span>
-              </button>
+      <!-- If user not login -->
+      <li class="nav-item" ng-if="!authCtrl.profile.$id">
+        <a class="nav-link" ui-sref="register">
+          <span class="white-font">
+            {{ 'KEY_REGISTER' | translate }}
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" ng-if="!authCtrl.profile.$id">
+        <a class="nav-link" ui-sref="login">
+          <span class="white-font">
+            {{ 'KEY_LOGIN' | translate }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <a class="dropdown-item purple-light-font hand"
-                   ng-click="authCtrl.toggleLang('ไทย')">
-                  <span class="purple-light-font">ไทย</span>
-                </a>
-                <a class="dropdown-item purple-light-font hand"
-                   ng-click="authCtrl.toggleLang('Eng')">
-                  <span class="purple-light-font">English</span>
-                </a>
-              </div>
-            </li>
-
-            <li class="nav-item nav-link" ng-if="authCtrl.profile.$id">
-                <a class="hand" ng-model="authCtrl.badgeNotification" ng-click="authCtrl.resetCounter()">
-                  <i class="fa fa-bell-o fa-x"></i>{{ authCtrl.badgeNotification.$value }}
-                </a>
-            </li>
-            <li>
-              <a class="nav-item nav-link" ui-sref="dashboard">
-                <i class="fa fa-home fa-1x white-font"></i>
-                <span class="white-font">{{'KEY_HOME' | translate}}</span>
-              </a>
-            </li>
-
-            <li>
-              <a class="nav-item nav-link" ui-sref="profile({Name:authCtrl.profile.displayName})">
-                <img ng-if="authCtrl.profile.photo"
-                     ng-src="{{authCtrl.profile.photo}}"
-                     class="img-circle" width="32px">
-                  <span class="white-font">
-                    {{authCtrl.profile.displayName}}
-                  </span>
-              </a>
-            </li>
-
-            <li>
-              <a class="nav-item nav-link" ui-sref="dashboard">
-                <i class="fa fa-cog white-font"></i>
-              </a>
-            </li>
-
-
-            <span ng-if="!authCtrl.profile.$id">
-              <a class="nav-item nav-link" ui-sref="register">
-                <span class="white-font">
-                  {{ 'KEY_REGISTER' | translate }}
-                </span>
-              </a>
-              <a class="nav-item nav-link" ui-sref="login">
-                <span class="white-font">
-                  {{ 'KEY_LOGIN' | translate }}
-                </span>
-              </a>
-            </span>
-            </li>
-          </ul>
-
-          <form class="form-inline pull-xs-right">
-            <input class="form-control" type="text" placeholder="Search">
-            <button class="btn btn-success-outline" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-
-
-    </header>
-  </div>
 </div>

@@ -1,15 +1,9 @@
-'use strict'
+'use strict';
 
 /**
- * @ngdoc overview
- * @name angularfireSlackApp
- * @description
- * # angularfireSlackApp
- *
  * Main module of the application.
  */
-angular
-  .module('App', [
+var app = angular.module('App', [
     'firebase',
     'angular-md5', // Encrypt email
     'ui.router',
@@ -29,7 +23,8 @@ angular
     'ngSanitize',
     'ui.bootstrap', // OR mgcrea.ngStrap
     'angular-smilies',
-    'ngCookies',
+
+    'ngCookies', // cookies stuff
 
   ])
 
@@ -296,7 +291,7 @@ angular
                   if (data[0] != null) {
                     topicKey = data[0].$id
                   } else {
-                    //$state.go('topic-notfound')
+                    $state.go('topic-notfound')
                   }
                   return Topics.replyList(topicKey)
                 })
