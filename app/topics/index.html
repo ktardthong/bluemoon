@@ -5,6 +5,7 @@
   <div class="inner-container container margin-top animated slideInUp">
 
     <div class="card md-padding" ng-controller="TopicCtrl as topicCtrl">
+
       <!-- remove topic btn-->
       <div class="pull-right" ng-if="topicLandingCtrl.isOwner">
           <button
@@ -37,19 +38,20 @@
         </div>
       </small>
 
-        <!-- Message Body -->
-        <div class="md-padding">
-          <h2>
-            {{topicLandingCtrl.topicLanding[0].topic}}
-          </h2>
 
-          <span class="topic-reading-font lato-font"
-             ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></span>
+      <!-- Message Body -->
+      <div class="md-padding">
+        <h2>
+          {{topicLandingCtrl.topicLanding[0].topic}}
+        </h2>
 
-          <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
-            <img ng-src="{{photo}}" class="img-fluid">
-          </div>
+        <span class="topic-reading-font lato-font"
+           ng-bind-html="topicLandingCtrl.topicLanding[0].body | nl2br"></span>
+
+        <div ng-repeat="photo in topicLandingCtrl.topicLanding[0].photos">
+          <img ng-src="{{photo}}" class="img-fluid">
         </div>
+      </div>
 
 
         <!-- If there is review -->
@@ -57,11 +59,12 @@
           <review-score review="topicLandingCtrl.topicLanding[0].review"></review-score>
         </div>
 
+
         <!-- Share -->
         Share here
-        <div class="fb-share-button"
+        <!--<div class="fb-share-button"
              data-href="https://developers.facebook.com/docs/plugins/"
-             data-layout="button_count"></div>
+             data-layout="button_count"></div>-->
 
         <!-- Footer action -->
         <div class="container" >
@@ -134,7 +137,7 @@
     <!-- Reply form -->
     <div ng-controller="TopicCtrl as topicCtrl" ng-if="topicLandingCtrl.auth.getUid()">
       <div class="media card md-padding">
-        <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0].$id)">
+        <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0])">
           <div class="media-left">
             <a href="#">
               <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
@@ -290,4 +293,5 @@
   </div>
 
 
+  </div>
 </div>

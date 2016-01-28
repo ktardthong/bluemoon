@@ -1,11 +1,13 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies){
+  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies,
+                                   NotiService){
     var authCtrl = this;
 
 
     //Parser
     authCtrl.auth     = Auth;
     authCtrl.users    = Users;
+    authCtrl.notification = NotiService;
 
 
     if(Auth.ref.getAuth() != null ){
@@ -21,6 +23,13 @@ angular.module('App')
       password: ''
     };
 
+
+    //Get the badge notification
+    authCtrl.badgeNotification =  authCtrl.notification.addArrChild(authCtrl.profile.$id+'/unread');
+    //Reset counter
+    authCtrl.resetCounter = function(){
+      authCtrl.notification.resetUnread(authCtrl.profile.$id);
+    }
 
 
     //Change language

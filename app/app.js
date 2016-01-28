@@ -156,6 +156,7 @@ angular
         }
       })
 
+
       // Places landing page
       .state('places', {
         url: '/places/{place_slug}/{place_id}',
@@ -181,6 +182,7 @@ angular
           }
         }
       })
+
 
       // Tag landing page
       .state('tag', {
@@ -249,11 +251,13 @@ angular
         }
       })
 
+
       // Topic landing page
       .state('topic', {
         url: '/{Slug}',
         resolve: {
-          Slug: function ($stateParams,$state) {
+          Slug: function ($stateParams,$state, NotiService,Auth) {
+            NotiService.unreadNotification(Auth.ref.getAuth().uid);
             $stateParams.Slug = decodeURIComponent($stateParams.Slug)
             if($stateParams.Slug == ''){
               $state.go('dashboard');
@@ -284,7 +288,7 @@ angular
                 }
               },
               topicLanding: function ($stateParams, Topics) {
-                return Topics.fortopic($stateParams.Slug)
+                return Topics.fortopic($stateParams.Slug).$loaded();
               },
               replyList: function ($stateParams, Topics, $state) {
                 var topicKey = ''
@@ -292,7 +296,7 @@ angular
                   if (data[0] != null) {
                     topicKey = data[0].$id
                   } else {
-                    $state.go('topic-notfound')
+                    //$state.go('topic-notfound')
                   }
                   return Topics.replyList(topicKey)
                 })

@@ -137,7 +137,6 @@ angular.module('App')
         }
       )
 
-
       profileCtrl.users.userArrRef(Auth.ref.getAuth().uid+'/log').push().set({
         action:   "name_change",
         oldname:  profileCtrl.oldProfileValue.firstname + "-" + profileCtrl.oldProfileValue.lastname,

@@ -1,16 +1,17 @@
   <br/>
   <div ng-repeat="topic in topics | orderBy:'-created'">
-    <div class="card card-block container-fluid">
+    <div class="card">
 
-      <div class="card-title">
+      <div class="card-title card-block">
 
         <!-- Type -->
         <span class="pull-left">
+          <i ng-if="topic.type == 'review'"   class="fa fa-pencil-square-o fa-x"></i>
           <i ng-if="topic.type == 'question'" class="fa fa-question-circle fa-x"></i>
-          <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i> {{ topic.type }}
+          <i ng-if="topic.type == 'topic'"    class="ion-chatbubble-working"></i>
+          {{ topic.type }}
         </span>
 
-        &nbsp;
 
         <!-- Language -->
         <span class="text-muted">
@@ -35,30 +36,29 @@
         </small>
       </div>
 
-      <br/>
 
       <!-- Title -->
-      <h4 class="card-title">
-        <a  href="/#/{{(topic.slug | decodeURI)}}"
-            class="purple-light-font">
-          {{topic.topic | decodeURI}}
-        </a>
-      </h4>
+      <div class="card-block">
+        <h4 class="card-title">
+          <a  href="/#/{{(topic.slug | decodeURI)}}"
+              class="purple-light-font">
+            {{topic.topic | decodeURI}}
+          </a>
+        </h4>
+        <p class="card-text">
+          <!-- body text-->
+          {{topic.body | limitTo: 140 }}
 
-
-      <p class="card-text">
-        {{topic.body | limitTo: 140 }}
-
-        <!-- Tags -->
-        <div ng-if="topic.tags">
-          <span ng-repeat="tag in topic.tags track by $index">
-            <a ui-sref="tag({Tag: tag.text})">
-              #{{tag.text}}
-            </a>
-          </span>
-        </div>
-      </p>
-
+          <!-- Tags -->
+          <div ng-if="topic.tags">
+            <span ng-repeat="tag in topic.tags track by $index">
+              <a ui-sref="tag({Tag: tag.text})">
+                #{{tag.text}}
+              </a>
+            </span>
+          </div>
+        </p>
+      </div>
 
 
       <!-- If there is location-->
@@ -77,9 +77,8 @@
       </div>
 
 
-
       <!-- Photos -->
-      <div ng-if="topic.photos">
+      <div ng-if="topic.photos" class="card-img">
         <flex-slider flex-slide="photo in topic.photos">
           <li>
             <img ng-src="{{photo}}" class="img-fluid" alt="Washed Out">
@@ -88,54 +87,53 @@
       </div>
 
 
-
       <!-- If there is review -->
-      <div ng-if="topic.review">
+      <div ng-if="topic.review" class="card-block">
         <review-score review="topic.review"></review-score>
       </div>
 
 
-
       <!-- Writer -->
-      <div class="media">
-        <div class="media-left">
-          <a href="#">
-            <img class="media-object img-circle"
-                 ng-src="{{topicCtrl.users.profile(topic.uid).photo }}"
-                 width="32px" />
-          </a>
-        </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <small>
-              <b>
-                <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
-                  @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
-                </a>
-              </b>
-              <div>
-                <span class="text-muted">
-                  {{ 'KEY_POSTED' | translate }}
-                  {{ topicCtrl.users.profile(topic.uid).stat.posted.count }}
-                </span>
+      <div class="card-block">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object img-circle"
+                   ng-src="{{topicCtrl.users.profile(topic.uid).photo }}"
+                   width="32px" />
+            </a>
+          </div>
+          <div class="media-body">
+            <p class="media-heading">
+              <small>
+                <b>
+                  <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
+                    @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
+                  </a>
+                </b>
+                <div>
+                  <span class="text-muted">
+                    {{ 'KEY_POSTED' | translate }}
+                    {{ topicCtrl.users.profile(topic.uid).stat.posted.count }}
+                  </span>
 
-                <span class="text-muted">
-                  &bull;
-                  {{ 'KEY_UPVOTED' | translate }}
-                  {{ topicCtrl.users.profile(topic.uid).stat.upvoted.count }}
-                </span>
+                  <span class="text-muted">
+                    &bull;
+                    {{ 'KEY_UPVOTED' | translate }}
+                    {{ topicCtrl.users.profile(topic.uid).stat.upvoted.count }}
+                  </span>
 
-                <span class="text-muted">
-                  &bull;
-                  {{ 'KEY_FOLLOWER' | translate }}
-                  {{ topicCtrl.users.profile(topic.uid).stat.follower.count }}
-                </span>
-              </div>
-            </small>
-          </p>
+                  <span class="text-muted">
+                    &bull;
+                    {{ 'KEY_FOLLOWER' | translate }}
+                    {{ topicCtrl.users.profile(topic.uid).stat.follower.count }}
+                  </span>
+                </div>
+              </small>
+            </p>
+          </div>
         </div>
       </div>
-      <br/>
 
       <small>
         <topic-actions-card topic='topic'></topic-actions-card>

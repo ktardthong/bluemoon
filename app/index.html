@@ -2,6 +2,7 @@
 <html class="no-js">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta http-equiv="Cache-control" content="max-private, max-age=600">
     <meta charset="utf-8">
     <title>Qanya</title>
     <meta name="description" content="">
@@ -32,7 +33,7 @@
   </head>
   <body ng-app="App">
 
-
+<!--
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -40,7 +41,7 @@
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=931376120263856";
     fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));</script>-->
 
 
     <!--[if lt IE 7]>
@@ -119,6 +120,8 @@
     <script src="tag/tag.controller.js"></script>
     <script src="place/place.service.js"></script>
     <script src="place/place.controller.js"></script>
+    <script src="notification/notification.service.js"></script>
+    <script src="notification/notification.controller.js"></script>
     <script src="dashboard/dashboard.controller.js"></script>
     <script src="directives/directives.js"></script>
     <script src="helpers/helpers.service.js"></script>

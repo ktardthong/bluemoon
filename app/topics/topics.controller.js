@@ -2,7 +2,8 @@ angular.module('App')
   .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,$scope,
                                     $http,FirebaseUrl,$translate,
                                     //Services
-                                    Tags, Topics, Auth, Users, Slug,Places, Languages,Archive){
+                                    NotiService,Tags, Topics, Auth, Users,
+                                    Slug,Places, Languages,Archive){
 
     var topicCtrl = this;
 
@@ -15,6 +16,7 @@ angular.module('App')
     topicCtrl.languages = Languages;
     topicCtrl.places    = Places;
     topicCtrl.archive   = Archive;
+    topicCtrl.noti      = NotiService;
 
     if(topicCtrl.auth.ref.getAuth() != null ){
       topicCtrl.profile  = topicCtrl.users.getProfile(topicCtrl.auth.ref.getAuth().uid);
@@ -43,11 +45,13 @@ angular.module('App')
     topicCtrl.reviewCriteria=false;
     topicCtrl.critReplyData = null;
 
+    //if allow null in the form
     topicCtrl.newTopic      = {
       'location': '',
       'url' : '',
       'ipInfo': '',
-      'tags': ''
+      'tags': '',
+      'body': ''
     }
 
 
@@ -136,9 +140,9 @@ angular.module('App')
     };
 
 
-    topicCtrl.users.getLocationIP().success(function(data) {
+    /*topicCtrl.users.getLocationIP().success(function(data) {
       topicCtrl.newTopic.ipInfo = data;
-    });
+    });*/
 
 
     //Upload Profile image
@@ -184,35 +188,44 @@ angular.module('App')
 
 
     //Reply to topic
-    topicCtrl.reply = function(topicId){
+    topicCtrl.reply = function(topicObj){
 
-      console.log(topicCtrl.critReplyData);
-
-      topicCtrl.topics.replyArr(topicId).$add({
-        topicId:  topicId,
+      topicCtrl.topics.replyArr(topicObj.$id).$add({
+        topicId:  topicObj.$id,
         body:     topicCtrl.newReply.body,
         uid:      topicCtrl.uid,
         review:   topicCtrl.critReplyData,
         created:  moment().toISOString()
-      })
+    })
 
-      topicCtrl.topics.replyCount(topicId).$loaded().then(function(data){
+      topicCtrl.noti.updateNotificationCount(topicObj.uid);
+
+      topicCtrl.noti.addChild(topicObj.uid).push().set({
+        topicId:    topicObj.$id,
+        from:       topicCtrl.uid,
+        is_read:    false,
+        timestamp:  moment().toISOString()
+      });
+
+
+      topicCtrl.topics.replyCount(topicObj.$id).$loaded().then(function(data){
         if(!data.count){
-          topicCtrl.topics.replyCountRef(topicId).set(1);
+          topicCtrl.topics.replyCountRef(topicObj.$id).set(1);
         }else{
-          topicCtrl.topics.replyCountRef(topicId)
+          topicCtrl.topics.replyCountRef(topicObj.$id)
             .set(data.count +1);
         }
-
       });
+
 
       //Stat update for user
       topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/count')
         .set(topicCtrl.profile.stat.comment.count + 1);
 
-      topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/topics/'+topicId)
+      topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/topics/'+topicObj.$id)
         .push().set(moment().toISOString());
     }
+
 
 
     //Reply in reply

@@ -8,7 +8,6 @@ angular.module('App')
     var TS = {
       topicName: function(topic_slug){
         var data = ref.orderByChild("slug").equalTo(topic_slug);
-        console.log(data);
         return $firebaseObject(data);
       },
       fortopic: function(topic_slug){
