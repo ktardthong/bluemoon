@@ -41,10 +41,8 @@ angular.module('App')
       },
 
       getDisplayName: function (uid) {
-        if (uid == null || uid === '') {
-          return ''
-        } else {
-          return users.$getRecord(uid).displayName
+        if (uid !== null || uid !== '') {
+          return users.$getRecord(uid).displayName;
         }
       },
 

@@ -1,8 +1,13 @@
 angular.module('App')
-  .controller('AuthCtrl', function(Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies,
-                                   NotiService){
+  .controller('AuthCtrl', function($scope,Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies,
+                                   NotiService,$notification){
     var authCtrl = this;
 
+    //Ask for notification permission
+    $notification.requestPermission()
+      .then(function (permission) {
+        console.log(permission); // default, granted, denied
+      });
 
     //Parser
     authCtrl.auth     = Auth;
@@ -24,12 +29,33 @@ angular.module('App')
     };
 
 
+
     //Get the badge notification
-    authCtrl.badgeNotification =  authCtrl.notification.addArrChild(authCtrl.profile.$id+'/unread');
+    /*authCtrl.badgeNotification = function() {
+     return authCtrl.notification.addArrChild(authCtrl.profile.$id + '/unread').$loaded();
+    }
+
+    authCtrl.badgeValue = authCtrl.badgeNotification;
+
+    console.log(authCtrl.badgeNotification);*/
+
+    $scope.badgeNotifcation = authCtrl.badgeNotification;
+
     //Reset counter
     authCtrl.resetCounter = function(){
       authCtrl.notification.resetUnread(authCtrl.profile.$id);
     }
+
+    authCtrl.changeVal = function(){
+      console.log('badge value '+authCtrl.badgeNotification.$value);
+
+    }
+
+    $scope.$watch("name", function(newValue, oldValue) {
+      if ($scope.name.length > 0) {
+        $scope.greeting = "Greetings " + $scope.name;
+      }
+    });
 
 
     //Change language

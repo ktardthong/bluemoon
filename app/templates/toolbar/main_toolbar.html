@@ -5,12 +5,9 @@
     <ul class="nav navbar-nav">
 
 
-
-      <!-- Right Side -->
+      <!--Notification -->
       <li class="nav-item" ng-if="authCtrl.profile.$id">
-        <a class="hand nav-link" ng-model="authCtrl.badgeNotification" ng-click="authCtrl.resetCounter()">
-          <i class="fa fa-bell-o fa-x"></i>{{ authCtrl.badgeNotification.$value }}
-        </a>
+        <badge-notification notification="authCtrl.badgeValue" ></badge-notification>
       </li>
 
       <li class="nav-item">
@@ -20,8 +17,6 @@
         </a>
       </li>
     </ul>
-
-
 
 
     <ul class="nav navbar-nav pull-right">
@@ -46,20 +41,23 @@
         </div>
       </li>
 
+
       <!-- Trending -->
       <li class="nav-item active">
         <a class="nav-link" ui-sref="trending"> {{ 'KEY_TRENDING' | translate }} </a>
       </li>
 
+
       <!-- Dashboard -->
       <li class="nav-item">
         <a class="nav-link hand" ng-click="authCtrl.toggleRight()">
           <i class="ion-grid"></i>
-              <span class="white-font">
-                {{ 'KEY_DASHBOARD' | translate }}
-              </span>
+            <span class="white-font">
+              {{ 'KEY_DASHBOARD' | translate }}
+            </span>
         </a>
       </li>
+
 
       <!-- If user not login -->
       <li class="nav-item" ng-if="!authCtrl.profile.$id">

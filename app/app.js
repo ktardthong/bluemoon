@@ -15,16 +15,16 @@ var app = angular.module('App', [
     'ngTagsInput', // Tags
     'cgNotify', // Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
-    'facebook', // Facebook - https://github.com/Ciul/angular-facebook
-    'angular-web-notification', // https://github.com/sagiegurari/angular-web-notification
+    'facebook',       //  Facebook - https://github.com/Ciul/angular-facebook
     'angular-flexslider', // Image slider - https://github.com/thenikso/angular-flexslider
 
     // Emoticon -- http://mistic100.github.io/angular-smilies/
     'ngSanitize',
-    'ui.bootstrap', // OR mgcrea.ngStrap
+    'ui.bootstrap',   //  OR mgcrea.ngStrap
     'angular-smilies',
 
-    'ngCookies', // cookies stuff
+    'ngCookies',      //  cookies stuff
+    'notification',   //  web notification - https://github.com/neoziro/angular-notification
 
   ])
 
@@ -251,13 +251,12 @@ var app = angular.module('App', [
       .state('topic', {
         url: '/{Slug}',
         resolve: {
-          Slug: function ($stateParams,$state, NotiService,Auth) {
-            NotiService.unreadNotification(Auth.ref.getAuth().uid);
+          /*Slug: function ($stateParams,$state,Auth) {
             $stateParams.Slug = decodeURIComponent($stateParams.Slug)
             if($stateParams.Slug == ''){
               $state.go('dashboard');
             }
-          }
+          }*/
         },
         views: {
           '': {
@@ -371,7 +370,7 @@ var app = angular.module('App', [
               },
               userPosts: function (Users, Topics, $stateParams) {
                 return Users.getProfileByUsername($stateParams.Name).$loaded().then(function (profile) {
-                  if (profile[0].$id) {
+                  if (profile[0].$id !== 'undefined') {
                     return Topics.createdBy(profile[0].$id)
                   }
                 })

@@ -1,6 +1,20 @@
 angular.module('App')
 
 
+  //Badge notification
+  .directive('badgeNotification',function(){
+    return {
+      restrict:     'E',
+      transclude:   true,
+      controller:   'AuthCtrl as authCtrl',
+      templateUrl:  'templates/html/badge-notification.html',
+      scope: {
+        notification: '='
+      }
+    }
+  })
+
+
   //List of categories on the siderbar
   .directive('reviewScore', function () {
     return {
@@ -14,6 +28,7 @@ angular.module('App')
     }
   })
 
+
   //Follow Button
   .directive('userFollowerBtn',function(){
     return {
@@ -26,6 +41,7 @@ angular.module('App')
       }
     }
   })
+
 
   //Category follow button
   .directive('cateFollowBtn',function(){

@@ -1,15 +1,35 @@
 angular.module('App')
 
-  .factory('NotiService', function($firebaseObject, $firebaseArray , FirebaseUrl, Users){
+  .factory('NotiService', function($firebaseObject, $firebaseArray , FirebaseUrl,
+                                   Users,$notification){
     var ref    = new Firebase(FirebaseUrl+'notification');
     var noti = $firebaseObject(ref);
     var users = Users;
 
+    var observerCallbacks = [];
+
+
     var Notification = {
 
+      //Display unread
       unreadNotification:function(uid){
-        var ref = new Firebase(FirebaseUrl+'notification/'+uid);
-        console.log($firebaseObject(ref.orderByChild("is_read").equalTo("false")));
+        var ref = new Firebase(FirebaseUrl+'notification/'+uid+'/unread');
+        var counter;
+        ref.on("value",function(snapshot){
+          counter = snapshot.val();
+        });
+        ref.once("value",function(){
+          $notification('New message from Qanya', {
+            body: 'Hello '+uid,
+            dir: 'auto',
+            lang: 'en',
+            tag: 'my-tag',
+            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+            //delay: 1000, // in ms
+            focusWindowOnClick: true // focus the window on click
+          });
+        })
+        return counter ;
       },
 
       //Notify followers
@@ -24,13 +44,18 @@ angular.module('App')
       },
 
       //Add detail for this notifictiaon
-      notifyLog:function(topicId,uid){
+      notifyLog:function(topicId,uid,from_uid){
+
+        console.log("uid "+uid);
+        console.log("from uid "+ from_uid);
+
         Notification.addChild(uid).push().set({
           topicId:    topicId,
-          from:       uid,
+          from:       from_uid,
           is_read:    false,
           timestamp:  moment().toISOString()
         });
+
       },
 
 
@@ -43,8 +68,8 @@ angular.module('App')
 
       //Update notification
       //@params uid - who this notification is going to
-      updateNotificationCount:function(topicId,uid){
-        console.log(">>>" + uid);
+      updateNotificationCount:function(topicId,uid,from_uid){
+
         var ref = new Firebase(FirebaseUrl+'notification/'+uid+'/unread');
         ref.once("value", function(snapshot) {
           //default unread is 1
@@ -55,10 +80,11 @@ angular.module('App')
           }
         }, function (errorObject) {
           console.log("The read failed: " + errorObject.code);
-        }).then(function(){
-          //Add to log
-          Notification.notifyLog(topicId,uid);
         });
+
+        //Add to log
+        Notification.notifyLog(topicId,uid,from_uid);
+
       },
 
 

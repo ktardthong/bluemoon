@@ -1,6 +1,6 @@
 angular.module('App')
   .controller('TopicCtrl', function($state,$scope,$rootScope, $mdDialog, $mdMedia,
-                                    $http,FirebaseUrl,$translate,
+                                    $http,FirebaseUrl,$translate,$notification,
                                     //Services
                                     NotiService,Tags, Topics, Auth, Users,
                                     Slug,Places, Languages,Archive){
@@ -96,7 +96,7 @@ angular.module('App')
 
     topicCtrl.userName = function(userId){
       if(userId!= null){
-        return topicCtrl.users.getDisplayName(userId);
+        //return topicCtrl.users.getDisplayName(userId);
       }
     }
 
@@ -196,17 +196,15 @@ angular.module('App')
         uid:      topicCtrl.uid,
         review:   topicCtrl.critReplyData,
         created:  moment().toISOString()
-    })
+      }).then(function(){
+        //Notify topic owner
+        //topicObj refers to the property of this object
+        topicCtrl.noti.updateNotificationCount(topicObj.$id,topicObj.uid,topicCtrl.uid);
+      })
 
-      topicCtrl.noti.updateNotificationCount(topicObj.uid,topicCtrl.uid);
 
 
-      /*topicCtrl.noti.addChild(topicObj.uid).push().set({
-        topicId:    topicObj.$id,
-        from:       topicCtrl.uid,
-        is_read:    false,
-        timestamp:  moment().toISOString()
-      });*/
+
 
 
       topicCtrl.topics.replyCount(topicObj.$id).$loaded().then(function(data){
