@@ -25,7 +25,7 @@ gulp.task('js', function () {
             'app/tag/*.js',
             'app/topics/*.js',
             'app/users/*.js',
-            '!app/build/'
+            '!app/build/*.js'
             ])
     .pipe(sourcemaps.init())
       .pipe(concat('build.js'))
@@ -37,5 +37,6 @@ gulp.task('js', function () {
 
 //Watch - run grunt watch to monitor js changes
 gulp.task('watch', ['js'], function () {
-  gulp.watch('app/**/*.js', ['js'])
+  gulp.watch('app/notification/*.js', ['js'])
+  //gulp.watch('app/**/*.js', ['js'])
 });

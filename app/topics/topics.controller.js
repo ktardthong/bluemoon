@@ -198,14 +198,15 @@ angular.module('App')
         created:  moment().toISOString()
     })
 
-      topicCtrl.noti.updateNotificationCount(topicObj.uid);
+      topicCtrl.noti.updateNotificationCount(topicObj.uid,topicCtrl.uid);
 
-      topicCtrl.noti.addChild(topicObj.uid).push().set({
+
+      /*topicCtrl.noti.addChild(topicObj.uid).push().set({
         topicId:    topicObj.$id,
         from:       topicCtrl.uid,
         is_read:    false,
         timestamp:  moment().toISOString()
-      });
+      });*/
 
 
       topicCtrl.topics.replyCount(topicObj.$id).$loaded().then(function(data){
@@ -342,14 +343,20 @@ angular.module('App')
 
           //if there are tags
           if(topicCtrl.newTopic.tags !== null){
-            for (index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
+            for (var index = 0; index < topicCtrl.newTopic.tags.length; ++index) {
               topicCtrl.tags.addChild(topicCtrl.newTopic.tags[index].text)
                 .child(topic.key()).push().set(moment().toISOString());
             }
           }
-        topicCtrl.newTopic = {
-          body: ''
-        };
+
+          //Notify follower
+          topicCtrl.noti.notifyFollower(topic.key(),topicCtrl.uid);
+
+
+          //Reset form here
+          topicCtrl.newTopic = {
+            body: ''
+          };
       });
     };
 

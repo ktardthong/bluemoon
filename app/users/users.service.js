@@ -48,6 +48,11 @@ angular.module('App')
         }
       },
 
+      //Get user Followers
+      getFollower:function(uid){
+        return usersRef.child(uid+'/stat/follower/uid');
+      },
+
       //Check if user is already following
       checkFollow:function(uid,follow_id){
 
@@ -59,6 +64,7 @@ angular.module('App')
         return follow;
       },
 
+      //Change password
       userChangePassword:function(email,oldpass,newpass){
 
         var ref = new Firebase(FirebaseUrl);
@@ -96,6 +102,7 @@ angular.module('App')
         return usersRef.child(uid).child('downvotes')
       },
 
+      //User following topic
       following: function (uid) {
         return usersRef.child(uid).child('following')
       },

@@ -34,16 +34,28 @@ $scope:{topic}
 
         <!-- topic type -->
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-success-outline"  ng-click="topicCtrl.type = 'question'" value="question">
+
+          <!-- Questions-->
+          <label class="btn btn-success-outline"
+                 ng-click="topicCtrl.type = 'question';
+                           topicCtrl.reviewCriteria = false;
+                           topicCtrl.showReview=false" value="question">
             <input type="radio" autocomplete="off" checked>
             <i class="ion-help"></i>
             {{ 'KEY_QUESTION' | translate }}
           </label>
-          <label class="btn btn-success-outline"  ng-click="topicCtrl.type = 'topic'" value="topic">
+
+          <!-- Translate -->
+          <label class="btn btn-success-outline"
+                 ng-click="topicCtrl.type = 'topic';
+                           topicCtrl.reviewCriteria = false;
+                           topicCtrl.showReview=false" value="topic">
             <input type="radio" autocomplete="off" >
             <i class="ion-chatbubble-working"></i>
             {{ 'KEY_TOPIC' | translate }}
           </label>
+
+          <!-- Review -->
           <label class="btn btn-success-outline"
                  ng-click="topicCtrl.type = 'review';
                            topicCtrl.reviewCriteria = [{id: 'choice1'}, {id: 'choice2'}];
