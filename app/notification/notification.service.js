@@ -18,7 +18,9 @@ angular.module('App')
         ref.on("value",function(snapshot){
           counter = snapshot.val();
         });
-        ref.once("value",function(){
+
+        var notification_ref = new Firebase(FirebaseUrl+'notification/'+uid);
+        notification_ref.on("child_added",function(){
           $notification('New message from Qanya', {
             body: 'Hello '+uid,
             dir: 'auto',

@@ -1,5 +1,14 @@
 angular.module('App')
 
+  .directive('mainHeader',function(){
+    return {
+      restrict:     'E',
+      transclude:   true,
+      controller: 'AuthCtrl as authCtrl',
+      templateUrl: 'templates/toolbar/main_toolbar.html'
+    }
+
+  })
 
   //Badge notification
   .directive('badgeNotification',function(){

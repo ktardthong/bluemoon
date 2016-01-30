@@ -97,10 +97,6 @@ var app = angular.module('App', [
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/html/login-form.html'
           },
-          'header@home': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
-          }
         }
       })
 
@@ -118,10 +114,6 @@ var app = angular.module('App', [
               }
             }
           },
-          'header@trending': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
-          }
         }
       })
 
@@ -144,10 +136,6 @@ var app = angular.module('App', [
               }
             }
           },
-          'header@category': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
-          }
         }
       })
 
@@ -335,10 +323,6 @@ var app = angular.module('App', [
               }
             }
           },
-          'header@topic': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
-          }
         }
       })
 
@@ -433,11 +417,6 @@ var app = angular.module('App', [
               }
             }
           },
-          'header@acccountEdit': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
-          }
-
         }
       })
 
@@ -582,10 +561,6 @@ var app = angular.module('App', [
           'login-form@login': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/html/login-form.html'
-          },
-          'header@login': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
           }
         }
       })
@@ -596,10 +571,6 @@ var app = angular.module('App', [
           '': {
             controller: 'AuthCtrl as authCtrl',
             templateUrl: 'auth/register.html'
-          },
-          'header@register': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
           }
         },
         resolve: {
