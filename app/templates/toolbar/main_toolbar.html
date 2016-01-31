@@ -48,17 +48,6 @@
       </li>
 
 
-      <!-- Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link hand" ng-click="authCtrl.toggleRight()">
-          <i class="ion-grid"></i>
-            <span class="white-font">
-              {{ 'KEY_DASHBOARD' | translate }}
-            </span>
-        </a>
-      </li>
-
-
       <!-- If user not login -->
       <li class="nav-item" ng-if="!authCtrl.profile.$id">
         <a class="nav-link" ui-sref="register">

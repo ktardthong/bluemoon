@@ -1,166 +1,60 @@
 
   <div ui-view="header"></div>
 
-  <section class="gray-background">
+  <div class="gray-background">
 
-    <div class="container margin-top animated slideInUp">
+    <div class="container margin-top">
 
-      <!-- Three columns -->
-      <div class="row">
-
-        <!-- LEFT -->
-        <div class="col-md-3 hidden-sm-down">
+      <div class="row" ng-controller="DashboardCtrl as dashboardCtrl">
+        <div class="col-md-8" >
           <div class="card">
-            <img class="card-img-top" src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
-            <div class="card-block">
-              <h4 class="card-title">
-                <a ui-sref="profile({Name: profileCtrl.users.getDisplayName(profileCtrl.auth.ref.getAuth().uid) })">
-                  {{ profileCtrl.profile.displayName }}
-                </a>
-              </h4>
-              <p class="card-text">{{ profileCtrl.profile.biography }}</p>
-              <p class="card-text">
-                <h5>
+            <!-- Creation form -->
+            <topic-create topic="cateCtrl.cateName.$id"></topic-create>
+          </div>
+            <div ui-view>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">
+                  <a ui-sref="profile({Name: profileCtrl.users.getDisplayName(profileCtrl.auth.ref.getAuth().uid) })">
+                    {{ profileCtrl.profile.displayName }}
+                  </a>
+                </span>
+                <span class="md-subhead">{{ profileCtrl.profile.biography }}</span>
+                <p class="card-text">
+
                   {{ profileCtrl.profile.stat.posted.count }}
                   <small>{{ 'KEY_POSTED' | translate }}</small>
-                </h5>
-              </p>
-              <p class="card-text">
-                <h5>
+
                   {{ profileCtrl.profile.stat.upvoted.count }}
                   <small>{{ 'KEY_UPVOTED' | translate }}</small>
-                </h5>
-              </p>
-              <p class="card-text">
-                <h5>
+
                   {{ profileCtrl.profile.stat.follower.count }}
                   <small>{{ 'KEY_FOLLOWER' | translate }}</small>
                 </h5>
-              </p>
+                </p>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-md card-media">
+                  <img class="card-img-top" src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
+                </div>
+              </md-card-title-media>
+            </md-card-title>
+            <!--<md-card-actions layout="row" layout-align="end center">
+              <md-button>Action 1</md-button>
+              <md-button>Action 2</md-button>
+            </md-card-actions>-->
+          </md-card>
 
-            </div>
-          </div>
+          <topic-grid ></topic-grid>
 
-          <div class="card card-block">
-            <h5 class="card-title">{{ 'KEY_FOLLOWING' | translate }}</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-unstyled"
-                    ng-repeat="cate in profileCtrl.cate.all | orderBy: '-slug' "
-                    ng-if="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)"
-                    ng-show="profileCtrl.cate.userFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
-                    <a ui-sref="category({Slug: cate.slug})">
-                      {{cate.name}}
-                    </a>
-                    &bull;
-                    <a class="hand"
-                       ng-click="profileCtrl.cate.unFollow(cate.slug,profileCtrl.auth.ref.getAuth().uid)">
-                      {{ 'KEY_UNFOLLOW' | translate }}
-                    </a>
-                </li>
-              </ul>
-          </div>
+          <tag-grid></tag-grid>
 
-          <div class="card card-block">
-            <h5 class="card-title">{{ 'KEY_TREND' | translate }}</h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-unstyled"
-                  ng-repeat="cate in profileCtrl.followList">
-                  {{cate}}
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Middle section-->
-        <div class="col-md-6">
-          <div class="card " layout-align="start center" layout="column" >
-            <div class="md-padding" layout-align="start center" layout="column" style="min-height:150px;" >
-              <h2 class="md-title">{{ 'KEY_NOTHING_HERE' | translate }}</h2>
-              <p>{{ 'KEY_CAT_WILL_APPEAR' | translate }}</p>
-              <hr/>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right side-->
-        <div class="col-md-3">
-          <div class="card card-block">
-            <h5 class="lead">{{ 'KEY_WHO_TO_FOLLOW' | translate }}</h5>
-            <div class="list"></div>
-          </div>
-          <div class="card card-block">
-            <p>
-              <small>
-                © 2016 TopikAday.com
-              </small>
-            </p>
-          </div>
         </div>
       </div>
     </div>
-  </section>
-  
-<!--  <div class="container margin-top animated slideInUp" layout="row">
-    &lt;!&ndash; Left &ndash;&gt;
-    <div flex-auto>
-      <md-sidenav
-        layout="column"
-        class="md-sidenav-left gray-background"
-        md-component-id="left"
-        md-is-locked-open="$mdMedia('gt-sm')">
-
-        <md-card>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">  {{ profileCtrl.profile.displayName }}</span>
-              <span class="md-subhead"><a>edit</a> </span>
-            </md-card-title-text>
-            <md-card-title-media>
-              <img ng-src="{{profileCtrl.profile.photo}}" class="img-circle">
-            </md-card-title-media>
-          </md-card-title>
-          <md-card-actions layout="row">
-            <md-button>Post <br> 1</md-button>
-            <md-button>Post <br> 1</md-button>
-          </md-card-actions>
-        </md-card>
-
-        <md-card>
-          <md-list>
-            <md-subheader class="md-no-sticky">Trends</md-subheader>
-            <md-list-item class="md-3-line">test</md-list-item>
-            <md-list-item class="md-3-line">test</md-list-item>
-          </md-list>
-        </md-card>
-      </md-sidenav>
-    </div>
-
-
-    &lt;!&ndash; Middle &ndash;&gt;
-    <div flex layout-fill layout-align="top center">
-      <md-card>
-        <md-card-header>HEADER</md-card-header>
-      </md-card>
-    </div>
-
-    &lt;!&ndash; Right &ndash;&gt;
-    <div flex layout-fill layout-align="top center">
-      <md-sidenav
-        layout="column"
-        class="md-sidenav-right gray-background"
-        md-component-id="right"
-        md-is-locked-open="$mdMedia('gt-sm')">
-
-      <md-card>
-        <md-list>
-          <md-subheader class="md-no-sticky">Popular Writer</md-subheader>
-          <md-list-item class="md-3-line">test</md-list-item>
-          <md-list-item class="md-3-line">test</md-list-item>
-        </md-list>
-      </md-card>
-      </md-sidenav>
-    </div>
-  </div>-->
-
-
-
+  </div>

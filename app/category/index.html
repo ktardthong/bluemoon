@@ -3,103 +3,24 @@
   <section class="gray-background">
 
     <div class="container margin-top animated slideInUp">
+      <!-- Feed -->
       <div class="row">
-
-        <div class="col-md-3 hidden-sm-down">
-
-          <!-- Trends-->
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">
-                <i class="ion-arrow-graph-up-right"></i>
-                <small>Trend</small>
-              </h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+        <div class="container-fluid">
+          <div class="pull-left">
+            <!-- Topic Category -->
+            <p class="text-center md-headline md-padding">
+              {{cateCtrl.cateName.name}}
+            </p>
           </div>
 
-
+          <div class="pull-right">
+            <cate-follow-btn cate="cateCtrl.cateName.slug"></cate-follow-btn>
+          </div>
         </div>
 
-        <!-- Feed -->
-        <div class="col-md-6">
-
-          <div class="container-fluid">
-            <div class="pull-left">
-              <!-- Topic Category -->
-              <p class="text-center md-headline md-padding">
-                {{cateCtrl.cateName.name}}
-              </p>
-            </div>
-
-            <div class="pull-right">
-              <cate-follow-btn cate="cateCtrl.cateName.slug"></cate-follow-btn>
-            </div>
-          </div>
-
-          <!-- Creation form -->
-          <topic-create topic="cateCtrl.cateName.$id"></topic-create>
-
-          <!--<button
-            ng-if="!profileCtrl.cate.userFollow(cateCtrl.cateName.slug,Auth.ref.getAuth().uid)"
-            class="btn btn-success-outline"> {{ 'KEY_FOLLOW' | translate }}</button>-->
-
-          <!-- List topics here-->
-          <topic-list topics="cateCtrl.cateTopics"></topic-list>
-
-        </div>
-
-        <!-- Right -->
-        <div class="col-md-3">
-
-          <!-- Most Contribuiters-->
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">
-                <i class="fa fa-tint"></i>
-                <small>Most Upvote reply</small>
-              </h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">
-                <i class="fa fa-trophy"></i>
-                <small>Most Upvote Writers</small>
-              </h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">
-                <i class="fa fa-tag"></i>
-                <small>Tags</small>
-              </h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
+        <!-- List topics here-->
+        <topic-list topics="cateCtrl.cateTopics">
+          Loading... please wait...
+        </topic-list>
     </div>
   </section>

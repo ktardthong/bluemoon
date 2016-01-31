@@ -51,7 +51,7 @@
     <![endif]-->
 
     <main-header></main-header>
-    <ui-view></ui-view>
+    <ui-view>LOADING....</ui-view>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -101,24 +101,13 @@
     <script src="bower_components/angular-flexslider/angular-flexslider.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-notification/angular-notification.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/build/build.js"></script>
     <!-- endbuild -->
-
-
-
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-      <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools"></h1>
-      </md-toolbar>
-      <md-content layout-padding>
-        <topic-grid ></topic-grid>
-        <tag-grid></tag-grid>
-      </md-content>
-    </md-sidenav>
 
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>

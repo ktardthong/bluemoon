@@ -47,5 +47,7 @@ gulp.task('watch', ['js'], function () {
   gulp.watch('app/topics/*.js', ['js'])
   gulp.watch('app/users/*.js', ['js'])
   gulp.watch('app/notification/*.js', ['js'])
+  gulp.watch('app/lang/*.js', ['js'])
+  gulp.watch('app/app.js', ['js'])
   //gulp.watch('app/**/*.js', ['js'])
 });

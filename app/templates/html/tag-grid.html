@@ -3,7 +3,7 @@
  -->
 
 
-<h5 class="md-display-1 text-center">
+<h5 class="text-center">
   {{ 'KEY_TAGS' | translate }}
 </h5>
 
@@ -12,6 +12,6 @@
   ui-sref="tag({Tag: tag.$id})"
   ng-repeat="tag in dashboardCtrl.tags"
   type="button"
-  class="btn btn-success-outline">
+  class="btn btn-sm btn-success-outline md-margin">
   {{ tag.$id }}
 </button>

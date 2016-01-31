@@ -6,6 +6,7 @@
 var app = angular.module('App', [
     'firebase',
     'angular-md5', // Encrypt email
+    'ngRoute',
     'ui.router',
     'ngMaterial', // Interface
     'angularMoment', // Time management
@@ -476,11 +477,30 @@ var app = angular.module('App', [
                 })
               }
             }
-          },
-          'header@dashboard': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
           }
+        }
+      })
+
+
+      // nested list with custom controller
+      .state('dashboard.list', {
+        url: '/feed/{Slug}',
+        //templateUrl: '/feeds/feed.html',
+        views: {
+          '': {
+            controller: 'CateCtrl as cateCtrl',
+            templateUrl: 'category/index.html',
+            resolve: {
+              // Getting Category details
+              cateName: function ($stateParams, Category) {
+                return Category.getName($stateParams.Slug).$loaded()
+              },
+              // Getting list of category topics here
+              cateTopics: function ($stateParams, Topics) {
+                return Topics.list($stateParams.Slug)
+              }
+            }
+          },
         }
       })
 
@@ -510,10 +530,6 @@ var app = angular.module('App', [
                 })
               }
             }
-          },
-          'header@follow_cates': {
-            controller: 'AuthCtrl as authCtrl',
-            templateUrl: 'templates/toolbar/main_toolbar.html'
           }
         }
       })

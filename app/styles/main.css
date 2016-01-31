@@ -64,6 +64,16 @@ a{
   text-decoration: none;
 }
 
+.stuck {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  width: 180px;
+  overflow-y: auto;
+  background-color: #eee;
+}
+
 .fix-toolbar {
   z-index: 100;
   position: fixed;

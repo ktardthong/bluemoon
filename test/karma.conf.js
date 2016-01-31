@@ -53,6 +53,7 @@ module.exports = function(config) {
       'bower_components/angular-flexslider/angular-flexslider.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-notification/angular-notification.js',
+      'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

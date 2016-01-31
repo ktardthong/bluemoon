@@ -15,6 +15,8 @@ angular.module('App')
     dashboardCtrl.followList      = '';
 
 
+    dashboardCtrl.userFeed ='null';
+
     //Close Side bar
     dashboardCtrl.close = function () {
       $mdSidenav('right').close();

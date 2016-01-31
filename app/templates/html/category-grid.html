@@ -6,10 +6,9 @@
 
 
 <button
-  ng-click="dashboardCtrl.close()"
-  ui-sref="category({Slug: cate.slug})"
+  ui-sref=".list({Slug: cate.slug})"
   ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
   type="button"
-  class="btn btn-success-outline md-margin">
+  class="btn btn-sm btn-success-outline md-margin">
   {{cate.name}}
 </button>

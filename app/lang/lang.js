@@ -31,6 +31,7 @@ angular.module('App')
       'KEY_SAVE_DRAFT': 'Save as draft',
       'KEY_TAGS':       'Tags',
       'KEY_EXPLORE':    'Explore',
+      'KEY_FEAT_CAT':    'Features categories',
       'KEY_COMMENTS':   'Comments',
       'KEY_REPLY':      'Reply',
       'KEY_REVIEW':     'Review',
