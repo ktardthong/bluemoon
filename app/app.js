@@ -107,7 +107,7 @@ var app = angular.module('App', [
         url: '/explore/trending',
         views: {
           '': {
-            controller: 'HomeCtrl as  homeCtrl',
+            //controller: 'HomeCtrl as  homeCtrl',
             templateUrl: 'home/trend.html',
             resolve: {
               feed: function (Topics) {

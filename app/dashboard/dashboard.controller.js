@@ -1,27 +1,22 @@
 angular.module('App')
-  .controller('DashboardCtrl', function(Auth, $state,Category,CateService,Tags,
-                                        $timeout, $mdSidenav, $log) {
+  .controller('DashboardCtrl', function(Auth, $state,Category,CateService,Tags,Topics
+                                        ) {
     var dashboardCtrl = this;
 
     dashboardCtrl.auth = Auth;
 
-    dashboardCtrl.cate = CateService;
-    dashboardCtrl.categories      = Category.all;
+    dashboardCtrl.cate        = CateService;
+    dashboardCtrl.categories  = Category.all;
+    dashboardCtrl.topics      = Topics;
     dashboardCtrl.topic_grid  = false;
     dashboardCtrl.tags        = Tags.arr;
 
     dashboardCtrl.userCateFollow  = [];
     dashboardCtrl.cateIsFollow    = [];
     dashboardCtrl.followList      = '';
-
-
     dashboardCtrl.userFeed ='null';
 
-    //Close Side bar
-    dashboardCtrl.close = function () {
-      $mdSidenav('right').close();
-    };
-
+    dashboardCtrl.latestFeed = dashboardCtrl.topics.latestFeed();
 
     dashboardCtrl.followCate = function(cate_slug){
       dashboardCtrl.cate.addChild(cate_slug+'/follower')
