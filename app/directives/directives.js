@@ -4,7 +4,7 @@ angular.module('App')
     return {
       restrict:     'E',
       transclude:   true,
-      controller: 'AuthCtrl as authCtrl',
+      //controller: 'AuthCtrl as authCtrl',
       templateUrl: 'templates/toolbar/main_toolbar.html'
     }
 
@@ -15,7 +15,7 @@ angular.module('App')
     return {
       restrict:     'E',
       transclude:   true,
-      controller:   'AuthCtrl as authCtrl',
+      //controller:   'AuthCtrl as authCtrl',
       templateUrl:  'templates/html/badge-notification.html',
       scope: {
         notification: '='

@@ -4,6 +4,9 @@ angular.module('App')
                                       Auth,Users,Topics, Facebook,notify,CateService,
                                       //Resolve
                                       profile,isOwner,userPosts){
+
+    console.log("ProfileCtrl");
+
     var profileCtrl = this;
 
     //Parser

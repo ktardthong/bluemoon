@@ -5,6 +5,8 @@ angular.module('App')
                                     NotiService,Tags, Topics, Auth, Users,
                                     Slug,Places, Languages,Archive){
 
+    console.log("topicCtrl");
+
     var topicCtrl = this;
 
 
@@ -107,7 +109,7 @@ angular.module('App')
     topicCtrl.showMdLogin = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       $mdDialog.show({
-          controller: 'AuthCtrl as authCtrl',
+          //controller: 'AuthCtrl as authCtrl',
           templateUrl: 'templates/html/md-login-form.html',
           parent: angular.element(document.body),
           targetEvent: ev,

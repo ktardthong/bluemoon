@@ -27,4 +27,6 @@ angular.module('App')
       dashboardCtrl.cate.addChild(cate_slug+'/follower')
         .child(Auth.ref.getAuth().uid).push().set(moment().toISOString());
     }
+
+    console.log("DashboardCtrl");
   });

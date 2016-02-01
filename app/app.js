@@ -73,13 +73,16 @@ var app = angular.module('App', [
 
 
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider,$controllerProvider) {
+
+    app.registerCtrl = $controllerProvider.register;
+
     $stateProvider
       .state('home', {
         url: '/',
         views: {
           '': {
-            controller: 'HomeCtrl as  homeCtrl',
+            controller: 'DashboardCtrl as  dashboardCtrl',
             templateUrl: 'home/home.html',
             resolve: {
               requireNoAuth: function ($state, Auth) {
@@ -88,14 +91,11 @@ var app = angular.module('App', [
                 }, function (error) {
                   return error
                 })
-              },
-              feed: function (Topics) {
-                return Topics.latestFeed()
               }
             }
           },
           'login-form@home': {
-            controller: 'AuthCtrl as authCtrl',
+            //controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/html/login-form.html'
           },
         }

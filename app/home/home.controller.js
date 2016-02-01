@@ -5,4 +5,7 @@ angular.module('App')
     homeCtrl.topics = Category;
     homeCtrl.topics = Topics;
     homeCtrl.feed   = feed;
+
+    console.log("homeCtrl");
+
   });

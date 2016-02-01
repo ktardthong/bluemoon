@@ -7,4 +7,6 @@ angular.module('App')
     cateCtrl.category   = Category;
     cateCtrl.cateTopics = cateTopics;
 
+
+    console.log("CateCtrl");
   });

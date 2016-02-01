@@ -1,6 +1,9 @@
 angular.module('App')
   .controller('AuthCtrl', function($scope,Auth, Users, $state,$rootScope,$mdSidenav,$translate, $cookies,
                                    NotiService,$notification){
+
+    console.log("authCtrl");
+
     var authCtrl = this;
 
     //Ask for notification permission
