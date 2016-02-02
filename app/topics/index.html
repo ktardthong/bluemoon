@@ -1,10 +1,12 @@
-<div class="gray-background">
+<div class="gray-background"
+     ng-controller="TopicCtrl as topicCtrl">
+
 
   <div ui-view="header"></div>
 
   <div class="inner-container container margin-top animated slideInUp">
 
-    <div class="card md-padding" ng-controller="TopicCtrl as topicCtrl">
+    <div class="card md-padding">
 
       <!-- remove topic btn-->
       <div class="pull-right" ng-if="topicLandingCtrl.isOwner">
@@ -61,10 +63,11 @@
 
 
         <!-- Share -->
-        Share here
+        <!--Share here
         <div class="fb-share-button"
              data-href="https://developers.facebook.com/docs/plugins/"
-             data-layout="button_count"></div>
+             data-layout="button_count"></div>-->
+
 
         <!-- Footer action -->
         <div class="container" >
@@ -85,7 +88,7 @@
 
 
     <!-- Author section -->
-    <div class="media md-padding" ng-controller="TopicCtrl as topicCtrl">
+    <div class="media md-padding">
 
       <div class="media-left">
         <a href="#">
@@ -135,7 +138,7 @@
 
 
     <!-- Reply form -->
-    <div ng-controller="TopicCtrl as topicCtrl" ng-if="topicLandingCtrl.auth.getUid()">
+    <div ng-if="topicLandingCtrl.auth.getUid()">
       <div class="media card md-padding">
         <form ng-submit="topicCtrl.reply(topicLandingCtrl.topicLanding[0])">
           <div class="media-left">
@@ -187,11 +190,9 @@
       {{ 'KEY_COMMENTS' | translate }}
       {{ topicLandingCtrl.topicLanding[0].replies.count }}
     </h5>
-    <!-- Reply body list-->
-    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "
-          ng-controller="TopicCtrl as topicCtrl">
 
-      <div class="media card md-padding" ng-if="reply.body">
+    <!-- Reply body list-->
+    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "  <div class="media card md-padding" ng-if="reply.body">
         <div class="media-left">
           <a href="#">
             <img ng-src="{{ topicCtrl.users.profile(reply.uid).photo }}"

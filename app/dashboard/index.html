@@ -1,14 +1,15 @@
-
+<div ng-controller="DashboardCtrl as dashboardCtrl">
   <div ui-view="header"></div>
 
   <div class="gray-background">
 
     <div class="container margin-top">
 
-      <div class="row" ng-controller="DashboardCtrl as dashboardCtrl">
+      <div class="row">
         <div class="col-md-8" >
           <div class="card">
             <!-- Creation form -->
+             >> {{ cateCtrl }}
             <topic-create topic="cateCtrl.cateName.$id"></topic-create>
           </div>
             <div ui-view>
@@ -16,7 +17,7 @@
 
         </div>
         <div class="col-md-4">
-          <md-card>
+          <md-card ui-view="profile">
             <md-card-title>
               <md-card-title-text>
                 <span class="md-headline">
@@ -40,7 +41,7 @@
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-md card-media">
-                  <img class="card-img-top" src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
+                  <img class="card-img-top" ng-src="{{profileCtrl.profile.photo}}" alt="Card image cap" width="100%">
                 </div>
               </md-card-title-media>
             </md-card-title>
@@ -58,3 +59,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -54,11 +54,11 @@ angular.module('App')
 
     }
 
-    $scope.$watch("name", function(newValue, oldValue) {
+    /*$scope.$watch("name", function(newValue, oldValue) {
       if ($scope.name.length > 0) {
         $scope.greeting = "Greetings " + $scope.name;
       }
-    });
+    });*/
 
 
     //Change language
@@ -108,13 +108,4 @@ angular.module('App')
         authCtrl.error = error;
       });
     };
-
-
-    authCtrl.toggleRight = buildToggler('right');
-    function buildToggler(navID) {
-      return function() {
-        $mdSidenav(navID)
-          .toggle()
-      };
-    }
   });

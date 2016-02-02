@@ -19,8 +19,9 @@
     <h4>
       {{ 'KEY_LATEST_FEED' | translate }}
     </h4>
-    <div class="card-columns">
-      <topic-list topics="dashboardCtrl.latestFeed"></topic-list>
+    <div class="card-columns" ng-controller="TopicCtrl as topicCtrl">
+      <topic-list
+        topics="dashboardCtrl.latestFeed"></topic-list>
     </div>
   </div>
 

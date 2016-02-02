@@ -7,7 +7,7 @@
 
 <button
   ui-sref=".list({Slug: cate.slug})"
-  ng-repeat="cate in dashboardCtrl.categories | orderBy: '-slug' "
+  ng-repeat="cate in dashboardCtrl.categories.all | orderBy: '-slug' "
   type="button"
   class="btn btn-sm btn-success-outline md-margin">
   {{cate.name}}

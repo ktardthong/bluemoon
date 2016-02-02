@@ -3,6 +3,8 @@ angular.module('App')
                                             //Resolve
                                             isOwner,topicLanding, replyList, viewData, followers) {
 
+    console.log("topicLandingCtrl");
+
     var topicLandingCtrl = this
 
 

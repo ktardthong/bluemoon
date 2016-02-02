@@ -107,7 +107,7 @@ var app = angular.module('App', [
         url: '/explore/trending',
         views: {
           '': {
-            //controller: 'HomeCtrl as  homeCtrl',
+            controller: 'DashboardCtrl as  dashboardCtrl',
             templateUrl: 'home/trend.html',
             resolve: {
               feed: function (Topics) {
@@ -124,7 +124,7 @@ var app = angular.module('App', [
         url: '/category/{Slug}',
         views: {
           '': {
-            controller: 'CateCtrl as cateCtrl',
+            //controller: 'CateCtrl as cateCtrl',
             templateUrl: 'category/index.html',
             resolve: {
               // Getting Category details
@@ -435,7 +435,6 @@ var app = angular.module('App', [
       // @profileCtrl
       .state('dashboard', {
         url: '/user/dashboard',
-        controller: 'DashboardCtrl as dashboardCtrl',
         views: {
           '': {
             controller: 'ProfileCtrl as profileCtrl',
@@ -575,7 +574,6 @@ var app = angular.module('App', [
             templateUrl: 'auth/login.html'
           },
           'login-form@login': {
-            controller: 'AuthCtrl as authCtrl',
             templateUrl: 'templates/html/login-form.html'
           }
         }
@@ -585,7 +583,6 @@ var app = angular.module('App', [
         url: '/user/register',
         views: {
           '': {
-            controller: 'AuthCtrl as authCtrl',
             templateUrl: 'auth/register.html'
           }
         },

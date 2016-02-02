@@ -6,7 +6,7 @@ angular.module('App')
     dashboardCtrl.auth = Auth;
 
     dashboardCtrl.cate        = CateService;
-    dashboardCtrl.categories  = Category.all;
+    dashboardCtrl.categories  = Category;
     dashboardCtrl.topics      = Topics;
     dashboardCtrl.topic_grid  = false;
     dashboardCtrl.tags        = Tags.arr;

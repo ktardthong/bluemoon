@@ -27,9 +27,7 @@ angular.module('App')
   //List of categories on the siderbar
   .directive('reviewScore', function () {
     return {
-      restrict:     'E',
-      transclude:   true,
-      controller:   'TopicCtrl as topicCtrl',
+      //controller:   'TopicCtrl as topicCtrl',
       templateUrl:  'templates/html/review-summary-list.html',
       scope: {
         review: '='
@@ -43,7 +41,7 @@ angular.module('App')
     return {
       restrict:     'E',
       transclude:   true,
-      controller:   'TopicCtrl as topicCtrl',
+      //controller:   'TopicCtrl as topicCtrl',
       templateUrl:  'templates/html/follow-user.html',
       scope: {
         follow: '='
@@ -55,7 +53,7 @@ angular.module('App')
   //Category follow button
   .directive('cateFollowBtn',function(){
     return {
-      controller: 'DashboardCtrl as dashboardCtrl',
+      //controller: 'DashboardCtrl as dashboardCtrl',
       templateUrl: 'templates/html/category-follow-btn.html',
       scope: {
         cate: '='
@@ -66,7 +64,7 @@ angular.module('App')
   //List of categories on the siderbar
   .directive('topicGrid', function () {
     return {
-      controller: 'DashboardCtrl as dashboardCtrl',
+      //controller: 'DashboardCtrl as dashboardCtrl',
       templateUrl: 'templates/html/category-grid.html'
     }
   })
@@ -74,7 +72,7 @@ angular.module('App')
   //Grid Tags for sidebar
   .directive('tagGrid', function () {
     return {
-      controller: 'DashboardCtrl as dashboardCtrl',
+      //controller: 'DashboardCtrl as dashboardCtrl',
       templateUrl: 'templates/html/tag-grid.html'
     }
   })
@@ -83,7 +81,7 @@ angular.module('App')
   .directive('topicCreate', function(){
 
     return {
-      controller: 'TopicCtrl as topicCtrl',
+      //controller: 'TopicCtrl as topicCtrl',
       templateUrl: 'templates/html/topic-create.html',
       scope: {
         topic: '='
@@ -95,7 +93,7 @@ angular.module('App')
 
   .directive('topicList', function () {
     return {
-      controller: 'TopicCtrl as topicCtrl',
+      //controller: 'TopicCtrl as topicCtrl',
       templateUrl: 'templates/html/topic-list.html',
       scope: {
         topics: '='
@@ -106,7 +104,7 @@ angular.module('App')
 
   .directive('topicActionsCard', function () {
     return {
-      controller: 'TopicCtrl as topicCtrl',
+      //controller: 'TopicCtrl as topicCtrl',
       templateUrl: 'templates/html/topic-actions-card.html',
       scope: {
         topic: '='
