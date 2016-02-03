@@ -38,6 +38,8 @@ angular.module('App')
       return NotiService.unreadNotification(authCtrl.profile.$id).then(function(val){
         authCtrl.badgeValue = val;
       });
+
+
       //return authCtrl.badgeValue = authCtrl.notification.unreadNotification(authCtrl.profile.$id);
     })
 

@@ -188,6 +188,10 @@ angular.module('App')
        }
     }
 
+    $scope.$watch('',function(){
+      console.log(">>> watching at topic controller");
+    })
+
 
     //Reply to topic
     topicCtrl.reply = function(topicObj){

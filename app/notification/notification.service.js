@@ -20,23 +20,23 @@ angular.module('App')
           counter = snapshot.val();
           console.log(snapshot.val());
 
-          $notification('New message from Qanya', {
-            body: 'You have '+counter +' unread messages',
-            dir: 'auto',
-            lang: 'en',
-            tag: 'my-tag',
-            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
-            //delay: 1000, // in ms
-            focusWindowOnClick: true // focus the window on click
-          });
-
-          deferred.resolve(counter);
+          if(counter > 0){
+            $notification('New message from Qanya', {
+              body: 'You have '+counter +' unread messages',
+              dir: 'auto',
+              lang: 'en',
+              tag: 'my-tag',
+              icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+              //delay: 1000, // in ms
+              focusWindowOnClick: true // focus the window on click
+            });
+            deferred.resolve(counter);
+          }
         });
-
-
 
         return deferred.promise;
       },
+
 
       //Notify followers
       notifyFollower:function(topicId,uid){
@@ -51,17 +51,25 @@ angular.module('App')
 
       //Add detail for this notifictiaon
       notifyLog:function(topicId,uid,from_uid){
-
         console.log("uid "+uid);
         console.log("from uid "+ from_uid);
-
-        Notification.addChild(uid).push().set({
+        var ref = new Firebase(FirebaseUrl+'notification/');
+        ref.on.addChild(uid).push().set({
           topicId:    topicId,
           from:       from_uid,
           is_read:    false,
           timestamp:  moment().toISOString()
-
-        });
+        }).then(function(){
+          $notification('New message from Qanya', {
+            body: 'You have new message',
+            dir: 'auto',
+            lang: 'en',
+            tag: 'my-tag',
+            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+            //delay: 1000, // in ms
+            focusWindowOnClick: true // focus the window on click
+          });
+        })
       },
 
 
@@ -84,15 +92,6 @@ angular.module('App')
           }else{
             ref.set(snapshot.val() + 1);
           }
-          $notification('New message from Qanya', {
-            body: 'You have new message',
-            dir: 'auto',
-            lang: 'en',
-            tag: 'my-tag',
-            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
-            //delay: 1000, // in ms
-            focusWindowOnClick: true // focus the window on click
-          });
         }, function (errorObject) {
           console.log("The read failed: " + errorObject.code);
         });

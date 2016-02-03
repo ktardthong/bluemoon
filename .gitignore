@@ -4,3 +4,4 @@ dist
 .sass-cache
 bower_components
 .idea/workspace.xml
+app/build/build.js
