@@ -17,14 +17,15 @@ angular.module('App')
     authCtrl.users    = Users;
     authCtrl.notification = NotiService;
 
+    authCtrl.badgeValue = 0;
 
     if(Auth.ref.getAuth() != null ){
-      authCtrl.profile  = authCtrl.users.getProfile(Auth.ref.getAuth().uid);
+      authCtrl.profile    = authCtrl.users.getProfile(Auth.ref.getAuth().uid);
+      //authCtrl.badgeValue = authCtrl.notification.unreadNotification(authCtrl.profile.$id);
     }
     else{
       authCtrl.profile =''
     }
-
 
     authCtrl.user = {
       email: '',
@@ -32,33 +33,21 @@ angular.module('App')
     };
 
 
+    $scope.$watch('badgeValue',function(){
+      console.log(">>>" + authCtrl.badgeValue.value);
+      return NotiService.unreadNotification(authCtrl.profile.$id).then(function(val){
+        authCtrl.badgeValue = val;
+      });
+      //return authCtrl.badgeValue = authCtrl.notification.unreadNotification(authCtrl.profile.$id);
+    })
 
-    //Get the badge notification
-    /*authCtrl.badgeNotification = function() {
-     return authCtrl.notification.addArrChild(authCtrl.profile.$id + '/unread').$loaded();
-    }
+    console.log(authCtrl.badgeValue);
 
-    authCtrl.badgeValue = authCtrl.badgeNotification;
-
-    console.log(authCtrl.badgeNotification);*/
-
-    $scope.badgeNotifcation = authCtrl.badgeNotification;
 
     //Reset counter
     authCtrl.resetCounter = function(){
       authCtrl.notification.resetUnread(authCtrl.profile.$id);
     }
-
-    authCtrl.changeVal = function(){
-      console.log('badge value '+authCtrl.badgeNotification.$value);
-
-    }
-
-    /*$scope.$watch("name", function(newValue, oldValue) {
-      if ($scope.name.length > 0) {
-        $scope.greeting = "Greetings " + $scope.name;
-      }
-    });*/
 
 
     //Change language

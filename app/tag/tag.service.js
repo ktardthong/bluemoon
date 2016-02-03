@@ -4,6 +4,8 @@ angular.module('App')
     var ref = new Firebase(FirebaseUrl+'tags');
     var tags = $firebaseArray(ref);
 
+    console.log("tag service");
+
     var Tags = {
 
       addChild: function(childname){

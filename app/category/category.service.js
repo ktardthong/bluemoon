@@ -1,10 +1,11 @@
 angular.module('App')
-
   //Topic list
   .factory('CateService', function($firebaseObject, $firebaseArray , FirebaseUrl){
     var ref    = new Firebase(FirebaseUrl+'categories');
     var categories = $firebaseObject(ref);
 
+    console.log("category service");
+    
     var Cate = {
 
       name: function(topic_slug){

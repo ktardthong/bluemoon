@@ -1,13 +1,12 @@
 angular.module('App')
 
   .factory('NotiService', function($firebaseObject, $firebaseArray , FirebaseUrl,
-                                   Users,$notification){
+                                   Users,$notification,$q){
     var ref    = new Firebase(FirebaseUrl+'notification');
     var noti = $firebaseObject(ref);
     var users = Users;
 
-    var observerCallbacks = [];
-
+    console.log('noti service');
 
     var Notification = {
 
@@ -15,14 +14,14 @@ angular.module('App')
       unreadNotification:function(uid){
         var ref = new Firebase(FirebaseUrl+'notification/'+uid+'/unread');
         var counter;
-        ref.on("value",function(snapshot){
-          counter = snapshot.val();
-        });
+        var deferred = $q.defer();
 
-        var notification_ref = new Firebase(FirebaseUrl+'notification/'+uid);
-        notification_ref.on("child_added",function(){
+        ref.once("value",function(snapshot){
+          counter = snapshot.val();
+          console.log(snapshot.val());
+
           $notification('New message from Qanya', {
-            body: 'Hello '+uid,
+            body: 'You have '+counter +' unread messages',
             dir: 'auto',
             lang: 'en',
             tag: 'my-tag',
@@ -30,8 +29,13 @@ angular.module('App')
             //delay: 1000, // in ms
             focusWindowOnClick: true // focus the window on click
           });
-        })
-        return counter ;
+
+          deferred.resolve(counter);
+        });
+
+
+
+        return deferred.promise;
       },
 
       //Notify followers
@@ -56,8 +60,8 @@ angular.module('App')
           from:       from_uid,
           is_read:    false,
           timestamp:  moment().toISOString()
-        });
 
+        });
       },
 
 
@@ -80,12 +84,23 @@ angular.module('App')
           }else{
             ref.set(snapshot.val() + 1);
           }
+          $notification('New message from Qanya', {
+            body: 'You have new message',
+            dir: 'auto',
+            lang: 'en',
+            tag: 'my-tag',
+            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+            //delay: 1000, // in ms
+            focusWindowOnClick: true // focus the window on click
+          });
         }, function (errorObject) {
           console.log("The read failed: " + errorObject.code);
         });
 
         //Add to log
         Notification.notifyLog(topicId,uid,from_uid);
+
+
 
       },
 
@@ -102,5 +117,21 @@ angular.module('App')
       all: noti
     }
     return Notification;
+
+
+    function notificationAlert(uid,head,body){
+      var notification_ref = new Firebase(FirebaseUrl+'notification/'+uid);
+      notification_ref.once("child_added",function(){
+        $notification(head, {
+          body: body,
+          dir: 'auto',
+          lang: 'en',
+          tag: 'my-tag',
+          icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+          //delay: 1000, // in ms
+          focusWindowOnClick: true // focus the window on click
+        });
+      })
+    }
   })
 

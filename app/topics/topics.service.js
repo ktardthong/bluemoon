@@ -6,6 +6,8 @@ angular.module('App')
     var topicsArr = $firebaseArray(ref)
     var topicKey = ''
 
+    console.log("topic service");
+
     var Topics = {
       // Get topic tag
       getTag: function (tag) {

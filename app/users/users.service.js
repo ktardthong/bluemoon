@@ -3,6 +3,8 @@ angular.module('App')
     var usersRef = new Firebase(FirebaseUrl + 'users')
     var users = $firebaseArray(usersRef)
 
+    console.log("User Service");
+
     var Users = {
       getLocationIP: function () {
         return $http({
@@ -41,6 +43,7 @@ angular.module('App')
       },
 
       getDisplayName: function (uid) {
+        console.log(uid);
         if (uid !== null || uid !== '') {
           return users.$getRecord(uid).displayName;
         }
