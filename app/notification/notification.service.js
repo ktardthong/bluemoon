@@ -49,27 +49,34 @@ angular.module('App')
         })
       },
 
+      replyStatus:function(uid){
+        $notification('New message from Qanya', {
+          body: 'You have new message',
+          dir: 'auto',
+          lang: 'en',
+          tag: 'my-tag',
+          icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
+          //delay: 1000, // in ms
+          focusWindowOnClick: true // focus the window on click
+        });
+        return uid;
+      },
+
       //Add detail for this notifictiaon
       notifyLog:function(topicId,uid,from_uid){
         console.log("uid "+uid);
         console.log("from uid "+ from_uid);
-        var ref = new Firebase(FirebaseUrl+'notification/');
-        ref.on.addChild(uid).push().set({
+        var ref = new Firebase(FirebaseUrl+'notification/'+uid);
+        ref.push().set({
           topicId:    topicId,
           from:       from_uid,
           is_read:    false,
           timestamp:  moment().toISOString()
-        }).then(function(){
-          $notification('New message from Qanya', {
-            body: 'You have new message',
-            dir: 'auto',
-            lang: 'en',
-            tag: 'my-tag',
-            icon: 'http://www.cl.cam.ac.uk/research/srg/netos/images/qsense-logo.png',
-            //delay: 1000, // in ms
-            focusWindowOnClick: true // focus the window on click
-          });
         })
+
+        Notification.replyStatus(uid);
+
+
       },
 
 

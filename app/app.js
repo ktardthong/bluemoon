@@ -16,7 +16,7 @@ var app = angular.module('App', [
     'ngTagsInput', // Tags
     'cgNotify', // Notification - https://github.com/cgross/angular-notify
     'pascalprecht.translate', // Translation - https://angular-translate.github.io/
-    'facebook',       //  Facebook - https://github.com/Ciul/angular-facebook
+    //'facebook',       //  Facebook - https://github.com/Ciul/angular-facebook
     'angular-flexslider', // Image slider - https://github.com/thenikso/angular-flexslider
 
     // Emoticon -- http://mistic100.github.io/angular-smilies/
@@ -56,13 +56,13 @@ var app = angular.module('App', [
   })
 
   // Facebook Config
-  .config(
+  /*.config(
     function (FacebookProvider) {
       var myAppId = '931376120263856'
       FacebookProvider.setAppId(myAppId)
       FacebookProvider.init(myAppId)
     }
-  )
+  )*/
 
   //Security for Translate
   .config(function ($translateProvider) {
@@ -273,15 +273,48 @@ var app = angular.module('App', [
               topicLanding: function ($stateParams, Topics) {
                 return Topics.fortopic($stateParams.Slug).$loaded();
               },
-              replyList: function ($stateParams, Topics, $state) {
+
+              replyList: function ($stateParams, Topics, $state, FirebaseUrl,$q) {
+
                 var topicKey = ''
+                var data;
+                var jsonData;
+                var jsonArr = [];
+
+                var deferred = $q.defer();
+
                 return Topics.fortopic($stateParams.Slug).$loaded().then(function (data) {
+
                   if (data[0] != null) {
                     topicKey = data[0].$id
                   } else {
                     $state.go('topic-notfound')
                   }
-                  return Topics.replyList(topicKey)
+
+                  var fb = new Firebase(FirebaseUrl);
+
+                  fb.child('topics/'+topicKey + '/replies').once('value', function(userSnap) {
+                    userSnap.forEach(function(childSnapshot) {
+                      var key = childSnapshot.key();
+                      fb.child('topics/'+topicKey + '/replies/'+key).once('value', function(childVal) {
+                        fb.child('users/'+childVal.val().uid).once('value', function(mediaSnap) {
+                          data = extend({}, childVal.val(), mediaSnap.val());
+
+                            jsonArr.push({
+                              uid:            data.uid,
+                              firstname:      data.firstname,
+                              lastname:       data.lastname,
+                              photo:          data.photo,
+                              displayName:    data.displyName,
+                              body:           data.body,
+                              created:        data.created
+                            });
+                          deferred.resolve(jsonArr);
+                        });
+                      });
+                    });
+                  });
+                  return deferred.promise;
                 })
               },
               viewData: function ($stateParams, Topics, Users, Auth) {

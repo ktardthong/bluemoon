@@ -33,6 +33,10 @@ angular.module('App')
     };
 
 
+    $scope.$watch('NotiService.replyStatus(authCtrl.profile)',function(){
+      console.log("watching reply status " + authCtrl.profile);
+    });
+
     $scope.$watch('badgeValue',function(){
       console.log(">>>" + authCtrl.badgeValue.value);
       return NotiService.unreadNotification(authCtrl.profile.$id).then(function(val){

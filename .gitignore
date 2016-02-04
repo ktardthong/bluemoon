@@ -5,3 +5,4 @@ dist
 bower_components
 .idea/workspace.xml
 app/build/build.js
+app/build

@@ -18,11 +18,9 @@ angular.module('App')
     topicLandingCtrl.isOwner      = isOwner;
 
 
-
-
     //Getting Replies in replies
     topicLandingCtrl.inReplyArr = [];
-    topicLandingCtrl.replyInReply = function(){
+    /*topicLandingCtrl.replyInReply = function(){
 
       for(var i=0; i<topicLandingCtrl.replyList.length;i++){
         var topicId = topicLandingCtrl.replyList[i].topicId;
@@ -31,5 +29,5 @@ angular.module('App')
       }
     }
 
-    topicLandingCtrl.replyInReply();
+    topicLandingCtrl.replyInReply();*/
   })

@@ -39,6 +39,7 @@ angular.module('App')
 
 
       getProfile: function (uid) {
+        console.log(uid);
         return $firebaseObject(usersRef.child(uid))
       },
 

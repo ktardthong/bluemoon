@@ -192,23 +192,24 @@
     </h5>
 
     <!-- Reply body list-->
-    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' "  <div class="media card md-padding" ng-if="reply.body">
+
+    <div  ng-repeat="reply in topicLandingCtrl.replyList | orderBy:'-created' " >
+      <div class="media card md-padding" ng-if="reply.body">
         <div class="media-left">
           <a href="#">
-            <img ng-src="{{ topicCtrl.users.profile(reply.uid).photo }}"
+            <img ng-src="{{ reply.photo }}"
                  class="img-circle" width="32px">
           </a>
         </div>
         <div class="media-body">
-          <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
-            {{ topicCtrl.users.profile(reply.uid).firstname }}
-            {{ topicCtrl.users.profile(reply.uid).lastname }}
+          <a ui-sref="profile({Name: reply.getDisplayName })">
+            {{ reply.firstname }}
+            {{ reply.lastname }}
           </a>
 
           <span class="text-muted" am-time-ago="reply.created"></span>
 
           <div class="lead layout-padding">
-
             {{reply.body}}
           </div>
 
@@ -247,11 +248,11 @@
 
             <form ng-submit="topicCtrl.replyInReply(topicLandingCtrl.topicLanding[0].$id,reply.$id)"
                   ng-if="topicLandingCtrl.auth.getUid()">
-              <img ng-src="{{ topicCtrl.users.profile(topicLandingCtrl.auth.getUid()).photo }}"
+              <img ng-src="{{reply.photo }}"
                    class="img-circle" width="32px">
-              <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
-                {{ topicCtrl.users.profile(reply.uid).firstname }}
-                {{ topicCtrl.users.profile(reply.uid).lastname }}
+              <a ui-sref="profile({Name: reply.displayName })">
+                {{ reply.firstname }}
+                {{ reply.lastname }}
               </a>
               <br>
               <div class="input-group">
@@ -276,8 +277,8 @@
               </div>
               <div class="media-body">
                 <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(reply.uid) })">
-                  {{ topicCtrl.users.profile(reply.uid).firstname }}
-                  {{ topicCtrl.users.profile(reply.uid).lastname }}
+                  {{ inreply.firstname }}
+                  {{ inreply.lastname }}
                 </a>
                 <span class="text-muted" am-time-ago="inreply.created"></span>
                 <div class="lead">

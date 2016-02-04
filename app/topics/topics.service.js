@@ -9,6 +9,30 @@ angular.module('App')
     console.log("topic service");
 
     var Topics = {
+
+
+
+      getTopicReply:function(topicKey) {
+        var fb = new Firebase(FirebaseUrl);
+
+        fb.child('topics/' + topicKey + '/replies').once('value', function (userSnap) {
+          userSnap.forEach(function (childSnapshot) {
+            var key = childSnapshot.key();
+            console.log(key);
+            fb.child('topics/' + topicKey + '/replies/' + key).once('value', function (childVal) {
+              console.log(childVal.val().uid);
+              console.log(childVal);
+              fb.child('users/' + childVal.val().uid).once('value', function (mediaSnap) {
+                console.log(childVal.val());
+                // extend function: https://gist.github.com/katowulf/6598238
+                console.log(extend({}, childVal.val(), mediaSnap.val()));
+                return $firebaseArray(extend({}, childVal.val(), mediaSnap.val()));
+              });
+            });
+          });
+        })
+      },
+
       // Get topic tag
       getTag: function (tag) {
         return $firebaseArray(ref.orderByChild('tags').equalTo(tag))

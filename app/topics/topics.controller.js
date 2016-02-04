@@ -53,9 +53,13 @@ angular.module('App')
       'url' : '',
       'ipInfo': '',
       'tags': '',
-      'body': ''
+
     }
 
+
+    $scope.$watch('',function(){
+      console.log(">>> watching at topic controller");
+    })
 
     //Calc average review input in reply
     topicCtrl.avgReviewReply = function(){
@@ -188,10 +192,6 @@ angular.module('App')
        }
     }
 
-    $scope.$watch('',function(){
-      console.log(">>> watching at topic controller");
-    })
-
 
     //Reply to topic
     topicCtrl.reply = function(topicObj){
@@ -208,11 +208,6 @@ angular.module('App')
         topicCtrl.noti.updateNotificationCount(topicObj.$id,topicObj.uid,topicCtrl.uid);
       })
 
-
-
-
-
-
       topicCtrl.topics.replyCount(topicObj.$id).$loaded().then(function(data){
         if(!data.count){
           topicCtrl.topics.replyCountRef(topicObj.$id).set(1);
@@ -221,7 +216,6 @@ angular.module('App')
             .set(data.count +1);
         }
       });
-
 
       //Stat update for user
       topicCtrl.users.userRef(topicCtrl.uid).child('stat/comment/count')
