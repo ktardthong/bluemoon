@@ -76,6 +76,7 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+              require('connect-gzip').gzip(),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',

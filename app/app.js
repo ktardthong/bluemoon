@@ -290,7 +290,6 @@ var app = angular.module('App', [
                   } else {
                     $state.go('topic-notfound')
                   }
-
                   var fb = new Firebase(FirebaseUrl);
 
                   fb.child('topics/'+topicKey + '/replies').once('value', function(userSnap) {
@@ -482,6 +481,7 @@ var app = angular.module('App', [
               profile: function ($state, $rootScope, Auth, Users) {
                 return Auth.auth.$requireAuth().then(function (auth) {
                   return Users.getProfile(auth.uid).$loaded().then(function (profile) {
+
                     // if no stat object
                     if (!profile.stat) {
                       Users.userRef(auth.uid).child('stat/upvoted/count').set(0)
@@ -528,8 +528,39 @@ var app = angular.module('App', [
                 return Category.getName($stateParams.Slug).$loaded()
               },
               // Getting list of category topics here
-              cateTopics: function ($stateParams, Topics) {
-                return Topics.list($stateParams.Slug)
+              cateTopics: function ($stateParams, Topics,FirebaseUrl,$q) {
+
+                var topicList =[];
+                var jsonArr = [];
+                var deferred = $q.defer();
+                var data;
+                var fb = new Firebase(FirebaseUrl);
+
+                return Topics.list($stateParams.Slug).$loaded().then(function(topicList) {
+
+                  for(var i=0; i< topicList.length;i++){
+                    fb.child('topics/'+topicList[i].$id).once('value', function(childVal) {
+                      fb.child('users/'+topicList[i].uid).once('value', function (mediaSnap) {
+                        data = extend({}, childVal.val(), mediaSnap.val());
+                        jsonArr.push({
+                          topic:          data.topic,
+                          slug:           data.slug,
+                          uid:            data.uid,
+                          firstname:      data.firstname,
+                          lastname:       data.lastname,
+                          photo:          data.photo,
+                          displayName:    data.displayName,
+                          body:           data.body,
+                          created:        data.created,
+                          photos:         data.photos,
+                          postedCount:    data.stat.posted.count
+                        });
+                        deferred.resolve(jsonArr);
+                      })
+                    })
+                  }
+                  return deferred.promise;
+                })
               }
             }
           },

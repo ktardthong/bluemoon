@@ -1,7 +1,7 @@
 angular.module('App')
   .controller('ProfileCtrl', function($scope, $rootScope, $state, $filter, md5,
                                       //Services
-                                      Auth,Users,Topics, Facebook,notify,CateService,
+                                      Auth,Users,Topics,notify,CateService,
                                       //Resolve
                                       profile,isOwner,userPosts){
 
@@ -14,7 +14,7 @@ angular.module('App')
     profileCtrl.auth      = Auth;
     profileCtrl.users     = Users;
     profileCtrl.topics    = Topics;
-    profileCtrl.facebook  = Facebook;
+    //profileCtrl.facebook  = Facebook;
     profileCtrl.isOwner   = isOwner;
     profileCtrl.cate      = CateService;
     profileCtrl.$state    = $state;
@@ -33,9 +33,8 @@ angular.module('App')
     }
 
 
-
     /*Link account with facebook*/
-    profileCtrl.linkFacebook = function(){
+   /* profileCtrl.linkFacebook = function(){
       profileCtrl.facebook.login(function(response) {
         profileCtrl.facebook.getLoginStatus(function(response){
           if(response.status === 'connected') {
@@ -48,7 +47,7 @@ angular.module('App')
           }
         });
       });
-    }
+    }*/
 
 
     //The original value from profile

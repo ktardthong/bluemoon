@@ -2,23 +2,9 @@
 
   <nav class="navbar navbar-fixed-top purple-background bg-inverse">
     <a class="navbar-brand" href="#">Qanya</a>
+    <div class="container">
     <ul class="nav navbar-nav">
 
-
-      <!--Notification -->
-      <li class="nav-item" ng-if="authCtrl.profile.$id">
-        <a class="hand nav-link">
-
-          <i class="fa fa-bell fa-x" ng-if="authCtrl.badgeValue >0">
-            {{ authCtrl.badgeValue }}
-          </i>
-          <i class="fa fa-bell-0 fa-x" ng-if="authCtrl.badgeValue == 0"></i>
-
-
-        </a>
-        <!--<badge-notification notification="authCtrl.badgeValue" ></badge-notification>-->
-
-      </li>
 
       <li class="nav-item">
         <a class="nav-link" ui-sref="dashboard">
@@ -56,7 +42,7 @@
       <li class="nav-item active">
         <a class="nav-link" ui-sref="trending"> {{ 'KEY_TRENDING' | translate }} </a>
       </li>
-      
+
       <!-- If user not login -->
       <li class="nav-item" ng-if="!authCtrl.profile.$id">
         <a class="nav-link" ui-sref="register">
@@ -72,7 +58,17 @@
           </span>
         </a>
       </li>
-    </ul>
-  </nav>
+      <!--Notification -->
+      <li class="nav-item" ng-if="authCtrl.profile.$id">
+        <a class="hand nav-link">
 
+          <i class="fa fa-bell fa-x" ng-if="authCtrl.badgeValue >0">
+            {{ authCtrl.badgeValue }}
+          </i>
+          <i class="fa fa-bell-0 fa-x" ng-if="authCtrl.badgeValue == 0"></i>
+        </a>
+      </li>
+    </ul>
+    </div>
+  </nav>
 </div>

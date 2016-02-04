@@ -10,8 +10,6 @@ angular.module('App')
 
     var Topics = {
 
-
-
       getTopicReply:function(topicKey) {
         var fb = new Firebase(FirebaseUrl);
 
@@ -56,7 +54,7 @@ angular.module('App')
 
       // Getting the list of topic base on category
       list: function (category) {
-        var data = ref.orderByChild('category').equalTo(category)
+        var data = ref.orderByChild('category').equalTo(category).limitToLast(15);
         return $firebaseArray(data)
       },
 

@@ -33,7 +33,6 @@ angular.module('App')
             deferred.resolve(counter);
           }
         });
-
         return deferred.promise;
       },
 

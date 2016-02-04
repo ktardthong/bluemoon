@@ -1,7 +1,7 @@
   <br/>
   <div ng-repeat="topic in topics | orderBy:'-created'">
-    <div class="card">
 
+    <div class="card">
       <div class="card-title card-block">
 
         <!-- Type -->
@@ -46,6 +46,7 @@
           </a>
         </h4>
         <p class="card-text">
+
           <!-- body text-->
           {{topic.body | limitTo: 140 }}
 
@@ -99,7 +100,7 @@
           <div class="media-left">
             <a href="#">
               <img class="media-object img-circle"
-                   ng-src="{{topicCtrl.users.profile(topic.uid).photo }}"
+                   ng-src="{{topic.photo }}"
                    width="32px" />
             </a>
           </div>
@@ -107,8 +108,8 @@
             <p class="media-heading">
               <small>
                 <b>
-                  <a ui-sref="profile({Name: topicCtrl.users.getDisplayName(topic.uid) })">
-                    @{{topicCtrl.users.getDisplayName(topic.uid) || "User"}}
+                  <a ui-sref="profile({Name: topic.displayName })">
+                    @{{ topic.displayName || "User"}}
                   </a>
                 </b>
                 <div>
